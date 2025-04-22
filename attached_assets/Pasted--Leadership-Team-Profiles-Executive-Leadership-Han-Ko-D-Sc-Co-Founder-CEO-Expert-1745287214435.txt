@@ -1,0 +1,163 @@
+# Leadership Team Profiles
+
+## Executive Leadership
+
+### Han Ko, D.Sc.
+**Co-Founder & CEO**
+- Expertise: CTO/CEO, Software Development Management, VC, Investor, Global Marketing, Community Leader, Professor
+- CEO of USAKO Group
+  - Investment in Commercial RE and Venture Capital
+  - Tech Scale-up
+  - Community Leadership
+  - Global Marketing
+- Current CTO in a Blockchain Development firm
+- Professor at Midwest University in U.S.
+
+### Brian Jung
+**Co-Founder/CEO & CTO**
+- Computer Science Expert specializing in blockchain architecture development and DevOps
+- International e-Sports Federation Global Chief
+- Daily News Media Director/Reporter
+- Education:
+  - Seoul National University GLP MBA
+  - Dongguk University Fintech MBA
+  - Various certifications from Stanford, Duke, Wharton, Google, IBM
+- Expertise in:
+  - Blockchain & Smart Contracts
+  - Decentralized Applications (Dapps) Programming
+  - IoT, AI, Cybersecurity
+
+### Barbara Bickham
+**CTO**
+- Global Technical Engineer
+- CEO of Trailyn Ventures, LLC
+- Expertise: NFT, Blockchain, Investment, Tech Scale-up
+- Background:
+  - Morgan Stanley managed fund WIFAX
+  - Computer Science & MBA from University of California, Berkeley
+  - Award-winning CTO & VC
+- Host: Female VC Lab Procast
+
+## Technical Leadership
+
+### Se Youl Park
+**Technical Lead**
+- Former IBM KOREA Director
+- Executive Information Technology Architect
+- Blockchain Technical Lead and CLT at IBM
+- Selected as "Technical Leader at IBM" by media in 2022
+
+### Yeom Ki Ho
+**CTO**
+- CEO of Keystone Lab & KDEX Cryptocurrency Exchange
+- Author of Hanbit Academy Java Programming Bible (Bestseller)
+- Metaverse, NFT, blockchain expert
+- Programming lecturer (C/C++, Visual C++, Java, VB)
+- Representative of the ICT Technology Association
+
+### Kim Hyun Chang
+**CTO**
+- Director of Pets DNA Labs
+- Current CEO at Pet & Cats Bio Ltd
+- Previous experience:
+  - IBM Korea
+  - Softbank Korea
+  - POSTECH Special Engineer
+
+## Directors
+
+### Tom Ray, JD
+**Executive Director**
+- C-Suite Commercial Real Estate professional with Juris Doctorate
+- Award-Winning Power Broker with REIT experience
+- Senior VP at CBRE (World's largest commercial real estate company)
+- Juris Doctorate, U.S.A.
+
+### Collin Knock
+**Executive Director**
+- Expertise: RE Lending, Financing, Blockchain
+- Founded and operated one of top 100 financing companies in USA
+- Experience in multiple successful tech and financing ventures
+
+### Dr. GT Wu, Ph.D & J.D
+**Executive Director**
+- Expertise: Investment, Legal & High Tech
+- Education:
+  - Ph.D. from Cornell University
+  - M.S. from Stanford University
+  - B.S. from University of California, Berkeley
+  - J.D. from Fordham University
+
+### Frank Pica
+**Executive Director**
+- Specializes in Fund Raising and Product Development
+- Expertise in AI Product and Blockchain for C-Suite Companies
+- Founding Member and VP of LockerDome (US) and Adyoulike (Europe)
+
+### Yong Hyoung
+**Executive Director**
+- Tech Scale-up and Startup specialist
+- Founder of "Cyworld" (quoted as "the person who inspired Facebook")
+- Proven Leader in Asia
+- Education: Korea Advanced Institute of Science and Technology (KAIST)
+
+### Dr. Eunice Ko, MD
+**Executive Director**
+- Medical Doctor
+- Expertise:
+  - Real Estate and Blockchain Tech Investment
+  - Fund Raising and Management
+  - Medical and Bio Tech
+
+### Jae Kim
+**Executive Director**
+- Finance, Accounting, Risk Analysis specialist
+- Chamber of commerce in U.S.
+- Expertise:
+  - Fund Raise & Investment
+  - Private company Finance & Risk Analysis
+  - U.S. Bank, Credit & Risk Analysis
+
+### David Shim
+**Executive Director**
+- Software Development Engineering at a boutique consulting firm in Denver, Colorado
+- Experience in software development for multinational companies including Amazon
+- Education: Accounting and Business degree from University of Illinois, Urbana-Champaign
+
+## Advisors
+
+### In Soo Kim
+**Advisor**
+- MBA, Seoul National University
+- Former CEO of Samjong KPMG Consulting
+- Former Vice President, Samjong KPMG
+
+### Yoon Jae Hwan
+**Advisor**
+- Chairman of Ocean Star Sahara Resort
+- President of Korea Railroad Newspaper
+- President of Bichaena World Movement Headquarters
+- President of Business Incubation Center
+
+### Hyug-soon Kwon
+**Advisor**
+- Former Head of Fintech Center, KB Kookmin Bank
+- TECHNO MBA from KAIST University
+
+### 이원부 (Won-bu Lee)
+**Advisor**
+- Dean and Professor at Dongguk University Business School
+- Professor of Artificial Intelligence, Fintech, and Blockchain
+
+### Perry Chappell
+**Advisor**
+- Successful startup founder and strategist for Exits and M&As
+- 40 Years of experience focusing on Consumer Markets and Startup Strategies
+- Multiple Exits and M&As:
+  - Founding team of NASDAQ trading company, Genesis Microchip
+  - VIXS - TSX
+  - Sale of VIXS to Pixelworks
+  - Genesis Paradise Electronics
+  - Genesis Sage
+- Current CEO and Co-founder of Zing Communications Inc (U.S. and Canada)
+  - 5G Entertainment ICT Service for Verizon, T-Mobile, AT&T
