@@ -376,29 +376,88 @@ export default function PropertyDetail() {
                   </TabsContent>
                   
                   <TabsContent value="analytics">
-                    <div className="space-y-8">
-                      <div className="border-b pb-4">
-                        <h3 className="text-lg font-semibold mb-4 flex items-center">
-                          <ChartLine className="h-5 w-5 mr-2 text-primary" />
-                          자산 재무 분석
-                        </h3>
-                        <PropertyAnalytics property={property} />
-                      </div>
-                      
-                      <div className="border-b pb-4">
-                        <h3 className="text-lg font-semibold mb-4 flex items-center">
-                          <Calculator className="h-5 w-5 mr-2 text-primary" />
-                          투자 시뮬레이션
-                        </h3>
-                        <InvestmentSimulator property={property} />
-                      </div>
-                      
-                      <div>
-                        <h3 className="text-lg font-semibold mb-4 flex items-center">
-                          <BarChart2 className="h-5 w-5 mr-2 text-primary" />
-                          시장 분석
-                        </h3>
-                        <MarketAnalysis property={property} />
+                    <div>
+                      <div className="mb-6">
+                        <Tabs defaultValue="cashflow" className="w-full">
+                          <TabsList className="grid grid-cols-6 mb-4">
+                            <TabsTrigger value="cashflow">현금 흐름 분석</TabsTrigger>
+                            <TabsTrigger value="returns">수익률 분석</TabsTrigger>
+                            <TabsTrigger value="value">자산 가치 분석</TabsTrigger>
+                            <TabsTrigger value="comparison">금융 상품 비교</TabsTrigger>
+                            <TabsTrigger value="tax">세금 및 비용 분석</TabsTrigger>
+                            <TabsTrigger value="portfolio">포트폴리오 분석</TabsTrigger>
+                          </TabsList>
+                          
+                          <div className="mx-auto text-center mb-4">
+                            <Button variant="outline" className="bg-primary/5 text-primary">
+                              시장 지표 및 예측
+                            </Button>
+                          </div>
+                          
+                          <TabsContent value="cashflow" className="space-y-4">
+                            <div className="border-b pb-4">
+                              <h3 className="text-lg font-semibold mb-4 flex items-center">
+                                <ChartLine className="h-5 w-5 mr-2 text-primary" />
+                                현금 흐름 분석
+                              </h3>
+                              <PropertyAnalytics property={property} />
+                            </div>
+                          </TabsContent>
+                          
+                          <TabsContent value="returns" className="space-y-4">
+                            <div className="border-b pb-4">
+                              <h3 className="text-lg font-semibold mb-4 flex items-center">
+                                <Calculator className="h-5 w-5 mr-2 text-primary" />
+                                수익률 분석
+                              </h3>
+                              <InvestmentSimulator property={property} />
+                            </div>
+                          </TabsContent>
+                          
+                          <TabsContent value="value" className="space-y-4">
+                            <div className="border-b pb-4">
+                              <h3 className="text-lg font-semibold mb-4 flex items-center">
+                                <Coins className="h-5 w-5 mr-2 text-primary" />
+                                자산 가치 분석
+                              </h3>
+                              <PropertyAnalytics property={property} />
+                            </div>
+                          </TabsContent>
+                          
+                          <TabsContent value="comparison" className="space-y-4">
+                            <div className="border-b pb-4">
+                              <h3 className="text-lg font-semibold mb-4 flex items-center">
+                                <BarChart2 className="h-5 w-5 mr-2 text-primary" />
+                                금융 상품 비교
+                              </h3>
+                              <MarketAnalysis property={property} />
+                            </div>
+                          </TabsContent>
+                          
+                          <TabsContent value="tax" className="space-y-4">
+                            <div className="border-b pb-4">
+                              <h3 className="text-lg font-semibold mb-4 flex items-center">
+                                <Calculator className="h-5 w-5 mr-2 text-primary" />
+                                세금 및 비용 분석
+                              </h3>
+                              <div className="p-8 text-center bg-neutral-50 rounded-lg">
+                                <p className="text-neutral-500">구현 중입니다...</p>
+                              </div>
+                            </div>
+                          </TabsContent>
+                          
+                          <TabsContent value="portfolio" className="space-y-4">
+                            <div className="border-b pb-4">
+                              <h3 className="text-lg font-semibold mb-4 flex items-center">
+                                <Trophy className="h-5 w-5 mr-2 text-primary" />
+                                포트폴리오 분석
+                              </h3>
+                              <div className="p-8 text-center bg-neutral-50 rounded-lg">
+                                <p className="text-neutral-500">구현 중입니다...</p>
+                              </div>
+                            </div>
+                          </TabsContent>
+                        </Tabs>
                       </div>
                     </div>
                   </TabsContent>
