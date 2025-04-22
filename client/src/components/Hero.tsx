@@ -12,9 +12,15 @@ export default function Hero() {
           <h1 className="text-3xl md:text-5xl font-bold mb-4">
             {t('hero.title')}
           </h1>
-          <p className="text-lg md:text-xl text-white/90 mb-6">
+          <p className="text-lg md:text-xl text-white/90 mb-4">
             {t('hero.subtitle')}
           </p>
+          
+          <div className="p-3 bg-white/20 backdrop-blur-sm border-l-4 border-white rounded-md mb-4">
+            <p className="text-white font-semibold text-sm md:text-base">
+              사하라 리얼테크는 철저한 법 규제를 준수하고 보안 감사를 통해 신뢰를 우선으로 한다
+            </p>
+          </div>
           
           <div className="flex flex-col sm:flex-row gap-4 mt-8">
             <Link href="/properties">
