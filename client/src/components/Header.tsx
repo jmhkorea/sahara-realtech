@@ -31,25 +31,17 @@ export default function Header() {
           </div>
           
           <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/">
-              <a className="font-medium text-neutral-500 hover:text-primary transition-colors">
-                {t('nav.home')}
-              </a>
+            <Link href="/" className="font-medium text-neutral-500 hover:text-primary transition-colors">
+              {t('nav.home')}
             </Link>
-            <Link href="/properties">
-              <a className="font-medium text-neutral-500 hover:text-primary transition-colors">
-                {t('nav.properties')}
-              </a>
+            <Link href="/properties" className="font-medium text-neutral-500 hover:text-primary transition-colors">
+              {t('nav.properties')}
             </Link>
-            <Link href="/how-to-invest">
-              <a className="font-medium text-neutral-500 hover:text-primary transition-colors">
-                {t('nav.howToInvest')}
-              </a>
+            <Link href="/how-to-invest" className="font-medium text-neutral-500 hover:text-primary transition-colors">
+              {t('nav.howToInvest')}
             </Link>
-            <Link href="/portfolio">
-              <a className="font-medium text-neutral-500 hover:text-primary transition-colors">
-                {t('nav.portfolio')}
-              </a>
+            <Link href="/portfolio" className="font-medium text-neutral-500 hover:text-primary transition-colors">
+              {t('nav.portfolio')}
             </Link>
           </nav>
           
@@ -91,25 +83,17 @@ export default function Header() {
               </SheetTrigger>
               <SheetContent>
                 <div className="flex flex-col gap-4 pt-10">
-                  <Link href="/">
-                    <a className="px-4 py-2 hover:bg-neutral-100 rounded-md">
-                      {t('nav.home')}
-                    </a>
+                  <Link href="/" className="px-4 py-2 hover:bg-neutral-100 rounded-md">
+                    {t('nav.home')}
                   </Link>
-                  <Link href="/properties">
-                    <a className="px-4 py-2 hover:bg-neutral-100 rounded-md">
-                      {t('nav.properties')}
-                    </a>
+                  <Link href="/properties" className="px-4 py-2 hover:bg-neutral-100 rounded-md">
+                    {t('nav.properties')}
                   </Link>
-                  <Link href="/how-to-invest">
-                    <a className="px-4 py-2 hover:bg-neutral-100 rounded-md">
-                      {t('nav.howToInvest')}
-                    </a>
+                  <Link href="/how-to-invest" className="px-4 py-2 hover:bg-neutral-100 rounded-md">
+                    {t('nav.howToInvest')}
                   </Link>
-                  <Link href="/portfolio">
-                    <a className="px-4 py-2 hover:bg-neutral-100 rounded-md">
-                      {t('nav.portfolio')}
-                    </a>
+                  <Link href="/portfolio" className="px-4 py-2 hover:bg-neutral-100 rounded-md">
+                    {t('nav.portfolio')}
                   </Link>
                   <hr />
                   <Button onClick={connectWallet}>

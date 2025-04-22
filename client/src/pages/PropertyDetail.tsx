@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 import { useParams } from "wouter";
+import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
-import { Property, TokenizationStatus, PropertyType } from "@shared/schema";
+import { Property, PropertyType, TokenizationStatus } from "@shared/schema";
+
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-  CardFooter,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -45,6 +45,8 @@ export default function PropertyDetail() {
   
   const [investmentAmount, setInvestmentAmount] = useState(0);
   const [tokenCount, setTokenCount] = useState(0);
+  const [membershipTier, setMembershipTier] = useState("standard");
+  const [additionalOptions, setAdditionalOptions] = useState<string[]>([]);
   
   const { data: property, isLoading, error } = useQuery<Property>({
     queryKey: [`/api/properties/${id}`],
@@ -96,7 +98,7 @@ export default function PropertyDetail() {
     
     const count = parseInt(e.target.value) || 0;
     setTokenCount(count);
-    setInvestmentAmount(count * parseFloat(property.tokenPrice as string));
+    setInvestmentAmount(count * parseFloat(property.tokenPrice));
   };
   
   // Handler for investment amount input
@@ -105,7 +107,18 @@ export default function PropertyDetail() {
     
     const amount = parseInt(e.target.value) || 0;
     setInvestmentAmount(amount);
-    setTokenCount(Math.floor(amount / parseFloat(property.tokenPrice as string)));
+    setTokenCount(Math.floor(amount / parseFloat(property.tokenPrice)));
+  };
+  
+  // Handle additional options selection
+  const handleAdditionalOptionChange = (option: string) => {
+    setAdditionalOptions((current) => {
+      if (current.includes(option)) {
+        return current.filter(item => item !== option);
+      } else {
+        return [...current, option];
+      }
+    });
   };
   
   // Simulated investment handler
@@ -117,7 +130,9 @@ export default function PropertyDetail() {
       propertyId: property.id,
       tokenCount,
       amount: investmentAmount,
-      isResortMembership: property.type === PropertyType.OTHER
+      isResortMembership: property.type === PropertyType.OTHER,
+      membershipTier: property.type === PropertyType.OTHER ? membershipTier : undefined,
+      additionalOptions: property.type === PropertyType.OTHER ? additionalOptions : undefined
     });
     
     // Show a success message
@@ -181,6 +196,10 @@ export default function PropertyDetail() {
   const propertyAddress = currentLang === 'ko' ? property.address : property.addressEn;
   const propertyDescription = currentLang === 'ko' ? property.description : property.descriptionEn;
 
+  const isResortOrMembership = property.type === PropertyType.OTHER;
+  const isGolfCourse = isResortOrMembership && property.name.includes("골프");
+  const isInternational = property.region === "해외";
+
   return (
     <div className="py-12 bg-neutral-100">
       <div className="container mx-auto px-4">
@@ -188,7 +207,7 @@ export default function PropertyDetail() {
           <div className="bg-white rounded-xl overflow-hidden shadow-lg mb-8">
             <div className="relative">
               <img 
-                src={property.imageUrl} 
+                src={property.imageUrl || '/assets/property-placeholder.jpg'} 
                 alt={propertyName} 
                 className="w-full h-72 object-cover"
               />
@@ -240,7 +259,7 @@ export default function PropertyDetail() {
                     <span className="font-inter font-medium">{property.tokenizationProgress}%</span>
                   </div>
                   <Progress 
-                    value={parseFloat(property.tokenizationProgress as string)} 
+                    value={parseFloat(property.tokenizationProgress)} 
                     className="h-2"
                   />
                 </div>
@@ -350,20 +369,20 @@ export default function PropertyDetail() {
             <div>
               <Card>
                 <CardHeader>
-                  {property.type === PropertyType.OTHER ? (
+                  {isResortOrMembership ? (
                     <>
                       <CardTitle className="flex items-center">
-                        {property.region === "해외" ? (
+                        {isInternational ? (
                           <Palmtree className="h-5 w-5 mr-2 text-primary" />
                         ) : (
                           <Hotel className="h-5 w-5 mr-2 text-primary" />
                         )}
-                        리조트/멤버십 투자하기
+                        {isGolfCourse ? "골프 멤버십 투자하기" : "리조트 멤버십 투자하기"}
                       </CardTitle>
                       <CardDescription>
-                        {property.name.includes("골프") ? 
-                          "골프 회원권과 리조트 시설 이용 혜택을 포함한 투자 상품입니다." : 
-                          "리조트 시설 이용 혜택을 포함한 멤버십 투자 상품입니다."}
+                        {isGolfCourse 
+                          ? "골프 회원권과 리조트 시설 이용 혜택을 포함한 투자 상품입니다." 
+                          : "리조트 시설 이용 혜택을 포함한 멤버십 투자 상품입니다."}
                       </CardDescription>
                     </>
                   ) : (
@@ -377,6 +396,96 @@ export default function PropertyDetail() {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
+                    {isResortOrMembership && (
+                      <div className="mb-6">
+                        <h4 className="text-sm font-medium mb-3">멤버십 등급 선택</h4>
+                        <RadioGroup 
+                          value={membershipTier} 
+                          onValueChange={setMembershipTier}
+                          className="grid grid-cols-1 gap-2"
+                        >
+                          <div className="flex items-center space-x-2 border rounded-md p-3 cursor-pointer hover:bg-neutral-50">
+                            <RadioGroupItem value="standard" id="standard" />
+                            <Label htmlFor="standard" className="flex flex-col cursor-pointer">
+                              <span className="font-medium">스탠다드</span>
+                              <span className="text-sm text-neutral-500">기본 멤버십 혜택</span>
+                            </Label>
+                            <div className="ml-auto font-medium">
+                              {formatCurrency(property.tokenPrice)}
+                            </div>
+                          </div>
+                          
+                          <div className="flex items-center space-x-2 border rounded-md p-3 cursor-pointer hover:bg-neutral-50">
+                            <RadioGroupItem value="premium" id="premium" />
+                            <Label htmlFor="premium" className="flex flex-col cursor-pointer">
+                              <span className="font-medium">프리미엄</span>
+                              <span className="text-sm text-neutral-500">VIP 혜택 포함</span>
+                            </Label>
+                            <div className="ml-auto font-medium">
+                              {formatCurrency(parseInt(property.tokenPrice) * 2)}
+                            </div>
+                          </div>
+                          
+                          <div className="flex items-center space-x-2 border rounded-md p-3 cursor-pointer hover:bg-neutral-50">
+                            <RadioGroupItem value="platinum" id="platinum" />
+                            <Label htmlFor="platinum" className="flex flex-col cursor-pointer">
+                              <span className="font-medium">플래티넘</span>
+                              <span className="text-sm text-neutral-500">최상위 혜택 + 우선 예약</span>
+                            </Label>
+                            <div className="ml-auto font-medium">
+                              {formatCurrency(parseInt(property.tokenPrice) * 3)}
+                            </div>
+                          </div>
+                        </RadioGroup>
+
+                        <div className="mt-4">
+                          <h4 className="text-sm font-medium mb-3">추가 옵션</h4>
+                          <div className="space-y-2">
+                            {isGolfCourse && (
+                              <div className="flex items-start space-x-2 border rounded-md p-3">
+                                <Checkbox 
+                                  id="golf-lessons" 
+                                  checked={additionalOptions.includes("golf-lessons")}
+                                  onCheckedChange={() => handleAdditionalOptionChange("golf-lessons")}
+                                />
+                                <div className="grid gap-1.5 leading-none">
+                                  <Label htmlFor="golf-lessons" className="font-medium">골프 레슨 패키지</Label>
+                                  <p className="text-sm text-neutral-500">전문 골프 강사의 개인 레슨 10회</p>
+                                </div>
+                                <div className="ml-auto font-medium">₩ 100만</div>
+                              </div>
+                            )}
+                            
+                            <div className="flex items-start space-x-2 border rounded-md p-3">
+                              <Checkbox 
+                                id="room-upgrade" 
+                                checked={additionalOptions.includes("room-upgrade")}
+                                onCheckedChange={() => handleAdditionalOptionChange("room-upgrade")}
+                              />
+                              <div className="grid gap-1.5 leading-none">
+                                <Label htmlFor="room-upgrade" className="font-medium">객실 업그레이드</Label>
+                                <p className="text-sm text-neutral-500">투숙 시 상위 객실로 무료 업그레이드</p>
+                              </div>
+                              <div className="ml-auto font-medium">₩ 50만</div>
+                            </div>
+                            
+                            <div className="flex items-start space-x-2 border rounded-md p-3">
+                              <Checkbox 
+                                id="dining-credit" 
+                                checked={additionalOptions.includes("dining-credit")}
+                                onCheckedChange={() => handleAdditionalOptionChange("dining-credit")}
+                              />
+                              <div className="grid gap-1.5 leading-none">
+                                <Label htmlFor="dining-credit" className="font-medium">다이닝 크레딧</Label>
+                                <p className="text-sm text-neutral-500">리조트 내 레스토랑 이용 크레딧</p>
+                              </div>
+                              <div className="ml-auto font-medium">₩ 30만</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    
                     <div>
                       <label className="block text-sm font-medium text-neutral-500 mb-1">
                         {t('propertyDetail.investmentCard.tokenCount')}
@@ -422,7 +531,7 @@ export default function PropertyDetail() {
                       <div className="flex justify-between">
                         <span className="text-sm text-neutral-500">{t('propertyDetail.investmentCard.estimatedYearlyIncome')}:</span>
                         <span className="font-medium">
-                          {formatCurrency(investmentAmount * parseFloat(property.expectedReturn as string) / 100)}
+                          {formatCurrency(investmentAmount * parseFloat(property.expectedReturn) / 100)}
                         </span>
                       </div>
                     </div>
@@ -430,7 +539,7 @@ export default function PropertyDetail() {
                     <Button 
                       className="w-full"
                       disabled={property.tokenizationStatus !== TokenizationStatus.IN_PROGRESS || 
-                              investmentAmount < parseFloat(property.minInvestment as string) ||
+                              investmentAmount < parseFloat(property.minInvestment) ||
                               tokenCount <= 0}
                       onClick={handleInvest}
                     >
