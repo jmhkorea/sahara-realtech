@@ -1,0 +1,132 @@
+import { useState } from "react";
+import { Link, useLocation } from "wouter";
+import { useTranslation } from "react-i18next";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import { Menu } from "lucide-react";
+
+export default function Header() {
+  const [, setLocation] = useLocation();
+  const { t, i18n } = useTranslation();
+  const [isWalletConnected, setIsWalletConnected] = useState(false);
+
+  const toggleLanguage = () => {
+    i18n.changeLanguage(i18n.language === 'ko' ? 'en' : 'ko');
+  };
+
+  const connectWallet = () => {
+    // Placeholder for wallet connection logic
+    setIsWalletConnected(true);
+  };
+
+  return (
+    <header className="bg-white shadow-sm sticky top-0 z-50">
+      <div className="container mx-auto px-4 py-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <svg className="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            </svg>
+            <span className="text-primary font-bold text-xl">BlockEstate</span>
+          </div>
+          
+          <nav className="hidden md:flex items-center space-x-8">
+            <Link href="/">
+              <a className="font-medium text-neutral-500 hover:text-primary transition-colors">
+                {t('nav.home')}
+              </a>
+            </Link>
+            <Link href="/properties">
+              <a className="font-medium text-neutral-500 hover:text-primary transition-colors">
+                {t('nav.properties')}
+              </a>
+            </Link>
+            <Link href="/how-to-invest">
+              <a className="font-medium text-neutral-500 hover:text-primary transition-colors">
+                {t('nav.howToInvest')}
+              </a>
+            </Link>
+            <Link href="/portfolio">
+              <a className="font-medium text-neutral-500 hover:text-primary transition-colors">
+                {t('nav.portfolio')}
+              </a>
+            </Link>
+          </nav>
+          
+          <div className="flex items-center space-x-4">
+            <button 
+              onClick={toggleLanguage}
+              className="hidden sm:flex px-2 py-1 text-sm border rounded-md"
+            >
+              {i18n.language === 'ko' ? 'EN' : 'KO'}
+            </button>
+            
+            {isWalletConnected ? (
+              <div className="hidden md:flex items-center space-x-2 border rounded-full py-1 px-3 text-sm">
+                <span className="bg-green-500 rounded-full w-2 h-2"></span>
+                <span className="font-inter">{t('wallet.connected')}</span>
+              </div>
+            ) : (
+              <Button
+                onClick={connectWallet}
+                variant="outline"
+                size="sm"
+                className="hidden md:flex"
+              >
+                {t('wallet.connect')}
+              </Button>
+            )}
+            
+            <div className="hidden sm:block">
+              <Button className="px-4 py-2">
+                {t('auth.loginRegister')}
+              </Button>
+            </div>
+            
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="md:hidden">
+                  <Menu />
+                </Button>
+              </SheetTrigger>
+              <SheetContent>
+                <div className="flex flex-col gap-4 pt-10">
+                  <Link href="/">
+                    <a className="px-4 py-2 hover:bg-neutral-100 rounded-md">
+                      {t('nav.home')}
+                    </a>
+                  </Link>
+                  <Link href="/properties">
+                    <a className="px-4 py-2 hover:bg-neutral-100 rounded-md">
+                      {t('nav.properties')}
+                    </a>
+                  </Link>
+                  <Link href="/how-to-invest">
+                    <a className="px-4 py-2 hover:bg-neutral-100 rounded-md">
+                      {t('nav.howToInvest')}
+                    </a>
+                  </Link>
+                  <Link href="/portfolio">
+                    <a className="px-4 py-2 hover:bg-neutral-100 rounded-md">
+                      {t('nav.portfolio')}
+                    </a>
+                  </Link>
+                  <hr />
+                  <Button onClick={connectWallet}>
+                    {isWalletConnected ? t('wallet.connected') : t('wallet.connect')}
+                  </Button>
+                  <Button variant="outline">
+                    {t('auth.loginRegister')}
+                  </Button>
+                  <Button variant="ghost" onClick={toggleLanguage}>
+                    {i18n.language === 'ko' ? 'Switch to English' : '한국어로 전환'}
+                  </Button>
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+}
