@@ -94,6 +94,8 @@ export default function SearchSection() {
                     <SelectItem value={PropertyType.OFFICETEL}>{t('propertyTypes.officetel')}</SelectItem>
                     <SelectItem value={PropertyType.COMMERCIAL}>{t('propertyTypes.commercial')}</SelectItem>
                     <SelectItem value={PropertyType.LAND}>{t('propertyTypes.land')}</SelectItem>
+                    <SelectItem value={PropertyType.RESORT}>{t('propertyTypes.resort')}</SelectItem>
+                    <SelectItem value={PropertyType.MEMBERSHIP}>{t('propertyTypes.membership')}</SelectItem>
                     <SelectItem value={PropertyType.OTHER}>{t('propertyTypes.other')}</SelectItem>
                   </SelectGroup>
                 </SelectContent>

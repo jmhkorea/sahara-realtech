@@ -46,6 +46,8 @@ const koTranslations = {
     officetel: '오피스텔',
     commercial: '상가',
     land: '토지',
+    resort: '리조트',
+    membership: '회원권',
     other: '기타'
   },
   property: {
@@ -520,6 +522,8 @@ const enTranslations = {
     officetel: 'Officetel',
     commercial: 'Commercial',
     land: 'Land',
+    resort: 'Resort',
+    membership: 'Membership',
     other: 'Other'
   },
   property: {
