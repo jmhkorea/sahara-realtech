@@ -6,6 +6,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Card, CardContent } from "@/components/ui/card";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 interface FAQItem {
   id: string;
@@ -15,6 +17,7 @@ interface FAQItem {
 
 export default function FAQ() {
   const { t } = useTranslation();
+  const [isFaqOpen, setIsFaqOpen] = useState(true);
   
   const faqItems: FAQItem[] = [
     {
@@ -71,36 +74,57 @@ export default function FAQ() {
     }
   ];
 
+  const toggleFaqCard = () => {
+    setIsFaqOpen(!isFaqOpen);
+  };
+
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">
-            {t('faq.title')}
-          </h2>
-          <p className="text-neutral-400">
-            {t('faq.subtitle')}
-          </p>
-        </div>
-        
-        <div className="max-w-3xl mx-auto">
-          <Accordion type="single" collapsible className="space-y-4">
-            {faqItems.map((item) => (
-              <AccordionItem
-                key={item.id}
-                value={item.id}
-                className="border border-neutral-200 rounded-lg overflow-hidden"
-              >
-                <AccordionTrigger className="p-5 bg-neutral-50 hover:bg-neutral-100 font-medium">
-                  {item.question}
-                </AccordionTrigger>
-                <AccordionContent className="p-5 bg-white border-t border-neutral-200 text-neutral-400">
-                  {item.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
+        <Card className="border border-neutral-200 rounded-lg overflow-hidden mb-6">
+          <div 
+            className="p-5 bg-neutral-50 flex justify-between items-center cursor-pointer"
+            onClick={toggleFaqCard}
+          >
+            <h2 className="text-2xl md:text-3xl font-bold">
+              {t('faq.title')}
+            </h2>
+            {isFaqOpen ? (
+              <ChevronUp className="h-6 w-6 text-neutral-500" />
+            ) : (
+              <ChevronDown className="h-6 w-6 text-neutral-500" />
+            )}
+          </div>
+          
+          {isFaqOpen && (
+            <CardContent className="pt-6">
+              <div className="text-center max-w-3xl mx-auto mb-8">
+                <p className="text-neutral-400">
+                  {t('faq.subtitle')}
+                </p>
+              </div>
+              
+              <div className="max-w-3xl mx-auto">
+                <Accordion type="single" collapsible className="space-y-4">
+                  {faqItems.map((item) => (
+                    <AccordionItem
+                      key={item.id}
+                      value={item.id}
+                      className="border border-neutral-200 rounded-lg overflow-hidden"
+                    >
+                      <AccordionTrigger className="p-5 bg-neutral-50 hover:bg-neutral-100 font-medium">
+                        {item.question}
+                      </AccordionTrigger>
+                      <AccordionContent className="p-5 bg-white border-t border-neutral-200 text-neutral-400">
+                        {item.answer}
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </div>
+            </CardContent>
+          )}
+        </Card>
       </div>
     </section>
   );
