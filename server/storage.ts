@@ -277,7 +277,7 @@ export class MemStorage implements IStorage {
         description: "발리 세미냑에 위치한 240실 규모의 럭셔리 리조트 회원권. 연간 높은 객실 점유율과 안정적인 수익이 예상됩니다.",
         descriptionEn: "Luxury resort membership for a 240-room property in Seminyak, Bali. High annual room occupancy rates with stable returns expected.",
         type: PropertyType.OTHER,
-        imageUrl: "https://images.unsplash.com/photo-1586813453716-55abded8849f",
+        imageUrl: "/assets/bali-seminyak-resort.jpg",
         totalValue: "32000000000", // 320억
         expectedReturn: "9.2",
         tokenizationStatus: TokenizationStatus.IN_PROGRESS,
