@@ -191,7 +191,7 @@ export default function BlogPostPage() {
             {post.tags && post.tags.length > 0 && (
               <div className="border-t border-b py-4 my-8">
                 <div className="flex flex-wrap gap-2">
-                  {post.tags.map((tag, index) => (
+                  {post.tags.map((tag: string, index: number) => (
                     <Badge key={index} variant="outline">
                       #{tag}
                     </Badge>
@@ -207,7 +207,7 @@ export default function BlogPostPage() {
                   {t('blog.relatedPosts', '관련 게시물')}
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {relatedPosts.map(relatedPost => (
+                  {relatedPosts.map((relatedPost: BlogPost) => (
                     <BlogPostCard key={relatedPost.id} post={relatedPost} />
                   ))}
                 </div>

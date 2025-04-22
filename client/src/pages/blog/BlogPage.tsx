@@ -29,7 +29,7 @@ export default function BlogPage() {
   // 카테고리별 게시물 필터링
   const filteredPosts = activeCategory === "ALL" 
     ? allPosts 
-    : allPosts?.filter(post => post.category === activeCategory);
+    : allPosts?.filter((post: BlogPost) => post.category === activeCategory);
   
   // 카테고리 이름 번역
   const getCategoryName = (category: string) => {
@@ -106,7 +106,7 @@ export default function BlogPage() {
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {featuredPosts.slice(0, 2).map(post => (
+            {featuredPosts.slice(0, 2).map((post: BlogPost) => (
               <BlogPostCard key={post.id} post={post} featured={true} />
             ))}
           </div>
@@ -166,7 +166,7 @@ export default function BlogPage() {
           </div>
         ) : filteredPosts && filteredPosts.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {filteredPosts.map(post => (
+            {filteredPosts.map((post: BlogPost) => (
               <BlogPostCard key={post.id} post={post} />
             ))}
           </div>
