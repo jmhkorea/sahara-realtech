@@ -267,10 +267,10 @@ export default function PropertyDetail() {
                 
                 <Tabs defaultValue="details">
                   <TabsList className="w-full mb-4">
-                    <TabsTrigger value="details" className="flex-1">매물 상세정보</TabsTrigger>
+                    <TabsTrigger value="details" className="flex-1">자산 상세정보</TabsTrigger>
                     <TabsTrigger value="investment" className="flex-1">투자 정보</TabsTrigger>
                     <TabsTrigger value="blockchain" className="flex-1">블록체인 정보</TabsTrigger>
-                    <TabsTrigger value="propertyInfo" className="flex-1">매물 정보</TabsTrigger>
+                    <TabsTrigger value="propertyInfo" className="flex-1">투자자산 정보</TabsTrigger>
                   </TabsList>
                   
                   <TabsContent value="details">
