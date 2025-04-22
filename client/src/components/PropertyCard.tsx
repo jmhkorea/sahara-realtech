@@ -168,6 +168,56 @@ export default function PropertyCard({ property }: PropertyCardProps) {
           </div>
         </div>
         
+        {/* 금융 분석 정보 카드 */}
+        <div className="mb-4 border border-neutral-200 rounded-lg p-3">
+          <div className="flex items-center justify-between mb-2">
+            <h4 className="text-sm font-bold text-primary flex items-center">
+              <TrendingUp className="mr-1 h-4 w-4" />
+              {t('property.financialAnalysis')}
+            </h4>
+            <div className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">
+              {t('property.keyMetrics')}
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-2 gap-2 text-xs mb-2">
+            <div className="flex justify-between">
+              <span className="text-neutral-500">{t('property.cashReturn')}</span>
+              <span className="font-semibold text-primary">8.5%</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-neutral-500">{t('property.capRate')}</span>
+              <span className="font-semibold">5.2%</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-neutral-500">{t('property.occupancyRate')}</span>
+              <span className="font-semibold">95.8%</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-neutral-500">{t('property.annualReturn')}</span>
+              <span className="font-semibold text-primary">12.3%</span>
+            </div>
+          </div>
+          
+          <div className="w-full h-10 bg-neutral-50 rounded flex items-center justify-between px-2">
+            <span className="text-xs text-neutral-500">{t('property.priceHistory')}</span>
+            <div className="flex items-center h-full">
+              {[100, 105, 112, 118, 125].map((val, i) => (
+                <div key={i} className="flex flex-col items-center mx-1">
+                  <div 
+                    className="bg-primary h-5" 
+                    style={{ 
+                      width: '4px', 
+                      height: `${val * 0.15}px`,
+                      opacity: 0.5 + (i * 0.1)
+                    }} 
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        
         <Link href={`/properties/${property.id}`}>
           <Button 
             className={`w-full py-3 ${

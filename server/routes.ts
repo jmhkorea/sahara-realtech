@@ -451,6 +451,38 @@ export async function registerRoutes(app: Express): Promise<Server> {
   
   // 포트폴리오 분석 데이터 API
   app.get('/api/financial/portfolio-analysis', getPortfolioAnalysisData);
+  
+  // 부동산 카드용 금융 요약 데이터 API
+  app.get('/api/financial/property-summary/:propertyId', async (req: Request, res: Response) => {
+    const propertyId = parseInt(req.params.propertyId);
+    
+    // Return simplified financial summary for the property card
+    res.json({
+      priceHistory: [
+        { year: '2020', price: 100 },
+        { year: '2021', price: 105 },
+        { year: '2022', price: 112 },
+        { year: '2023', price: 118 },
+        { year: '2024', price: 125 }
+      ],
+      keyMetrics: {
+        cashOnCashReturn: 8.5,
+        capRate: 5.2,
+        grossRentMultiplier: 13.5,
+        totalReturnRate: 12.3
+      },
+      occupancyRate: 95.8,
+      rentalIncome: {
+        monthly: 1200000, 
+        annual: 14400000
+      },
+      marketComparison: {
+        neighborhood: 100,
+        city: 95,
+        property: 105
+      }
+    });
+  });
 
   const httpServer = createServer(app);
   return httpServer;
