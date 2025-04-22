@@ -493,6 +493,70 @@ const koTranslations = {
       description: '혁신적인 블록체인 기반 부동산 투자 플랫폼을 함께 만들어갈 열정적인 인재를 찾고 있습니다',
       button: '채용 정보 보기'
     }
+  },
+  investmentGuide: {
+    title: '투자 전 보세요',
+    subtitle: 'SaharaRealTech의 토큰 구조와 아발란체 블록체인 기반 투자에 대한 중요 정보를 확인하세요.',
+    tokenStructure: {
+      title: '토큰 구조',
+      primeMasterNFT: {
+        title: '프라임 마스터 NFT (1개)',
+        description: '최고 거버넌스 권한을 가진 단일 NFT로, 특별 결의안 거부권 및 최종 의사 결정권을 보유합니다.'
+      },
+      governanceNFT: {
+        title: '거버넌스 마스터 NFT (99개)',
+        description: '프로젝트 거버넌스에 참여할 수 있는 등급별 NFT입니다. 한국 사모펀드 규정(최대 99명의 투자자)을 준수합니다.',
+        classA: '클래스 A: 10개 (투표 가중치 10배)',
+        classB: '클래스 B: 39개 (투표 가중치 5배)',
+        classC: '클래스 C: 50개 (투표 가중치 1배)'
+      },
+      projectTokens: {
+        title: '프로젝트 토큰 (RSA-020)',
+        description: '개별 부동산 프로젝트의 소유권을 나타내는 토큰으로, 수익 분배 권한이 포함되어 있습니다.'
+      },
+      companyToken: {
+        title: '회사 토큰 (SRT)',
+        description: '향후 거래소 상장을 위한 토큰으로, 성공적인 3-5개의 토큰화 프로젝트 이후 생성됩니다.'
+      }
+    },
+    avalancheProtocol: {
+      title: '아발란체 프로토콜',
+      description: '아발란체는 고성능 블록체인 플랫폼으로, 빠른 거래 속도와 낮은 수수료가 특징입니다. C-Chain에 스마트 컨트랙트가 배포됩니다.',
+      features: {
+        speed: {
+          title: '빠른 거래 속도',
+          description: '초당 4,500개 이상의 트랜잭션 처리 능력'
+        },
+        fees: {
+          title: '낮은 거래 수수료',
+          description: '이더리움 대비 최대 95% 저렴한 수수료'
+        },
+        eco: {
+          title: '친환경 설계',
+          description: '에너지 효율적인 지분 증명(PoS) 방식 사용'
+        }
+      }
+    },
+    investmentProcess: {
+      title: '투자 프로세스',
+      step1: {
+        title: '계정 생성 및 KYC 인증',
+        description: '플랫폼에 가입하고 신원 확인을 완료합니다.'
+      },
+      step2: {
+        title: '아발란체 지갑 연결',
+        description: 'MetaMask 또는 다른 호환 지갑을 연결하고 AVAX를 준비합니다.'
+      },
+      step3: {
+        title: '투자자산 선택 및 토큰 구매',
+        description: '원하는 부동산 프로젝트를 선택하고 해당 프로젝트의 토큰을 구매합니다.'
+      },
+      step4: {
+        title: '수익 분배 및 관리',
+        description: '투자한 프로젝트에서 발생하는 임대 수익 및 가치 상승에 따른 이익을 받습니다.'
+      }
+    },
+    disclaimer: '투자에는 원금 손실의 위험이 있습니다. 투자 결정 전에 충분한 검토를 부탁드립니다.'
   }
 };
 
