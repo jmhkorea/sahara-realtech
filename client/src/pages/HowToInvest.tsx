@@ -227,8 +227,17 @@ export default function HowToInvest() {
                       <Key className="mr-2 h-5 w-5 text-primary" />
                       {t('howToInvest.blockchain.avalancheProtocol.title')}
                     </h3>
+                    <div className="mb-4 flex items-center">
+                      <div className="mr-3">
+                        <span className="text-lg font-bold text-gray-800">Avalanche</span>
+                        <span className="ml-2 text-gray-600 font-medium">기술 기반</span>
+                      </div>
+                    </div>
                     <p className="text-neutral-600 mb-4">
                       {t('howToInvest.blockchain.avalancheProtocol.description')}
+                    </p>
+                    <p className="text-neutral-600 mb-4">
+                      빠른 거래 처리 속도와 낮은 수수료의 아발란체 프로토콜을 사용합니다
                     </p>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
                       <div className="bg-neutral-50 p-4 rounded-lg">
