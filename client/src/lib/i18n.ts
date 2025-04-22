@@ -33,7 +33,7 @@ const koTranslations = {
     selectType: '유형 선택',
     investmentAmount: '투자 금액',
     selectAmount: '금액 선택',
-    searchButton: '매물 검색',
+    searchButton: '투자 자산 검색',
     amountRanges: {
       under1m: '100만원 이하',
       '1mTo5m': '100만원 - 500만원',
@@ -528,7 +528,7 @@ const enTranslations = {
     selectType: 'Select Type',
     investmentAmount: 'Investment Amount',
     selectAmount: 'Select Amount',
-    searchButton: 'Search Properties',
+    searchButton: 'Search Investment Assets',
     amountRanges: {
       under1m: 'Under 1M Won',
       '1mTo5m': '1M - 5M Won',
