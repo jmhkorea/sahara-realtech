@@ -1,22 +1,64 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { useTranslation } from "react-i18next";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
+import { Menu, Globe, ChevronDown } from "lucide-react";
 
 export default function Header() {
   const [, setLocation] = useLocation();
   const { t, i18n } = useTranslation();
   const [isWalletConnected, setIsWalletConnected] = useState(false);
 
-  const toggleLanguage = () => {
-    i18n.changeLanguage(i18n.language === 'ko' ? 'en' : 'ko');
+  // 언어 선택 드롭다운 상태
+  const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
+  
+  // 언어 변경 함수
+  const changeLanguage = (lang: string) => {
+    i18n.changeLanguage(lang);
+    setLanguageMenuOpen(false);
   };
 
   const connectWallet = () => {
     // Placeholder for wallet connection logic
     setIsWalletConnected(true);
+  };
+
+  // 언어 드롭다운 참조
+  const languageMenuRef = useRef<HTMLDivElement>(null);
+  
+  // 언어 드롭다운 외부 클릭 감지
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (languageMenuRef.current && !languageMenuRef.current.contains(event.target as Node)) {
+        setLanguageMenuOpen(false);
+      }
+    }
+    
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+  
+  // 현재 언어 표시 이름
+  const getLanguageDisplay = (lang: string) => {
+    switch(lang) {
+      case 'ko': return '한국어';
+      case 'en': return 'English';
+      case 'ja': return '日本語';
+      default: return 'Language';
+    }
+  };
+  
+  // 현재 언어 약어
+  const getLanguageCode = (lang: string) => {
+    switch(lang) {
+      case 'ko': return 'KO';
+      case 'en': return 'EN';
+      case 'ja': return 'JP';
+      default: return '';
+    }
   };
 
   return (
@@ -43,12 +85,44 @@ export default function Header() {
           </nav>
           
           <div className="flex items-center space-x-4">
-            <button 
-              onClick={toggleLanguage}
-              className="hidden sm:flex px-2 py-1 text-sm border rounded-md"
-            >
-              {i18n.language === 'ko' ? 'EN' : 'KO'}
-            </button>
+            <div className="hidden sm:block relative" ref={languageMenuRef}>
+              <button 
+                onClick={() => setLanguageMenuOpen(!languageMenuOpen)}
+                className="flex items-center space-x-1 px-3 py-1.5 text-sm border rounded-md hover:bg-neutral-50 transition-colors"
+              >
+                <Globe className="h-4 w-4 mr-1 text-neutral-500" />
+                <span>{getLanguageCode(i18n.language)}</span>
+                <ChevronDown className="h-3 w-3 text-neutral-400" />
+              </button>
+              
+              {languageMenuOpen && (
+                <div className="absolute right-0 mt-1 w-36 bg-white border rounded-md shadow-lg z-50">
+                  <div className="py-1">
+                    <button 
+                      className={`w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 flex items-center 
+                      ${i18n.language === 'ko' ? 'text-primary font-medium' : 'text-neutral-700'}`}
+                      onClick={() => changeLanguage('ko')}
+                    >
+                      <span className="mr-1">🇰🇷</span> 한국어
+                    </button>
+                    <button 
+                      className={`w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 flex items-center 
+                      ${i18n.language === 'en' ? 'text-primary font-medium' : 'text-neutral-700'}`}
+                      onClick={() => changeLanguage('en')}
+                    >
+                      <span className="mr-1">🇺🇸</span> English
+                    </button>
+                    <button 
+                      className={`w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 flex items-center 
+                      ${i18n.language === 'ja' ? 'text-primary font-medium' : 'text-neutral-700'}`}
+                      onClick={() => changeLanguage('ja')}
+                    >
+                      <span className="mr-1">🇯🇵</span> 日本語
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
             
             {isWalletConnected ? (
               <div className="hidden md:flex items-center space-x-2 border rounded-full py-1 px-3 text-sm">
@@ -99,9 +173,18 @@ export default function Header() {
                   <Button variant="outline">
                     {t('auth.loginRegister')}
                   </Button>
-                  <Button variant="ghost" onClick={toggleLanguage}>
-                    {i18n.language === 'ko' ? 'Switch to English' : '한국어로 전환'}
-                  </Button>
+                  <div className="flex flex-col gap-2 mt-2">
+                    <p className="text-sm text-neutral-600 font-medium ml-1">언어 선택</p>
+                    <Button variant="ghost" onClick={() => changeLanguage('ko')} className={i18n.language === 'ko' ? 'bg-neutral-100' : ''}>
+                      <span className="mr-2">🇰🇷</span> 한국어
+                    </Button>
+                    <Button variant="ghost" onClick={() => changeLanguage('en')} className={i18n.language === 'en' ? 'bg-neutral-100' : ''}>
+                      <span className="mr-2">🇺🇸</span> English
+                    </Button>
+                    <Button variant="ghost" onClick={() => changeLanguage('ja')} className={i18n.language === 'ja' ? 'bg-neutral-100' : ''}>
+                      <span className="mr-2">🇯🇵</span> 日本語
+                    </Button>
+                  </div>
                 </div>
               </SheetContent>
             </Sheet>

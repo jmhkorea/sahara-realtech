@@ -955,6 +955,116 @@ const enTranslations = {
   }
 };
 
+// Japanese translations
+const jaTranslations = {
+  nav: {
+    home: 'ホーム',
+    properties: 'プロジェクト閲覧',
+    howToInvest: '投資方法',
+    portfolio: 'マイポートフォリオ'
+  },
+  auth: {
+    loginRegister: 'ログイン / 登録'
+  },
+  wallet: {
+    connect: 'ウォレット接続',
+    connected: 'Avalanche接続済み'
+  },
+  hero: {
+    title: '実世界の資産をデジタル化',
+    subtitle: 'アバランチプロトコルベースのブロックチェーン技術で不動産投資の障壁を下げ、少額でもプレミアム不動産に投資できるようにします。',
+    startInvesting: '投資を始める',
+    learnMore: 'サービスについて',
+    avalancheBased: 'Avalanche技術ベース',
+    avalancheDescription: '高速取引処理と低手数料のアバランチプロトコルを使用',
+    completedTransactions: '完了した取引'
+  },
+  search: {
+    region: '地域',
+    selectRegion: '地域を選択',
+    propertyType: '不動産タイプ',
+    selectType: 'タイプを選択',
+    investmentAmount: '投資金額',
+    selectAmount: '金額を選択',
+    searchButton: '物件検索',
+    amountRanges: {
+      under1m: '100万ウォン以下',
+      '1mTo5m': '100万〜500万ウォン',
+      '5mTo10m': '500万〜1,000万ウォン',
+      over10m: '1,000万ウォン以上',
+      all: 'すべて'
+    }
+  },
+  propertyTypes: {
+    apartment: 'アパート',
+    officetel: 'オフィステル',
+    commercial: '商業施設',
+    land: '土地',
+    resort: 'リゾート',
+    membership: '会員権',
+    other: 'その他'
+  },
+  property: {
+    tokenizationStatus: {
+      inProgress: 'トークン化進行中',
+      completed: 'トークン化完了',
+      upcoming: '近日公開予定',
+      unknown: 'ステータス未定'
+    },
+    expectedReturn: '予想利回り {{value}}%',
+    verified: '検証済み',
+    totalValue: '総資産価値',
+    tokenizationProgress: 'トークン化進捗',
+    tokenPrice: 'トークン価格',
+    minInvestment: '最低投資額',
+    investors: '投資家',
+    target: '目標',
+    investButton: '投資する',
+    soldOutButton: '販売完了',
+    registerInterestButton: '関心を登録',
+    viewDetailsButton: '詳細を見る'
+  },
+  featuredProperties: {
+    title: '注目の投資物件',
+    viewAll: 'すべての物件を見る'
+  },
+  footer: {
+    companyDescription: 'ブロックチェーン技術を活用した不動産投資プラットフォームで、誰もが簡単に不動産に投資できる機会を提供します。',
+    services: {
+      title: 'サービス',
+      invest: '不動産投資',
+      exchange: 'トークン取引所',
+      portfolio: '投資ポートフォリオ',
+      returns: '収益管理',
+      education: '投資教育'
+    },
+    company: {
+      title: '会社情報',
+      about: '会社概要',
+      team: 'チーム',
+      blog: 'ブログ',
+      careers: '採用情報',
+      partners: 'パートナーシップ'
+    },
+    legal: {
+      title: '法的情報',
+      terms: '利用規約',
+      privacy: 'プライバシーポリシー',
+      cookies: 'クッキーポリシー',
+      trading: '安全取引ガイド',
+      contact: 'お問い合わせ'
+    },
+    copyright: 'All rights reserved.',
+    supportedBlockchains: '対応ブロックチェーン'
+  },
+  errors: {
+    failedToLoad: 'データの読み込みに失敗しました',
+    tryAgainLater: '後ほど再試行してください',
+    propertyNotFound: '物件が見つかりません',
+    propertyNotFoundDesc: 'リクエストされた不動産物件が見つかりません。他の物件をご確認ください。'
+  }
+};
+
 i18n
   .use(initReactI18next)
   .init({
@@ -964,6 +1074,9 @@ i18n
       },
       en: {
         translation: enTranslations
+      },
+      ja: {
+        translation: jaTranslations
       }
     },
     lng: 'ko', // Set Korean as the default language
