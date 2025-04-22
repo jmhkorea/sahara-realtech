@@ -266,9 +266,9 @@ export default function PropertyDetail() {
                 
                 <Tabs defaultValue="details">
                   <TabsList className="w-full mb-4">
-                    <TabsTrigger value="details" className="flex-1">{t('propertyDetail.tabs.details')}</TabsTrigger>
-                    <TabsTrigger value="investment" className="flex-1">{t('propertyDetail.tabs.investment')}</TabsTrigger>
-                    <TabsTrigger value="blockchain" className="flex-1">{t('propertyDetail.tabs.blockchain')}</TabsTrigger>
+                    <TabsTrigger value="details" className="flex-1">매물 상세정보</TabsTrigger>
+                    <TabsTrigger value="investment" className="flex-1">투자 정보</TabsTrigger>
+                    <TabsTrigger value="blockchain" className="flex-1">블록체인 정보</TabsTrigger>
                     <TabsTrigger value="propertyInfo" className="flex-1">매물 정보</TabsTrigger>
                   </TabsList>
                   
