@@ -1,66 +1,78 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { 
+  BinanceLogo, 
+  CoinbaseLogo, 
+  UpbitLogo, 
+  BithumbLogo, 
+  KrakenLogo,
+  KoreaInvestmentLogo,
+  MiraeAssetLogo,
+  SamsungLogo,
+  ShinhanLogo,
+  KBLogo
+} from "../assets/partner-fix";
 
-// 파트너 로고 데이터
+// 파트너 로고 데이터 (React 컴포넌트를 사용)
 const partnerLogos = [
   { 
     id: 1, 
     name: "Binance", 
-    imgSrc: "/assets/partners/binance.svg", 
+    LogoComponent: BinanceLogo, 
     category: "crypto" 
   },
   { 
     id: 2, 
     name: "Coinbase", 
-    imgSrc: "/assets/partners/coinbase.svg", 
+    LogoComponent: CoinbaseLogo, 
     category: "crypto" 
   },
   { 
     id: 3, 
     name: "Upbit", 
-    imgSrc: "/assets/partners/upbit.svg", 
+    LogoComponent: UpbitLogo, 
     category: "crypto" 
   },
   { 
     id: 4, 
     name: "Bithumb", 
-    imgSrc: "/assets/partners/bithumb.svg", 
+    LogoComponent: BithumbLogo, 
     category: "crypto" 
   },
   { 
     id: 5, 
     name: "Kraken", 
-    imgSrc: "/assets/partners/kraken.svg", 
+    LogoComponent: KrakenLogo, 
     category: "crypto" 
   },
   { 
     id: 6, 
     name: "한국투자증권", 
-    imgSrc: "/assets/partners/koreainvestment.svg", 
+    LogoComponent: KoreaInvestmentLogo, 
     category: "securities" 
   },
   { 
     id: 7, 
     name: "미래에셋증권", 
-    imgSrc: "/assets/partners/mirae.svg", 
+    LogoComponent: MiraeAssetLogo, 
     category: "securities" 
   },
   { 
     id: 8, 
     name: "삼성증권", 
-    imgSrc: "/assets/partners/samsung.svg", 
+    LogoComponent: SamsungLogo, 
     category: "securities" 
   },
   { 
     id: 9, 
     name: "신한투자증권", 
-    imgSrc: "/assets/partners/shinhan.svg", 
+    LogoComponent: ShinhanLogo, 
     category: "securities" 
   },
   { 
     id: 10, 
     name: "KB증권", 
-    imgSrc: "/assets/partners/kb.svg", 
+    LogoComponent: KBLogo, 
     category: "securities" 
   },
 ];
@@ -91,7 +103,7 @@ export default function PartnerLogos() {
   }, []);
   
   // 슬라이드가 완전히 왼쪽으로 이동했을 때 다시 처음 위치로 이동
-  const containerWidth = filteredLogos.length * 120; // 로고 하나당 120px
+  const containerWidth = filteredLogos.length * 200; // 로고 하나당 200px (더 넓게 설정)
   
   useEffect(() => {
     if (Math.abs(position) >= containerWidth / 2) {
@@ -149,14 +161,11 @@ export default function PartnerLogos() {
             <div 
               key={logo.id} 
               className="inline-flex items-center justify-center mx-6"
-              style={{ minWidth: "100px" }}
+              style={{ minWidth: "180px" }}
             >
-              <img
-                src={logo.imgSrc}
-                alt={logo.name}
-                className="h-12 object-contain transition-all filter grayscale brightness-150 hover:grayscale-0 hover:brightness-110 hover:scale-110"
-                title={logo.name}
-              />
+              <div className="text-white transition-all opacity-50 hover:opacity-100 hover:scale-110">
+                <logo.LogoComponent />
+              </div>
             </div>
           ))}
           
@@ -165,14 +174,11 @@ export default function PartnerLogos() {
             <div 
               key={`duplicate-${logo.id}`} 
               className="inline-flex items-center justify-center mx-6"
-              style={{ minWidth: "100px" }}
+              style={{ minWidth: "180px" }}
             >
-              <img
-                src={logo.imgSrc}
-                alt={logo.name}
-                className="h-12 object-contain transition-all filter grayscale brightness-150 hover:grayscale-0 hover:brightness-110 hover:scale-110"
-                title={logo.name}
-              />
+              <div className="text-white transition-all opacity-50 hover:opacity-100 hover:scale-110">
+                <logo.LogoComponent />
+              </div>
             </div>
           ))}
         </div>
