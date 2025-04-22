@@ -59,7 +59,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <div className="flex items-center space-x-2 mb-6">
-              <img src="/assets/logo-sahararealtech.svg" alt="SaharaRealTech" className="h-10" />
+              <img src="/assets/new/sahara-real-tech-logo.svg" alt="SaharaRealTech" className="h-12 invert brightness-0" />
             </div>
             <p className="text-neutral-400 mb-6">
               {t('footer.companyDescription')}
