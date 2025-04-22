@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Menu, Globe, ChevronDown } from "lucide-react";
+import WalletConnect from "@/components/WalletConnect";
 
 export default function Header() {
   const [, setLocation] = useLocation();
