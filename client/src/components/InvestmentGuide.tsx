@@ -7,46 +7,52 @@ import { Button } from '@/components/ui/button';
 
 export default function InvestmentGuide() {
   const { t } = useTranslation();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <Card className="w-full border-2 border-gray-200 shadow-md mb-8 overflow-hidden">
-      <CardHeader className="bg-gradient-to-r from-gray-50 to-gray-100 cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
+    <Card className="w-full border-2 border-blue-300 shadow-lg mb-8 overflow-hidden bg-gradient-to-br from-blue-50 to-sky-50">
+      <CardHeader className="bg-gradient-to-r from-blue-100 to-blue-200 cursor-pointer hover:from-blue-200 hover:to-blue-300 transition-colors" onClick={() => setIsOpen(!isOpen)}>
         <div className="flex items-center justify-between">
-          <CardTitle className="text-lg md:text-xl text-gray-800 flex items-center gap-2">
-            <Info className="h-5 w-5 text-blue-600" /> 
+          <CardTitle className="text-lg md:text-xl text-blue-800 flex items-center gap-2 font-bold">
+            <Info className="h-6 w-6 text-blue-600" /> 
             {t('investmentGuide.title')}
           </CardTitle>
-          <Button variant="ghost" size="sm" className="p-1">
+          <Button variant="ghost" size="sm" className="p-1 text-blue-700 hover:text-blue-900 hover:bg-blue-100">
             {isOpen ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
           </Button>
         </div>
       </CardHeader>
       
       {isOpen && (
-        <CardContent className="pt-4">
-          <p className="text-sm text-gray-600 mb-4">{t('investmentGuide.subtitle')}</p>
+        <CardContent className="pt-4 bg-blue-50 bg-opacity-70">
+          <p className="text-sm text-blue-700 mb-4 font-medium">{t('investmentGuide.subtitle')}</p>
           
           <Accordion type="single" collapsible className="w-full">
-            <AccordionItem value="security-audit">
-              <AccordionTrigger className="text-sm md:text-base font-medium">
+            <AccordionItem value="security-audit" className="border-emerald-200 rounded-md my-3 shadow-sm">
+              <AccordionTrigger className="text-sm md:text-base font-medium bg-gradient-to-r from-emerald-50 to-emerald-100 hover:from-emerald-100 hover:to-emerald-200 px-3 py-2 rounded-t-md">
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-emerald-600" />
-                  {t('investmentGuide.securityAudit.title')}
+                  <CheckCircle2 className="h-5 w-5 text-emerald-600" />
+                  <span className="text-emerald-800 font-semibold">{t('investmentGuide.securityAudit.title')}</span>
                 </div>
               </AccordionTrigger>
-              <AccordionContent>
+              <AccordionContent className="bg-emerald-50 bg-opacity-50 px-3 pb-4 pt-2 rounded-b-md">
                 <div className="space-y-3 text-sm">
-                  <p>{t('investmentGuide.securityAudit.description')}</p>
+                  <p className="text-emerald-800 font-medium">{t('investmentGuide.securityAudit.description')}</p>
                   
-                  <div className="p-3 bg-emerald-50 rounded-md">
-                    <h4 className="font-semibold text-emerald-800">{t('investmentGuide.securityAudit.certik.title')}</h4>
-                    <p className="text-emerald-700">{t('investmentGuide.securityAudit.certik.description')}</p>
+                  <div className="p-4 bg-white border border-emerald-200 rounded-md shadow-sm">
+                    <h4 className="font-semibold text-emerald-800 flex items-center gap-2">
+                      <Shield className="h-4 w-4 text-emerald-600" />
+                      {t('investmentGuide.securityAudit.certik.title')}
+                    </h4>
+                    <p className="text-emerald-700 mt-1">{t('investmentGuide.securityAudit.certik.description')}</p>
                   </div>
                   
-                  <div className="mt-3">
-                    <h4 className="font-semibold text-gray-800 mb-2">{t('investmentGuide.securityAudit.auditProcess.title')}</h4>
-                    <ol className="list-decimal pl-5 space-y-1 text-gray-700">
+                  <div className="mt-3 p-4 bg-white border border-emerald-200 rounded-md shadow-sm">
+                    <h4 className="font-semibold text-emerald-800 mb-2 flex items-center gap-2">
+                      <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+                      {t('investmentGuide.securityAudit.auditProcess.title')}
+                    </h4>
+                    <ol className="list-decimal pl-5 space-y-2 text-emerald-700">
                       <li>{t('investmentGuide.securityAudit.auditProcess.step1')}</li>
                       <li>{t('investmentGuide.securityAudit.auditProcess.step2')}</li>
                       <li>{t('investmentGuide.securityAudit.auditProcess.step3')}</li>
@@ -157,8 +163,13 @@ export default function InvestmentGuide() {
             </AccordionItem>
           </Accordion>
           
-          <div className="mt-4 text-xs text-gray-500">
-            {t('investmentGuide.disclaimer')}
+          <div className="mt-6 p-3 bg-amber-50 border-l-4 border-amber-500 rounded-md text-amber-800 font-medium text-sm flex items-start gap-2">
+            <div className="shrink-0 mt-0.5">
+              <Info className="h-5 w-5 text-amber-600" />
+            </div>
+            <div>
+              {t('investmentGuide.disclaimer')}
+            </div>
           </div>
         </CardContent>
       )}
