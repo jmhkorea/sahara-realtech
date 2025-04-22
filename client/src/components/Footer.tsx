@@ -65,15 +65,7 @@ export default function Footer() {
           
           {/* 로고 슬라이더 (어두운 배경에 맞게 스타일 조정) */}
           <div className="relative overflow-hidden">
-            <div className="partnerLogosWrapper">
-              <style jsx>{`
-                .partnerLogosWrapper :global(.grayscale) {
-                  filter: grayscale(100%) brightness(1.5);
-                }
-                .partnerLogosWrapper :global(.grayscale:hover) {
-                  filter: grayscale(0%) brightness(1.5);
-                }
-              `}</style>
+            <div className="partner-logos-wrapper">
               <PartnerLogos />
             </div>
           </div>
