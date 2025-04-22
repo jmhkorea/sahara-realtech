@@ -46,8 +46,8 @@ export default function TokenProjectDetail() {
     expectedReturn: "7.2",
     tokenizationStatus: "진행 중",
     tokenizationProgress: "65",
-    tokenSymbol: "SRA",
-    tokenName: "SaharaRealTech Asset",
+    tokenSymbol: "SRA-020",
+    tokenName: "SaharaRealTech Asset - 강남 프리미엄 오피스",
     tokenSupply: "100000", // 총 10만개
     tokenPrice: "10000", // 1만원
     tokenSold: "65000", // 6만 5천개 판매됨
