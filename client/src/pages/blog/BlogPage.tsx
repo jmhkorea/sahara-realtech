@@ -16,24 +16,14 @@ export default function BlogPage() {
   // 모든 게시물 및 추천 게시물 가져오기
   const { data: allPosts, isLoading: isLoadingAll } = useQuery({
     queryKey: ['/api/blog/posts'],
-    onError: () => {
-      toast({
-        title: t('blog.error.title', '오류 발생'),
-        description: t('blog.error.fetch', '블로그 게시물을 불러오는데 실패했습니다.'),
-        variant: "destructive",
-      });
-    }
+    gcTime: 5 * 60 * 1000,
+    staleTime: 1 * 60 * 1000,
   });
   
   const { data: featuredPosts, isLoading: isLoadingFeatured } = useQuery({
     queryKey: ['/api/blog/featured'],
-    onError: () => {
-      toast({
-        title: t('blog.error.title', '오류 발생'),
-        description: t('blog.error.fetch', '추천 게시물을 불러오는데 실패했습니다.'),
-        variant: "destructive",
-      });
-    }
+    gcTime: 5 * 60 * 1000,
+    staleTime: 1 * 60 * 1000,
   });
   
   // 카테고리별 게시물 필터링
@@ -143,8 +133,8 @@ export default function BlogPage() {
           <TabsTrigger value={BlogCategory.EVENT}>
             {getCategoryName(BlogCategory.EVENT)}
           </TabsTrigger>
-          <TabsTrigger value={BlogCategory.CRYPTO_UPDATE}>
-            {getCategoryName(BlogCategory.CRYPTO_UPDATE)}
+          <TabsTrigger value={BlogCategory.CRYPTO_NEWS}>
+            {getCategoryName(BlogCategory.CRYPTO_NEWS)}
           </TabsTrigger>
         </TabsList>
         

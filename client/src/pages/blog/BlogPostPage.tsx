@@ -26,19 +26,16 @@ export default function BlogPostPage() {
   } = useQuery({
     queryKey: [`/api/blog/posts/${postId}`],
     enabled: !!postId,
-    onError: () => {
-      toast({
-        title: t('blog.error.title', '오류 발생'),
-        description: t('blog.error.fetchPost', '게시물을 불러오는데 실패했습니다.'),
-        variant: "destructive",
-      });
-    }
+    gcTime: 5 * 60 * 1000,
+    staleTime: 1 * 60 * 1000,
   });
   
   // 관련 게시물 가져오기
   const { data: relatedPosts } = useQuery({
     queryKey: [`/api/blog/posts/${postId}/related`],
     enabled: !!postId,
+    gcTime: 5 * 60 * 1000,
+    staleTime: 1 * 60 * 1000,
   });
   
   // 현재 언어에 맞는 제목과 내용 선택
@@ -83,29 +80,35 @@ export default function BlogPostPage() {
     switch(i18n.language) {
       case 'ko':
         switch(category) {
-          case 'COMPANY_NEWS': return '회사 소식';
-          case 'INVESTMENT_GUIDE': return '투자 가이드';
-          case 'MARKET_ANALYSIS': return '시장 분석';
-          case 'EVENT': return '이벤트';
-          case 'CRYPTO_UPDATE': return '암호화폐 업데이트';
+          case 'company_news': return '회사 소식';
+          case 'investment_guide': return '투자 가이드';
+          case 'market_analysis': return '시장 분석';
+          case 'event': return '이벤트';
+          case 'crypto_news': return '암호화폐 뉴스';
+          case 'avalanche_update': return '아발란체 업데이트';
+          case 'property_showcase': return '추천 매물 소개';
           default: return category;
         }
       case 'ja':
         switch(category) {
-          case 'COMPANY_NEWS': return '会社ニュース';
-          case 'INVESTMENT_GUIDE': return '投資ガイド';
-          case 'MARKET_ANALYSIS': return '市場分析';
-          case 'EVENT': return 'イベント';
-          case 'CRYPTO_UPDATE': return '暗号通貨アップデート';
+          case 'company_news': return '会社ニュース';
+          case 'investment_guide': return '投資ガイド';
+          case 'market_analysis': return '市場分析';
+          case 'event': return 'イベント';
+          case 'crypto_news': return '暗号通貨ニュース';
+          case 'avalanche_update': return 'アバランチェアップデート';
+          case 'property_showcase': return '不動産紹介';
           default: return category;
         }
       default:
         switch(category) {
-          case 'COMPANY_NEWS': return 'Company News';
-          case 'INVESTMENT_GUIDE': return 'Investment Guide';
-          case 'MARKET_ANALYSIS': return 'Market Analysis';
-          case 'EVENT': return 'Events';
-          case 'CRYPTO_UPDATE': return 'Crypto Updates';
+          case 'company_news': return 'Company News';
+          case 'investment_guide': return 'Investment Guide';
+          case 'market_analysis': return 'Market Analysis';
+          case 'event': return 'Events';
+          case 'crypto_news': return 'Crypto News';
+          case 'avalanche_update': return 'Avalanche Updates';
+          case 'property_showcase': return 'Property Showcase';
           default: return category;
         }
     }
