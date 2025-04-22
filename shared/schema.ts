@@ -60,6 +60,11 @@ export const properties = pgTable("properties", {
   minInvestment: numeric("min_investment").notNull(),
   numInvestors: integer("num_investors").default(0),
   region: text("region").notNull(),
+  // 추가 필드
+  appraisalValue: numeric("appraisal_value"), // 감정가
+  legalRights: text("legal_rights"), // 권리관계  
+  mortgageAmount: numeric("mortgage_amount"), // 대출금
+  otherNotes: text("other_notes"), // 기타 의견
 });
 
 export const insertPropertySchema = createInsertSchema(properties).omit({

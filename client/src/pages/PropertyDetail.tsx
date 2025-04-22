@@ -269,6 +269,7 @@ export default function PropertyDetail() {
                     <TabsTrigger value="details" className="flex-1">{t('propertyDetail.tabs.details')}</TabsTrigger>
                     <TabsTrigger value="investment" className="flex-1">{t('propertyDetail.tabs.investment')}</TabsTrigger>
                     <TabsTrigger value="blockchain" className="flex-1">{t('propertyDetail.tabs.blockchain')}</TabsTrigger>
+                    <TabsTrigger value="propertyInfo" className="flex-1">매물 정보</TabsTrigger>
                   </TabsList>
                   
                   <TabsContent value="details">
@@ -358,6 +359,125 @@ export default function PropertyDetail() {
                         <div>
                           <h4 className="font-medium">{t('propertyDetail.verification')}</h4>
                           <p className="text-neutral-500 text-sm">{t('propertyDetail.verifiedBy')}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </TabsContent>
+                  
+                  <TabsContent value="propertyInfo">
+                    <div className="space-y-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="border rounded-lg p-4 bg-neutral-50">
+                          <h3 className="text-lg font-medium mb-2">감정가</h3>
+                          <div className="flex justify-between items-center">
+                            <p className="text-neutral-600">{property.appraisalValue ? formatCurrency(property.appraisalValue) : "정보 없음"}</p>
+                          </div>
+                        </div>
+                        
+                        <div className="border rounded-lg p-4 bg-neutral-50">
+                          <h3 className="text-lg font-medium mb-2">권리관계</h3>
+                          <p className="text-neutral-600">{property.legalRights || "정보 없음"}</p>
+                        </div>
+                        
+                        <div className="border rounded-lg p-4 bg-neutral-50">
+                          <h3 className="text-lg font-medium mb-2">대출금</h3>
+                          <p className="text-neutral-600">{property.mortgageAmount ? formatCurrency(property.mortgageAmount) : "정보 없음"}</p>
+                        </div>
+                        
+                        <div className="border rounded-lg p-4 bg-neutral-50">
+                          <h3 className="text-lg font-medium mb-2">기타 정보</h3>
+                          <p className="text-neutral-600">{property.otherNotes || "정보 없음"}</p>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-white rounded-lg border p-4 mt-4">
+                        <h3 className="text-lg font-medium mb-4">투자 의견 및 정보 공유</h3>
+                        <form className="space-y-4">
+                          <div>
+                            <label htmlFor="comment-type" className="block text-sm font-medium text-neutral-700 mb-1">의견 유형</label>
+                            <Select>
+                              <SelectTrigger id="comment-type">
+                                <SelectValue placeholder="의견 유형 선택" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="investment-opinion">투자 의견</SelectItem>
+                                <SelectItem value="property-info">부동산 정보</SelectItem>
+                                <SelectItem value="market-analysis">시장 분석</SelectItem>
+                                <SelectItem value="question">질문</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          
+                          <div>
+                            <label htmlFor="comment-title" className="block text-sm font-medium text-neutral-700 mb-1">제목</label>
+                            <input 
+                              type="text" 
+                              id="comment-title" 
+                              className="w-full border rounded-md p-2" 
+                              placeholder="제목을 입력하세요"
+                            />
+                          </div>
+                          
+                          <div>
+                            <label htmlFor="comment-content" className="block text-sm font-medium text-neutral-700 mb-1">내용</label>
+                            <textarea 
+                              id="comment-content" 
+                              rows={4} 
+                              className="w-full border rounded-md p-2" 
+                              placeholder="의견이나 정보를 공유해주세요"
+                            ></textarea>
+                          </div>
+                          
+                          <div className="flex items-center space-x-2">
+                            <Checkbox id="anonymous" />
+                            <label htmlFor="anonymous" className="text-sm text-neutral-600">익명으로 작성</label>
+                          </div>
+                          
+                          <Button className="w-full">의견 제출하기</Button>
+                        </form>
+                        
+                        <div className="mt-8">
+                          <h4 className="text-md font-medium mb-4">다른 사용자 의견 (3)</h4>
+                          <div className="space-y-4">
+                            <div className="border-b pb-4">
+                              <div className="flex justify-between mb-1">
+                                <h5 className="font-medium">투자 수익률 검토</h5>
+                                <span className="text-sm text-neutral-500">3일 전</span>
+                              </div>
+                              <p className="text-sm text-neutral-600 mb-2">주변 시세를 고려했을 때 예상 수익률은 적절하다고 판단됩니다. 다만 주변 개발 계획에 따라 변동 가능성이 있습니다.</p>
+                              <div className="flex items-center text-sm text-neutral-500">
+                                <span className="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-xs">투자 의견</span>
+                                <span className="mx-2">·</span>
+                                <span>김투자</span>
+                              </div>
+                            </div>
+                            
+                            <div className="border-b pb-4">
+                              <div className="flex justify-between mb-1">
+                                <h5 className="font-medium">주변 개발 계획 정보</h5>
+                                <span className="text-sm text-neutral-500">1주일 전</span>
+                              </div>
+                              <p className="text-sm text-neutral-600 mb-2">해당 지역 인근에 새로운 지하철 노선이 2026년까지 개통될 예정이며, 이로 인한 지가 상승이 예상됩니다.</p>
+                              <div className="flex items-center text-sm text-neutral-500">
+                                <span className="bg-green-100 text-green-800 px-2 py-0.5 rounded text-xs">부동산 정보</span>
+                                <span className="mx-2">·</span>
+                                <span>익명</span>
+                              </div>
+                            </div>
+                            
+                            <div>
+                              <div className="flex justify-between mb-1">
+                                <h5 className="font-medium">권리관계 질문</h5>
+                                <span className="text-sm text-neutral-500">2주일 전</span>
+                              </div>
+                              <p className="text-sm text-neutral-600 mb-2">현재 권리관계에 대한 자세한 정보를 추가로 공유해주실 수 있을까요?</p>
+                              <div className="flex items-center text-sm text-neutral-500">
+                                <span className="bg-purple-100 text-purple-800 px-2 py-0.5 rounded text-xs">질문</span>
+                                <span className="mx-2">·</span>
+                                <span>이상담</span>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
