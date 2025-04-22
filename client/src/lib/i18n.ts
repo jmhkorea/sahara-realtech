@@ -72,8 +72,8 @@ const koTranslations = {
     viewDetailsButton: '상세 보기'
   },
   featuredProperties: {
-    title: '주목할 만한 투자 매물',
-    viewAll: '모든 매물 보기'
+    title: '주목할 만한 투자자산',
+    viewAll: '모든 투자자산 보기'
   },
   blockchain: {
     title: '블록체인 기술로 부동산 투자의 혁신',
@@ -217,18 +217,18 @@ const koTranslations = {
     supportedBlockchains: '지원되는 블록체인'
   },
   propertyList: {
-    regionTitle: '{{region}} 지역 매물',
+    regionTitle: '{{region}} 지역 투자자산',
     typeTitle: {
-      apartment: '아파트 매물',
-      officetel: '오피스텔 매물',
-      commercial: '상가 매물',
-      land: '토지 매물',
-      resort: '리조트 매물',
-      membership: '회원권 매물',
-      other: '기타 매물',
-      all: '모든 매물'
+      apartment: '아파트 투자자산',
+      officetel: '오피스텔 투자자산',
+      commercial: '상가 투자자산',
+      land: '토지 투자자산',
+      resort: '리조트 투자자산',
+      membership: '회원권 투자자산',
+      other: '기타 투자자산',
+      all: '모든 투자자산'
     },
-    allProperties: '모든 투자 매물',
+    allProperties: '모든 투자자산',
     sortBy: '정렬',
     sortOptions: {
       newest: '최신순',
@@ -236,13 +236,13 @@ const koTranslations = {
       priceLow: '가격 낮은순',
       returns: '수익률순'
     },
-    showing: '총 {{count}}개 매물',
-    noProperties: '조건에 맞는 매물이 없습니다',
+    showing: '총 {{count}}개 투자자산',
+    noProperties: '조건에 맞는 투자자산이 없습니다',
     tryDifferentFilters: '다른 검색 조건을 시도해보세요'
   },
   propertyDetail: {
     tabs: {
-      details: '매물 정보',
+      details: '투자자산 정보',
       investment: '투자 정보',
       blockchain: '블록체인 정보'
     },
