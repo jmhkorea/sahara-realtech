@@ -214,6 +214,11 @@ export class MemStorage implements IStorage {
         minInvestment: "50000",
         numInvestors: 312,
         region: "서울",
+        // 새로 추가된 필드
+        appraisalValue: "19500000000", // 감정가 195억
+        legalRights: "단독 소유권, 근저당 설정 없음", // 권리관계
+        mortgageAmount: "5000000000", // 대출금 50억
+        otherNotes: "2025년 재개발 계획에 따른 가치 상승 예상", // 기타 정보
       },
       {
         name: "부산 해운대 레지던스",
@@ -232,6 +237,11 @@ export class MemStorage implements IStorage {
         minInvestment: "50000",
         numInvestors: 528,
         region: "부산",
+        // 새로 추가된 필드
+        appraisalValue: "13000000000", // 감정가 130억
+        legalRights: "소유권 분쟁 없음, 담보권 설정 상태", // 권리관계
+        mortgageAmount: "3800000000", // 대출금 38억
+        otherNotes: "2022년 리모델링 완료, 방재시설 신규 설치됨", // 기타 정보
       },
       {
         name: "판교 테크노밸리 오피스",
