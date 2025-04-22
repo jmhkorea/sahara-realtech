@@ -137,8 +137,8 @@ const koTranslations = {
         highlight: 'MetaMask, Avalanche Wallet 등 지원'
       },
       step3: {
-        title: '매물 선택 및 투자',
-        description: '다양한 투자 매물 중 원하는 부동산을 선택하고 토큰을 구매하여 투자합니다.',
+        title: '투자자산 선택 및 투자',
+        description: '다양한 투자자산 중 원하는 부동산을 선택하고 토큰을 구매하여 투자합니다.',
         highlight: '부동산별 상세 투자 정보 확인 가능'
       },
       step4: {
@@ -301,8 +301,8 @@ const koTranslations = {
           step3: '플랫폼에 지갑을 연결합니다.'
         },
         investment: {
-          title: '부동산 매물 선택 및 투자',
-          step1: '다양한 부동산 매물을 검토하고 투자할 매물을 선택합니다.',
+          title: '부동산 투자자산 선택 및 투자',
+          step1: '다양한 부동산 투자자산을 검토하고 투자할 자산을 선택합니다.',
           step2: '투자하고자 하는 토큰 수량을 결정합니다.',
           step3: '디지털 지갑을 통해 결제를 완료합니다.',
           step4: '스마트 컨트랙트를 통해 토큰이 즉시 발행됩니다.'
@@ -435,7 +435,7 @@ const koTranslations = {
       },
       noInvestments: '아직 투자 내역이 없습니다',
       noReturns: '수익 데이터가 없습니다',
-      exploreProperties: '매물 둘러보기'
+      exploreProperties: '투자자산 둘러보기'
     },
     investments: {
       title: '투자 내역',
@@ -449,7 +449,7 @@ const koTranslations = {
       tokenizationProgress: '토큰화 진행 상황',
       noInvestments: '투자 내역이 없습니다',
       startInvesting: '부동산 투자를 시작해보세요',
-      exploreProperties: '투자 가능한 매물 보기'
+      exploreProperties: '투자 가능한 자산 둘러보기'
     },
     transactions: {
       title: '거래 내역',
@@ -475,8 +475,8 @@ const koTranslations = {
   errors: {
     failedToLoad: '데이터를 불러오는데 실패했습니다',
     tryAgainLater: '잠시 후 다시 시도해주세요',
-    propertyNotFound: '매물을 찾을 수 없습니다',
-    propertyNotFoundDesc: '요청하신 부동산 매물을 찾을 수 없습니다. 다른 매물을 확인해보세요.'
+    propertyNotFound: '투자자산을 찾을 수 없습니다',
+    propertyNotFoundDesc: '요청하신 투자자산을 찾을 수 없습니다. 다른 투자자산을 확인해보세요.'
   },
   team: {
     title: '팀 소개',
@@ -567,8 +567,8 @@ const enTranslations = {
     viewDetailsButton: 'View Details'
   },
   featuredProperties: {
-    title: 'Featured Investment Properties',
-    viewAll: 'View All Properties'
+    title: 'Featured Investment Assets',
+    viewAll: 'View All Investment Assets'
   },
   blockchain: {
     title: 'Revolutionizing Real Estate with Blockchain',
