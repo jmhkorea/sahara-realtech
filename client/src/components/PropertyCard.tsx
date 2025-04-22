@@ -220,7 +220,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
         
         <Link href={`/properties/${property.id}`}>
           <Button 
-            className={`w-full py-3 ${
+            className={`w-full h-12 py-3 flex items-center justify-center ${
               property.tokenizationStatus === TokenizationStatus.UPCOMING 
                 ? 'border-2 border-accent text-accent hover:bg-accent/5' 
                 : property.tokenizationStatus === TokenizationStatus.COMPLETED 
