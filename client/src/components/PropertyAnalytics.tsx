@@ -22,7 +22,9 @@ import {
   PolarRadiusAxis,
   Radar,
   ScatterChart,
-  Scatter
+  Scatter,
+  LineChart as RechartsLineChart,
+  Line
 } from "recharts";
 import {
   Card,
@@ -49,7 +51,7 @@ import {
   AlertCircle,
   CheckCircle,
   Briefcase,
-  LineChart
+  LineChart as LineChartIcon
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -165,7 +167,7 @@ export default function PropertyAnalytics({ property }: PropertyAnalyticsProps) 
                         <CardContent>
                           <div className="h-56">
                             <ResponsiveContainer width="100%" height="100%">
-                              <LineChart
+                              <RechartsLineChart
                                 data={marketData.marketTrends}
                                 margin={{ top: 20, right: 5, left: 5, bottom: 5 }}
                               >
@@ -185,7 +187,7 @@ export default function PropertyAnalytics({ property }: PropertyAnalyticsProps) 
                                   dataKey="거래량" 
                                   stroke="#10b981" 
                                 />
-                              </LineChart>
+                              </RechartsLineChart>
                             </ResponsiveContainer>
                           </div>
                         </CardContent>
@@ -1106,7 +1108,7 @@ export default function PropertyAnalytics({ property }: PropertyAnalyticsProps) 
                               <p className="text-sm text-purple-700">상관관계 점수</p>
                               <p className="text-2xl font-bold text-purple-800">7.8/10</p>
                             </div>
-                            <LineChart className="h-10 w-10 text-purple-500 opacity-80" />
+                            <LineChartIcon className="h-10 w-10 text-purple-500 opacity-80" />
                           </div>
                           <p className="text-xs text-purple-600 mt-2">낮은 자산간 상관관계</p>
                         </CardContent>
