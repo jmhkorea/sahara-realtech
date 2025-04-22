@@ -44,38 +44,28 @@ export default function Footer() {
             <h3 className="font-bold text-lg mb-4">{t('footer.services.title')}</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="/properties">
-                  <a className="text-neutral-400 hover:text-white transition-colors">
-                    {t('footer.services.invest')}
-                  </a>
+                <Link href="/properties" className="text-neutral-400 hover:text-white transition-colors">
+                  {t('footer.services.invest')}
                 </Link>
               </li>
               <li>
-                <Link href="#">
-                  <a className="text-neutral-400 hover:text-white transition-colors">
-                    {t('footer.services.exchange')}
-                  </a>
+                <Link href="#" className="text-neutral-400 hover:text-white transition-colors">
+                  {t('footer.services.exchange')}
                 </Link>
               </li>
               <li>
-                <Link href="/portfolio">
-                  <a className="text-neutral-400 hover:text-white transition-colors">
-                    {t('footer.services.portfolio')}
-                  </a>
+                <Link href="/portfolio" className="text-neutral-400 hover:text-white transition-colors">
+                  {t('footer.services.portfolio')}
                 </Link>
               </li>
               <li>
-                <Link href="#">
-                  <a className="text-neutral-400 hover:text-white transition-colors">
-                    {t('footer.services.returns')}
-                  </a>
+                <Link href="#" className="text-neutral-400 hover:text-white transition-colors">
+                  {t('footer.services.returns')}
                 </Link>
               </li>
               <li>
-                <Link href="/how-to-invest">
-                  <a className="text-neutral-400 hover:text-white transition-colors">
-                    {t('footer.services.education')}
-                  </a>
+                <Link href="/how-to-invest" className="text-neutral-400 hover:text-white transition-colors">
+                  {t('footer.services.education')}
                 </Link>
               </li>
             </ul>
@@ -85,38 +75,28 @@ export default function Footer() {
             <h3 className="font-bold text-lg mb-4">{t('footer.company.title')}</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="#">
-                  <a className="text-neutral-400 hover:text-white transition-colors">
-                    {t('footer.company.about')}
-                  </a>
+                <Link href="#" className="text-neutral-400 hover:text-white transition-colors">
+                  {t('footer.company.about')}
                 </Link>
               </li>
               <li>
-                <Link href="#">
-                  <a className="text-neutral-400 hover:text-white transition-colors">
-                    {t('footer.company.team')}
-                  </a>
+                <Link href="#" className="text-neutral-400 hover:text-white transition-colors">
+                  {t('footer.company.team')}
                 </Link>
               </li>
               <li>
-                <Link href="#">
-                  <a className="text-neutral-400 hover:text-white transition-colors">
-                    {t('footer.company.blog')}
-                  </a>
+                <Link href="#" className="text-neutral-400 hover:text-white transition-colors">
+                  {t('footer.company.blog')}
                 </Link>
               </li>
               <li>
-                <Link href="#">
-                  <a className="text-neutral-400 hover:text-white transition-colors">
-                    {t('footer.company.careers')}
-                  </a>
+                <Link href="#" className="text-neutral-400 hover:text-white transition-colors">
+                  {t('footer.company.careers')}
                 </Link>
               </li>
               <li>
-                <Link href="#">
-                  <a className="text-neutral-400 hover:text-white transition-colors">
-                    {t('footer.company.partners')}
-                  </a>
+                <Link href="#" className="text-neutral-400 hover:text-white transition-colors">
+                  {t('footer.company.partners')}
                 </Link>
               </li>
             </ul>
@@ -126,38 +106,28 @@ export default function Footer() {
             <h3 className="font-bold text-lg mb-4">{t('footer.legal.title')}</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="#">
-                  <a className="text-neutral-400 hover:text-white transition-colors">
-                    {t('footer.legal.terms')}
-                  </a>
+                <Link href="#" className="text-neutral-400 hover:text-white transition-colors">
+                  {t('footer.legal.terms')}
                 </Link>
               </li>
               <li>
-                <Link href="#">
-                  <a className="text-neutral-400 hover:text-white transition-colors">
-                    {t('footer.legal.privacy')}
-                  </a>
+                <Link href="#" className="text-neutral-400 hover:text-white transition-colors">
+                  {t('footer.legal.privacy')}
                 </Link>
               </li>
               <li>
-                <Link href="#">
-                  <a className="text-neutral-400 hover:text-white transition-colors">
-                    {t('footer.legal.cookies')}
-                  </a>
+                <Link href="#" className="text-neutral-400 hover:text-white transition-colors">
+                  {t('footer.legal.cookies')}
                 </Link>
               </li>
               <li>
-                <Link href="#">
-                  <a className="text-neutral-400 hover:text-white transition-colors">
-                    {t('footer.legal.trading')}
-                  </a>
+                <Link href="#" className="text-neutral-400 hover:text-white transition-colors">
+                  {t('footer.legal.trading')}
                 </Link>
               </li>
               <li>
-                <Link href="#">
-                  <a className="text-neutral-400 hover:text-white transition-colors">
-                    {t('footer.legal.contact')}
-                  </a>
+                <Link href="#" className="text-neutral-400 hover:text-white transition-colors">
+                  {t('footer.legal.contact')}
                 </Link>
               </li>
             </ul>
