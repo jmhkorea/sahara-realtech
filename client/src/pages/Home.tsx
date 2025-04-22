@@ -8,6 +8,7 @@ import FinancialAnalytics from "@/components/FinancialAnalytics";
 import FAQ from "@/components/FAQ";
 import Newsletter from "@/components/Newsletter";
 import InvestmentGuide from "@/components/InvestmentGuide";
+import FeatureCards from "@/components/FeatureCards";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <Hero />
       <SearchSection />
       <InvestmentGuide />
+      <FeatureCards />
       <FeaturedProperties />
       <BlockchainDetails />
       <HowItWorks />

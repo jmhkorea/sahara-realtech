@@ -16,6 +16,9 @@ import BlogPage from "@/pages/blog/BlogPage";
 import BlogPostPage from "@/pages/blog/BlogPostPage";
 import AdminPage from "@/pages/AdminPage";
 import LaosProjectDetail from "@/pages/LaosProjectDetail";
+import RealEstateTokenization from "@/pages/RealEstateTokenization";
+import SecureTransactions from "@/pages/SecureTransactions";
+import LiquidityEnhancement from "@/pages/LiquidityEnhancement";
 
 import "./lib/i18n";
 
@@ -36,6 +39,9 @@ function Router() {
           <Route path="/team" component={TeamPage} />
           <Route path="/admin" component={AdminPage} />
           <Route path="/projects/laos-vientiane" component={LaosProjectDetail} />
+          <Route path="/real-estate-tokenization" component={RealEstateTokenization} />
+          <Route path="/secure-transactions" component={SecureTransactions} />
+          <Route path="/liquidity-enhancement" component={LiquidityEnhancement} />
           <Route component={NotFound} />
         </Switch>
       </main>
