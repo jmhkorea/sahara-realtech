@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="250" height="60" viewBox="0 0 250 60" xmlns="http://www.w3.org/2000/svg">
-  <!-- Sahara Real Tech 로고 - 단순화된 버전 -->
-  <g>
-    <!-- 이미지 아이콘을 시뮬레이션하는 사각형 -->
-    <rect x="10" y="15" width="30" height="30" fill="#f8f8f8" stroke="#cccccc" />
-    <path d="M10 15 L40 15 L40 35 L10 35 Z" fill="#f0f0f0" />
-    <path d="M15 25 L20 20 L30 30 L25 35 L15 25" fill="#8bc34a" />
-    <circle cx="25" cy="22" r="3" fill="#ffeb3b" />
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- R 로고 (배경 제거, 진한 회색) -->
+  <g fill="#333333">
+    <!-- R 외곽선들 -->
+    <path d="M165,50 h70 q20,0 20,20 v25 q0,20 -20,20 h-40 l40,35 h-25 l-40,-35 h-5 v35 h-20 v-100 z"/>
+    <path d="M185,70 v50 h30 q10,0 10,-10 v-30 q0,-10 -10,-10 z" fill="white"/>
     
-    <!-- SaharaRealTech 텍스트 (한 줄) -->
-    <text x="45" y="38" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">SaharaRealTech</text>
+    <!-- 내부 R 라인들 -->
+    <rect x="175" y="50" width="5" height="100"/>
+    <rect x="185" y="50" width="5" height="100"/>
+    <rect x="195" y="50" width="5" height="100"/>
+    <rect x="205" y="50" width="5" height="70"/>
+    <rect x="215" y="50" width="5" height="70"/>
   </g>
+  
+  <!-- sahara 텍스트 (진한 회색) -->
+  <text x="200" y="190" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="#333333" text-anchor="middle">sahara</text>
+  
+  <!-- Real Tech 텍스트 (진한 회색) -->
+  <text x="200" y="230" font-family="Arial, sans-serif" font-size="24" fill="#333333" text-anchor="middle">R e a l  T e c h</text>
 </svg>
