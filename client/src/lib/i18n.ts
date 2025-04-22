@@ -5,7 +5,7 @@ import { initReactI18next } from 'react-i18next';
 const koTranslations = {
   nav: {
     home: '홈',
-    properties: '매물 목록',
+    properties: '프로젝트 보기',
     howToInvest: '투자 방법',
     portfolio: '마이 포트폴리오'
   },
@@ -479,7 +479,7 @@ const koTranslations = {
 const enTranslations = {
   nav: {
     home: 'Home',
-    properties: 'Properties',
+    properties: 'View Projects',
     howToInvest: 'How to Invest',
     portfolio: 'My Portfolio'
   },
