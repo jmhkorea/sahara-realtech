@@ -1,7 +1,6 @@
 import Hero from "@/components/Hero";
 import SearchSection from "@/components/SearchSection";
 import FeaturedProperties from "@/components/FeaturedProperties";
-import BlockchainDetails from "@/components/BlockchainDetails";
 import HowItWorks from "@/components/HowItWorks";
 import InvestmentVisualizations from "@/components/InvestmentVisualizations";
 import FinancialAnalytics from "@/components/FinancialAnalytics";
@@ -18,7 +17,6 @@ export default function Home() {
       <InvestmentGuide />
       <FeatureCards />
       <FeaturedProperties />
-      <BlockchainDetails />
       <HowItWorks />
       <InvestmentVisualizations />
       <FinancialAnalytics />
