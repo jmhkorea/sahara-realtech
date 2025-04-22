@@ -367,7 +367,7 @@ export class MemStorage implements IStorage {
         summaryKo: "SaharaRealTech의 혁신적인 플랫폼은 아발란체 프로토콜을 활용하여 부동산 투자를 혁신합니다",
         summaryJa: "SaharaRealTechの革新的なプラットフォームは、アバランチェプロトコルを活用して不動産投資を革新します",
         category: BlogCategory.COMPANY_NEWS,
-        imageUrl: "/assets/blog/avalanche-protocol.jpg",
+        imageUrl: "/attached_assets/AVAX.png",
         author: "Han Ko",
         authorId: 1,
         tags: ["avalanche", "블록체인", "부동산", "tokenization"],

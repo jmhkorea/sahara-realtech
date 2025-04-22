@@ -406,6 +406,34 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ message: "태그를 생성하는데 실패했습니다" });
     }
   });
+  
+  // 블로그 게시물 이미지 URL 업데이트
+  app.patch('/api/blog/posts/:id/image', async (req: Request, res: Response) => {
+    try {
+      const id = Number(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "유효하지 않은 게시물 ID입니다" });
+      }
+      
+      const post = await storage.getBlogPost(id);
+      if (!post) {
+        return res.status(404).json({ message: "게시물을 찾을 수 없습니다" });
+      }
+      
+      const imageUrlSchema = z.object({
+        imageUrl: z.string().url()
+      });
+      
+      const validatedData = imageUrlSchema.parse(req.body);
+      const updatedPost = await storage.updateBlogPost(id, { imageUrl: validatedData.imageUrl });
+      res.json(updatedPost);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: "유효하지 않은 이미지 URL입니다", errors: error.errors });
+      }
+      res.status(500).json({ message: "이미지 URL을 업데이트하는데 실패했습니다" });
+    }
+  });
 
   const httpServer = createServer(app);
   return httpServer;
