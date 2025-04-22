@@ -17,7 +17,7 @@ const koTranslations = {
     connected: 'Avalanche 연결됨'
   },
   hero: {
-    title: '부동산, 이제 블록체인으로 투자하세요',
+    title: '실제 세계 자산을 디지털화 하세요',
     subtitle: '아발란체 프로토콜 기반의 블록체인 기술로 부동산 투자의 진입장벽을 낮추고, 소액으로도 프리미엄 부동산에 투자할 수 있습니다.',
     startInvesting: '투자 시작하기',
     learnMore: '서비스 알아보기',
@@ -121,7 +121,7 @@ const koTranslations = {
   },
   howItWorks: {
     title: '블록체인 부동산 투자 방법',
-    subtitle: 'BlockEstate에서 블록체인 기술을 활용한 부동산 투자는 간단합니다. 아래 단계를 따라 시작해보세요.',
+    subtitle: 'SaharaRealTech에서 블록체인 기술을 활용한 부동산 투자는 간단합니다. 아래 단계를 따라 시작해보세요.',
     steps: {
       step1: {
         title: '회원가입 및 인증',
@@ -168,7 +168,7 @@ const koTranslations = {
       },
       legalSafety: {
         question: '법적으로 안전한가요?',
-        answer: 'BlockEstate는 한국의 부동산 및 금융 관련 법규를 준수하며 운영됩니다. 모든 부동산은 법적 검토를 거쳐 등록되며, 투자자 보호를 위한 다양한 안전장치를 마련하고 있습니다. 또한 블록체인 기술을 통해 모든 거래 내역이 투명하게 기록되어 안전성을 높였습니다.'
+        answer: 'SaharaRealTech는 한국의 부동산 및 금융 관련 법규를 준수하며 운영됩니다. 모든 부동산은 법적 검토를 거쳐 등록되며, 투자자 보호를 위한 다양한 안전장치를 마련하고 있습니다. 또한 블록체인 기술을 통해 모든 거래 내역이 투명하게 기록되어 안전성을 높였습니다.'
       }
     }
   },
@@ -373,7 +373,7 @@ const koTranslations = {
       },
       education: {
         title: '투자 교육 중요성',
-        description: '블록체인 부동산 투자를 시작하기 전에 충분한 정보와 교육을 통해 리스크를 이해하는 것이 중요합니다. BlockEstate는 투자자 교육을 위한 다양한 자료를 제공하고 있습니다.',
+        description: '블록체인 부동산 투자를 시작하기 전에 충분한 정보와 교육을 통해 리스크를 이해하는 것이 중요합니다. SaharaRealTech는 투자자 교육을 위한 다양한 자료를 제공하고 있습니다.',
         button: '투자 교육 자료 보기'
       }
     }
@@ -491,7 +491,7 @@ const enTranslations = {
     connected: 'Avalanche Connected'
   },
   hero: {
-    title: 'Invest in Real Estate with Blockchain',
+    title: 'Digitize Real-World Assets',
     subtitle: 'Using Avalanche protocol-based blockchain technology to lower the barriers to real estate investment and make premium properties available for small investments.',
     startInvesting: 'Start Investing',
     learnMore: 'Learn More',
@@ -595,7 +595,7 @@ const enTranslations = {
   },
   howItWorks: {
     title: 'How to Invest in Blockchain Real Estate',
-    subtitle: 'Blockchain-based real estate investment at BlockEstate is simple. Follow the steps below to get started.',
+    subtitle: 'Blockchain-based real estate investment at SaharaRealTech is simple. Follow the steps below to get started.',
     steps: {
       step1: {
         title: 'Register & Verify',
@@ -630,7 +630,7 @@ const enTranslations = {
       },
       whereToTrade: {
         question: 'Where can I trade real estate tokens?',
-        answer: 'You can trade tokens directly on BlockEstate, as well as on digital asset exchanges based on the Avalanche protocol. This provides high liquidity and allows you to cash out your investment at any time.'
+        answer: 'You can trade tokens directly on SaharaRealTech, as well as on digital asset exchanges based on the Avalanche protocol. This provides high liquidity and allows you to cash out your investment at any time.'
       },
       howToReceiveReturns: {
         question: 'How do I receive investment returns?',
@@ -642,7 +642,7 @@ const enTranslations = {
       },
       legalSafety: {
         question: 'Is it legally safe?',
-        answer: 'BlockEstate operates in compliance with Korean real estate and financial regulations. All properties are registered after legal review, and various safety measures are in place to protect investors. Blockchain technology also enhances safety by transparently recording all transaction details.'
+        answer: 'SaharaRealTech operates in compliance with Korean real estate and financial regulations. All properties are registered after legal review, and various safety measures are in place to protect investors. Blockchain technology also enhances safety by transparently recording all transaction details.'
       }
     }
   },
@@ -847,7 +847,7 @@ const enTranslations = {
       },
       education: {
         title: 'Importance of Investment Education',
-        description: 'Before starting blockchain real estate investment, it is important to understand the risks through sufficient information and education. BlockEstate provides various materials for investor education.',
+        description: 'Before starting blockchain real estate investment, it is important to understand the risks through sufficient information and education. SaharaRealTech provides various materials for investor education.',
         button: 'View Investment Education Materials'
       }
     }
