@@ -8,6 +8,13 @@ import {
   insertTransactionSchema
 } from "@shared/schema";
 import { z } from "zod";
+import { 
+  getCashFlowData, 
+  getAssetValueData, 
+  getReturnAnalysisData, 
+  getMarketIndicatorsData,
+  getPortfolioAnalysisData 
+} from "./services/financialDataService";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API endpoints
@@ -189,6 +196,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ message: "Failed to create transaction" });
     }
   });
+
+  // 재무 분석 API 엔드포인트
+  app.get('/api/financial/cashflow', getCashFlowData);
+  app.get('/api/financial/asset-value', getAssetValueData);
+  app.get('/api/financial/return-analysis', getReturnAnalysisData);
+  app.get('/api/financial/market-indicators', getMarketIndicatorsData);
+  app.get('/api/financial/portfolio-analysis', getPortfolioAnalysisData);
 
   const httpServer = createServer(app);
   return httpServer;
