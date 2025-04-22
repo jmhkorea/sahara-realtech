@@ -80,6 +80,26 @@ export default function PropertyAnalytics({ property }: PropertyAnalyticsProps) 
     queryFn: () => fetch('/api/financial/return-analysis?analysisType=coc').then(res => res.json())
   });
   
+  const { data: irrData, isLoading: isIrrLoading } = useQuery({
+    queryKey: ['/api/financial/return-analysis', 'irr'],
+    queryFn: () => fetch('/api/financial/return-analysis?analysisType=irr').then(res => res.json())
+  });
+  
+  const { data: comparisonData, isLoading: isComparisonLoading } = useQuery({
+    queryKey: ['/api/financial/return-analysis', 'comparison'],
+    queryFn: () => fetch('/api/financial/return-analysis?analysisType=comparison').then(res => res.json())
+  });
+  
+  const { data: marketData, isLoading: isMarketLoading } = useQuery({
+    queryKey: ['/api/financial/market-indicators'],
+    queryFn: () => fetch('/api/financial/market-indicators').then(res => res.json())
+  });
+  
+  const { data: portfolioData, isLoading: isPortfolioLoading } = useQuery({
+    queryKey: ['/api/financial/portfolio-analysis'],
+    queryFn: () => fetch('/api/financial/portfolio-analysis').then(res => res.json())
+  });
+  
   // Format currency for display
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('ko-KR', {
@@ -219,10 +239,92 @@ export default function PropertyAnalytics({ property }: PropertyAnalyticsProps) 
                 <CardDescription>투자 수익률과 성과 지표를 확인하세요</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="h-72 p-8 text-center bg-neutral-50 rounded-lg">
-                  <AlertCircle className="h-8 w-8 text-amber-500 mx-auto mb-4" />
-                  <p className="text-neutral-500">구현 중입니다...</p>
-                </div>
+                {isReturnLoading || isIrrLoading ? (
+                  <Skeleton className="h-72 w-full" />
+                ) : returnAnalysisData && irrData ? (
+                  <div className="space-y-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <h3 className="text-md font-medium mb-3">현금 수익률 (Cash on Cash)</h3>
+                        <div className="h-64">
+                          <ResponsiveContainer width="100%" height="100%">
+                            <BarChart
+                              data={returnAnalysisData.details}
+                              margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                            >
+                              <CartesianGrid strokeDasharray="3 3" />
+                              <XAxis dataKey="name" />
+                              <YAxis tickFormatter={(value) => `${value}%`} />
+                              <Tooltip formatter={(value) => [`${value}%`, '수익률']} />
+                              <Bar dataKey="value" fill="#10b981" barSize={40} radius={[4, 4, 0, 0]} />
+                            </BarChart>
+                          </ResponsiveContainer>
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <h3 className="text-md font-medium mb-3">내부 수익률 (IRR)</h3>
+                        <div className="h-64">
+                          <ResponsiveContainer width="100%" height="100%">
+                            <AreaChart
+                              data={irrData.yearlyData}
+                              margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                            >
+                              <CartesianGrid strokeDasharray="3 3" />
+                              <XAxis dataKey="year" tickFormatter={(value) => `${value}년차`} />
+                              <YAxis tickFormatter={(value) => `${value}%`} />
+                              <Tooltip formatter={(value) => [`${value}%`, '수익률']} />
+                              <Area type="monotone" dataKey="value" stroke="#8884d8" fill="#8884d880" />
+                            </AreaChart>
+                          </ResponsiveContainer>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <Card className="bg-green-50">
+                        <CardContent className="pt-4">
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <p className="text-sm text-green-700">현금 수익률</p>
+                              <p className="text-2xl font-bold text-green-800">{returnAnalysisData.coc}%</p>
+                            </div>
+                            <DollarSign className="h-10 w-10 text-green-500 opacity-80" />
+                          </div>
+                        </CardContent>
+                      </Card>
+                      
+                      <Card className="bg-purple-50">
+                        <CardContent className="pt-4">
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <p className="text-sm text-purple-700">내부 수익률</p>
+                              <p className="text-2xl font-bold text-purple-800">{irrData.irr}%</p>
+                            </div>
+                            <TrendingUp className="h-10 w-10 text-purple-500 opacity-80" />
+                          </div>
+                        </CardContent>
+                      </Card>
+                      
+                      <Card className="bg-blue-50">
+                        <CardContent className="pt-4">
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <p className="text-sm text-blue-700">자본 회수 기간</p>
+                              <p className="text-2xl font-bold text-blue-800">4.3년</p>
+                            </div>
+                            <Calendar className="h-10 w-10 text-blue-500 opacity-80" />
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-center h-72">
+                    <AlertCircle className="h-8 w-8 text-amber-500 mr-2" />
+                    <span>데이터를 불러오는 중 오류가 발생했습니다</span>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </TabsContent>
@@ -249,10 +351,133 @@ export default function PropertyAnalytics({ property }: PropertyAnalyticsProps) 
                 <CardDescription>부동산 자산의 가치 변화 예측을 확인하세요</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="h-72 p-8 text-center bg-neutral-50 rounded-lg">
-                  <AlertCircle className="h-8 w-8 text-amber-500 mx-auto mb-4" />
-                  <p className="text-neutral-500">구현 중입니다...</p>
-                </div>
+                {isAssetValueLoading ? (
+                  <Skeleton className="h-72 w-full" />
+                ) : assetValueData ? (
+                  <div className="space-y-6">
+                    <div className="h-60">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <AreaChart
+                          data={assetValueData}
+                          margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                        >
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis dataKey="year" />
+                          <YAxis 
+                            yAxisId="left"
+                            orientation="left"
+                            tickFormatter={(value) => `${(value / 1000000).toFixed(0)}M`}
+                          />
+                          <YAxis 
+                            yAxisId="right"
+                            orientation="right"
+                            tickFormatter={(value) => `${(value / 1000).toFixed(0)}K`}
+                          />
+                          <Tooltip 
+                            formatter={(value, name) => {
+                              if (name === 'propertyValue') {
+                                return [formatCurrency(Number(value)), '자산 가치'];
+                              } else {
+                                return [formatCurrency(Number(value)), '토큰 가치'];
+                              }
+                            }}
+                            labelFormatter={(label) => `${label}년`}
+                          />
+                          <Legend />
+                          <Area 
+                            yAxisId="left"
+                            type="monotone" 
+                            dataKey="propertyValue" 
+                            stroke="#3b82f6" 
+                            fill="#3b82f680"
+                            name="자산 가치" 
+                          />
+                          <Area 
+                            yAxisId="right"
+                            type="monotone" 
+                            dataKey="tokenValue" 
+                            stroke="#10b981" 
+                            fill="#10b98180"
+                            name="토큰 가치" 
+                          />
+                        </AreaChart>
+                      </ResponsiveContainer>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                      <Card className="bg-blue-50">
+                        <CardContent className="pt-4">
+                          <h3 className="text-sm text-blue-700 mb-1">초기 자산 가치 (2020)</h3>
+                          <p className="text-xl font-bold text-blue-800">{formatCurrency(assetValueData[0].propertyValue)}</p>
+                          <div className="mt-2 flex items-center">
+                            <p className="text-xs text-blue-600">토큰 당 {formatCurrency(assetValueData[0].tokenValue)}</p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                      
+                      <Card className="bg-green-50">
+                        <CardContent className="pt-4">
+                          <h3 className="text-sm text-green-700 mb-1">현재 자산 가치 (2024)</h3>
+                          <p className="text-xl font-bold text-green-800">{formatCurrency(assetValueData[4].propertyValue)}</p>
+                          <div className="mt-2 flex items-center">
+                            <p className="text-xs text-green-600">토큰 당 {formatCurrency(assetValueData[4].tokenValue)}</p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                      
+                      <Card className="bg-purple-50">
+                        <CardContent className="pt-4">
+                          <h3 className="text-sm text-purple-700 mb-1">5년 후 예상 가치 (2029)</h3>
+                          <p className="text-xl font-bold text-purple-800">{formatCurrency(assetValueData[9].propertyValue)}</p>
+                          <div className="mt-2 flex items-center">
+                            <p className="text-xs text-purple-600">토큰 당 {formatCurrency(assetValueData[9].tokenValue)}</p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+                    
+                    <div className="mt-6 bg-gray-50 p-4 rounded-lg">
+                      <h3 className="text-sm font-medium mb-3">자산 가치 상승 요인</h3>
+                      <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
+                        <div className="text-center">
+                          <div className="inline-block w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-2">
+                            <span className="font-medium text-blue-600">30%</span>
+                          </div>
+                          <p className="text-xs">위치</p>
+                        </div>
+                        <div className="text-center">
+                          <div className="inline-block w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mb-2">
+                            <span className="font-medium text-green-600">15%</span>
+                          </div>
+                          <p className="text-xs">주변시설</p>
+                        </div>
+                        <div className="text-center">
+                          <div className="inline-block w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center mb-2">
+                            <span className="font-medium text-yellow-600">20%</span>
+                          </div>
+                          <p className="text-xs">교통</p>
+                        </div>
+                        <div className="text-center">
+                          <div className="inline-block w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mb-2">
+                            <span className="font-medium text-purple-600">15%</span>
+                          </div>
+                          <p className="text-xs">건물상태</p>
+                        </div>
+                        <div className="text-center">
+                          <div className="inline-block w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center mb-2">
+                            <span className="font-medium text-pink-600">20%</span>
+                          </div>
+                          <p className="text-xs">시장수요</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-center h-72">
+                    <AlertCircle className="h-8 w-8 text-amber-500 mr-2" />
+                    <span>데이터를 불러오는 중 오류가 발생했습니다</span>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </TabsContent>
