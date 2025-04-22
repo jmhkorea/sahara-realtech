@@ -476,6 +476,22 @@ const koTranslations = {
     tryAgainLater: '잠시 후 다시 시도해주세요',
     propertyNotFound: '매물을 찾을 수 없습니다',
     propertyNotFoundDesc: '요청하신 부동산 매물을 찾을 수 없습니다. 다른 매물을 확인해보세요.'
+  },
+  team: {
+    title: '팀 소개',
+    subtitle: '우리의 전문가 팀은 블록체인 기술과 부동산 업계에서 풍부한 경험을 가지고 있습니다',
+    filters: {
+      all: '전체',
+      executive: '경영진',
+      technical: '기술 리더십',
+      directors: '이사진',
+      advisors: '자문위원'
+    },
+    joinUs: {
+      title: '함께 일해요',
+      description: '혁신적인 블록체인 기반 부동산 투자 플랫폼을 함께 만들어갈 열정적인 인재를 찾고 있습니다',
+      button: '채용 정보 보기'
+    }
   }
 };
 
@@ -952,6 +968,22 @@ const enTranslations = {
     tryAgainLater: 'Please try again later',
     propertyNotFound: 'Property Not Found',
     propertyNotFoundDesc: 'The property you requested could not be found. Please check other properties.'
+  },
+  team: {
+    title: 'Our Team',
+    subtitle: 'Our expert team has rich experience in blockchain technology and real estate industry',
+    filters: {
+      all: 'All',
+      executive: 'Executive Leadership',
+      technical: 'Technical Leadership',
+      directors: 'Board of Directors',
+      advisors: 'Advisory Board'
+    },
+    joinUs: {
+      title: 'Join Our Team',
+      description: 'We are looking for passionate talents to build an innovative blockchain-based real estate investment platform together',
+      button: 'View Career Opportunities'
+    }
   }
 };
 
@@ -1062,6 +1094,22 @@ const jaTranslations = {
     tryAgainLater: '後ほど再試行してください',
     propertyNotFound: '物件が見つかりません',
     propertyNotFoundDesc: 'リクエストされた不動産物件が見つかりません。他の物件をご確認ください。'
+  },
+  team: {
+    title: 'チーム紹介',
+    subtitle: '当社の専門家チームはブロックチェーン技術と不動産業界で豊富な経験を持っています',
+    filters: {
+      all: 'すべて',
+      executive: '経営陣',
+      technical: '技術リーダーシップ',
+      directors: '取締役会',
+      advisors: 'アドバイザリーボード'
+    },
+    joinUs: {
+      title: '一緒に働きましょう',
+      description: '革新的なブロックチェーンベースの不動産投資プラットフォームを一緒に構築する情熱的な人材を探しています',
+      button: '採用情報を見る'
+    }
   }
 };
 
