@@ -19,7 +19,7 @@ export default function Footer() {
               <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
               </svg>
-              <span className="text-white font-bold text-xl">BlockEstate</span>
+              <span className="text-white font-bold text-xl">SaharaRealTech</span>
             </div>
             <p className="text-neutral-400 mb-6">
               {t('footer.companyDescription')}
@@ -166,7 +166,7 @@ export default function Footer() {
         
         <div className="border-t border-neutral-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-neutral-400 text-sm">
-            &copy; {new Date().getFullYear()} BlockEstate. {t('footer.copyright')}
+            &copy; {new Date().getFullYear()} SaharaRealTech. {t('footer.copyright')}
           </p>
           <div className="flex items-center mt-4 md:mt-0">
             <span className="text-neutral-400 text-sm mr-2">{t('footer.supportedBlockchains')}:</span>

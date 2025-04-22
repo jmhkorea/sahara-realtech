@@ -27,7 +27,7 @@ export default function Header() {
             <svg className="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
             </svg>
-            <span className="text-primary font-bold text-xl">BlockEstate</span>
+            <span className="text-primary font-bold text-xl">SaharaRealTech</span>
           </div>
           
           <nav className="hidden md:flex items-center space-x-8">
