@@ -3,6 +3,7 @@ import SearchSection from "@/components/SearchSection";
 import FeaturedProperties from "@/components/FeaturedProperties";
 import BlockchainDetails from "@/components/BlockchainDetails";
 import HowItWorks from "@/components/HowItWorks";
+import InvestmentVisualizations from "@/components/InvestmentVisualizations";
 import FAQ from "@/components/FAQ";
 import Newsletter from "@/components/Newsletter";
 
@@ -14,6 +15,7 @@ export default function Home() {
       <FeaturedProperties />
       <BlockchainDetails />
       <HowItWorks />
+      <InvestmentVisualizations />
       <FAQ />
       <Newsletter />
     </>

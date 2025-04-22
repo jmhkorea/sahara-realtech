@@ -147,40 +147,122 @@ export default function InvestmentVisualizations() {
               </div>
             </TabsContent>
 
-            {/* 나머지 TabsContent는 추후 구현 */}
             <TabsContent value="investmentComparison">
-              <div className="text-center py-16">
-                <p className="text-lg text-neutral-500">추후 업데이트 예정</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>투자 방식별 비교</CardTitle>
+                    <CardDescription>토큰화 부동산, 전통적 부동산, 리츠(REITs) 등 다양한 투자 방식의 비교</CardDescription>
+                  </CardHeader>
+                  <CardContent className="h-80">
+                    <InvestmentComparison comparisonType="radar" />
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardHeader>
+                    <CardTitle>최소 투자금액 비교</CardTitle>
+                    <CardDescription>투자 방식별 최소 투자금액 비교</CardDescription>
+                  </CardHeader>
+                  <CardContent className="h-80">
+                    <InvestmentComparison comparisonType="bar" />
+                  </CardContent>
+                </Card>
               </div>
             </TabsContent>
 
             <TabsContent value="roiCalculator">
-              <div className="text-center py-16">
-                <p className="text-lg text-neutral-500">추후 업데이트 예정</p>
-              </div>
+              <ROICalculator />
             </TabsContent>
 
             <TabsContent value="propertyValue">
-              <div className="text-center py-16">
-                <p className="text-lg text-neutral-500">추후 업데이트 예정</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card className="md:col-span-2">
+                  <CardHeader>
+                    <CardTitle>부동산 가치 평가 요소</CardTitle>
+                    <CardDescription>다양한 요소에 따른 부동산 가치 평가 분석</CardDescription>
+                  </CardHeader>
+                  <CardContent className="h-96">
+                    <PropertyValueChart chartType="radar" />
+                  </CardContent>
+                </Card>
+                <Card className="md:col-span-2">
+                  <CardHeader>
+                    <CardTitle>감정가 형성 요인 및 비교</CardTitle>
+                    <CardDescription>감정가에 영향을 주는 요소와 실거래가 비교</CardDescription>
+                  </CardHeader>
+                  <CardContent className="h-96">
+                    <PropertyValueChart chartType="factors" />
+                  </CardContent>
+                </Card>
               </div>
             </TabsContent>
 
             <TabsContent value="tokenization">
-              <div className="text-center py-16">
-                <p className="text-lg text-neutral-500">추후 업데이트 예정</p>
+              <div className="grid grid-cols-1 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>부동산 토큰화 프로세스</CardTitle>
+                    <CardDescription>부동산이 토큰화되는 전체 과정과 현재 진행 상황</CardDescription>
+                  </CardHeader>
+                  <CardContent className="pb-6">
+                    <TokenizationProcess processType="timeline" />
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardHeader>
+                    <CardTitle>토큰 분배 및 블록체인 통합</CardTitle>
+                    <CardDescription>토큰 분배 현황과 블록체인 통합 구조</CardDescription>
+                  </CardHeader>
+                  <CardContent className="pb-6">
+                    <TokenizationProcess processType="distribution" />
+                  </CardContent>
+                </Card>
               </div>
             </TabsContent>
 
             <TabsContent value="riskManagement">
-              <div className="text-center py-16">
-                <p className="text-lg text-neutral-500">추후 업데이트 예정</p>
+              <div className="grid grid-cols-1 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>투자 리스크 분석 및 보호 장치</CardTitle>
+                    <CardDescription>부동산 투자 리스크 요소와 투자자 보호 메커니즘</CardDescription>
+                  </CardHeader>
+                  <CardContent className="pb-6">
+                    <RiskManagement chartType="radar" />
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardHeader>
+                    <CardTitle>분산 투자 효과 및 법적 보호</CardTitle>
+                    <CardDescription>다양한 자산 분산 투자의 효과와 투자자 법적 권리</CardDescription>
+                  </CardHeader>
+                  <CardContent className="pb-6">
+                    <RiskManagement chartType="diversification" />
+                  </CardContent>
+                </Card>
               </div>
             </TabsContent>
 
             <TabsContent value="globalOpportunities">
-              <div className="text-center py-16">
-                <p className="text-lg text-neutral-500">추후 업데이트 예정</p>
+              <div className="grid grid-cols-1 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>글로벌 투자 지역 및 트렌드</CardTitle>
+                    <CardDescription>글로벌 부동산 투자 지역과 시장 트렌드</CardDescription>
+                  </CardHeader>
+                  <CardContent className="pb-6">
+                    <GlobalOpportunities chartType="trendMap" />
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardHeader>
+                    <CardTitle>국가별 시장 성장률 및 투자 이점</CardTitle>
+                    <CardDescription>다양한 국가의 부동산 시장 성장률과 글로벌 투자의 이점</CardDescription>
+                  </CardHeader>
+                  <CardContent className="pb-6">
+                    <GlobalOpportunities chartType="countryComparison" />
+                  </CardContent>
+                </Card>
               </div>
             </TabsContent>
           </div>
