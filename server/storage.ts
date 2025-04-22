@@ -491,7 +491,7 @@ export class MemStorage implements IStorage {
         description: "강남 중심부에 위치한 프리미엄 오피스 빌딩으로, 안정적인 임대 수익이 예상됩니다.",
         descriptionEn: "Premium office building located in the center of Gangnam, expected to provide stable rental income.",
         type: PropertyType.COMMERCIAL,
-        imageUrl: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00",
+        imageUrl: "/attached_assets/image_1745320022420.png",
         totalValue: "18000000000", // 180억
         expectedReturn: "7.2",
         tokenizationStatus: TokenizationStatus.IN_PROGRESS,
@@ -514,7 +514,7 @@ export class MemStorage implements IStorage {
         description: "부산 해운대 프리미엄 레지던스로, 바다 전망과 높은 임대 수요를 자랑합니다.",
         descriptionEn: "Premium residence in Haeundae, Busan, featuring ocean views and high rental demand.",
         type: PropertyType.APARTMENT,
-        imageUrl: "https://images.unsplash.com/photo-1577415124269-fc1140a69e91",
+        imageUrl: "/attached_assets/image_1745299871569.png",
         totalValue: "12600000000", // 126억
         expectedReturn: "6.8",
         tokenizationStatus: TokenizationStatus.COMPLETED,
