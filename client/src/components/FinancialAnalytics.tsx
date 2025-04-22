@@ -109,33 +109,31 @@ export default function FinancialAnalytics() {
 
             <TabsContent value="returnAnalysis">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Card className="md:col-span-2">
-                  <CardHeader>
-                    <CardTitle>내부수익률(IRR) 시뮬레이션</CardTitle>
-                    <CardDescription>다양한 시나리오에 따른 내부수익률 시뮬레이션</CardDescription>
-                  </CardHeader>
-                  <CardContent className="h-96">
+                <CollapsibleCard
+                  title="내부수익률(IRR) 시뮬레이션"
+                  description="다양한 시나리오에 따른 내부수익률 시뮬레이션"
+                  className="md:col-span-2"
+                >
+                  <div className="h-96">
                     <ReturnAnalysis analysisType="irr" />
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardHeader>
-                    <CardTitle>현금-현-현금 수익률</CardTitle>
-                    <CardDescription>투자 기간에 따른 CoC 수익률 변화</CardDescription>
-                  </CardHeader>
-                  <CardContent className="h-80">
+                  </div>
+                </CollapsibleCard>
+                <CollapsibleCard
+                  title="현금-현-현금 수익률"
+                  description="투자 기간에 따른 CoC 수익률 변화"
+                >
+                  <div className="h-80">
                     <ReturnAnalysis analysisType="coc" />
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardHeader>
-                    <CardTitle>총수익률 vs 순수익률</CardTitle>
-                    <CardDescription>세금 및 비용 공제 전후 수익률 비교</CardDescription>
-                  </CardHeader>
-                  <CardContent className="h-80">
+                  </div>
+                </CollapsibleCard>
+                <CollapsibleCard
+                  title="총수익률 vs 순수익률"
+                  description="세금 및 비용 공제 전후 수익률 비교"
+                >
+                  <div className="h-80">
                     <ReturnAnalysis analysisType="comparison" />
-                  </CardContent>
-                </Card>
+                  </div>
+                </CollapsibleCard>
               </div>
             </TabsContent>
 
