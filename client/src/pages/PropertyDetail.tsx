@@ -277,6 +277,10 @@ export default function PropertyDetail() {
                     <TabsTrigger value="investment" className="flex-1">투자 정보</TabsTrigger>
                     <TabsTrigger value="blockchain" className="flex-1">블록체인 정보</TabsTrigger>
                     <TabsTrigger value="propertyInfo" className="flex-1">투자자산 정보</TabsTrigger>
+                    <TabsTrigger value="analytics" className="flex-1">
+                      <BarChart2 className="h-4 w-4 mr-1" />
+                      금융 분석
+                    </TabsTrigger>
                   </TabsList>
                   
                   <TabsContent value="details">
@@ -367,6 +371,34 @@ export default function PropertyDetail() {
                           <h4 className="font-medium">{t('propertyDetail.verification')}</h4>
                           <p className="text-neutral-500 text-sm">{t('propertyDetail.verifiedBy')}</p>
                         </div>
+                      </div>
+                    </div>
+                  </TabsContent>
+                  
+                  <TabsContent value="analytics">
+                    <div className="space-y-8">
+                      <div className="border-b pb-4">
+                        <h3 className="text-lg font-semibold mb-4 flex items-center">
+                          <ChartLine className="h-5 w-5 mr-2 text-primary" />
+                          자산 재무 분석
+                        </h3>
+                        <PropertyAnalytics property={property} />
+                      </div>
+                      
+                      <div className="border-b pb-4">
+                        <h3 className="text-lg font-semibold mb-4 flex items-center">
+                          <Calculator className="h-5 w-5 mr-2 text-primary" />
+                          투자 시뮬레이션
+                        </h3>
+                        <InvestmentSimulator property={property} />
+                      </div>
+                      
+                      <div>
+                        <h3 className="text-lg font-semibold mb-4 flex items-center">
+                          <BarChart2 className="h-5 w-5 mr-2 text-primary" />
+                          시장 분석
+                        </h3>
+                        <MarketAnalysis property={property} />
                       </div>
                     </div>
                   </TabsContent>

@@ -62,14 +62,17 @@ export default function PropertyAnalytics({ property }: PropertyAnalyticsProps) 
   // Fetch financial analytics data
   const { data: cashflowData, isLoading: isCashflowLoading } = useQuery({
     queryKey: ['/api/financial/cashflow', cashflowPeriod],
+    queryFn: () => fetch(`/api/financial/cashflow?chartType=${cashflowPeriod}`).then(res => res.json())
   });
 
   const { data: assetValueData, isLoading: isAssetValueLoading } = useQuery({
     queryKey: ['/api/financial/asset-value'],
+    queryFn: () => fetch(`/api/financial/asset-value`).then(res => res.json())
   });
 
   const { data: incomeDistribution, isLoading: isIncomeLoading } = useQuery({
     queryKey: ['/api/financial/cashflow', 'distribution'],
+    queryFn: () => fetch(`/api/financial/cashflow?chartType=distribution`).then(res => res.json())
   });
 
   // Risk analysis data
