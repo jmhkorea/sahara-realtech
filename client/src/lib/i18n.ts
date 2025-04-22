@@ -222,6 +222,8 @@ const koTranslations = {
       officetel: '오피스텔 매물',
       commercial: '상가 매물',
       land: '토지 매물',
+      resort: '리조트 매물',
+      membership: '회원권 매물',
       other: '기타 매물',
       all: '모든 매물'
     },

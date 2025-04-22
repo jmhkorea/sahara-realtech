@@ -4,27 +4,73 @@ import {
   Twitter,
   Facebook,
   Instagram,
-  Linkedin
+  Linkedin,
+  Mail,
+  MapPin,
+  Globe
 } from "lucide-react";
 
 export default function Footer() {
   const { t } = useTranslation();
 
+  // 지사 정보
+  const globalOffices = {
+    korea: {
+      name: "Korea (Headquarters)",
+      address: "Orange Planet 1F, PR Center"
+    },
+    bali: {
+      name: "Bali, Indonesia",
+      address: "Banjar Pande, Desa/Kelurahan Tulkup, Kec. Giannyar.Ka.Gianyar, Provinsi Bali"
+    },
+    dubai: {
+      name: "Dubai, UAE",
+      address: "43-44 Ownned by Dubai Municpality, Al Fahidi, Bur Dubai"
+    },
+    malaysia: {
+      name: "Malaysia",
+      address: "Block D, 10-3 Menara Suezcap, KL Gateway, Jalan Kerinchi, Bangsar South, 59200 Kuala Lumpur"
+    },
+    china: {
+      name: "China",
+      address: "中国四川省成都高新技术产业开发区成都环球中心"
+    },
+    japan: {
+      name: "Japan",
+      address: "〒105-0011 東京都港区芝公園1-2-17 芝公園ハイツ206号室"
+    },
+    usa: {
+      name: "USA",
+      address: "911 Washington Ave Saint Louis, Missouri, U.S.A. / Houston, Texas, U.S.A."
+    },
+    india: {
+      name: "India",
+      address: "Singjamei Okram Leikai, Imphal west Manipur 795001, India"
+    },
+    malta: {
+      name: "Malta, Europe",
+      address: "152, Naxxar Road, San Gwann SGN 9030, Malta. Europe"
+    }
+  };
+
   return (
     <footer className="bg-neutral-900 text-white py-12">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <div className="flex items-center space-x-2 mb-6">
-              <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-              </svg>
-              <span className="text-white font-bold text-xl">SaharaRealTech</span>
+              <img src="/assets/logo-sahararealtech.svg" alt="SaharaRealTech" className="h-10" />
             </div>
             <p className="text-neutral-400 mb-6">
               {t('footer.companyDescription')}
             </p>
-            <div className="flex space-x-4">
+            <div className="flex items-center mb-4">
+              <Mail className="h-5 w-5 text-primary mr-2" />
+              <a href="mailto:INFO@SAHARAREALTECH.COM" className="text-neutral-300 hover:text-white transition-colors">
+                INFO@SAHARAREALTECH.COM
+              </a>
+            </div>
+            <div className="flex space-x-4 mt-4">
               <a href="#" className="text-white hover:text-primary transition-colors">
                 <Twitter className="h-5 w-5" />
               </a>
@@ -69,41 +115,8 @@ export default function Footer() {
                 </Link>
               </li>
             </ul>
-          </div>
-          
-          <div>
-            <h3 className="font-bold text-lg mb-4">{t('footer.company.title')}</h3>
-            <ul className="space-y-3">
-              <li>
-                <Link href="#" className="text-neutral-400 hover:text-white transition-colors">
-                  {t('footer.company.about')}
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-neutral-400 hover:text-white transition-colors">
-                  {t('footer.company.team')}
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-neutral-400 hover:text-white transition-colors">
-                  {t('footer.company.blog')}
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-neutral-400 hover:text-white transition-colors">
-                  {t('footer.company.careers')}
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-neutral-400 hover:text-white transition-colors">
-                  {t('footer.company.partners')}
-                </Link>
-              </li>
-            </ul>
-          </div>
-          
-          <div>
-            <h3 className="font-bold text-lg mb-4">{t('footer.legal.title')}</h3>
+            
+            <h3 className="font-bold text-lg mt-8 mb-4">{t('footer.legal.title')}</h3>
             <ul className="space-y-3">
               <li>
                 <Link href="#" className="text-neutral-400 hover:text-white transition-colors">
@@ -117,20 +130,28 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="#" className="text-neutral-400 hover:text-white transition-colors">
-                  {t('footer.legal.cookies')}
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-neutral-400 hover:text-white transition-colors">
-                  {t('footer.legal.trading')}
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-neutral-400 hover:text-white transition-colors">
                   {t('footer.legal.contact')}
                 </Link>
               </li>
             </ul>
+          </div>
+          
+          <div>
+            <h3 className="font-bold text-lg mb-4 flex items-center">
+              <Globe className="h-5 w-5 mr-2" />
+              Global Offices
+            </h3>
+            <div className="grid grid-cols-1 gap-y-4 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
+              {Object.values(globalOffices).map((office, index) => (
+                <div key={index} className="border-b border-neutral-800 pb-3 last:border-none">
+                  <h4 className="text-white font-medium">{office.name}</h4>
+                  <p className="text-neutral-400 text-sm flex items-start mt-1">
+                    <MapPin className="h-4 w-4 mr-1 mt-0.5 flex-shrink-0" />
+                    <span>{office.address}</span>
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
         

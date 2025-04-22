@@ -23,12 +23,9 @@ export default function Header() {
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <svg className="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-            </svg>
-            <span className="text-primary font-bold text-xl">SaharaRealTech</span>
-          </div>
+          <Link href="/" className="flex items-center space-x-2">
+            <img src="/assets/logo-sahararealtech.svg" alt="SaharaRealTech" className="h-10" />
+          </Link>
           
           <nav className="hidden md:flex items-center space-x-8">
             <Link href="/" className="font-medium text-neutral-500 hover:text-primary transition-colors">
