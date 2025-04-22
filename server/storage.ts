@@ -537,7 +537,7 @@ export class MemStorage implements IStorage {
         description: "IT 기업들이 밀집한 판교 테크노밸리의 최신 오피스 빌딩으로, 높은 성장성이 기대됩니다.",
         descriptionEn: "Latest office building in Pangyo Technovalley, where IT companies are concentrated, expected to show high growth potential.",
         type: PropertyType.COMMERCIAL,
-        imageUrl: "https://images.unsplash.com/photo-1565402170291-8491f14678db",
+        imageUrl: "/attached_assets/image_1745299952200.png",
         totalValue: "21500000000", // 215억
         expectedReturn: "8.1",
         tokenizationStatus: TokenizationStatus.UPCOMING,
@@ -591,7 +591,7 @@ export class MemStorage implements IStorage {
         description: "강원도 평창에 위치한 반얀트리 레지던트 200실 중 일부에 투자할 수 있는 기회. 사계절 관광지로 꾸준한 방문객 유입이 예상됩니다.",
         descriptionEn: "Investment opportunity in a portion of the 200 Banyan Tree Residences in Pyeongchang, Gangwon. Steady visitor influx expected as a four-season tourist destination.",
         type: PropertyType.RESORT,
-        imageUrl: "https://images.unsplash.com/photo-1610641818989-c2051b5e2cfd",
+        imageUrl: "/attached_assets/image_1745300302568.png",
         totalValue: "28500000000", // 285억
         expectedReturn: "7.8",
         tokenizationStatus: TokenizationStatus.UPCOMING,
