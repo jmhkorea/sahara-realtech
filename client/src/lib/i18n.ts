@@ -647,7 +647,14 @@ const enTranslations = {
     investButton: 'Invest Now',
     soldOutButton: 'Sold Out',
     registerInterestButton: 'Register Interest',
-    viewDetailsButton: 'View Details'
+    viewDetailsButton: 'View Details',
+    financialAnalysis: 'Financial Analysis',
+    keyMetrics: 'Key Metrics',
+    cashReturn: 'Cash Return',
+    capRate: 'Cap Rate',
+    occupancyRate: 'Occupancy Rate',
+    annualReturn: 'Annual Return',
+    priceHistory: 'Price History'
   },
   featuredProperties: {
     title: 'Featured Investment Assets',
