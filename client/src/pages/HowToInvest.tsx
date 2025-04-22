@@ -8,6 +8,8 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { useState } from "react";
 import { Link } from "wouter";
 import { 
   Wallet, 
@@ -19,11 +21,17 @@ import {
   Key, 
   Shield, 
   BarChart3, 
-  BookOpen 
+  BookOpen,
+  ChevronDown,
+  ChevronUp
 } from "lucide-react";
 
 export default function HowToInvest() {
   const { t } = useTranslation();
+  const [registrationOpen, setRegistrationOpen] = useState(true);
+  const [walletOpen, setWalletOpen] = useState(true);
+  const [investmentOpen, setInvestmentOpen] = useState(true);
+  const [returnsOpen, setReturnsOpen] = useState(true);
 
   return (
     <div className="bg-neutral-100 min-h-screen">
@@ -63,78 +71,110 @@ export default function HowToInvest() {
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <Card>
-                      <CardHeader>
-                        <div className="flex items-center mb-2">
-                          <div className="bg-primary/10 w-10 h-10 rounded-full flex items-center justify-center mr-3">
-                            <UserCheck className="text-primary" />
+                    <div className="border-2 border-primary/30 rounded-lg bg-white shadow-sm">
+                      <Collapsible
+                        open={registrationOpen}
+                        onOpenChange={setRegistrationOpen}
+                      >
+                        <CollapsibleTrigger className="w-full p-4 flex items-center justify-between hover:bg-neutral-50">
+                          <div className="flex items-center">
+                            <div className="bg-primary/10 w-10 h-10 rounded-full flex items-center justify-center mr-3">
+                              <UserCheck className="text-primary" />
+                            </div>
+                            <h3 className="text-lg font-bold">{t('howToInvest.guide.steps.registration.title')}</h3>
                           </div>
-                          <CardTitle>{t('howToInvest.guide.steps.registration.title')}</CardTitle>
-                        </div>
-                      </CardHeader>
-                      <CardContent>
-                        <ol className="list-decimal list-inside text-neutral-600 space-y-2 pl-2">
-                          <li>{t('howToInvest.guide.steps.registration.step1')}</li>
-                          <li>{t('howToInvest.guide.steps.registration.step2')}</li>
-                          <li>{t('howToInvest.guide.steps.registration.step3')}</li>
-                        </ol>
-                      </CardContent>
-                    </Card>
+                          <div>
+                            {registrationOpen ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
+                          </div>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent className="p-4 pt-0 border-t">
+                          <ol className="list-decimal list-inside text-neutral-600 space-y-2 pl-2 mt-4">
+                            <li>{t('howToInvest.guide.steps.registration.step1')}</li>
+                            <li>{t('howToInvest.guide.steps.registration.step2')}</li>
+                            <li>{t('howToInvest.guide.steps.registration.step3')}</li>
+                          </ol>
+                        </CollapsibleContent>
+                      </Collapsible>
+                    </div>
 
-                    <Card>
-                      <CardHeader>
-                        <div className="flex items-center mb-2">
-                          <div className="bg-primary/10 w-10 h-10 rounded-full flex items-center justify-center mr-3">
-                            <Wallet className="text-primary" />
+                    <div className="border-2 border-primary/30 rounded-lg bg-white shadow-sm">
+                      <Collapsible
+                        open={walletOpen}
+                        onOpenChange={setWalletOpen}
+                      >
+                        <CollapsibleTrigger className="w-full p-4 flex items-center justify-between hover:bg-neutral-50">
+                          <div className="flex items-center">
+                            <div className="bg-primary/10 w-10 h-10 rounded-full flex items-center justify-center mr-3">
+                              <Wallet className="text-primary" />
+                            </div>
+                            <h3 className="text-lg font-bold">{t('howToInvest.guide.steps.wallet.title')}</h3>
                           </div>
-                          <CardTitle>{t('howToInvest.guide.steps.wallet.title')}</CardTitle>
-                        </div>
-                      </CardHeader>
-                      <CardContent>
-                        <ol className="list-decimal list-inside text-neutral-600 space-y-2 pl-2">
-                          <li>{t('howToInvest.guide.steps.wallet.step1')}</li>
-                          <li>{t('howToInvest.guide.steps.wallet.step2')}</li>
-                          <li>{t('howToInvest.guide.steps.wallet.step3')}</li>
-                        </ol>
-                      </CardContent>
-                    </Card>
+                          <div>
+                            {walletOpen ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
+                          </div>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent className="p-4 pt-0 border-t">
+                          <ol className="list-decimal list-inside text-neutral-600 space-y-2 pl-2 mt-4">
+                            <li>{t('howToInvest.guide.steps.wallet.step1')}</li>
+                            <li>{t('howToInvest.guide.steps.wallet.step2')}</li>
+                            <li>{t('howToInvest.guide.steps.wallet.step3')}</li>
+                          </ol>
+                        </CollapsibleContent>
+                      </Collapsible>
+                    </div>
 
-                    <Card>
-                      <CardHeader>
-                        <div className="flex items-center mb-2">
-                          <div className="bg-primary/10 w-10 h-10 rounded-full flex items-center justify-center mr-3">
-                            <Building className="text-primary" />
+                    <div className="border-2 border-primary/30 rounded-lg bg-white shadow-sm">
+                      <Collapsible
+                        open={investmentOpen}
+                        onOpenChange={setInvestmentOpen}
+                      >
+                        <CollapsibleTrigger className="w-full p-4 flex items-center justify-between hover:bg-neutral-50">
+                          <div className="flex items-center">
+                            <div className="bg-primary/10 w-10 h-10 rounded-full flex items-center justify-center mr-3">
+                              <Building className="text-primary" />
+                            </div>
+                            <h3 className="text-lg font-bold">{t('howToInvest.guide.steps.investment.title')}</h3>
                           </div>
-                          <CardTitle>{t('howToInvest.guide.steps.investment.title')}</CardTitle>
-                        </div>
-                      </CardHeader>
-                      <CardContent>
-                        <ol className="list-decimal list-inside text-neutral-600 space-y-2 pl-2">
-                          <li>{t('howToInvest.guide.steps.investment.step1')}</li>
-                          <li>{t('howToInvest.guide.steps.investment.step2')}</li>
-                          <li>{t('howToInvest.guide.steps.investment.step3')}</li>
-                          <li>{t('howToInvest.guide.steps.investment.step4')}</li>
-                        </ol>
-                      </CardContent>
-                    </Card>
+                          <div>
+                            {investmentOpen ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
+                          </div>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent className="p-4 pt-0 border-t">
+                          <ol className="list-decimal list-inside text-neutral-600 space-y-2 pl-2 mt-4">
+                            <li>{t('howToInvest.guide.steps.investment.step1')}</li>
+                            <li>{t('howToInvest.guide.steps.investment.step2')}</li>
+                            <li>{t('howToInvest.guide.steps.investment.step3')}</li>
+                            <li>{t('howToInvest.guide.steps.investment.step4')}</li>
+                          </ol>
+                        </CollapsibleContent>
+                      </Collapsible>
+                    </div>
 
-                    <Card>
-                      <CardHeader>
-                        <div className="flex items-center mb-2">
-                          <div className="bg-primary/10 w-10 h-10 rounded-full flex items-center justify-center mr-3">
-                            <LineChart className="text-primary" />
+                    <div className="border-2 border-primary/30 rounded-lg bg-white shadow-sm">
+                      <Collapsible
+                        open={returnsOpen}
+                        onOpenChange={setReturnsOpen}
+                      >
+                        <CollapsibleTrigger className="w-full p-4 flex items-center justify-between hover:bg-neutral-50">
+                          <div className="flex items-center">
+                            <div className="bg-primary/10 w-10 h-10 rounded-full flex items-center justify-center mr-3">
+                              <LineChart className="text-primary" />
+                            </div>
+                            <h3 className="text-lg font-bold">{t('howToInvest.guide.steps.returns.title')}</h3>
                           </div>
-                          <CardTitle>{t('howToInvest.guide.steps.returns.title')}</CardTitle>
-                        </div>
-                      </CardHeader>
-                      <CardContent>
-                        <ol className="list-decimal list-inside text-neutral-600 space-y-2 pl-2">
-                          <li>{t('howToInvest.guide.steps.returns.step1')}</li>
-                          <li>{t('howToInvest.guide.steps.returns.step2')}</li>
-                          <li>{t('howToInvest.guide.steps.returns.step3')}</li>
-                        </ol>
-                      </CardContent>
-                    </Card>
+                          <div>
+                            {returnsOpen ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
+                          </div>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent className="p-4 pt-0 border-t">
+                          <ol className="list-decimal list-inside text-neutral-600 space-y-2 pl-2 mt-4">
+                            <li>{t('howToInvest.guide.steps.returns.step1')}</li>
+                            <li>{t('howToInvest.guide.steps.returns.step2')}</li>
+                            <li>{t('howToInvest.guide.steps.returns.step3')}</li>
+                          </ol>
+                        </CollapsibleContent>
+                      </Collapsible>
+                    </div>
                   </div>
 
                   <div className="mt-10 flex justify-center">
