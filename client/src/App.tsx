@@ -15,6 +15,7 @@ import TeamPage from "@/pages/TeamPage";
 import BlogPage from "@/pages/blog/BlogPage";
 import BlogPostPage from "@/pages/blog/BlogPostPage";
 import AdminPage from "@/pages/AdminPage";
+import LaosProjectDetail from "@/pages/LaosProjectDetail";
 
 import "./lib/i18n";
 
@@ -34,6 +35,7 @@ function Router() {
           <Route path="/blog/:id" component={BlogPostPage} />
           <Route path="/team" component={TeamPage} />
           <Route path="/admin" component={AdminPage} />
+          <Route path="/projects/laos-vientiane" component={LaosProjectDetail} />
           <Route component={NotFound} />
         </Switch>
       </main>
