@@ -1,78 +1,75 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { 
-  BinanceLogo, 
-  CoinbaseLogo, 
-  UpbitLogo, 
-  BithumbLogo, 
-  KrakenLogo,
-  KoreaInvestmentLogo,
-  MiraeAssetLogo,
-  SamsungLogo,
-  ShinhanLogo,
-  KBLogo
-} from "../assets/partner-fix";
 
-// 파트너 로고 데이터 (React 컴포넌트를 사용)
+// 파트너 로고 데이터
 const partnerLogos = [
   { 
     id: 1, 
     name: "Binance", 
-    LogoComponent: BinanceLogo, 
+    imgSrc: "/assets/partners/binance.png", 
     category: "crypto" 
   },
   { 
     id: 2, 
     name: "Coinbase", 
-    LogoComponent: CoinbaseLogo, 
+    // 임시로 Binance 이미지 사용 (실제 로고 업로드 후 수정 예정)
+    imgSrc: "/assets/partners/binance.png", 
     category: "crypto" 
   },
   { 
     id: 3, 
     name: "Upbit", 
-    LogoComponent: UpbitLogo, 
+    // 임시로 Binance 이미지 사용 (실제 로고 업로드 후 수정 예정)
+    imgSrc: "/assets/partners/binance.png", 
     category: "crypto" 
   },
   { 
     id: 4, 
     name: "Bithumb", 
-    LogoComponent: BithumbLogo, 
+    // 임시로 Binance 이미지 사용 (실제 로고 업로드 후 수정 예정)
+    imgSrc: "/assets/partners/binance.png", 
     category: "crypto" 
   },
   { 
     id: 5, 
     name: "Kraken", 
-    LogoComponent: KrakenLogo, 
+    // 임시로 Binance 이미지 사용 (실제 로고 업로드 후 수정 예정)
+    imgSrc: "/assets/partners/binance.png", 
     category: "crypto" 
   },
   { 
     id: 6, 
     name: "한국투자증권", 
-    LogoComponent: KoreaInvestmentLogo, 
+    // 임시로 Binance 이미지 사용 (실제 로고 업로드 후 수정 예정)
+    imgSrc: "/assets/partners/binance.png", 
     category: "securities" 
   },
   { 
     id: 7, 
     name: "미래에셋증권", 
-    LogoComponent: MiraeAssetLogo, 
+    // 임시로 Binance 이미지 사용 (실제 로고 업로드 후 수정 예정)
+    imgSrc: "/assets/partners/binance.png", 
     category: "securities" 
   },
   { 
     id: 8, 
     name: "삼성증권", 
-    LogoComponent: SamsungLogo, 
+    // 임시로 Binance 이미지 사용 (실제 로고 업로드 후 수정 예정)
+    imgSrc: "/assets/partners/binance.png", 
     category: "securities" 
   },
   { 
     id: 9, 
     name: "신한투자증권", 
-    LogoComponent: ShinhanLogo, 
+    // 임시로 Binance 이미지 사용 (실제 로고 업로드 후 수정 예정)
+    imgSrc: "/assets/partners/binance.png", 
     category: "securities" 
   },
   { 
     id: 10, 
     name: "KB증권", 
-    LogoComponent: KBLogo, 
+    // 임시로 Binance 이미지 사용 (실제 로고 업로드 후 수정 예정)
+    imgSrc: "/assets/partners/binance.png", 
     category: "securities" 
   },
 ];
@@ -163,9 +160,12 @@ export default function PartnerLogos() {
               className="inline-flex items-center justify-center mx-6"
               style={{ minWidth: "180px" }}
             >
-              <div className="text-white transition-all opacity-50 hover:opacity-100 hover:scale-110">
-                <logo.LogoComponent />
-              </div>
+              <img
+                src={logo.imgSrc}
+                alt={logo.name}
+                className="h-16 object-contain transition-all filter grayscale brightness-150 hover:grayscale-0 hover:brightness-110 hover:scale-110"
+                title={logo.name}
+              />
             </div>
           ))}
           
@@ -176,9 +176,12 @@ export default function PartnerLogos() {
               className="inline-flex items-center justify-center mx-6"
               style={{ minWidth: "180px" }}
             >
-              <div className="text-white transition-all opacity-50 hover:opacity-100 hover:scale-110">
-                <logo.LogoComponent />
-              </div>
+              <img
+                src={logo.imgSrc}
+                alt={logo.name}
+                className="h-16 object-contain transition-all filter grayscale brightness-150 hover:grayscale-0 hover:brightness-110 hover:scale-110"
+                title={logo.name}
+              />
             </div>
           ))}
         </div>
