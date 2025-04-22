@@ -520,6 +520,66 @@ const LaosProjectDetail = () => {
                       </div>
                     </div>
                   </div>
+                  
+                  <div>
+                    <h4 className="font-bold mb-3">스마트 컨트랙트와 토큰 시스템 구조</h4>
+                    <div className="bg-gradient-to-r from-slate-50 to-blue-50 p-4 rounded-lg border border-blue-100 space-y-4">
+                      <div>
+                        <h5 className="font-medium text-blue-900">아발란체 블록체인과 토큰 구조</h5>
+                        <p className="text-sm text-slate-700 mt-1">
+                          사하라리얼테크의 토큰 시스템은 아발란체 메인넷의 C-Chain(이더리움 호환 체인)에 배포됩니다. 
+                          이 체인은 이더리움과 호환되는 스마트 컨트랙트를 실행하면서도 더 빠른 속도와 낮은 수수료를 제공합니다.
+                        </p>
+                      </div>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="bg-white rounded-lg border border-blue-100 p-3">
+                          <h5 className="font-medium text-blue-900 text-sm">NFT 컨트랙트 (ARC-721)</h5>
+                          <div className="text-xs space-y-2 mt-2">
+                            <p>프라임 마스터 NFT와 거버넌스 마스터 NFT는 소유권과 의사결정 권한을 나타내는 디지털 증서입니다.</p>
+                            <div className="flex items-center gap-2">
+                              <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                              <p>블록체인에 영구 기록된 소유권</p>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                              <p>투명한 거버넌스 의사결정 권한</p>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="bg-white rounded-lg border border-blue-100 p-3">
+                          <h5 className="font-medium text-blue-900 text-sm">토큰 컨트랙트 (ARC-20)</h5>
+                          <div className="text-xs space-y-2 mt-2">
+                            <p>RSA-020와 SRT 토큰은 분할 가능한 자산 소유권과 플랫폼 가치를 나타냅니다.</p>
+                            <div className="flex items-center gap-2">
+                              <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                              <p>자유로운 거래 및 양도 가능</p>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                              <p>수익 배당 자동화 기능</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="border-t border-blue-100 pt-3">
+                        <h5 className="font-medium text-blue-900">투자자를 위한 안전장치</h5>
+                        <ul className="text-xs text-slate-700 space-y-2 mt-2 list-disc pl-5">
+                          <li>모든 스마트 컨트랙트는 전문 감사 기관의 감사를 받아 안전성 검증</li>
+                          <li>멀티시그(다중 서명) 시스템으로 중요 결정에 여러 관계자의 승인 필요</li>
+                          <li>토큰 락업 기능으로 초기 투자자와 팀의 토큰 매도 제한</li>
+                          <li>모든 토큰 거래와 소유권 정보는 블록체인에 투명하게 기록</li>
+                        </ul>
+                      </div>
+                      
+                      <div className="flex justify-between items-center text-xs text-blue-800 pt-2">
+                        <span>완전한 컨트랙트 코드는 Avalanche C-Chain Explorer에서 확인 가능</span>
+                        <span>2025년 Q3 배포 예정</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               )}
             </CardContent>
@@ -584,6 +644,31 @@ const LaosProjectDetail = () => {
                     자유롭게 거래 가능한 유동성 토큰입니다. RSA-020은 주로 수익 분배 권리에 초점이 맞춰져 있으며, 
                     일상적인 운영 의사결정에 참여할 수 있습니다. 투자 규모와 전략적 중요도에 따라 두 토큰 중 
                     적합한 것을 선택할 수 있습니다.
+                  </AccordionContent>
+                </AccordionItem>
+                
+                <AccordionItem value="faq-5">
+                  <AccordionTrigger>
+                    스마트 컨트랙트란 무엇이며 투자자로서 왜 중요한가요?
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    스마트 컨트랙트는 블록체인 상에서 실행되는 자동화된 디지털 계약으로, 중개자 없이 거래와 약속을 
+                    실행하고 기록합니다. 부동산 토큰화에서 스마트 컨트랙트는 토큰 발행, 소유권 기록, 수익 배당, 
+                    의사결정 투표 등 핵심 기능을 담당합니다. 투자자에게 중요한 이유는 거래 투명성과 신뢰성을 보장하며, 
+                    배당금 지급이 자동화되고, 모든 투자 조건이 코드로 확정되어 변경 불가능하기 때문입니다.
+                  </AccordionContent>
+                </AccordionItem>
+                
+                <AccordionItem value="faq-6">
+                  <AccordionTrigger>
+                    아발란체 블록체인은 무엇이고 왜 선택되었나요?
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    아발란체는 높은 처리 속도와 낮은 수수료를 제공하는, 친환경적인 블록체인 플랫폼입니다. 
+                    초당 4,500개 이상의 트랜잭션을 처리할 수 있고, 이더리움과 완벽하게 호환되면서도 더 빠르고 
+                    저렴한 거래를 제공합니다. 사하라리얼테크는 부동산 토큰화에 필요한 빠른 속도, 낮은 비용, 
+                    높은 보안성, 그리고 환경 친화적인 특성을 갖춘 아발란체를 선택했습니다. 또한 국내외 주요 
+                    거래소와의 연동이 용이하고 MetaMask 등 주요 지갑과의 호환성이 뛰어나다는 장점이 있습니다.
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
