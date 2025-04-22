@@ -25,7 +25,12 @@ export default function InvestmentGuide() {
       
       {isOpen && (
         <CardContent className="pt-4 bg-blue-50 bg-opacity-70">
-          <p className="text-sm text-blue-700 mb-4 font-medium">{t('investmentGuide.subtitle')}</p>
+          <p className="text-sm text-blue-700 mb-2 font-medium">{t('investmentGuide.subtitle')}</p>
+          <div className="p-3 bg-white bg-opacity-80 border-l-4 border-blue-500 rounded-md text-blue-900 font-semibold mb-4 shadow-sm">
+            <p className="text-sm">
+              사하라 리얼테크는 철저한 법 규제를 준수하고 보안 감사를 통해 신뢰를 우선으로 한다
+            </p>
+          </div>
           
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="security-audit" className="border-emerald-200 rounded-md my-3 shadow-sm">
