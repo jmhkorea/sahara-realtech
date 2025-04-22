@@ -197,119 +197,124 @@ export default function TeamPage() {
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold mb-3 bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent">
+      <div className="mb-12">
+        <h1 className="text-3xl font-bold">
           {t('team.title')}
         </h1>
-        <p className="text-xl text-neutral-600 max-w-2xl mx-auto">
+        <p className="text-neutral-600 mt-2 mb-10 max-w-2xl">
           {t('team.subtitle')}
         </p>
-      </div>
 
-      {/* 필터 버튼 */}
-      <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-12">
-        <button
-          onClick={() => setActiveFilter('all')}
-          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors 
-            ${activeFilter === 'all' 
-              ? 'bg-primary text-white' 
-              : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'}`}
-        >
-          {t('team.filters.all')}
-        </button>
-        <button
-          onClick={() => setActiveFilter('executive')}
-          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors 
-            ${activeFilter === 'executive' 
-              ? 'bg-primary text-white' 
-              : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'}`}
-        >
-          {t('team.filters.executive')}
-        </button>
-        <button
-          onClick={() => setActiveFilter('technical')}
-          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors 
-            ${activeFilter === 'technical' 
-              ? 'bg-primary text-white' 
-              : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'}`}
-        >
-          {t('team.filters.technical')}
-        </button>
-        <button
-          onClick={() => setActiveFilter('directors')}
-          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors 
-            ${activeFilter === 'directors' 
-              ? 'bg-primary text-white' 
-              : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'}`}
-        >
-          {t('team.filters.directors')}
-        </button>
-        <button
-          onClick={() => setActiveFilter('advisors')}
-          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors 
-            ${activeFilter === 'advisors' 
-              ? 'bg-primary text-white' 
-              : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'}`}
-        >
-          {t('team.filters.advisors')}
-        </button>
+        {/* 필터 버튼 */}
+        <div className="flex flex-wrap overflow-x-auto border-b border-neutral-200 mb-8">
+          <button
+            onClick={() => setActiveFilter('all')}
+            className={`px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap transition-colors ${
+              activeFilter === 'all' 
+                ? 'border-primary text-primary' 
+                : 'border-transparent text-neutral-500 hover:text-neutral-800'
+            }`}
+          >
+            {t('team.filters.all')}
+          </button>
+          <button
+            onClick={() => setActiveFilter('executive')}
+            className={`px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap transition-colors ${
+              activeFilter === 'executive' 
+                ? 'border-primary text-primary' 
+                : 'border-transparent text-neutral-500 hover:text-neutral-800'
+            }`}
+          >
+            {t('team.filters.executive')}
+          </button>
+          <button
+            onClick={() => setActiveFilter('technical')}
+            className={`px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap transition-colors ${
+              activeFilter === 'technical' 
+                ? 'border-primary text-primary' 
+                : 'border-transparent text-neutral-500 hover:text-neutral-800'
+            }`}
+          >
+            {t('team.filters.technical')}
+          </button>
+          <button
+            onClick={() => setActiveFilter('directors')}
+            className={`px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap transition-colors ${
+              activeFilter === 'directors' 
+                ? 'border-primary text-primary' 
+                : 'border-transparent text-neutral-500 hover:text-neutral-800'
+            }`}
+          >
+            {t('team.filters.directors')}
+          </button>
+          <button
+            onClick={() => setActiveFilter('advisors')}
+            className={`px-4 py-3 text-sm font-medium border-b-2 whitespace-nowrap transition-colors ${
+              activeFilter === 'advisors' 
+                ? 'border-primary text-primary' 
+                : 'border-transparent text-neutral-500 hover:text-neutral-800'
+            }`}
+          >
+            {t('team.filters.advisors')}
+          </button>
+        </div>
       </div>
 
       {/* 팀원 카드 그리드 */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {filteredMembers.map((member) => (
           <div 
             key={member.id} 
-            className="bg-white rounded-xl shadow-md overflow-hidden transition-transform hover:shadow-lg"
+            className="bg-white rounded-md border border-neutral-200 overflow-hidden transition-all hover:border-primary"
           >
-            <div className="p-1 bg-gradient-to-r from-primary to-primary-dark">
-              <div className="bg-white pt-5 px-5">
-                <img 
-                  src={member.imageUrl} 
-                  alt={getLocalizedName(member)} 
-                  className="w-full h-64 object-cover rounded-lg mb-4"
-                />
-                <div className="p-2">
-                  <h3 className="font-bold text-lg">{getLocalizedName(member)}</h3>
-                  <p className="text-primary text-sm mb-2">{getLocalizedTitle(member)}</p>
-                  <p className="text-neutral-600 text-sm line-clamp-4 mb-3">
-                    {getLocalizedBio(member)}
-                  </p>
-                  
-                  {/* 소셜 링크 */}
-                  <div className="flex space-x-2 mt-2 mb-4">
-                    {member.linkedin && (
-                      <a 
-                        href={member.linkedin} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="text-neutral-600 hover:text-primary transition-colors"
-                      >
-                        <FaLinkedin size={18} />
-                      </a>
-                    )}
-                    {member.twitter && (
-                      <a 
-                        href={member.twitter} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="text-neutral-600 hover:text-primary transition-colors"
-                      >
-                        <FaTwitter size={18} />
-                      </a>
-                    )}
-                    {member.github && (
-                      <a 
-                        href={member.github} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="text-neutral-600 hover:text-primary transition-colors"
-                      >
-                        <FaGithub size={18} />
-                      </a>
-                    )}
-                  </div>
+            <div className="flex flex-col md:grid md:grid-cols-3 h-full">
+              {/* 이름과 직책 */}
+              <div className="p-5 md:p-6 border-b md:border-b-0 md:border-r border-neutral-100 flex flex-row md:flex-col justify-between items-start">
+                <div>
+                  <h3 className="font-bold text-lg mb-1">{getLocalizedName(member)}</h3>
+                  <p className="text-primary text-sm">{getLocalizedTitle(member)}</p>
                 </div>
+                
+                {/* 소셜 링크 */}
+                <div className="flex space-x-3 md:mt-auto md:pt-4">
+                  {member.linkedin && (
+                    <a 
+                      href={member.linkedin} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-neutral-400 hover:text-primary transition-colors"
+                    >
+                      <FaLinkedin size={16} />
+                    </a>
+                  )}
+                  {member.twitter && (
+                    <a 
+                      href={member.twitter} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-neutral-400 hover:text-primary transition-colors"
+                    >
+                      <FaTwitter size={16} />
+                    </a>
+                  )}
+                  {member.github && (
+                    <a 
+                      href={member.github} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-neutral-400 hover:text-primary transition-colors"
+                    >
+                      <FaGithub size={16} />
+                    </a>
+                  )}
+                </div>
+              </div>
+              
+              {/* 프로필 */}
+              <div className="md:col-span-2 p-5 md:p-6 bg-neutral-50">
+                <p className="text-neutral-600 text-sm">
+                  {getLocalizedBio(member)}
+                </p>
               </div>
             </div>
           </div>
@@ -317,14 +322,18 @@ export default function TeamPage() {
       </div>
 
       {/* 채용 섹션 */}
-      <div className="mt-20 bg-neutral-50 rounded-xl p-8 text-center">
-        <h2 className="text-2xl font-bold mb-3">{t('team.joinUs.title')}</h2>
-        <p className="text-neutral-600 max-w-2xl mx-auto mb-6">
-          {t('team.joinUs.description')}
-        </p>
-        <button className="px-6 py-3 bg-primary hover:bg-primary-dark text-white rounded-full font-medium transition-colors">
-          {t('team.joinUs.button')}
-        </button>
+      <div className="mt-16 border-t border-neutral-200 pt-12">
+        <div className="flex flex-col md:flex-row md:items-center justify-between">
+          <div>
+            <h2 className="text-xl font-bold">{t('team.joinUs.title')}</h2>
+            <p className="text-neutral-600 mt-1 max-w-2xl">
+              {t('team.joinUs.description')}
+            </p>
+          </div>
+          <button className="mt-4 md:mt-0 px-5 py-2 bg-white border border-primary text-primary hover:bg-primary hover:text-white rounded-md font-medium transition-colors">
+            {t('team.joinUs.button')}
+          </button>
+        </div>
       </div>
     </div>
   );
