@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ChevronDown, ChevronUp, Info, Shield, Coins, Key } from 'lucide-react';
+import { ChevronDown, ChevronUp, Info, Shield, Coins, Key, CheckCircle2 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
@@ -28,6 +28,35 @@ export default function InvestmentGuide() {
           <p className="text-sm text-gray-600 mb-4">{t('investmentGuide.subtitle')}</p>
           
           <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="security-audit">
+              <AccordionTrigger className="text-sm md:text-base font-medium">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+                  {t('investmentGuide.securityAudit.title')}
+                </div>
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="space-y-3 text-sm">
+                  <p>{t('investmentGuide.securityAudit.description')}</p>
+                  
+                  <div className="p-3 bg-emerald-50 rounded-md">
+                    <h4 className="font-semibold text-emerald-800">{t('investmentGuide.securityAudit.certik.title')}</h4>
+                    <p className="text-emerald-700">{t('investmentGuide.securityAudit.certik.description')}</p>
+                  </div>
+                  
+                  <div className="mt-3">
+                    <h4 className="font-semibold text-gray-800 mb-2">{t('investmentGuide.securityAudit.auditProcess.title')}</h4>
+                    <ol className="list-decimal pl-5 space-y-1 text-gray-700">
+                      <li>{t('investmentGuide.securityAudit.auditProcess.step1')}</li>
+                      <li>{t('investmentGuide.securityAudit.auditProcess.step2')}</li>
+                      <li>{t('investmentGuide.securityAudit.auditProcess.step3')}</li>
+                      <li>{t('investmentGuide.securityAudit.auditProcess.step4')}</li>
+                    </ol>
+                  </div>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+            
             <AccordionItem value="token-structure">
               <AccordionTrigger className="text-sm md:text-base font-medium">
                 <div className="flex items-center gap-2">
