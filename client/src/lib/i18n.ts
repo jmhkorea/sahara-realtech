@@ -7,7 +7,8 @@ const koTranslations = {
     home: '홈',
     properties: '프로젝트 보기',
     howToInvest: '투자 방법',
-    portfolio: '마이 포트폴리오'
+    portfolio: '마이 포트폴리오',
+    team: '팀 소개'
   },
   auth: {
     loginRegister: '로그인 / 회원가입'
@@ -501,7 +502,8 @@ const enTranslations = {
     home: 'Home',
     properties: 'View Projects',
     howToInvest: 'How to Invest',
-    portfolio: 'My Portfolio'
+    portfolio: 'My Portfolio',
+    team: 'Our Team'
   },
   auth: {
     loginRegister: 'Login / Register'
@@ -993,7 +995,8 @@ const jaTranslations = {
     home: 'ホーム',
     properties: 'プロジェクト閲覧',
     howToInvest: '投資方法',
-    portfolio: 'マイポートフォリオ'
+    portfolio: 'マイポートフォリオ',
+    team: 'チーム紹介'
   },
   auth: {
     loginRegister: 'ログイン / 登録'

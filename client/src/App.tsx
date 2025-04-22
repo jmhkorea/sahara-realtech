@@ -11,6 +11,7 @@ import PropertyList from "@/pages/PropertyList";
 import PropertyDetail from "@/pages/PropertyDetail";
 import HowToInvest from "@/pages/HowToInvest";
 import Portfolio from "@/pages/Portfolio";
+import TeamPage from "@/pages/TeamPage";
 
 import "./lib/i18n";
 
@@ -25,6 +26,7 @@ function Router() {
           <Route path="/properties/:id" component={PropertyDetail} />
           <Route path="/how-to-invest" component={HowToInvest} />
           <Route path="/portfolio" component={Portfolio} />
+          <Route path="/team" component={TeamPage} />
           <Route component={NotFound} />
         </Switch>
       </main>
