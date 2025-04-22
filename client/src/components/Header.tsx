@@ -82,6 +82,9 @@ export default function Header() {
             <Link href="/portfolio" className="font-medium text-neutral-500 hover:text-primary transition-colors">
               {t('nav.portfolio')}
             </Link>
+            <Link href="/blog" className="font-medium text-neutral-500 hover:text-primary transition-colors">
+              {t('nav.blog', '블로그')}
+            </Link>
             <Link href="/team" className="font-medium text-neutral-500 hover:text-primary transition-colors">
               {t('nav.team')}
             </Link>
@@ -168,6 +171,9 @@ export default function Header() {
                   </Link>
                   <Link href="/portfolio" className="px-4 py-2 hover:bg-neutral-100 rounded-md">
                     {t('nav.portfolio')}
+                  </Link>
+                  <Link href="/blog" className="px-4 py-2 hover:bg-neutral-100 rounded-md">
+                    {t('nav.blog', '블로그')}
                   </Link>
                   <Link href="/team" className="px-4 py-2 hover:bg-neutral-100 rounded-md">
                     {t('nav.team')}

@@ -5,7 +5,12 @@ import {
   insertUserSchema, 
   insertPropertySchema,
   insertInvestmentSchema,
-  insertTransactionSchema
+  insertTransactionSchema,
+  insertBlogPostSchema,
+  insertBlogCommentSchema,
+  insertBlogTagSchema,
+  BlogCategory,
+  type BlogCategoryValue
 } from "@shared/schema";
 import { z } from "zod";
 import { 
@@ -203,6 +208,202 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get('/api/financial/return-analysis', getReturnAnalysisData);
   app.get('/api/financial/market-indicators', getMarketIndicatorsData);
   app.get('/api/financial/portfolio-analysis', getPortfolioAnalysisData);
+
+  // 블로그 API 엔드포인트
+  // 블로그 게시물 목록 조회
+  app.get('/api/blog/posts', async (req: Request, res: Response) => {
+    try {
+      const limit = Number(req.query.limit) || 10;
+      const offset = Number(req.query.offset) || 0;
+      const posts = await storage.getBlogPosts(limit, offset);
+      res.json(posts);
+    } catch (error) {
+      res.status(500).json({ message: "블로그 게시물을 가져오는데 실패했습니다" });
+    }
+  });
+
+  // 특정 블로그 게시물 조회
+  app.get('/api/blog/posts/:id', async (req: Request, res: Response) => {
+    try {
+      const id = Number(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "유효하지 않은 게시물 ID입니다" });
+      }
+      
+      const post = await storage.getBlogPost(id);
+      if (!post) {
+        return res.status(404).json({ message: "게시물을 찾을 수 없습니다" });
+      }
+      
+      // 조회수 증가
+      await storage.incrementBlogPostViews(id);
+      
+      res.json(post);
+    } catch (error) {
+      res.status(500).json({ message: "게시물을 가져오는데 실패했습니다" });
+    }
+  });
+
+  // 카테고리별 블로그 게시물 조회
+  app.get('/api/blog/category/:category', async (req: Request, res: Response) => {
+    try {
+      const category = req.params.category as BlogCategoryValue;
+      const validCategories = Object.values(BlogCategory);
+      
+      if (!validCategories.includes(category)) {
+        return res.status(400).json({
+          message: `유효하지 않은 카테고리입니다. 유효한 카테고리: ${validCategories.join(', ')}`
+        });
+      }
+      
+      const limit = Number(req.query.limit) || 10;
+      const posts = await storage.getBlogPostsByCategory(category, limit);
+      res.json(posts);
+    } catch (error) {
+      res.status(500).json({ message: "카테고리별 게시물을 가져오는데 실패했습니다" });
+    }
+  });
+
+  // 추천 블로그 게시물 조회
+  app.get('/api/blog/featured', async (req: Request, res: Response) => {
+    try {
+      const limit = Number(req.query.limit) || 5;
+      const posts = await storage.getFeaturedBlogPosts(limit);
+      res.json(posts);
+    } catch (error) {
+      res.status(500).json({ message: "추천 게시물을 가져오는데 실패했습니다" });
+    }
+  });
+
+  // 관련 블로그 게시물 조회
+  app.get('/api/blog/posts/:id/related', async (req: Request, res: Response) => {
+    try {
+      const id = Number(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "유효하지 않은 게시물 ID입니다" });
+      }
+      
+      const limit = Number(req.query.limit) || 3;
+      const posts = await storage.getRelatedBlogPosts(id, limit);
+      res.json(posts);
+    } catch (error) {
+      res.status(500).json({ message: "관련 게시물을 가져오는데 실패했습니다" });
+    }
+  });
+
+  // 블로그 게시물 작성
+  app.post('/api/blog/posts', async (req: Request, res: Response) => {
+    try {
+      const validatedData = insertBlogPostSchema.parse(req.body);
+      const post = await storage.createBlogPost(validatedData);
+      res.status(201).json(post);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: "유효하지 않은 게시물 데이터입니다", errors: error.errors });
+      }
+      res.status(500).json({ message: "게시물을 생성하는데 실패했습니다" });
+    }
+  });
+
+  // 블로그 게시물 수정
+  app.patch('/api/blog/posts/:id', async (req: Request, res: Response) => {
+    try {
+      const id = Number(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "유효하지 않은 게시물 ID입니다" });
+      }
+      
+      const post = await storage.getBlogPost(id);
+      if (!post) {
+        return res.status(404).json({ message: "게시물을 찾을 수 없습니다" });
+      }
+      
+      const updatedPost = await storage.updateBlogPost(id, req.body);
+      res.json(updatedPost);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: "유효하지 않은 게시물 데이터입니다", errors: error.errors });
+      }
+      res.status(500).json({ message: "게시물을 수정하는데 실패했습니다" });
+    }
+  });
+
+  // 블로그 게시물 삭제
+  app.delete('/api/blog/posts/:id', async (req: Request, res: Response) => {
+    try {
+      const id = Number(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "유효하지 않은 게시물 ID입니다" });
+      }
+      
+      const post = await storage.getBlogPost(id);
+      if (!post) {
+        return res.status(404).json({ message: "게시물을 찾을 수 없습니다" });
+      }
+      
+      const success = await storage.deleteBlogPost(id);
+      if (success) {
+        res.status(204).send();
+      } else {
+        res.status(500).json({ message: "게시물을 삭제하는데 실패했습니다" });
+      }
+    } catch (error) {
+      res.status(500).json({ message: "게시물을 삭제하는데 실패했습니다" });
+    }
+  });
+
+  // 블로그 댓글 조회
+  app.get('/api/blog/posts/:postId/comments', async (req: Request, res: Response) => {
+    try {
+      const postId = Number(req.params.postId);
+      if (isNaN(postId)) {
+        return res.status(400).json({ message: "유효하지 않은 게시물 ID입니다" });
+      }
+      
+      const comments = await storage.getBlogComments(postId);
+      res.json(comments);
+    } catch (error) {
+      res.status(500).json({ message: "댓글을 가져오는데 실패했습니다" });
+    }
+  });
+
+  // 블로그 댓글 작성
+  app.post('/api/blog/comments', async (req: Request, res: Response) => {
+    try {
+      const validatedData = insertBlogCommentSchema.parse(req.body);
+      const comment = await storage.createBlogComment(validatedData);
+      res.status(201).json(comment);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: "유효하지 않은 댓글 데이터입니다", errors: error.errors });
+      }
+      res.status(500).json({ message: "댓글을 작성하는데 실패했습니다" });
+    }
+  });
+
+  // 블로그 태그 조회
+  app.get('/api/blog/tags', async (req: Request, res: Response) => {
+    try {
+      const tags = await storage.getBlogTags();
+      res.json(tags);
+    } catch (error) {
+      res.status(500).json({ message: "태그를 가져오는데 실패했습니다" });
+    }
+  });
+
+  // 블로그 태그 생성
+  app.post('/api/blog/tags', async (req: Request, res: Response) => {
+    try {
+      const validatedData = insertBlogTagSchema.parse(req.body);
+      const tag = await storage.createBlogTag(validatedData);
+      res.status(201).json(tag);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: "유효하지 않은 태그 데이터입니다", errors: error.errors });
+      }
+      res.status(500).json({ message: "태그를 생성하는데 실패했습니다" });
+    }
+  });
 
   const httpServer = createServer(app);
   return httpServer;
