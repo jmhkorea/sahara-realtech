@@ -54,6 +54,7 @@ export default function MarketAnalysis({ property }: MarketAnalysisProps) {
   // Fetch market indicators data
   const { data: marketData, isLoading: isMarketLoading } = useQuery({
     queryKey: ['/api/financial/market-indicators'],
+    queryFn: () => fetch('/api/financial/market-indicators').then(res => res.json())
   });
 
   // Location score data (simulated)
