@@ -102,9 +102,14 @@ export default function PropertyCard({ property }: PropertyCardProps) {
     <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow">
       <div className="relative">
         <img 
-          src={property.imageUrl} 
+          src={property.imageUrl || ''} 
           alt={propertyName} 
           className="w-full h-48 object-cover"
+          onError={(e) => {
+            // Fallback 이미지 설정
+            e.currentTarget.src = "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3";
+            console.log(`Image load error for: ${property.imageUrl}`);
+          }}
         />
         <div className={`absolute top-4 left-4 ${statusInfo.colorClass} text-white px-3 py-1 rounded-full text-sm font-medium`}>
           {statusInfo.label}

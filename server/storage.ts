@@ -491,7 +491,7 @@ export class MemStorage implements IStorage {
         description: "강남 중심부에 위치한 프리미엄 오피스 빌딩으로, 안정적인 임대 수익이 예상됩니다.",
         descriptionEn: "Premium office building located in the center of Gangnam, expected to provide stable rental income.",
         type: PropertyType.COMMERCIAL,
-        imageUrl: "/attached_assets/image_1745320022420.png",
+        imageUrl: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00", // 임시로 온라인 이미지 사용
         totalValue: "18000000000", // 180억
         expectedReturn: "7.2",
         tokenizationStatus: TokenizationStatus.IN_PROGRESS,
@@ -514,7 +514,7 @@ export class MemStorage implements IStorage {
         description: "부산 해운대 프리미엄 레지던스로, 바다 전망과 높은 임대 수요를 자랑합니다.",
         descriptionEn: "Premium residence in Haeundae, Busan, featuring ocean views and high rental demand.",
         type: PropertyType.APARTMENT,
-        imageUrl: "/attached_assets/image_1745299871569.png",
+        imageUrl: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2", // 임시로 온라인 이미지 사용
         totalValue: "12600000000", // 126억
         expectedReturn: "6.8",
         tokenizationStatus: TokenizationStatus.COMPLETED,
@@ -537,7 +537,7 @@ export class MemStorage implements IStorage {
         description: "IT 기업들이 밀집한 판교 테크노밸리의 최신 오피스 빌딩으로, 높은 성장성이 기대됩니다.",
         descriptionEn: "Latest office building in Pangyo Technovalley, where IT companies are concentrated, expected to show high growth potential.",
         type: PropertyType.COMMERCIAL,
-        imageUrl: "/attached_assets/image_1745299952200.png",
+        imageUrl: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab", // 임시로 온라인 이미지 사용
         totalValue: "21500000000", // 215억
         expectedReturn: "8.1",
         tokenizationStatus: TokenizationStatus.UPCOMING,
@@ -555,7 +555,7 @@ export class MemStorage implements IStorage {
         description: "라오스 비엔티안 탓루앙 경제 특구에 위치한 반얀트리 닉팔도 라구나 골프텔 및 골프 회원권. 고급 리조트 시설과 골프 코스를 포함한 프리미엄 투자 기회입니다.",
         descriptionEn: "Banyan Tree Nikpaldo Laguna GolfTel and Golf Membership, located in That Luang Economic Zone, Vientiane, Laos. A premium investment opportunity including luxury resort facilities and golf course.",
         type: PropertyType.RESORT,
-        imageUrl: "/attached_assets/image_1745317506879.png",
+        imageUrl: "https://images.unsplash.com/photo-1566073771259-6a8506099945", // 임시로 온라인 이미지 사용
         totalValue: "25000000000", // 250억
         expectedReturn: "8.5",
         tokenizationStatus: TokenizationStatus.IN_PROGRESS,
@@ -573,7 +573,7 @@ export class MemStorage implements IStorage {
         description: "발리 세미냑에 위치한 240실 규모의 럭셔리 리조트 회원권. 연간 높은 객실 점유율과 안정적인 수익이 예상됩니다.",
         descriptionEn: "Luxury resort membership for a 240-room property in Seminyak, Bali. High annual room occupancy rates with stable returns expected.",
         type: PropertyType.MEMBERSHIP,
-        imageUrl: "/attached_assets/image_1745317658375.png",
+        imageUrl: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb", // 임시로 온라인 이미지 사용
         totalValue: "32000000000", // 320억
         expectedReturn: "9.2",
         tokenizationStatus: TokenizationStatus.IN_PROGRESS,
@@ -591,7 +591,7 @@ export class MemStorage implements IStorage {
         description: "강원도 평창에 위치한 반얀트리 레지던트 200실 중 일부에 투자할 수 있는 기회. 사계절 관광지로 꾸준한 방문객 유입이 예상됩니다.",
         descriptionEn: "Investment opportunity in a portion of the 200 Banyan Tree Residences in Pyeongchang, Gangwon. Steady visitor influx expected as a four-season tourist destination.",
         type: PropertyType.RESORT,
-        imageUrl: "/attached_assets/image_1745300302568.png",
+        imageUrl: "https://images.unsplash.com/photo-1496417263034-38ec4f0b665a", // 임시로 온라인 이미지 사용
         totalValue: "28500000000", // 285억
         expectedReturn: "7.8",
         tokenizationStatus: TokenizationStatus.UPCOMING,
