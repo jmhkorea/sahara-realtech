@@ -7,12 +7,14 @@ import InvestmentVisualizations from "@/components/InvestmentVisualizations";
 import FinancialAnalytics from "@/components/FinancialAnalytics";
 import FAQ from "@/components/FAQ";
 import Newsletter from "@/components/Newsletter";
+import InvestmentGuide from "@/components/InvestmentGuide";
 
 export default function Home() {
   return (
     <>
       <Hero />
       <SearchSection />
+      <InvestmentGuide />
       <FeaturedProperties />
       <BlockchainDetails />
       <HowItWorks />

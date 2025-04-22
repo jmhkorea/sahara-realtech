@@ -1050,6 +1050,70 @@ const enTranslations = {
       description: 'We are looking for passionate talents to build an innovative blockchain-based real estate investment platform together',
       button: 'View Career Opportunities'
     }
+  },
+  investmentGuide: {
+    title: 'Before You Invest',
+    subtitle: 'Learn about SaharaRealTech\'s token structure and Avalanche blockchain-based investment information.',
+    tokenStructure: {
+      title: 'Token Structure',
+      primeMasterNFT: {
+        title: 'Prime Master NFT (1)',
+        description: 'A single NFT with highest governance authority, holding veto power for special resolutions and final decision-making rights.'
+      },
+      governanceNFT: {
+        title: 'Governance Master NFTs (99)',
+        description: 'Tiered NFTs that can participate in project governance. Complies with Korean private fund regulations (maximum 99 investors).',
+        classA: 'Class A: 10 NFTs (10x voting weight)',
+        classB: 'Class B: 39 NFTs (5x voting weight)',
+        classC: 'Class C: 50 NFTs (1x voting weight)'
+      },
+      projectTokens: {
+        title: 'Project Tokens (RSA-020)',
+        description: 'Tokens representing ownership in individual real estate projects, with profit distribution rights.'
+      },
+      companyToken: {
+        title: 'Company Token (SRT)',
+        description: 'Token for future exchange listing, to be created after 3-5 successful tokenized projects.'
+      }
+    },
+    avalancheProtocol: {
+      title: 'Avalanche Protocol',
+      description: 'Avalanche is a high-performance blockchain platform with fast transaction speeds and low fees. Smart contracts are deployed on the C-Chain.',
+      features: {
+        speed: {
+          title: 'Fast Transaction Speed',
+          description: 'Over 4,500 transactions per second'
+        },
+        fees: {
+          title: 'Low Transaction Fees',
+          description: 'Up to 95% cheaper than Ethereum'
+        },
+        eco: {
+          title: 'Eco-Friendly Design',
+          description: 'Uses energy-efficient Proof of Stake (PoS)'
+        }
+      }
+    },
+    investmentProcess: {
+      title: 'Investment Process',
+      step1: {
+        title: 'Create Account & Complete KYC',
+        description: 'Register on the platform and complete identity verification.'
+      },
+      step2: {
+        title: 'Connect Avalanche Wallet',
+        description: 'Connect MetaMask or other compatible wallet and prepare AVAX.'
+      },
+      step3: {
+        title: 'Select Asset & Purchase Tokens',
+        description: 'Choose a real estate project and purchase tokens for that project.'
+      },
+      step4: {
+        title: 'Receive & Manage Returns',
+        description: 'Receive rental income and profits from value appreciation of your invested projects.'
+      }
+    },
+    disclaimer: 'Investment involves risk of principal loss. Please review thoroughly before making investment decisions.'
   }
 };
 
@@ -1177,6 +1241,70 @@ const jaTranslations = {
       description: '革新的なブロックチェーンベースの不動産投資プラットフォームを一緒に構築する情熱的な人材を探しています',
       button: '採用情報を見る'
     }
+  },
+  investmentGuide: {
+    title: '投資前にご確認ください',
+    subtitle: 'SaharaRealTechのトークン構造とアバランチブロックチェーン基盤の投資情報をご確認ください。',
+    tokenStructure: {
+      title: 'トークン構造',
+      primeMasterNFT: {
+        title: 'プライムマスターNFT (1個)',
+        description: '最高のガバナンス権限を持つ単一のNFTで、特別決議に対する拒否権と最終的な意思決定権を保有しています。'
+      },
+      governanceNFT: {
+        title: 'ガバナンスマスターNFT (99個)',
+        description: 'プロジェクトのガバナンスに参加できる階級別NFTです。韓国の私募ファンド規制（最大99人の投資家）に準拠しています。',
+        classA: 'クラスA: 10個 (投票権重み10倍)',
+        classB: 'クラスB: 39個 (投票権重み5倍)',
+        classC: 'クラスC: 50個 (投票権重み1倍)'
+      },
+      projectTokens: {
+        title: 'プロジェクトトークン (RSA-020)',
+        description: '個々の不動産プロジェクトの所有権を表すトークンで、収益分配権が含まれています。'
+      },
+      companyToken: {
+        title: '会社トークン (SRT)',
+        description: '将来の取引所上場のためのトークンで、3〜5つの成功したトークン化プロジェクト後に作成されます。'
+      }
+    },
+    avalancheProtocol: {
+      title: 'アバランチプロトコル',
+      description: 'アバランチは高性能ブロックチェーンプラットフォームで、高速取引と低手数料が特徴です。スマートコントラクトはC-Chainにデプロイされます。',
+      features: {
+        speed: {
+          title: '高速取引速度',
+          description: '秒間4,500以上のトランザクション処理能力'
+        },
+        fees: {
+          title: '低取引手数料',
+          description: 'イーサリアムと比較して最大95%安い手数料'
+        },
+        eco: {
+          title: '環境に優しい設計',
+          description: 'エネルギー効率の良いプルーフオブステーク(PoS)方式を使用'
+        }
+      }
+    },
+    investmentProcess: {
+      title: '投資プロセス',
+      step1: {
+        title: 'アカウント作成とKYC認証',
+        description: 'プラットフォームに登録し、本人確認を完了します。'
+      },
+      step2: {
+        title: 'アバランチウォレット接続',
+        description: 'MetaMaskなどの互換ウォレットを接続し、AVAXを準備します。'
+      },
+      step3: {
+        title: '資産選択とトークン購入',
+        description: '不動産プロジェクトを選択し、そのプロジェクトのトークンを購入します。'
+      },
+      step4: {
+        title: 'リターンの受け取りと管理',
+        description: '投資したプロジェクトからの賃貸収入や価値上昇による利益を受け取ります。'
+      }
+    },
+    disclaimer: '投資には元本損失のリスクがあります。投資決定前に十分な検討をお願いします。'
   }
 };
 
