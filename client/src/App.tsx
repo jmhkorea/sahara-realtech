@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import Home from "@/pages/Home";
 import PropertyList from "@/pages/PropertyList";
 import PropertyDetail from "@/pages/PropertyDetail";
+import TokenProjectDetail from "@/pages/TokenProjectDetail";
 import HowToInvest from "@/pages/HowToInvest";
 import Portfolio from "@/pages/Portfolio";
 import TeamPage from "@/pages/TeamPage";
@@ -25,6 +26,7 @@ function Router() {
           <Route path="/" component={Home} />
           <Route path="/properties" component={PropertyList} />
           <Route path="/properties/:id" component={PropertyDetail} />
+          <Route path="/token-project" component={TokenProjectDetail} />
           <Route path="/how-to-invest" component={HowToInvest} />
           <Route path="/portfolio" component={Portfolio} />
           <Route path="/blog" component={BlogPage} />
