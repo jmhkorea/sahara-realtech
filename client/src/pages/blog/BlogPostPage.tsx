@@ -11,6 +11,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import BlogPostCard from "@/components/blog/BlogPostCard";
 import { ArrowLeft, Calendar, User, Eye } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { BlogPost } from "@shared/schema";
 
 export default function BlogPostPage() {
   const { t, i18n } = useTranslation();
@@ -23,7 +24,7 @@ export default function BlogPostPage() {
     data: post, 
     isLoading,
     isError
-  } = useQuery({
+  } = useQuery<BlogPost>({
     queryKey: [`/api/blog/posts/${postId}`],
     enabled: !!postId,
     gcTime: 5 * 60 * 1000,
@@ -31,7 +32,7 @@ export default function BlogPostPage() {
   });
   
   // 관련 게시물 가져오기
-  const { data: relatedPosts } = useQuery({
+  const { data: relatedPosts } = useQuery<BlogPost[]>({
     queryKey: [`/api/blog/posts/${postId}/related`],
     enabled: !!postId,
     gcTime: 5 * 60 * 1000,

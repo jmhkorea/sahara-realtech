@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
-import { BlogCategoryValue, BlogCategory } from "@shared/schema";
+import { BlogCategoryValue, BlogCategory, BlogPost } from "@shared/schema";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import BlogPostCard from "@/components/blog/BlogPostCard";
 import { Button } from "@/components/ui/button";
@@ -14,13 +14,13 @@ export default function BlogPage() {
   const { toast } = useToast();
   
   // 모든 게시물 및 추천 게시물 가져오기
-  const { data: allPosts, isLoading: isLoadingAll } = useQuery({
+  const { data: allPosts, isLoading: isLoadingAll } = useQuery<BlogPost[]>({
     queryKey: ['/api/blog/posts'],
     gcTime: 5 * 60 * 1000,
     staleTime: 1 * 60 * 1000,
   });
   
-  const { data: featuredPosts, isLoading: isLoadingFeatured } = useQuery({
+  const { data: featuredPosts, isLoading: isLoadingFeatured } = useQuery<BlogPost[]>({
     queryKey: ['/api/blog/featured'],
     gcTime: 5 * 60 * 1000,
     staleTime: 1 * 60 * 1000,
