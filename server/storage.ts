@@ -269,7 +269,7 @@ export class MemStorage implements IStorage {
         description: "라오스 비엔티안 탓루앙 경제 특구에 위치한 반얀트리 닉팔도 라구나 골프텔 및 골프 회원권. 고급 리조트 시설과 골프 코스를 포함한 프리미엄 투자 기회입니다.",
         descriptionEn: "Banyan Tree Nikpaldo Laguna GolfTel and Golf Membership, located in That Luang Economic Zone, Vientiane, Laos. A premium investment opportunity including luxury resort facilities and golf course.",
         type: PropertyType.RESORT,
-        imageUrl: "/assets/vientiane-sez.png",
+        imageUrl: "/assets/vientiane-sez-new.png",
         totalValue: "25000000000", // 250억
         expectedReturn: "8.5",
         tokenizationStatus: TokenizationStatus.IN_PROGRESS,
