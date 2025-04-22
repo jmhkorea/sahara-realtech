@@ -33,6 +33,14 @@ export default function RealEstateTokenization() {
 
   return (
     <div className="container mx-auto px-4 py-12">
+      <div className="mb-5">
+        <Link href="/">
+          <Button variant="outline" className="flex items-center gap-2">
+            <ArrowRight className="h-4 w-4 rotate-180" />
+            <span>이전 페이지로 돌아가기</span>
+          </Button>
+        </Link>
+      </div>
       <div className="max-w-4xl mx-auto mb-16">
         {/* 헤더 섹션 */}
         <div className="text-center mb-12">
