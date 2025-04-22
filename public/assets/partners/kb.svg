@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" fill="#FFB81C">
+  <path d="M15 10h10v20H15z"/>
+  <path d="M25 10h5L25 20v10h-5l5-10z"/>
+  <text x="45" y="24" font-family="Arial" font-size="12" fill="#FFB81C">KB증권</text>
+</svg>

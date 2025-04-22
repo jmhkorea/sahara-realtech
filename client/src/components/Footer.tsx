@@ -9,6 +9,7 @@ import {
   MapPin,
   Globe
 } from "lucide-react";
+import PartnerLogos from "./PartnerLogos";
 
 export default function Footer() {
   const { t } = useTranslation();
@@ -55,7 +56,31 @@ export default function Footer() {
 
   return (
     <footer className="bg-neutral-900 text-white py-12">
-      <div className="container mx-auto px-4">
+      {/* 파트너 로고 슬라이더 - 검은 배경에 맞는 스타일링 */}
+      <div className="bg-neutral-800 py-8">
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl font-bold text-center mb-6 text-white">
+            {t("partners.title", "파트너사")}
+          </h2>
+          
+          {/* 로고 슬라이더 (어두운 배경에 맞게 스타일 조정) */}
+          <div className="relative overflow-hidden">
+            <div className="partnerLogosWrapper">
+              <style jsx>{`
+                .partnerLogosWrapper :global(.grayscale) {
+                  filter: grayscale(100%) brightness(1.5);
+                }
+                .partnerLogosWrapper :global(.grayscale:hover) {
+                  filter: grayscale(0%) brightness(1.5);
+                }
+              `}</style>
+              <PartnerLogos />
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div className="container mx-auto px-4 mt-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <div className="flex items-center space-x-2 mb-6">
