@@ -132,14 +132,41 @@ const LaosProjectDetail = () => {
                       <div className="bg-purple-100 p-1.5 rounded-full mr-2">
                         <FileText className="h-4 w-4 text-purple-700" />
                       </div>
-                      <span>마스터 NFT</span>
+                      <span>마스터 NFT 구조</span>
                     </div>
                   </AccordionTrigger>
                   <AccordionContent>
-                    <div className="pl-9 text-sm space-y-2">
-                      <p>비엔티안 부동산 전체 소유권을 나타내는 디지털 증서입니다.</p>
-                      <p className="text-muted-foreground">표준: ARC-721</p>
-                      <p className="text-muted-foreground">발행량: 1 NFT</p>
+                    <div className="pl-9 text-sm space-y-4">
+                      <div>
+                        <p className="font-medium">프라임 마스터 NFT</p>
+                        <p>비엔티안 부동산 전체 소유권을 나타내는 디지털 증서입니다.</p>
+                        <p className="text-muted-foreground">표준: ARC-721</p>
+                        <p className="text-muted-foreground">발행량: 1 NFT</p>
+                        <p className="text-muted-foreground">소유자: 프로젝트 SPV</p>
+                      </div>
+                      
+                      <div>
+                        <p className="font-medium">거버넌스 마스터 NFT</p>
+                        <p>프로젝트의 주요 의사결정에 참여할 수 있는 권한을 부여하는 NFT입니다.</p>
+                        <p className="text-muted-foreground">표준: ARC-721</p>
+                        <p className="text-muted-foreground">발행량: 최대 99개 (사모펀드 규제 최적화)</p>
+                        <p className="text-muted-foreground">클래스 구분:</p>
+                        <ul className="text-muted-foreground list-disc pl-5">
+                          <li>A클래스 (10개): 주요 전략적 파트너용, 가중치 높음</li>
+                          <li>B클래스 (39개): 기관 투자자용, 중간 가중치</li>
+                          <li>C클래스 (50개): 전문 투자자용, 기본 가중치</li>
+                        </ul>
+                      </div>
+                      
+                      <div>
+                        <p className="font-medium">거버넌스 NFT 혜택</p>
+                        <ul className="text-muted-foreground list-disc pl-5">
+                          <li>자산 매각, 대규모 리노베이션 등 전략적 의사결정 참여</li>
+                          <li>RSA-020 토큰 구매 우선권</li>
+                          <li>추가 수익 배분 혜택</li>
+                          <li>제한적 양도 가능 (이사회 승인 필요)</li>
+                        </ul>
+                      </div>
                     </div>
                   </AccordionContent>
                 </AccordionItem>
@@ -260,7 +287,7 @@ const LaosProjectDetail = () => {
                   <Alert>
                     <AlertTitle>토큰 발행 계획</AlertTitle>
                     <AlertDescription>
-                      RSA-020 토큰은 프로젝트의 법적 소유권을 가진 SPV에 의해 발행되며, 각 토큰은 비엔티안 오피스 빌딩의 부분 소유권을 나타냅니다.
+                      라오스 비엔티안 프로젝트는 계층적 토큰 구조로 설계되었습니다. 프라임 마스터 NFT(1개), 거버넌스 마스터 NFT(최대 99개), 그리고 RSA-020 토큰(1,250,000개)으로 구성된 3계층 구조로 다양한 투자자의 요구를 충족합니다.
                     </AlertDescription>
                   </Alert>
 
@@ -440,6 +467,31 @@ const LaosProjectDetail = () => {
                   <AccordionContent>
                     초기 투자 단계에서는 사하라리얼테크 플랫폼을 통해 직접 구매가 가능합니다. 
                     플랫폼에서 지갑을 연결한 후 AVAX, USDC, USDT 등으로 구매할 수 있습니다. 
+                  </AccordionContent>
+                </AccordionItem>
+                
+                <AccordionItem value="faq-3">
+                  <AccordionTrigger>
+                    거버넌스 마스터 NFT는 무엇인가요?
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    거버넌스 마스터 NFT는 프로젝트의 전략적 의사결정에 참여할 수 있는 권한을 부여하는 토큰입니다. 
+                    최대 99개까지 발행되며, A, B, C 세 가지 클래스로 구분됩니다. 한국 사모펀드 규제에 최적화된 
+                    구조로 설계되었으며, 투자 규모와 역할에 따라 다른 투표 가중치를 갖습니다. 거버넌스 NFT 
+                    소유자는 RSA-020 토큰 구매 우선권, 추가 수익 배분 혜택 등 특별한 권리를 가집니다.
+                  </AccordionContent>
+                </AccordionItem>
+                
+                <AccordionItem value="faq-4">
+                  <AccordionTrigger>
+                    거버넌스 NFT와 일반 RSA-020 토큰의 차이점은 무엇인가요?
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    거버넌스 NFT는 프로젝트의 전략적 의사결정 권한을 가진 상위 레벨 토큰으로, 제한된 수량(최대 99개)만 
+                    발행됩니다. 양도가 제한적이며 이사회 승인이 필요합니다. 반면, RSA-020 토큰은 125만개가 발행되며 
+                    자유롭게 거래 가능한 유동성 토큰입니다. RSA-020은 주로 수익 분배 권리에 초점이 맞춰져 있으며, 
+                    일상적인 운영 의사결정에 참여할 수 있습니다. 투자 규모와 전략적 중요도에 따라 두 토큰 중 
+                    적합한 것을 선택할 수 있습니다.
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
