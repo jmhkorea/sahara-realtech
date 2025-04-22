@@ -3,6 +3,7 @@ import { useParams } from "wouter";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { Property, PropertyType, TokenizationStatus } from "@shared/schema";
+import TokenPurchaseModal from "@/components/TokenPurchaseModal";
 
 import {
   Card,
@@ -656,20 +657,27 @@ export default function PropertyDetail() {
                       </div>
                     </div>
                     
-                    <Button 
-                      className="w-full"
-                      disabled={property.tokenizationStatus !== TokenizationStatus.IN_PROGRESS || 
-                              investmentAmount < parseFloat(property.minInvestment) ||
-                              tokenCount <= 0}
-                      onClick={handleInvest}
-                    >
-                      {property.tokenizationStatus === TokenizationStatus.IN_PROGRESS 
-                        ? t('propertyDetail.investmentCard.investButton') 
-                        : property.tokenizationStatus === TokenizationStatus.COMPLETED
+                    {property.tokenizationStatus === TokenizationStatus.IN_PROGRESS && (
+                      <TokenPurchaseModal 
+                        property={property}
+                        onPurchaseSuccess={() => {
+                          // 투자 성공 후 데이터 갱신을 위한 로직을 추가할 수 있습니다.
+                          window.location.reload();
+                        }}
+                      />
+                    )}
+                    
+                    {property.tokenizationStatus !== TokenizationStatus.IN_PROGRESS && (
+                      <Button 
+                        className="w-full"
+                        disabled={true}
+                      >
+                        {property.tokenizationStatus === TokenizationStatus.COMPLETED
                           ? t('propertyDetail.investmentCard.soldOut')
                           : t('propertyDetail.investmentCard.comingSoon')
-                      }
-                    </Button>
+                        }
+                      </Button>
+                    )}
                     
                     <p className="text-xs text-neutral-500 text-center">
                       {t('propertyDetail.investmentCard.disclaimer')}

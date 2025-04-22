@@ -1,62 +1,108 @@
-import { useEffect, useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Wallet, AlertTriangle } from 'lucide-react';
-import { addAvalancheNetworkToMetamask, connectWallet, getAVAXBalance } from '@/lib/blockchain';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { useToast } from '@/hooks/use-toast';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
+import { connectWallet, getAVAXBalance, addAvalancheNetworkToMetamask } from '@/lib/blockchain';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { 
+  Wallet, 
+  ChevronDown, 
+  Copy, 
+  LogOut,
+  ExternalLink,
+  RefreshCw
+} from 'lucide-react';
 
 export default function WalletConnect() {
   const { t } = useTranslation();
   const { toast } = useToast();
-  const [address, setAddress] = useState<string | null>(null);
-  const [balance, setBalance] = useState<string>('0');
-  const [loading, setLoading] = useState(false);
-  const [isMetaMaskInstalled, setIsMetaMaskInstalled] = useState(true);
+  const [walletAddress, setWalletAddress] = useState<string | null>(null);
+  const [walletBalance, setWalletBalance] = useState<string>('0');
+  const [isConnecting, setIsConnecting] = useState(false);
 
+  // 지갑 연결 확인 및 리스너 등록
   useEffect(() => {
-    checkIfMetaMaskIsInstalled();
-    checkIfWalletIsConnected();
+    // 초기 연결 확인
+    const checkWalletConnection = async () => {
+      if (window.ethereum) {
+        try {
+          const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+          if (accounts.length > 0) {
+            setWalletAddress(accounts[0]);
+            updateBalance(accounts[0]);
+          }
+        } catch (error) {
+          console.error('지갑 연결 확인 실패:', error);
+        }
+      }
+    };
+
+    checkWalletConnection();
+
+    // 계정 변경 이벤트 리스너
+    const handleAccountsChanged = (accounts: string[]) => {
+      if (accounts.length === 0) {
+        // 연결 해제됨
+        setWalletAddress(null);
+        setWalletBalance('0');
+      } else {
+        // 계정 변경됨
+        setWalletAddress(accounts[0]);
+        updateBalance(accounts[0]);
+      }
+    };
+
+    // 체인 변경 이벤트 리스너
+    const handleChainChanged = (chainId: string) => {
+      // 체인이 변경되면 페이지 새로고침 (MetaMask 권장사항)
+      window.location.reload();
+    };
+
+    // 이벤트 리스너 등록
+    if (window.ethereum) {
+      window.ethereum.on('accountsChanged', handleAccountsChanged);
+      window.ethereum.on('chainChanged', handleChainChanged);
+    }
+
+    // 컴포넌트 언마운트 시 리스너 제거
+    return () => {
+      if (window.ethereum) {
+        window.ethereum.removeListener('accountsChanged', handleAccountsChanged);
+        window.ethereum.removeListener('chainChanged', handleChainChanged);
+      }
+    };
   }, []);
 
-  const checkIfMetaMaskIsInstalled = () => {
-    const isInstalled = typeof window.ethereum !== 'undefined';
-    setIsMetaMaskInstalled(isInstalled);
-  };
-
-  const checkIfWalletIsConnected = async () => {
-    if (!window.ethereum) return;
-
+  // 잔액 업데이트
+  const updateBalance = async (address: string) => {
     try {
-      const accounts = await window.ethereum.request({ method: 'eth_accounts' });
-      if (accounts.length > 0) {
-        setAddress(accounts[0]);
-        fetchBalance(accounts[0]);
-      }
+      const balance = await getAVAXBalance(address);
+      setWalletBalance(balance);
     } catch (error) {
-      console.error('지갑 연결 상태 확인 실패:', error);
+      console.error('잔액 조회 실패:', error);
     }
   };
 
-  const fetchBalance = async (walletAddress: string) => {
-    const avaxBalance = await getAVAXBalance(walletAddress);
-    setBalance(parseFloat(avaxBalance).toFixed(4));
-  };
-
+  // 지갑 연결
   const handleConnectWallet = async () => {
-    setLoading(true);
+    if (isConnecting) return;
+    
+    setIsConnecting(true);
     try {
-      const connectedAddress = await connectWallet();
-      if (connectedAddress) {
-        setAddress(connectedAddress);
-        fetchBalance(connectedAddress);
-        
-        // API를 통해 사용자 지갑 주소 업데이트
-        updateUserWalletAddress(connectedAddress);
-        
+      // 아발란체 네트워크가 없으면 추가 시도
+      await addAvalancheNetworkToMetamask();
+      
+      const address = await connectWallet();
+      if (address) {
+        setWalletAddress(address);
+        updateBalance(address);
         toast({
           title: t('wallet.connectSuccess'),
-          description: t('wallet.connectSuccessDesc'),
+          description: t('wallet.walletConnected'),
         });
       }
     } catch (error) {
@@ -64,108 +110,131 @@ export default function WalletConnect() {
       toast({
         variant: 'destructive',
         title: t('wallet.connectError'),
-        description: t('wallet.connectErrorDesc'),
+        description: typeof error === 'string' ? error : t('wallet.connectErrorDesc'),
       });
     } finally {
-      setLoading(false);
+      setIsConnecting(false);
     }
   };
 
-  const updateUserWalletAddress = async (walletAddress: string) => {
-    try {
-      // 현재는 userId를 1로 하드코딩했지만, 실제로는 로그인한 사용자의 ID를 사용해야 함
-      const userId = 1;
-      
-      const response = await fetch(`/api/users/${userId}/wallet`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ walletAddress }),
-      });
-      
-      if (!response.ok) {
-        throw new Error('지갑 주소 업데이트 실패');
-      }
-    } catch (error) {
-      console.error('사용자 지갑 주소 업데이트 실패:', error);
-    }
+  // 지갑 연결 해제
+  const handleDisconnectWallet = () => {
+    // MetaMask는 프로그래매틱 연결 해제를 지원하지 않음
+    // 대신 상태만 초기화
+    setWalletAddress(null);
+    setWalletBalance('0');
+    toast({
+      title: t('wallet.disconnected'),
+      description: t('wallet.disconnectedDesc'),
+    });
   };
 
-  const handleAddAvalancheNetwork = async () => {
-    try {
-      const success = await addAvalancheNetworkToMetamask();
-      if (success) {
-        toast({
-          title: t('wallet.networkAddSuccess'),
-          description: t('wallet.networkAddSuccessDesc'),
-        });
-      }
-    } catch (error) {
-      console.error('아발란체 네트워크 추가 실패:', error);
+  // 주소 복사
+  const copyAddressToClipboard = () => {
+    if (walletAddress) {
+      navigator.clipboard.writeText(walletAddress);
       toast({
-        variant: 'destructive',
-        title: t('wallet.networkAddError'),
-        description: t('wallet.networkAddErrorDesc'),
+        title: t('wallet.addressCopied'),
+        description: t('wallet.addressCopiedDesc'),
       });
     }
   };
 
-  const formatAddress = (address: string) => {
+  // 주소 단축 표시
+  const shortenAddress = (address: string) => {
     return `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
   };
 
-  if (!isMetaMaskInstalled) {
+  // 익스플로러에서 주소 보기
+  const viewAddressInExplorer = () => {
+    if (walletAddress) {
+      // AVALANCHE_TESTNET에서 blockExplorerUrls를 가져옴
+      import { AVALANCHE_TESTNET } from '@/lib/blockchain';
+      const explorerUrl = `${AVALANCHE_TESTNET.blockExplorerUrls[0]}/address/${walletAddress}`;
+      window.open(explorerUrl, '_blank');
+    }
+  };
+
+  if (!walletAddress) {
     return (
-      <Alert variant="destructive" className="mb-4">
-        <AlertTriangle className="h-4 w-4" />
-        <AlertTitle>{t('wallet.metamaskRequired')}</AlertTitle>
-        <AlertDescription>
-          <p className="mb-2">{t('wallet.metamaskRequiredDesc')}</p>
-          <a 
-            href="https://metamask.io/download/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-primary underline"
-          >
-            {t('wallet.installMetamask')}
-          </a>
-        </AlertDescription>
-      </Alert>
+      <Button
+        onClick={handleConnectWallet}
+        variant="outline"
+        size="sm"
+        disabled={isConnecting}
+        className="flex items-center"
+      >
+        <Wallet className="mr-2 h-4 w-4" />
+        {isConnecting ? t('wallet.connecting') : t('wallet.connect')}
+      </Button>
     );
   }
 
   return (
-    <div className="flex flex-col sm:flex-row items-center gap-2">
-      {!address ? (
-        <Button 
-          variant="outline" 
-          size="sm" 
-          className="border-primary text-primary hover:bg-primary/10"
-          onClick={handleConnectWallet}
-          disabled={loading}
-        >
-          <Wallet className="mr-2 h-4 w-4" />
-          {loading ? t('wallet.connecting') : t('wallet.connect')}
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline" size="sm" className="flex items-center">
+          <div className="flex items-center">
+            <span className="inline-block bg-green-500 rounded-full w-2 h-2 mr-2"></span>
+            <span>{shortenAddress(walletAddress)}</span>
+            <ChevronDown className="ml-2 h-4 w-4" />
+          </div>
         </Button>
-      ) : (
-        <div className="flex items-center gap-2 bg-muted px-3 py-1 rounded-full text-sm">
-          <Wallet className="h-4 w-4" />
-          <span className="font-medium">{formatAddress(address)}</span>
-          <span className="text-muted-foreground">
-            {balance} AVAX
-          </span>
+      </PopoverTrigger>
+      <PopoverContent className="w-64 p-0" align="end">
+        <div className="p-4 border-b">
+          <div className="flex justify-between items-center mb-2">
+            <h4 className="font-medium text-sm">{t('wallet.walletAddress')}</h4>
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="h-6 w-6" 
+              onClick={copyAddressToClipboard}
+            >
+              <Copy className="h-4 w-4" />
+            </Button>
+          </div>
+          <p className="text-xs text-muted-foreground break-all mb-4">{walletAddress}</p>
+          
+          <div className="flex justify-between items-center">
+            <div>
+              <h4 className="font-medium text-sm">{t('wallet.balance')}</h4>
+              <div className="flex items-center">
+                <p className="text-lg font-bold">{parseFloat(walletBalance).toFixed(4)}</p>
+                <span className="ml-1 text-sm">AVAX</span>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-6 w-6 ml-1"
+                  onClick={() => updateBalance(walletAddress)}
+                >
+                  <RefreshCw className="h-3 w-3" />
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
-      )}
-      
-      <Button 
-        variant="ghost" 
-        size="sm" 
-        onClick={handleAddAvalancheNetwork}
-        className="text-xs"
-      >
-        {t('wallet.addAvalancheNetwork')}
-      </Button>
-    </div>
+        
+        <div className="p-2">
+          <Button 
+            variant="ghost" 
+            className="w-full justify-start text-sm" 
+            onClick={viewAddressInExplorer}
+          >
+            <ExternalLink className="mr-2 h-4 w-4" />
+            {t('wallet.viewInExplorer')}
+          </Button>
+          
+          <Button 
+            variant="ghost" 
+            className="w-full justify-start text-sm text-red-500 hover:text-red-600 hover:bg-red-50" 
+            onClick={handleDisconnectWallet}
+          >
+            <LogOut className="mr-2 h-4 w-4" />
+            {t('wallet.disconnect')}
+          </Button>
+        </div>
+      </PopoverContent>
+    </Popover>
   );
 }
