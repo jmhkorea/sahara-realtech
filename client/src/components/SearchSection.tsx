@@ -65,11 +65,13 @@ export default function SearchSection() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
+                    <SelectItem value="대한민국">대한민국 전체</SelectItem>
                     <SelectItem value="서울">서울특별시</SelectItem>
                     <SelectItem value="경기">경기도</SelectItem>
                     <SelectItem value="인천">인천광역시</SelectItem>
                     <SelectItem value="부산">부산광역시</SelectItem>
-                    <SelectItem value="기타">기타 지역</SelectItem>
+                    <SelectItem value="강원">강원도</SelectItem>
+                    <SelectItem value="해외">해외</SelectItem>
                   </SelectGroup>
                 </SelectContent>
               </Select>

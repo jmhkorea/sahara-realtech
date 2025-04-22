@@ -25,6 +25,8 @@ export const PropertyType = {
   OFFICETEL: "officetel",
   COMMERCIAL: "commercial",
   LAND: "land",
+  RESORT: "resort",
+  MEMBERSHIP: "membership",
   OTHER: "other",
 } as const;
 

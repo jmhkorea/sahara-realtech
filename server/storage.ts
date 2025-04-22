@@ -258,7 +258,7 @@ export class MemStorage implements IStorage {
         addressEn: "That Luang Economic Zone, Vientiane, Laos",
         description: "라오스 비엔티안 탓루앙 경제 특구에 위치한 반얀트리 닉팔도 라구나 골프텔 및 골프 회원권. 고급 리조트 시설과 골프 코스를 포함한 프리미엄 투자 기회입니다.",
         descriptionEn: "Banyan Tree Nikpaldo Laguna GolfTel and Golf Membership, located in That Luang Economic Zone, Vientiane, Laos. A premium investment opportunity including luxury resort facilities and golf course.",
-        type: PropertyType.OTHER,
+        type: PropertyType.RESORT,
         imageUrl: "/assets/vientiane-sez.jpg",
         totalValue: "25000000000", // 250억
         expectedReturn: "8.5",
@@ -276,7 +276,7 @@ export class MemStorage implements IStorage {
         addressEn: "Seminyak, Bali, Indonesia",
         description: "발리 세미냑에 위치한 240실 규모의 럭셔리 리조트 회원권. 연간 높은 객실 점유율과 안정적인 수익이 예상됩니다.",
         descriptionEn: "Luxury resort membership for a 240-room property in Seminyak, Bali. High annual room occupancy rates with stable returns expected.",
-        type: PropertyType.OTHER,
+        type: PropertyType.MEMBERSHIP,
         imageUrl: "/assets/bali-seminyak-resort.jpg",
         totalValue: "32000000000", // 320억
         expectedReturn: "9.2",
@@ -294,7 +294,7 @@ export class MemStorage implements IStorage {
         addressEn: "Pyeongchang, Gangwon Province, South Korea",
         description: "강원도 평창에 위치한 반얀트리 레지던트 200실 중 일부에 투자할 수 있는 기회. 사계절 관광지로 꾸준한 방문객 유입이 예상됩니다.",
         descriptionEn: "Investment opportunity in a portion of the 200 Banyan Tree Residences in Pyeongchang, Gangwon. Steady visitor influx expected as a four-season tourist destination.",
-        type: PropertyType.OTHER,
+        type: PropertyType.RESORT,
         imageUrl: "https://images.unsplash.com/photo-1610641818989-c2051b5e2cfd",
         totalValue: "28500000000", // 285억
         expectedReturn: "7.8",
