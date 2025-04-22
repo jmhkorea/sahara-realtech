@@ -9,7 +9,6 @@ import WalletConnect from "@/components/WalletConnect";
 export default function Header() {
   const [, setLocation] = useLocation();
   const { t, i18n } = useTranslation();
-  const [isWalletConnected, setIsWalletConnected] = useState(false);
 
   // 언어 선택 드롭다운 상태
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
@@ -18,11 +17,6 @@ export default function Header() {
   const changeLanguage = (lang: string) => {
     i18n.changeLanguage(lang);
     setLanguageMenuOpen(false);
-  };
-
-  const connectWallet = () => {
-    // Placeholder for wallet connection logic
-    setIsWalletConnected(true);
   };
 
   // 언어 드롭다운 참조
@@ -131,21 +125,9 @@ export default function Header() {
               )}
             </div>
             
-            {isWalletConnected ? (
-              <div className="hidden md:flex items-center space-x-2 border rounded-full py-1 px-3 text-sm">
-                <span className="bg-green-500 rounded-full w-2 h-2"></span>
-                <span className="font-inter">{t('wallet.connected')}</span>
-              </div>
-            ) : (
-              <Button
-                onClick={connectWallet}
-                variant="outline"
-                size="sm"
-                className="hidden md:flex"
-              >
-                {t('wallet.connect')}
-              </Button>
-            )}
+            <div className="hidden md:block">
+              <WalletConnect />
+            </div>
             
             <div className="hidden sm:block">
               <Button className="px-4 py-2">
@@ -180,9 +162,7 @@ export default function Header() {
                     {t('nav.team')}
                   </Link>
                   <hr />
-                  <Button onClick={connectWallet}>
-                    {isWalletConnected ? t('wallet.connected') : t('wallet.connect')}
-                  </Button>
+                  <WalletConnect />
                   <Button variant="outline">
                     {t('auth.loginRegister')}
                   </Button>

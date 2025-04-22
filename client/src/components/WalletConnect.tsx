@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
-import { connectWallet, getAVAXBalance, addAvalancheNetworkToMetamask } from '@/lib/blockchain';
+import { connectWallet, getAVAXBalance, addAvalancheNetworkToMetamask, AVALANCHE_TESTNET } from '@/lib/blockchain';
 import {
   Popover,
   PopoverContent,
@@ -148,8 +148,6 @@ export default function WalletConnect() {
   // 익스플로러에서 주소 보기
   const viewAddressInExplorer = () => {
     if (walletAddress) {
-      // AVALANCHE_TESTNET에서 blockExplorerUrls를 가져옴
-      import { AVALANCHE_TESTNET } from '@/lib/blockchain';
       const explorerUrl = `${AVALANCHE_TESTNET.blockExplorerUrls[0]}/address/${walletAddress}`;
       window.open(explorerUrl, '_blank');
     }
