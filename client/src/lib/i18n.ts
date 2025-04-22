@@ -497,6 +497,21 @@ const koTranslations = {
   investmentGuide: {
     title: '투자 전 보세요',
     subtitle: 'SaharaRealTech의 토큰 구조와 아발란체 블록체인 기반 투자에 대한 중요 정보를 확인하세요.',
+    securityAudit: {
+      title: '철저한 보안 감사',
+      description: '스마트컨트랙트는 최고의 감사 기관인 CertiK(서틱)의 철저한 감사를 통해 토큰 생태계의 검증을 시행합니다.',
+      certik: {
+        title: 'CertiK(서틱) 감사',
+        description: 'CertiK은 블록체인 보안 분야의 선두 기업으로, 형식 검증(Formal Verification) 기술을 활용하여 스마트컨트랙트의 취약점을 찾아내는 데 특화되어 있습니다.'
+      },
+      auditProcess: {
+        title: '감사 프로세스',
+        step1: '철저한 코드 분석 및 검토',
+        step2: '보안 취약점 식별 및 수정',
+        step3: '수정 사항 재검토 및 최종 인증',
+        step4: '정기적인 보안 업데이트 및 모니터링'
+      }
+    },
     tokenStructure: {
       title: '토큰 구조',
       primeMasterNFT: {
@@ -731,6 +746,10 @@ const enTranslations = {
       legalSafety: {
         question: 'Is it legally safe?',
         answer: 'SaharaRealTech operates in compliance with Korean real estate and financial regulations. All properties are registered after legal review, and various safety measures are in place to protect investors. Blockchain technology also enhances safety by transparently recording all transaction details.'
+      },
+      securityAudits: {
+        question: 'How secure are your smart contracts?',
+        answer: 'All our smart contracts undergo rigorous auditing by CertiK, a leading blockchain security firm. CertiK uses formal verification technology to mathematically check for vulnerabilities in smart contracts, following a process of code analysis, vulnerability identification and remediation, and final certification. These audit results are publicly available, and we maintain the latest security standards through regular security updates.'
       }
     }
   },
@@ -1054,6 +1073,21 @@ const enTranslations = {
   investmentGuide: {
     title: 'Before You Invest',
     subtitle: 'Learn about SaharaRealTech\'s token structure and Avalanche blockchain-based investment information.',
+    securityAudit: {
+      title: 'Thorough Security Audit',
+      description: 'Our smart contracts undergo rigorous auditing by CertiK, one of the leading blockchain security firms, to validate the token ecosystem.',
+      certik: {
+        title: 'CertiK Audit',
+        description: 'CertiK is a leader in blockchain security, specializing in identifying vulnerabilities in smart contracts through formal verification technology.'
+      },
+      auditProcess: {
+        title: 'Audit Process',
+        step1: 'Comprehensive code analysis and review',
+        step2: 'Security vulnerability identification and remediation',
+        step3: 'Review of fixes and final certification',
+        step4: 'Regular security updates and monitoring'
+      }
+    },
     tokenStructure: {
       title: 'Token Structure',
       primeMasterNFT: {
@@ -1245,6 +1279,21 @@ const jaTranslations = {
   investmentGuide: {
     title: '投資前にご確認ください',
     subtitle: 'SaharaRealTechのトークン構造とアバランチブロックチェーン基盤の投資情報をご確認ください。',
+    securityAudit: {
+      title: '厳格なセキュリティ監査',
+      description: '当社のスマートコントラクトは、ブロックチェーンセキュリティ分野をリードするCertiKによる厳格な監査を受け、トークンエコシステムの検証を行っています。',
+      certik: {
+        title: 'CertiK監査',
+        description: 'CertiKはブロックチェーンセキュリティのリーダーであり、形式検証（Formal Verification）技術を用いてスマートコントラクトの脆弱性を特定することに特化しています。'
+      },
+      auditProcess: {
+        title: '監査プロセス',
+        step1: '包括的なコード分析とレビュー',
+        step2: 'セキュリティ脆弱性の特定と修正',
+        step3: '修正事項の再確認と最終認証',
+        step4: '定期的なセキュリティ更新とモニタリング'
+      }
+    },
     tokenStructure: {
       title: 'トークン構造',
       primeMasterNFT: {
