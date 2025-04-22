@@ -35,7 +35,8 @@ export async function getAssetValueData(req: Request, res: Response) {
   try {
     // 실제 API 호출은 향후에 구현
     // 현재는 샘플 데이터 반환
-    return res.status(200).json(getSampleAssetValueData());
+    const data = getSampleAssetValueData();
+    return res.status(200).json(data.valueTrend);
   } catch (error) {
     console.error('Failed to fetch asset value data:', error);
     return res.status(500).json({ error: 'Failed to fetch asset value data' });
@@ -61,7 +62,8 @@ export async function getMarketIndicatorsData(req: Request, res: Response) {
   try {
     // 실제 API 호출은 향후에 구현
     // 현재는 샘플 데이터 반환
-    return res.status(200).json(getSampleMarketIndicatorsData());
+    const data = getSampleMarketIndicatorsData();
+    return res.status(200).json(data);
   } catch (error) {
     console.error('Failed to fetch market indicators data:', error);
     return res.status(500).json({ error: 'Failed to fetch market data' });
@@ -146,6 +148,19 @@ function getSampleAssetValueData() {
       { factor: '교통', weight: 20 },
       { factor: '건물상태', weight: 15 },
       { factor: '시장수요', weight: 20 },
+    ],
+    // 자산 가치 추세 데이터 추가
+    valueTrend: [
+      { year: '2020', propertyValue: 80000000, tokenValue: 80000 },
+      { year: '2021', propertyValue: 87000000, tokenValue: 87000 },
+      { year: '2022', propertyValue: 96000000, tokenValue: 96000 },
+      { year: '2023', propertyValue: 105000000, tokenValue: 105000 },
+      { year: '2024', propertyValue: 115000000, tokenValue: 115000 },
+      { year: '2025 (예상)', propertyValue: 126000000, tokenValue: 126000 },
+      { year: '2026 (예상)', propertyValue: 138000000, tokenValue: 138000 },
+      { year: '2027 (예상)', propertyValue: 151000000, tokenValue: 151000 },
+      { year: '2028 (예상)', propertyValue: 165000000, tokenValue: 165000 },
+      { year: '2029 (예상)', propertyValue: 180000000, tokenValue: 180000 }
     ]
   };
 }
@@ -235,6 +250,44 @@ function getSampleMarketIndicatorsData() {
       { name: '2024년 Q4', 지수: 141, 예측범위상한: 146, 예측범위하한: 136 },
       { name: '2025년 Q1', 지수: 143, 예측범위상한: 149, 예측범위하한: 137 },
       { name: '2025년 Q2', 지수: 146, 예측범위상한: 153, 예측범위하한: 139 },
+    ],
+    // 추가된 시장 지표 데이터
+    priceIndices: [
+      { date: '2021 Q1', residentialIndex: 100, commercialIndex: 100, regionalIndex: 100 },
+      { date: '2021 Q2', residentialIndex: 102, commercialIndex: 101, regionalIndex: 103 },
+      { date: '2021 Q3', residentialIndex: 105, commercialIndex: 103, regionalIndex: 106 },
+      { date: '2021 Q4', residentialIndex: 108, commercialIndex: 106, regionalIndex: 110 },
+      { date: '2022 Q1', residentialIndex: 111, commercialIndex: 108, regionalIndex: 113 },
+      { date: '2022 Q2', residentialIndex: 114, commercialIndex: 110, regionalIndex: 116 },
+      { date: '2022 Q3', residentialIndex: 117, commercialIndex: 112, regionalIndex: 119 },
+      { date: '2022 Q4', residentialIndex: 120, commercialIndex: 115, regionalIndex: 123 },
+      { date: '2023 Q1', residentialIndex: 122, commercialIndex: 117, regionalIndex: 125 },
+      { date: '2023 Q2', residentialIndex: 125, commercialIndex: 119, regionalIndex: 127 },
+      { date: '2023 Q3', residentialIndex: 127, commercialIndex: 121, regionalIndex: 130 },
+      { date: '2023 Q4', residentialIndex: 130, commercialIndex: 124, regionalIndex: 133 },
+      { date: '2024 Q1', residentialIndex: 133, commercialIndex: 127, regionalIndex: 137 },
+      { date: '2024 Q2', residentialIndex: 136, commercialIndex: 130, regionalIndex: 142 },
+    ],
+    transactionVolume: [
+      { quarter: '2021 Q1', totalTransactions: 850, similarPropertyTransactions: 320 },
+      { quarter: '2021 Q2', totalTransactions: 920, similarPropertyTransactions: 360 },
+      { quarter: '2021 Q3', totalTransactions: 880, similarPropertyTransactions: 340 },
+      { quarter: '2021 Q4', totalTransactions: 950, similarPropertyTransactions: 380 },
+      { quarter: '2022 Q1', totalTransactions: 1020, similarPropertyTransactions: 410 },
+      { quarter: '2022 Q2', totalTransactions: 1080, similarPropertyTransactions: 430 },
+      { quarter: '2022 Q3', totalTransactions: 1040, similarPropertyTransactions: 420 },
+      { quarter: '2022 Q4', totalTransactions: 1110, similarPropertyTransactions: 450 },
+      { quarter: '2023 Q1', totalTransactions: 1170, similarPropertyTransactions: 470 },
+      { quarter: '2023 Q2', totalTransactions: 1230, similarPropertyTransactions: 490 },
+      { quarter: '2023 Q3', totalTransactions: 1190, similarPropertyTransactions: 480 },
+      { quarter: '2023 Q4', totalTransactions: 1250, similarPropertyTransactions: 500 },
+    ],
+    marketComparison: [
+      { period: '2021', stockMarket: 10.2, bondMarket: 3.5, realEstate: 8.7, propertyType: 9.3 },
+      { period: '2022', stockMarket: 7.5, bondMarket: 4.2, realEstate: 9.2, propertyType: 10.1 },
+      { period: '2023', stockMarket: 12.8, bondMarket: 3.9, realEstate: 9.8, propertyType: 11.5 },
+      { period: '2024(예상)', stockMarket: 9.5, bondMarket: 4.5, realEstate: 10.3, propertyType: 12.2 },
+      { period: '2025(예상)', stockMarket: 8.7, bondMarket: 4.8, realEstate: 10.8, propertyType: 12.8 },
     ]
   };
 }

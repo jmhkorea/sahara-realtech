@@ -435,6 +435,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // 금융 데이터 API 라우트 추가
+  
+  // 현금 흐름 데이터 API
+  app.get('/api/financial/cashflow', getCashFlowData);
+  
+  // 자산 가치 데이터 API
+  app.get('/api/financial/asset-value', getAssetValueData);
+  
+  // 수익률 분석 데이터 API
+  app.get('/api/financial/return-analysis', getReturnAnalysisData);
+  
+  // 시장 지표 데이터 API
+  app.get('/api/financial/market-indicators', getMarketIndicatorsData);
+  
+  // 포트폴리오 분석 데이터 API
+  app.get('/api/financial/portfolio-analysis', getPortfolioAnalysisData);
+
   const httpServer = createServer(app);
   return httpServer;
 }

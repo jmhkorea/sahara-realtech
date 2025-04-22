@@ -4,6 +4,9 @@ import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { Property, PropertyType, TokenizationStatus } from "@shared/schema";
 import TokenPurchaseModal from "@/components/TokenPurchaseModal";
+import PropertyAnalytics from "@/components/PropertyAnalytics";
+import InvestmentSimulator from "@/components/InvestmentSimulator";
+import MarketAnalysis from "@/components/MarketAnalysis";
 
 import {
   Card,
@@ -28,6 +31,9 @@ import {
   Shield,
   CheckCircle,
   Palmtree,
+  ChartLine,
+  Calculator,
+  BarChart2,
   Hotel,
   Calendar,
   Sparkles,
