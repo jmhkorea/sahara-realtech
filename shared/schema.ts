@@ -104,6 +104,76 @@ export const insertTransactionSchema = createInsertSchema(transactions).omit({
 });
 
 // Types
+// 블로그 게시물 카테고리 정의
+export const BlogCategory = {
+  COMPANY_NEWS: "company_news",
+  EVENT: "event",
+  CRYPTO_NEWS: "crypto_news",
+  MARKET_ANALYSIS: "market_analysis",
+  INVESTMENT_GUIDE: "investment_guide",
+  AVALANCHE_UPDATE: "avalanche_update",
+  PROPERTY_SHOWCASE: "property_showcase",
+} as const;
+
+export type BlogCategoryValue = typeof BlogCategory[keyof typeof BlogCategory];
+
+// 블로그 게시물 스키마
+export const blogPosts = pgTable("blog_posts", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  titleKo: text("title_ko"),
+  titleJa: text("title_ja"),
+  content: text("content").notNull(),
+  contentKo: text("content_ko"),
+  contentJa: text("content_ja"),
+  summary: text("summary"),
+  summaryKo: text("summary_ko"),
+  summaryJa: text("summary_ja"),
+  category: text("category").$type<BlogCategoryValue>().notNull(),
+  imageUrl: text("image_url"),
+  author: text("author").notNull(),
+  authorId: integer("author_id").references(() => users.id),
+  publishedAt: timestamp("published_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+  tags: text("tags").array(),
+  featured: boolean("featured").default(false),
+  views: integer("views").default(0),
+  relatedPropertyId: integer("related_property_id").references(() => properties.id),
+});
+
+// 블로그 태그 스키마
+export const blogTags = pgTable("blog_tags", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull().unique(),
+  nameKo: text("name_ko"),
+  nameJa: text("name_ja"),
+});
+
+// 블로그 댓글 스키마
+export const blogComments = pgTable("blog_comments", {
+  id: serial("id").primaryKey(),
+  postId: integer("post_id").notNull().references(() => blogPosts.id),
+  userId: integer("user_id").references(() => users.id),
+  content: text("content").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  parentCommentId: integer("parent_comment_id"),
+});
+
+// 블로그 스키마 타입 정의
+export const insertBlogPostSchema = createInsertSchema(blogPosts).omit({
+  id: true,
+  views: true,
+});
+
+export const insertBlogTagSchema = createInsertSchema(blogTags).omit({
+  id: true,
+});
+
+export const insertBlogCommentSchema = createInsertSchema(blogComments).omit({
+  id: true,
+  createdAt: true,
+});
+
 export type User = typeof users.$inferSelect;
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type Property = typeof properties.$inferSelect;
@@ -112,3 +182,9 @@ export type Investment = typeof investments.$inferSelect;
 export type InsertInvestment = z.infer<typeof insertInvestmentSchema>;
 export type Transaction = typeof transactions.$inferSelect;
 export type InsertTransaction = z.infer<typeof insertTransactionSchema>;
+export type BlogPost = typeof blogPosts.$inferSelect;
+export type InsertBlogPost = z.infer<typeof insertBlogPostSchema>;
+export type BlogTag = typeof blogTags.$inferSelect;
+export type InsertBlogTag = z.infer<typeof insertBlogTagSchema>;
+export type BlogComment = typeof blogComments.$inferSelect;
+export type InsertBlogComment = z.infer<typeof insertBlogCommentSchema>;

@@ -3,7 +3,10 @@ import {
   properties, type Property, type InsertProperty,
   investments, type Investment, type InsertInvestment,
   transactions, type Transaction, type InsertTransaction,
-  TokenizationStatus, PropertyType
+  blogPosts, type BlogPost, type InsertBlogPost,
+  blogComments, type BlogComment, type InsertBlogComment,
+  blogTags, type BlogTag, type InsertBlogTag,
+  TokenizationStatus, PropertyType, BlogCategory, type BlogCategoryValue
 } from "@shared/schema";
 
 export interface IStorage {
@@ -30,6 +33,25 @@ export interface IStorage {
   getTransactions(userId: number): Promise<Transaction[]>;
   getRecentTransactions(limit: number): Promise<Transaction[]>;
   createTransaction(transaction: InsertTransaction): Promise<Transaction>;
+  
+  // Blog methods
+  getBlogPosts(limit?: number, offset?: number): Promise<BlogPost[]>;
+  getBlogPost(id: number): Promise<BlogPost | undefined>;
+  getBlogPostsByCategory(category: BlogCategoryValue, limit?: number): Promise<BlogPost[]>;
+  getFeaturedBlogPosts(limit?: number): Promise<BlogPost[]>;
+  getRelatedBlogPosts(postId: number, limit?: number): Promise<BlogPost[]>;
+  createBlogPost(post: InsertBlogPost): Promise<BlogPost>;
+  updateBlogPost(id: number, post: Partial<InsertBlogPost>): Promise<BlogPost | undefined>;
+  deleteBlogPost(id: number): Promise<boolean>;
+  incrementBlogPostViews(id: number): Promise<boolean>;
+  
+  // Blog Comment methods
+  getBlogComments(postId: number): Promise<BlogComment[]>;
+  createBlogComment(comment: InsertBlogComment): Promise<BlogComment>;
+  
+  // Blog Tag methods
+  getBlogTags(): Promise<BlogTag[]>;
+  createBlogTag(tag: InsertBlogTag): Promise<BlogTag>;
 }
 
 export class MemStorage implements IStorage {
@@ -37,22 +59,34 @@ export class MemStorage implements IStorage {
   private properties: Map<number, Property>;
   private investments: Map<number, Investment>;
   private transactions: Map<number, Transaction>;
+  private blogPosts: Map<number, BlogPost>;
+  private blogComments: Map<number, BlogComment>;
+  private blogTags: Map<number, BlogTag>;
   
   private userCurrentId: number;
   private propertyCurrentId: number;
   private investmentCurrentId: number;
   private transactionCurrentId: number;
+  private blogPostCurrentId: number;
+  private blogCommentCurrentId: number;
+  private blogTagCurrentId: number;
 
   constructor() {
     this.users = new Map();
     this.properties = new Map();
     this.investments = new Map();
     this.transactions = new Map();
+    this.blogPosts = new Map();
+    this.blogComments = new Map();
+    this.blogTags = new Map();
     
     this.userCurrentId = 1;
     this.propertyCurrentId = 1;
     this.investmentCurrentId = 1;
     this.transactionCurrentId = 1;
+    this.blogPostCurrentId = 1;
+    this.blogCommentCurrentId = 1;
+    this.blogTagCurrentId = 1;
 
     // Add sample properties for development
     this.initSampleData();
@@ -191,6 +225,122 @@ export class MemStorage implements IStorage {
     };
     this.transactions.set(id, transaction);
     return transaction;
+  }
+  
+  // Blog methods
+  async getBlogPosts(limit: number = 10, offset: number = 0): Promise<BlogPost[]> {
+    return Array.from(this.blogPosts.values())
+      .sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime())
+      .slice(offset, offset + limit);
+  }
+
+  async getBlogPost(id: number): Promise<BlogPost | undefined> {
+    return this.blogPosts.get(id);
+  }
+
+  async getBlogPostsByCategory(category: BlogCategoryValue, limit: number = 10): Promise<BlogPost[]> {
+    return Array.from(this.blogPosts.values())
+      .filter(post => post.category === category)
+      .sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime())
+      .slice(0, limit);
+  }
+
+  async getFeaturedBlogPosts(limit: number = 5): Promise<BlogPost[]> {
+    return Array.from(this.blogPosts.values())
+      .filter(post => post.featured)
+      .sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime())
+      .slice(0, limit);
+  }
+
+  async getRelatedBlogPosts(postId: number, limit: number = 3): Promise<BlogPost[]> {
+    const post = await this.getBlogPost(postId);
+    if (!post) return [];
+
+    // Find posts in the same category or with related property
+    return Array.from(this.blogPosts.values())
+      .filter(p => p.id !== postId && (
+        p.category === post.category || 
+        (post.relatedPropertyId && p.relatedPropertyId === post.relatedPropertyId)
+      ))
+      .sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime())
+      .slice(0, limit);
+  }
+
+  async createBlogPost(insertPost: InsertBlogPost): Promise<BlogPost> {
+    const id = this.blogPostCurrentId++;
+    const now = new Date();
+    const post: BlogPost = {
+      ...insertPost,
+      id,
+      publishedAt: insertPost.publishedAt || now,
+      updatedAt: insertPost.updatedAt || now,
+      views: 0
+    };
+    this.blogPosts.set(id, post);
+    return post;
+  }
+
+  async updateBlogPost(id: number, postUpdate: Partial<InsertBlogPost>): Promise<BlogPost | undefined> {
+    const post = await this.getBlogPost(id);
+    if (!post) return undefined;
+
+    const updatedPost: BlogPost = {
+      ...post,
+      ...postUpdate,
+      id,
+      updatedAt: new Date()
+    };
+    this.blogPosts.set(id, updatedPost);
+    return updatedPost;
+  }
+
+  async deleteBlogPost(id: number): Promise<boolean> {
+    return this.blogPosts.delete(id);
+  }
+
+  async incrementBlogPostViews(id: number): Promise<boolean> {
+    const post = await this.getBlogPost(id);
+    if (!post) return false;
+
+    const updatedPost = {
+      ...post,
+      views: post.views + 1
+    };
+    this.blogPosts.set(id, updatedPost);
+    return true;
+  }
+
+  // Blog Comment methods
+  async getBlogComments(postId: number): Promise<BlogComment[]> {
+    return Array.from(this.blogComments.values())
+      .filter(comment => comment.postId === postId)
+      .sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
+  }
+
+  async createBlogComment(insertComment: InsertBlogComment): Promise<BlogComment> {
+    const id = this.blogCommentCurrentId++;
+    const comment: BlogComment = {
+      ...insertComment,
+      id,
+      createdAt: new Date()
+    };
+    this.blogComments.set(id, comment);
+    return comment;
+  }
+
+  // Blog Tag methods
+  async getBlogTags(): Promise<BlogTag[]> {
+    return Array.from(this.blogTags.values());
+  }
+
+  async createBlogTag(insertTag: InsertBlogTag): Promise<BlogTag> {
+    const id = this.blogTagCurrentId++;
+    const tag: BlogTag = {
+      ...insertTag,
+      id
+    };
+    this.blogTags.set(id, tag);
+    return tag;
   }
 
   // Initialize sample data
