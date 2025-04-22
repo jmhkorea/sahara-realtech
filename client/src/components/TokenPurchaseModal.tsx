@@ -24,12 +24,7 @@ import {
 import { Property } from '@shared/schema';
 import { useToast } from '@/hooks/use-toast';
 import { connectWallet, getAVAXBalance, purchasePropertyTokens } from '@/lib/blockchain';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+// React 훅 오류를 일으키는 Tooltip 제거
 
 interface TokenPurchaseModalProps {
   property: Property;
@@ -231,16 +226,9 @@ export default function TokenPurchaseModal({ property, onPurchaseSuccess }: Toke
               <div className="grid gap-2">
                 <Label htmlFor="token-amount" className="flex items-center">
                   {t('property.tokenAmount')}
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <Info className="h-3.5 w-3.5 ml-1 text-muted-foreground" />
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>{t('property.tokenPriceInfo', { price: property.tokenPrice })}</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
+                  <span className="inline-flex ml-1" title={t('property.tokenPriceInfo', { price: property.tokenPrice })}>
+                    <Info className="h-3.5 w-3.5 text-muted-foreground" />
+                  </span>
                 </Label>
                 <div className="flex items-center space-x-2">
                   <Slider
