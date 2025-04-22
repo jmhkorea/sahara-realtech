@@ -2,13 +2,14 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "wouter";
 import { useQuery } from "@tanstack/react-query";
-import { Property, TokenizationStatus } from "@shared/schema";
+import { Property, TokenizationStatus, PropertyType } from "@shared/schema";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
+  CardFooter,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -24,8 +25,17 @@ import {
   Users,
   CreditCard,
   Shield,
-  CheckCircle
+  CheckCircle,
+  Palmtree,
+  Hotel,
+  Calendar,
+  Sparkles,
+  Trophy
 } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function PropertyDetail() {
@@ -106,7 +116,8 @@ export default function PropertyDetail() {
     console.log("Investing:", {
       propertyId: property.id,
       tokenCount,
-      amount: investmentAmount
+      amount: investmentAmount,
+      isResortMembership: property.type === PropertyType.OTHER
     });
     
     // Show a success message
@@ -339,10 +350,30 @@ export default function PropertyDetail() {
             <div>
               <Card>
                 <CardHeader>
-                  <CardTitle>{t('propertyDetail.investmentCard.title')}</CardTitle>
-                  <CardDescription>
-                    {t('propertyDetail.investmentCard.description')}
-                  </CardDescription>
+                  {property.type === PropertyType.OTHER ? (
+                    <>
+                      <CardTitle className="flex items-center">
+                        {property.region === "해외" ? (
+                          <Palmtree className="h-5 w-5 mr-2 text-primary" />
+                        ) : (
+                          <Hotel className="h-5 w-5 mr-2 text-primary" />
+                        )}
+                        리조트/멤버십 투자하기
+                      </CardTitle>
+                      <CardDescription>
+                        {property.name.includes("골프") ? 
+                          "골프 회원권과 리조트 시설 이용 혜택을 포함한 투자 상품입니다." : 
+                          "리조트 시설 이용 혜택을 포함한 멤버십 투자 상품입니다."}
+                      </CardDescription>
+                    </>
+                  ) : (
+                    <>
+                      <CardTitle>{t('propertyDetail.investmentCard.title')}</CardTitle>
+                      <CardDescription>
+                        {t('propertyDetail.investmentCard.description')}
+                      </CardDescription>
+                    </>
+                  )}
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
