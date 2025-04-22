@@ -55,11 +55,7 @@ export default function Hero() {
           <div className="flex items-center mt-8 bg-white/10 rounded-lg p-4 backdrop-blur-sm">
             <div className="flex-1">
               <div className="flex items-center">
-                <img 
-                  src="https://cryptologos.cc/logos/avalanche-avax-logo.png" 
-                  alt="Avalanche Logo" 
-                  className="w-6 h-6 mr-2"
-                />
+                <span className="font-bold text-white mr-2">Avalanche</span>
                 <span className="font-inter font-medium">
                   {t('hero.avalancheBased')}
                 </span>
