@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+  <!-- Avalanche 로고 (배경 제거 버전) -->
+  <g>
+    <!-- 왼쪽 큰 삼각형 -->
+    <path d="M11.5 28 L20 11.5 L28.5 28 Z" fill="none" stroke="#E84142" stroke-width="2"/>
+    
+    <!-- 오른쪽 작은 삼각형 -->
+    <path d="M23.5 22 L26.5 28 L20.5 28 Z" fill="none" stroke="#E84142" stroke-width="2"/>
+    
+    <!-- 왼쪽 큰 삼각형 내부 영역 -->
+    <path d="M13.5 26 L20 14 L26.5 26 L13.5 26 Z" fill="#E84142" fill-opacity="0.2"/>
+    
+    <!-- 오른쪽 작은 삼각형 내부 영역 -->
+    <path d="M23.5 23 L25.5 27 L21.5 27 L23.5 23 Z" fill="#E84142" fill-opacity="0.2"/>
+  </g>
+</svg>

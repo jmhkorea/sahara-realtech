@@ -162,7 +162,7 @@ export default function Footer() {
           <div className="flex items-center mt-4 md:mt-0">
             <span className="text-neutral-400 text-sm mr-2">{t('footer.supportedBlockchains')}:</span>
             <img 
-              src="/assets/AVAX.png" 
+              src="/assets/logo-avalanche.svg" 
               alt="Avalanche" 
               className="h-6 mr-2" 
             />
