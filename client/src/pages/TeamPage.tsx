@@ -22,20 +22,20 @@ export default function TeamPage() {
   const teamMembers: TeamMember[] = [
     {
       id: 1,
-      name: 'Han Ko, D.Sc.',
-      title: 'Co-Founder & CEO',
-      bio: 'Expertise: CTO/CEO, Software Development Management, VC, Investor, Global Marketing, Community Leader, Professor. CEO of USAKO Group with experience in Commercial RE Investment, Tech Scale-up, and Community Leadership.',
-      imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',
-      linkedin: 'https://linkedin.com/in/hanko',
-      department: 'executive'
-    },
-    {
-      id: 2,
       name: 'Brian Jung',
       title: 'Co-Founder/CEO & CTO',
       bio: 'Computer Science Expert specializing in blockchain architecture development and DevOps. International e-Sports Federation Global Chief with education from Seoul National University GLP MBA and Dongguk University Fintech MBA.',
       imageUrl: 'https://randomuser.me/api/portraits/men/2.jpg',
       linkedin: 'https://linkedin.com/in/brianjung',
+      department: 'executive'
+    },
+    {
+      id: 2,
+      name: 'Han Ko, D.Sc.',
+      title: 'Co-Founder & CEO',
+      bio: 'Expertise: CTO/CEO, Software Development Management, VC, Investor, Global Marketing, Community Leader, Professor. CEO of USAKO Group with experience in Commercial RE Investment, Tech Scale-up, and Community Leadership.',
+      imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg',
+      linkedin: 'https://linkedin.com/in/hanko',
       department: 'executive'
     },
     {
