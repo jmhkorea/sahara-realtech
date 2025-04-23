@@ -39,8 +39,8 @@ function Router() {
           <Route path="/how-to-invest" component={HowToInvest} />
           <Route path="/portfolio" component={Portfolio} />
           <Route path="/blog" component={BlogPage} />
-          <Route path="/blog/:id" component={BlogPostPage} />
           <Route path="/blog/new" component={BlogPostForm} />
+          <Route path="/blog/:id" component={BlogPostPage} />
           <Route path="/team" component={TeamPage} />
           <Route path="/admin" component={AdminPage} />
           <Route path="/projects/laos-vientiane" component={LaosProjectDetail} />

@@ -1,17 +1,20 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "wouter";
 import { BlogCategoryValue, BlogCategory, BlogPost } from "@shared/schema";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import BlogPostCard from "@/components/blog/BlogPostCard";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/hooks/use-toast";
+import { PlusCircle } from "lucide-react";
 import SEO from "@/components/SEO";
 
 export default function BlogPage() {
   const { t, i18n } = useTranslation();
   const [activeCategory, setActiveCategory] = useState<BlogCategoryValue | "ALL">("ALL");
+  const [, setLocation] = useLocation();
   const { toast } = useToast();
   
   // 모든 게시물 및 추천 게시물 가져오기
@@ -79,13 +82,24 @@ export default function BlogPage() {
         keywords={t('blog.seo.keywords', '부동산 블로그, 블록체인 블로그, 투자 가이드, 시장 분석, 암호화폐 뉴스, 아발란체, 부동산 투자')}
       />
       {/* 블로그 헤더 */}
-      <div className="mb-10 text-center">
-        <h1 className="text-3xl md:text-4xl font-bold mb-3">
-          {t('blog.title', 'SaharaRealTech 블로그')}
-        </h1>
-        <p className="text-neutral-600 max-w-2xl mx-auto">
-          {t('blog.description', '부동산 투자, 블록체인 기술, 암호화폐 시장 및 디지털 자산에 관한 최신 정보와 인사이트를 확인하세요.')}
-        </p>
+      <div className="mb-10">
+        <div className="text-center">
+          <h1 className="text-3xl md:text-4xl font-bold mb-3">
+            {t('blog.title', 'SaharaRealTech 블로그')}
+          </h1>
+          <p className="text-neutral-600 max-w-2xl mx-auto">
+            {t('blog.description', '부동산 투자, 블록체인 기술, 암호화폐 시장 및 디지털 자산에 관한 최신 정보와 인사이트를 확인하세요.')}
+          </p>
+        </div>
+        <div className="flex justify-end mt-6">
+          <Button 
+            onClick={() => setLocation("/blog/new")}
+            className="gap-2"
+          >
+            <PlusCircle className="h-4 w-4" />
+            {t('blog.newPost', '새 게시물 작성')}
+          </Button>
+        </div>
       </div>
       
       {/* 추천 게시물 */}
