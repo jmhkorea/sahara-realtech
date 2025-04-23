@@ -55,6 +55,20 @@ export default function CompanyIntroduction() {
                 </div>
               </section>
               
+              <section className="mb-6">
+                <div className="rounded-lg overflow-hidden shadow-lg mb-6">
+                  <img 
+                    src="/dubai-signing-ceremony.png" 
+                    alt="두바이 계약 체결식 - 사하라 리얼테크와 KHOORY & PARK LLC" 
+                    className="w-full object-cover" 
+                  />
+                  <div className="p-4 bg-blue-50">
+                    <h3 className="font-semibold text-gray-800 mb-1">두바이 계약 체결식</h3>
+                    <p className="text-sm text-gray-600">사하라 리얼테크와 두바이 KHOORY & PARK LLC 간의 블록체인 부동산 골드 플랫폼 서비스 계약 체결식</p>
+                  </div>
+                </div>
+              </section>
+              
               <section className="mb-10">
                 <h2 className="text-2xl font-bold text-gray-800 mb-4">글로벌 네트워크</h2>
                 <p>
