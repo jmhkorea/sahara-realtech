@@ -24,6 +24,7 @@ import LiquidityEnhancement from "@/pages/LiquidityEnhancement";
 import Feedback from "@/pages/Feedback";
 import TokenSecuritiesGuide from "@/pages/TokenSecuritiesGuide";
 import RealWorldAssetsGuide from "@/pages/RealWorldAssetsGuide";
+import GlobalCaseStudies from "@/pages/GlobalCaseStudies";
 import ChatWidget from "@/components/ui/ChatWidget";
 
 import "./lib/i18n";
@@ -52,6 +53,7 @@ function Router() {
           <Route path="/feedback" component={Feedback} />
           <Route path="/token-securities-guide" component={TokenSecuritiesGuide} />
           <Route path="/real-world-assets-guide" component={RealWorldAssetsGuide} />
+          <Route path="/global-case-studies" component={GlobalCaseStudies} />
           <Route component={NotFound} />
         </Switch>
       </main>

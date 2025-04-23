@@ -44,6 +44,13 @@ export default function Hero() {
                 실제세계자산(RWA) 제대로 알기
               </Button>
             </Link>
+            <Link href="/global-case-studies">
+              <Button 
+                className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white hover:from-purple-600 hover:to-indigo-600 font-bold px-4 py-3 md:px-6 md:py-4 w-full sm:w-auto"
+              >
+                해외 사례로 본 전망
+              </Button>
+            </Link>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 mt-4">
             <Link href="/how-to-invest">
