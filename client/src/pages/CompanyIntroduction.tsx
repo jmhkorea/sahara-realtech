@@ -8,10 +8,12 @@ import SEO from "@/components/SEO";
 import dubaiSigningCeremony from "@/assets/dubai-signing-ceremony.png";
 import hancomAgreement from "@/assets/hancom-agreement.png";
 import ctgBusinessCard from "@/assets/ctg-business-card.png";
+import kimiyiAi from "@/assets/kimiyi-ai.jpg";
 
 export default function CompanyIntroduction() {
   const [isCtgInfoOpen, setIsCtgInfoOpen] = useState(false);
   const [isKoreaOfficeOpen, setIsKoreaOfficeOpen] = useState(false);
+  const [isAiPartnerOpen, setIsAiPartnerOpen] = useState(false);
   return (
     <>
       <SEO 
@@ -169,7 +171,43 @@ export default function CompanyIntroduction() {
                   </Card>
                 </div>
                 
-                <p>
+                <div className="mt-5">
+                  <Card className="bg-purple-50 overflow-hidden">
+                    <Collapsible open={isAiPartnerOpen} onOpenChange={setIsAiPartnerOpen}>
+                      <CardContent className="p-4">
+                        <div className="flex justify-between items-center">
+                          <h4 className="font-semibold">메이저 생성형 AI 기업과 한국 판매권 계약</h4>
+                          <CollapsibleTrigger asChild>
+                            <Button variant="ghost" size="sm" className="p-0 h-8 w-8">
+                              {isAiPartnerOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                            </Button>
+                          </CollapsibleTrigger>
+                        </div>
+                        
+                        <CollapsibleContent>
+                          <div className="pt-3 space-y-2">
+                            <p className="text-sm text-gray-600">
+                              싱가폴, 홍콩 생성형 AI 기업과 한국 판매권을 확보하는 계약을 완료하고, 대한노인회 경로당, 
+                              리조트 호텔 팬션 대학 병원 등에 키오스크 판매 및 개인형 생성형 AI 명함 비지니스, 미래형 음성 서비스 
+                              홈페이지 AI, 수익 다각화 계약을 완료하였습니다.
+                            </p>
+                            <div className="mt-2 flex justify-center">
+                              <div className="rounded overflow-hidden border border-gray-200 max-w-sm">
+                                <img 
+                                  src={kimiyiAi} 
+                                  alt="Kimiyi AI - 생성형 AI 기업" 
+                                  className="w-full h-auto"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </CollapsibleContent>
+                      </CardContent>
+                    </Collapsible>
+                  </Card>
+                </div>
+                
+                <p className="mt-4">
                   해외 지사로는 일본 도쿄 및 말레이시아 쿠알라룸푸르, 인도, 태국, 인도네시아 등지에서 
                   파트너사와 노드 파트너로 협력 중입니다. 특히 에스토니아는 전자 시민권을 취득하여 
                   회사를 운영 중에 있습니다.
