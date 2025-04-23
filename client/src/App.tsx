@@ -20,6 +20,7 @@ import LaosProjectDetail from "@/pages/LaosProjectDetail";
 import RealEstateTokenization from "@/pages/RealEstateTokenization";
 import SecureTransactions from "@/pages/SecureTransactions";
 import LiquidityEnhancement from "@/pages/LiquidityEnhancement";
+import Feedback from "@/pages/Feedback";
 
 import "./lib/i18n";
 

@@ -7,6 +7,7 @@ import BlogPostCard from "@/components/blog/BlogPostCard";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/hooks/use-toast";
+import SEO from "@/components/SEO";
 
 export default function BlogPage() {
   const { t, i18n } = useTranslation();
@@ -72,6 +73,11 @@ export default function BlogPage() {
   
   return (
     <div className="container mx-auto px-4 py-8">
+      <SEO 
+        title={t('blog.seo.title', '블로그')}
+        description={t('blog.seo.description', 'SaharaRealTech의 블로그에서 부동산 투자, 블록체인 기술, 암호화폐 시장 및 디지털 자산에 관한 최신 정보와 인사이트를 확인하세요.')}
+        keywords={t('blog.seo.keywords', '부동산 블로그, 블록체인 블로그, 투자 가이드, 시장 분석, 암호화폐 뉴스, 아발란체, 부동산 투자')}
+      />
       {/* 블로그 헤더 */}
       <div className="mb-10 text-center">
         <h1 className="text-3xl md:text-4xl font-bold mb-3">

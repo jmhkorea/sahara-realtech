@@ -12,6 +12,7 @@ import BlogPostCard from "@/components/blog/BlogPostCard";
 import { ArrowLeft, Calendar, User, Eye } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { BlogPost } from "@shared/schema";
+import SEO from "@/components/SEO";
 
 export default function BlogPostPage() {
   const { t, i18n } = useTranslation();
@@ -117,6 +118,15 @@ export default function BlogPostPage() {
   
   return (
     <div className="container mx-auto px-4 py-8">
+      {post && (
+        <SEO 
+          title={title || ''}
+          description={content ? content.replace(/<[^>]*>?/gm, '').substring(0, 160) : ''}
+          keywords={post.tags ? post.tags.join(', ') : getCategoryName(post.category)}
+          ogImage={post.imageUrl || ''}
+          canonical={`https://saharatech.com/blog/${post.id}`}
+        />
+      )}
       <div className="max-w-4xl mx-auto">
         {/* 뒤로 가기 버튼 */}
         <div className="mb-6">

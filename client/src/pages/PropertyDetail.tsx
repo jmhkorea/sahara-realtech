@@ -212,7 +212,7 @@ export default function PropertyDetail() {
     <div className="py-12 bg-neutral-100">
       <SEO 
         title={propertyName}
-        description={`${propertyName}에 블록체인으로 투자하세요. ${property.description.substring(0, 120)}...`}
+        description={`${propertyName}에 블록체인으로 투자하세요. ${propertyDescription?.substring(0, 120) || ''}...`}
         keywords={`${propertyName}, 부동산 투자, 토큰화, ${property.type}, ${property.region}, 블록체인 투자`}
         ogImage={property.imageUrl || "https://saharatech.com/og-property.jpg"}
       />
