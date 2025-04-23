@@ -58,11 +58,26 @@ const partnerLogos = [
     name: "동국대학교", 
     category: "universities" 
   },
+  { 
+    id: 12, 
+    name: "Cornell University", 
+    category: "universities" 
+  },
+  { 
+    id: 13, 
+    name: "Stanford University", 
+    category: "universities" 
+  },
+  { 
+    id: 14, 
+    name: "데일리뉴스", 
+    category: "media" 
+  },
 ];
 
 export default function PartnerLogos() {
   const { t } = useTranslation();
-  const [activeTab, setActiveTab] = useState<"all" | "crypto" | "securities" | "universities">("all");
+  const [activeTab, setActiveTab] = useState<"all" | "crypto" | "securities" | "universities" | "media">("all");
   
   // 무한 슬라이드를 위한 상태
   const [position, setPosition] = useState(0);
@@ -137,6 +152,16 @@ export default function PartnerLogos() {
           onClick={() => setActiveTab("universities")}
         >
           {t("partners.universities", "대학교")}
+        </button>
+        <button
+          className={`px-4 py-2 rounded-md transition-all mb-2 ${
+            activeTab === "media"
+              ? "bg-blue-500 text-white"
+              : "bg-neutral-700 text-neutral-200 hover:bg-neutral-600"
+          }`}
+          onClick={() => setActiveTab("media")}
+        >
+          {t("partners.media", "언론사")}
         </button>
       </div>
       
