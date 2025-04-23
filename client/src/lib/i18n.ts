@@ -896,7 +896,6 @@ const enTranslations = {
         },
         returns: {
           title: 'Manage Returns',
-          step1: 'Rental income from your investment will be paid quarterly.',
           step2: 'Check your investment status and returns on My Portfolio page.',
           step3: 'You can trade your tokens on the secondary market if needed.'
         }
