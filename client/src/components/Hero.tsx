@@ -30,6 +30,13 @@ export default function Hero() {
                 투자하기
               </Button>
             </Link>
+            <Link href="/token-securities-guide">
+              <Button 
+                className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white hover:from-blue-600 hover:to-cyan-600 font-bold px-4 py-3 md:px-6 md:py-4 w-full sm:w-auto"
+              >
+                토큰증권(STO) 제대로 알기
+              </Button>
+            </Link>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 mt-4">
             <Link href="/how-to-invest">
