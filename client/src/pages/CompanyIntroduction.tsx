@@ -6,6 +6,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 import { useState } from "react";
 import SEO from "@/components/SEO";
 import dubaiSigningCeremony from "@/assets/dubai-signing-ceremony.png";
+import hancomAgreement from "@/assets/hancom-agreement.png";
 
 export default function CompanyIntroduction() {
   const [isCtgInfoOpen, setIsCtgInfoOpen] = useState(false);
@@ -101,6 +102,21 @@ export default function CompanyIntroduction() {
                     <CardContent className="p-4">
                       <h4 className="font-semibold">한국 지사</h4>
                       <p className="text-sm text-gray-600">경기도 판교</p>
+                      <div className="mt-3">
+                        <p className="text-xs text-gray-600 mb-2">
+                          한국 지사에서는 강원도 '평창 반얀트리 레지던트'를 성사시켜 현재 프로젝트 진행 중에 있습니다.
+                          '한글과 컴퓨터' 코스닥 상장사 보안 디지털 기업 '한컴위드'와 '블록체인 디지털 부동산, 금' 메인넷 구축을 위한 
+                          계약을 완료하고 메인넷 개발 참여를 진행한 바 있습니다.
+                        </p>
+                        <div className="mt-2 rounded overflow-hidden">
+                          <img 
+                            src={hancomAgreement} 
+                            alt="한글과 컴퓨터 한컴위드와 디지털 부동산을 위한 협약식" 
+                            className="w-full h-auto"
+                          />
+                          <p className="text-xs text-center py-1 bg-gray-100">한글과 컴퓨터 한컴위드와 디지털 부동산을 위한 협약식</p>
+                        </div>
+                      </div>
                     </CardContent>
                   </Card>
                   <Card className="bg-blue-50 overflow-hidden">
