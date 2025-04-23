@@ -214,7 +214,7 @@ export default function HowItWorks() {
         <div className="text-center mt-16">
           <Link href="/properties">
             <Button className="inline-block px-8 py-4 text-lg">
-              {t('howItWorks.startNowButton')}
+              <span className="mx-auto">{t('howItWorks.startNowButton')}</span>
             </Button>
           </Link>
         </div>
