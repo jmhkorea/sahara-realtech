@@ -299,10 +299,11 @@ const koTranslations = {
           step3: '계정 보안을 위해 2단계 인증을 설정합니다.'
         },
         wallet: {
-          title: '디지털 지갑 연결',
-          step1: 'MetaMask나 Avalanche Wallet과 같은 디지털 지갑을 설치합니다.',
-          step2: '아발란체 C-Chain 네트워크를 지갑에 추가합니다.',
-          step3: '플랫폼에 지갑을 연결합니다.'
+          title: '실물 부동산 토큰증권(STO) 의뢰',
+          step1: '사하라 리얼테크 플랫폼 자산 등록',
+          step2: '실물 자산 디지털화 진행',
+          step3: '증권사 상장 협의',
+          step4: '증권사 상장 - 자금 유동화 진행'
         },
         investment: {
           title: '부동산 투자자산 선택 및 투자',
