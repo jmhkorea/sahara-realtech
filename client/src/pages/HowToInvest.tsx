@@ -168,7 +168,6 @@ export default function HowToInvest() {
                         </CollapsibleTrigger>
                         <CollapsibleContent className="p-4 pt-0 border-t">
                           <ol className="list-decimal list-inside text-neutral-600 space-y-2 pl-2 mt-4">
-                            <li>{t('howToInvest.guide.steps.returns.step1')}</li>
                             <li>{t('howToInvest.guide.steps.returns.step2')}</li>
                             <li>{t('howToInvest.guide.steps.returns.step3')}</li>
                           </ol>
