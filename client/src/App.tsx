@@ -44,6 +44,7 @@ function Router() {
           <Route path="/real-estate-tokenization" component={RealEstateTokenization} />
           <Route path="/secure-transactions" component={SecureTransactions} />
           <Route path="/liquidity-enhancement" component={LiquidityEnhancement} />
+          <Route path="/feedback" component={Feedback} />
           <Route component={NotFound} />
         </Switch>
       </main>

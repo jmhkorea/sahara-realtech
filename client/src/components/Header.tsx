@@ -83,6 +83,9 @@ export default function Header() {
             <Link href="/team" className="font-medium text-neutral-500 hover:text-primary transition-colors">
               {t('nav.team')}
             </Link>
+            <Link href="/feedback" className="font-medium text-neutral-500 hover:text-primary transition-colors">
+              {t('nav.feedback', '피드백')}
+            </Link>
             <Link href="/admin" className="font-medium text-neutral-500 hover:text-primary transition-colors flex items-center">
               <Settings className="h-4 w-4 mr-1" />
               관리자
@@ -164,6 +167,9 @@ export default function Header() {
                   </Link>
                   <Link href="/team" className="px-4 py-2 hover:bg-neutral-100 rounded-md">
                     {t('nav.team')}
+                  </Link>
+                  <Link href="/feedback" className="px-4 py-2 hover:bg-neutral-100 rounded-md">
+                    {t('nav.feedback', '피드백')}
                   </Link>
                   <Link href="/admin" className="px-4 py-2 hover:bg-neutral-100 rounded-md flex items-center">
                     <Settings className="h-4 w-4 mr-2" />
