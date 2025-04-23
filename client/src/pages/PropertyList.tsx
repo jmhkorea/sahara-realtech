@@ -6,6 +6,7 @@ import { Property, PropertyType } from "@shared/schema";
 import PropertyCard from "@/components/PropertyCard";
 import SearchSection from "@/components/SearchSection";
 import { Skeleton } from "@/components/ui/skeleton";
+import SEO from "@/components/SEO";
 import { 
   Select,
   SelectContent,
@@ -99,6 +100,11 @@ export default function PropertyList() {
 
   return (
     <>
+      <SEO 
+        title={t('propertyList.seo.title', '투자 가능한 매물 목록')}
+        description={t('propertyList.seo.description', 'SaharaRealTech에서 제공하는 부동산 투자 상품 목록을 살펴보세요. 다양한 지역과 유형의 프리미엄 투자 기회를 블록체인 기술로 접근할 수 있습니다.')}
+        keywords={t('propertyList.seo.keywords', '부동산 투자, 매물 목록, 토큰화 부동산, 분산 투자, 블록체인, 부동산 토큰, Avalanche, SaharaRealTech')}
+      />
       <SearchSection />
       
       <section className="py-12 bg-neutral-100">

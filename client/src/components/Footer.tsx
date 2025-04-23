@@ -150,6 +150,11 @@ export default function Footer() {
                   {t('footer.legal.contact')}
                 </Link>
               </li>
+              <li>
+                <Link href="/feedback" className="text-neutral-400 hover:text-white transition-colors">
+                  {t('footer.legal.feedback', '피드백')}
+                </Link>
+              </li>
             </ul>
           </div>
           
