@@ -23,6 +23,7 @@ import SecureTransactions from "@/pages/SecureTransactions";
 import LiquidityEnhancement from "@/pages/LiquidityEnhancement";
 import Feedback from "@/pages/Feedback";
 import TokenSecuritiesGuide from "@/pages/TokenSecuritiesGuide";
+import RealWorldAssetsGuide from "@/pages/RealWorldAssetsGuide";
 import ChatWidget from "@/components/ui/ChatWidget";
 
 import "./lib/i18n";
@@ -50,6 +51,7 @@ function Router() {
           <Route path="/liquidity-enhancement" component={LiquidityEnhancement} />
           <Route path="/feedback" component={Feedback} />
           <Route path="/token-securities-guide" component={TokenSecuritiesGuide} />
+          <Route path="/real-world-assets-guide" component={RealWorldAssetsGuide} />
           <Route component={NotFound} />
         </Switch>
       </main>

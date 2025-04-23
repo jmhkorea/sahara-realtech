@@ -37,6 +37,13 @@ export default function Hero() {
                 토큰증권(STO) 제대로 알기
               </Button>
             </Link>
+            <Link href="/real-world-assets-guide">
+              <Button 
+                className="bg-gradient-to-r from-green-500 to-teal-500 text-white hover:from-green-600 hover:to-teal-600 font-bold px-4 py-3 md:px-6 md:py-4 w-full sm:w-auto"
+              >
+                실제세계자산(RWA) 제대로 알기
+              </Button>
+            </Link>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 mt-4">
             <Link href="/how-to-invest">
