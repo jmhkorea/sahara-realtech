@@ -520,15 +520,15 @@ const koTranslations = {
     tokenStructure: {
       title: '토큰 구조',
       primeMasterNFT: {
-        title: '프라임 마스터 NFT (1개)',
-        description: '최고 거버넌스 권한을 가진 단일 NFT로, 특별 결의안 거부권 및 최종 의사 결정권을 보유합니다.'
+        title: '프라임 마스터 NFT (10개)',
+        description: '최고 거버넌스 권한을 가진 NFT로, 중요 결정에 대한 거부권을 보유합니다. 프라임 마스터 간 합의는 70% 이상(7/10)의 찬성으로 결정되며, 비잔틴 장애 허용(Byzantine Fault Tolerance) 메커니즘이 적용됩니다. 민주적 합의 절차를 통해 권력 집중을 방지합니다.'
       },
       governanceNFT: {
-        title: '거버넌스 마스터 NFT (99개)',
-        description: '프로젝트 거버넌스에 참여할 수 있는 등급별 NFT입니다. 한국 사모펀드 규정(최대 99명의 투자자)을 준수합니다.',
-        classA: '클래스 A: 10개 (투표 가중치 10배)',
-        classB: '클래스 B: 39개 (투표 가중치 5배)',
-        classC: '클래스 C: 50개 (투표 가중치 1배)'
+        title: '거버넌스 마스터 NFT (89개)',
+        description: '프로젝트 거버넌스에 참여할 수 있는 등급별 NFT입니다. 한국 사모펀드 규정(최대 99명의 투자자)을 준수하기 위해 프라임 마스터 NFT와 합쳐 총 99개로 제한됩니다.',
+        classA: '클래스 A: 9개 (투표 가중치 10배)',
+        classB: '클래스 B: 35개 (투표 가중치 5배)',
+        classC: '클래스 C: 45개 (투표 가중치 1배)'
       },
       projectTokens: {
         title: '프로젝트 토큰 (RSA-020)',
@@ -1103,15 +1103,15 @@ const enTranslations = {
     tokenStructure: {
       title: 'Token Structure',
       primeMasterNFT: {
-        title: 'Prime Master NFT (1)',
-        description: 'A single NFT with highest governance authority, holding veto power for special resolutions and final decision-making rights.'
+        title: 'Prime Master NFT (10)',
+        description: 'NFTs with highest governance authority, holding veto power for important decisions. Decisions among Prime Masters require 70% approval (7/10), implementing Byzantine Fault Tolerance mechanisms for secure consensus. Democratic decision-making processes prevent concentration of power.'
       },
       governanceNFT: {
-        title: 'Governance Master NFTs (99)',
-        description: 'Tiered NFTs that can participate in project governance. Complies with Korean private fund regulations (maximum 99 investors).',
-        classA: 'Class A: 10 NFTs (10x voting weight)',
-        classB: 'Class B: 39 NFTs (5x voting weight)',
-        classC: 'Class C: 50 NFTs (1x voting weight)'
+        title: 'Governance Master NFTs (89)',
+        description: 'Tiered NFTs that participate in project governance. Limited to 89 to comply with Korean private fund regulations (maximum 99 investors total, including Prime Master NFTs).',
+        classA: 'Class A: 9 NFTs (10x voting weight)',
+        classB: 'Class B: 35 NFTs (5x voting weight)',
+        classC: 'Class C: 45 NFTs (1x voting weight)'
       },
       projectTokens: {
         title: 'Project Tokens (RSA-020)',
@@ -1339,15 +1339,15 @@ const jaTranslations = {
     tokenStructure: {
       title: 'トークン構造',
       primeMasterNFT: {
-        title: 'プライムマスターNFT (1個)',
-        description: '最高のガバナンス権限を持つ単一のNFTで、特別決議に対する拒否権と最終的な意思決定権を保有しています。'
+        title: 'プライムマスターNFT (10個)',
+        description: '最高のガバナンス権限を持つNFTで、重要な決定に対する拒否権を持ちます。プライムマスター間の合意は70％以上（10個中7個）の賛成で決定され、ビザンチン障害耐性（Byzantine Fault Tolerance）メカニズムが安全な合意形成に適用されます。民主的な意思決定プロセスにより権力の集中を防ぎます。'
       },
       governanceNFT: {
-        title: 'ガバナンスマスターNFT (99個)',
-        description: 'プロジェクトのガバナンスに参加できる階級別NFTです。韓国の私募ファンド規制（最大99人の投資家）に準拠しています。',
-        classA: 'クラスA: 10個 (投票権重み10倍)',
-        classB: 'クラスB: 39個 (投票権重み5倍)',
-        classC: 'クラスC: 50個 (投票権重み1倍)'
+        title: 'ガバナンスマスターNFT (89個)',
+        description: 'プロジェクトのガバナンスに参加できる階級別NFTです。韓国の私募ファンド規制（最大99人の投資家）に準拠するため、プライムマスターNFTと合わせて合計99個に制限されています。',
+        classA: 'クラスA: 9個 (投票権重み10倍)',
+        classB: 'クラスB: 35個 (投票権重み5倍)',
+        classC: 'クラスC: 45個 (投票権重み1倍)'
       },
       projectTokens: {
         title: 'プロジェクトトークン (RSA-020)',
