@@ -166,6 +166,52 @@ export default function GlobalCaseStudies() {
                       </div>
                     </div>
                     
+                    <h3 className="text-xl font-bold mt-6 mb-3">주요 대형 금융사의 RWA 전략</h3>
+                  
+                    <div className="grid md:grid-cols-2 gap-6 mt-4">
+                      <div className="bg-blue-50 p-5 rounded-lg border border-blue-200">
+                        <h4 className="text-lg font-bold mb-2">블랙록 (BlackRock)</h4>
+                        <p className="text-sm mb-2">세계 최대 자산운용사</p>
+                        <ul className="list-disc pl-5 space-y-1 text-sm">
+                          <li>2023년 Tokenized Asset Reference Architecture 발표, 자산 토큰화 표준화 추진</li>
+                          <li>Ethereum 및 Solana 기반 자산 토큰화 플랫폼 개발 참여</li>
+                          <li>가치 약 5조 달러 규모의 Aladdin 플랫폼을 통해 토큰화 자산 관리 시스템 구축 중</li>
+                          <li>2022년 USDC 스테이블코인 발행사 Circle과 파트너십 체결</li>
+                        </ul>
+                      </div>
+                      
+                      <div className="bg-blue-50 p-5 rounded-lg border border-blue-200">
+                        <h4 className="text-lg font-bold mb-2">JP모건 (JPMorgan)</h4>
+                        <p className="text-sm mb-2">세계 최대 은행 중 하나</p>
+                        <ul className="list-disc pl-5 space-y-1 text-sm">
+                          <li>자체 블록체인 플랫폼 Onyx 개발, 실물 자산 토큰화에 활용</li>
+                          <li>2022년 싱가포르에서 DBS, SBI와 함께 Project Guardian 참여</li>
+                          <li>2023년 실제 1억 7000만 달러 규모의 이더리움 기반 토큰화 거래 실행</li>
+                          <li>JP모건 추산: 향후 5년간 최대 10조 달러 규모의 자산이 토큰화될 전망</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div className="bg-indigo-50 p-5 rounded-lg border-l-4 border-indigo-500 mt-8">
+                      <h3 className="text-xl font-bold mb-3">기타 주요 금융기관의 RWA 사례</h3>
+                      <div className="grid md:grid-cols-2 gap-4 mt-3">
+                        <div>
+                          <p className="font-semibold">골드만삭스 (Goldman Sachs)</p>
+                          <ul className="list-disc pl-5 text-sm">
+                            <li>디지털 자산팀 확대, RWA 토큰화 집중</li>
+                            <li>2023년 디지털 자산 플랫폼 GS DAP 출시</li>
+                          </ul>
+                        </div>
+                        <div>
+                          <p className="font-semibold">BNY 멜론 (BNY Mellon)</p>
+                          <ul className="list-disc pl-5 text-sm">
+                            <li>세계 최대 수탁은행, 디지털 자산 수탁 서비스 출시</li>
+                            <li>토큰화 국채 프로젝트 진행 중</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    
                     <div className="bg-indigo-50 p-5 rounded-lg border-l-4 border-indigo-500 mt-8">
                       <h3 className="text-xl font-bold mb-3">Masterworks (미술품 토큰화)</h3>
                       <p>
