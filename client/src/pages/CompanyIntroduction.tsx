@@ -24,7 +24,7 @@ export default function CompanyIntroduction() {
         </div>
         
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-          <div className="bg-gradient-to-r from-gray-800 to-gray-900 py-12 px-6 text-white">
+          <div className="bg-gradient-to-r from-blue-700 to-blue-900 py-12 px-6 text-white">
             <h1 className="text-3xl md:text-4xl font-bold mb-4">사하라 리얼테크 소개</h1>
             <p className="text-lg opacity-90">실물자산 디지털화를 선도하는 글로벌 블록체인 전문 기업</p>
           </div>
@@ -85,7 +85,7 @@ export default function CompanyIntroduction() {
                 
                 <p>
                   해외 지사로는 일본 도쿄 및 말레이시아 쿠알라룸푸르, 인도, 태국, 인도네시아 등지에서 
-                  파트너사와 노트 파트너로 협력 중입니다. 특히 에스토니아는 전자 시민권을 취득하여 
+                  파트너사와 노드 파트너로 협력 중입니다. 특히 에스토니아는 전자 시민권을 취득하여 
                   회사를 운영 중에 있습니다.
                 </p>
               </section>
