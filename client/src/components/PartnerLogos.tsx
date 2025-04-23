@@ -55,27 +55,7 @@ const partnerLogos = [
   },
   { 
     id: 11, 
-    name: "서울대학교", 
-    category: "universities" 
-  },
-  { 
-    id: 12, 
-    name: "고려대학교", 
-    category: "universities" 
-  },
-  { 
-    id: 13, 
-    name: "연세대학교", 
-    category: "universities" 
-  },
-  { 
-    id: 14, 
-    name: "카이스트", 
-    category: "universities" 
-  },
-  { 
-    id: 15, 
-    name: "포항공과대학교", 
+    name: "동국대학교", 
     category: "universities" 
   },
 ];
