@@ -22,24 +22,6 @@ export default function TeamPage() {
   // 팀원 데이터
   const teamMembers: TeamMember[] = [
     {
-      id: 18,
-      name: '김대명',
-      title: '건축사/재무 및 M&A 전문가',
-      bio: '성균관대학교 재무 부동산학 석사, 협상 전문가, M&A 전문가, 박사 과정 수료. 건축 및 부동산 개발 프로젝트에서 풍부한 경험을 보유하고 있으며, 재무적 분석과 M&A 협상에 특화된 전문가입니다.',
-      imageUrl: 'https://randomuser.me/api/portraits/men/20.jpg',
-      linkedin: 'https://linkedin.com/in/daeMyungKim',
-      department: 'directors'
-    },
-    {
-      id: 19,
-      name: '전종한',
-      title: 'CDO/부동산 코디네이터',
-      bio: '부동산 자산 유동화 및 토큰화 프로젝트에서 풍부한 경험을 보유한 부동산 코디네이터입니다. 다양한 부동산 개발 사업의 기획부터 실행까지 참여하였으며, 디지털 자산으로의 전환 프로세스를 전문적으로 관리합니다.',
-      imageUrl: 'https://randomuser.me/api/portraits/men/21.jpg',
-      linkedin: 'https://linkedin.com/in/jonghanJeon',
-      department: 'technical'
-    },
-    {
       id: 1,
       name: 'Brian Jung',
       title: 'Co-Founder/CEO & CTO',
@@ -192,6 +174,24 @@ export default function TeamPage() {
       imageUrl: 'https://randomuser.me/api/portraits/men/16.jpg',
       linkedin: 'https://linkedin.com/in/perrychappell',
       department: 'advisors'
+    },
+    {
+      id: 18,
+      name: 'Dae-Myung Kim',
+      title: 'Architect/Finance & M&A Specialist',
+      bio: 'Master in Finance and Real Estate from Sungkyunkwan University, negotiation expert, M&A specialist, completed Ph.D. coursework. Extensive experience in architecture and real estate development projects with a focus on financial analysis and M&A negotiations.',
+      imageUrl: 'https://randomuser.me/api/portraits/men/20.jpg',
+      linkedin: 'https://linkedin.com/in/daeMyungKim',
+      department: 'directors'
+    },
+    {
+      id: 19,
+      name: 'Jong-Han Jeon',
+      title: 'CDO/Real Estate Coordinator',
+      bio: 'Experienced real estate coordinator with extensive background in property asset liquidity and tokenization projects. Has participated in various real estate development ventures from planning to execution, specializing in the management of digital asset conversion processes.',
+      imageUrl: 'https://randomuser.me/api/portraits/men/21.jpg',
+      linkedin: 'https://linkedin.com/in/jonghanJeon',
+      department: 'technical'
     }
   ];
 
