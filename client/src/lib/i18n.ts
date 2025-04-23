@@ -307,14 +307,15 @@ const koTranslations = {
         },
         investment: {
           title: '부동산 투자자산 선택 및 투자',
-          step1: '증권사를 통해 다양한 부동산 투자자산을 검토하고 투자할 자산을 선택합니다.',
+          step1: '다양한 부동산 투자자산을 검토하고 투자할 자산을 선택합니다.',
           step2: '투자하고자 하는 토큰 수량을 결정합니다.',
-          step3: '사하라리얼테크 플랫폼을 통한 수익성 분석을 학습합니다.',
-          step4: '최종적으로 증권사 토큰 증권에 투자합니다.'
+          step3: '디지털 지갑을 통해 결제를 완료합니다.',
+          step4: '스마트 컨트랙트를 통해 토큰이 즉시 발행됩니다.'
         },
         returns: {
           title: '수익 관리',
-          step2: '마이 포트폴리오 페이지에서 토큰 증권 투자 현황을 등록 하시면 수시로 수익분석을 확인할 수 있습니다.',
+          step1: '투자한 부동산의 임대 수익은 분기별로 지급됩니다.',
+          step2: '마이 포트폴리오 페이지에서 투자 현황과 수익을 확인할 수 있습니다.',
           step3: '필요시 2차 시장에서 토큰을 거래할 수 있습니다.'
         }
       },
@@ -896,6 +897,7 @@ const enTranslations = {
         },
         returns: {
           title: 'Manage Returns',
+          step1: 'Rental income from your investment will be paid quarterly.',
           step2: 'Check your investment status and returns on My Portfolio page.',
           step3: 'You can trade your tokens on the secondary market if needed.'
         }
