@@ -30,6 +30,8 @@ export default function Hero() {
                 투자하기
               </Button>
             </Link>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-4 mt-4">
             <Link href="/how-to-invest">
               <Button 
                 variant="outline" 
@@ -38,22 +40,12 @@ export default function Hero() {
                 토큰증권(STO) 상장 의뢰
               </Button>
             </Link>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-4 mt-4">
             <Link href="/how-to-invest">
               <Button 
                 variant="outline" 
                 className="bg-transparent border border-white text-white hover:bg-white/10 font-bold px-4 py-3 md:px-6 md:py-4 w-full sm:w-auto text-sm md:text-base"
               >
                 실제세계자산(RWA) 자산 유동화 하기
-              </Button>
-            </Link>
-            <Link href="/team">
-              <Button 
-                variant="outline" 
-                className="bg-transparent border border-white text-white hover:bg-white/10 font-bold px-4 py-3 md:px-6 md:py-4 w-full sm:w-auto text-sm md:text-base"
-              >
-                서비스 알아보기
               </Button>
             </Link>
           </div>
