@@ -289,8 +289,8 @@ const koTranslations = {
       risks: '투자 위험성'
     },
     guide: {
-      title: '블록체인 부동산 투자 4단계',
-      description: '아발란체 블록체인을 통한 부동산 투자는 누구나 쉽게 시작할 수 있습니다. 아래 단계를 따라 투자를 시작해보세요.',
+      title: '토큰 증권(STO) 투자 단계',
+      description: '토큰증권(STO)는 정부 가이드 및 증권사 가이드에 따라 진행 됩니다. (현재 국회 협의 중)',
       steps: {
         registration: {
           title: '회원가입 및 본인 인증',
