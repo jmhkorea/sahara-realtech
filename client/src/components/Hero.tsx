@@ -69,6 +69,14 @@ export default function Hero() {
                 실제세계자산(RWA) 자산 유동화 하기
               </Button>
             </Link>
+            <Link href="/company-introduction">
+              <Button 
+                variant="outline" 
+                className="bg-transparent border border-white text-white hover:bg-white/10 font-bold px-4 py-3 md:px-6 md:py-4 w-full sm:w-auto text-sm md:text-base"
+              >
+                사하라 리얼테크 소개
+              </Button>
+            </Link>
           </div>
           
           <div className="flex items-center mt-8 bg-white/10 rounded-lg p-4 backdrop-blur-sm">

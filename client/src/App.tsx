@@ -22,9 +22,10 @@ import RealEstateTokenization from "@/pages/RealEstateTokenization";
 import SecureTransactions from "@/pages/SecureTransactions";
 import LiquidityEnhancement from "@/pages/LiquidityEnhancement";
 import Feedback from "@/pages/Feedback";
-import TokenSecuritiesGuide from "@/pages/TokenSecuritiesGuide";
+
 import RealWorldAssetsGuide from "@/pages/RealWorldAssetsGuide";
 import GlobalCaseStudies from "@/pages/GlobalCaseStudies";
+import CompanyIntroduction from "@/pages/CompanyIntroduction";
 import ChatWidget from "@/components/ui/ChatWidget";
 
 import "./lib/i18n";
@@ -51,9 +52,10 @@ function Router() {
           <Route path="/secure-transactions" component={SecureTransactions} />
           <Route path="/liquidity-enhancement" component={LiquidityEnhancement} />
           <Route path="/feedback" component={Feedback} />
-          <Route path="/token-securities-guide" component={TokenSecuritiesGuide} />
+
           <Route path="/real-world-assets-guide" component={RealWorldAssetsGuide} />
           <Route path="/global-case-studies" component={GlobalCaseStudies} />
+          <Route path="/company-introduction" component={CompanyIntroduction} />
           <Route component={NotFound} />
         </Switch>
       </main>

@@ -3,7 +3,7 @@ import { Link, useLocation } from "wouter";
 import { useTranslation } from "react-i18next";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Menu, Globe, ChevronDown, Settings } from "lucide-react";
+import { Menu, Globe, ChevronDown, Settings, Building2 } from "lucide-react";
 import WalletConnect from "@/components/WalletConnect";
 
 export default function Header() {
@@ -79,6 +79,9 @@ export default function Header() {
             </Link>
             <Link href="/blog" className="font-medium text-neutral-500 hover:text-primary transition-colors">
               {t('nav.blog', '블로그')}
+            </Link>
+            <Link href="/company-introduction" className="font-medium text-neutral-500 hover:text-primary transition-colors">
+              {t('nav.company', '사하라 리얼테크 소개')}
             </Link>
             <Link href="/team" className="font-medium text-neutral-500 hover:text-primary transition-colors">
               {t('nav.team')}
@@ -164,6 +167,10 @@ export default function Header() {
                   </Link>
                   <Link href="/blog" className="px-4 py-2 hover:bg-neutral-100 rounded-md">
                     {t('nav.blog', '블로그')}
+                  </Link>
+                  <Link href="/company-introduction" className="px-4 py-2 hover:bg-neutral-100 rounded-md">
+                    <Building2 className="h-4 w-4 mr-2" />
+                    {t('nav.company', '사하라 리얼테크 소개')}
                   </Link>
                   <Link href="/team" className="px-4 py-2 hover:bg-neutral-100 rounded-md">
                     {t('nav.team')}
