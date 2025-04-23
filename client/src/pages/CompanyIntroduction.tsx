@@ -11,6 +11,7 @@ import ctgBusinessCard from "@/assets/ctg-business-card.png";
 
 export default function CompanyIntroduction() {
   const [isCtgInfoOpen, setIsCtgInfoOpen] = useState(false);
+  const [isKoreaOfficeOpen, setIsKoreaOfficeOpen] = useState(false);
   return (
     <>
       <SEO 
@@ -99,26 +100,38 @@ export default function CompanyIntroduction() {
                       <p className="text-sm text-gray-600">유럽 몰타공화국</p>
                     </CardContent>
                   </Card>
-                  <Card>
-                    <CardContent className="p-4">
-                      <h4 className="font-semibold">한국 지사</h4>
-                      <p className="text-sm text-gray-600">경기도 판교</p>
-                      <div className="mt-3">
-                        <p className="text-xs text-gray-600 mb-2">
-                          한국 지사에서는 강원도 '평창 반얀트리 레지던트'를 성사시켜 현재 프로젝트 진행 중에 있습니다.
-                          '한글과 컴퓨터' 코스닥 상장사 보안 디지털 기업 '한컴위드'와 '블록체인 디지털 부동산, 금' 메인넷 구축을 위한 
-                          계약을 완료하고 메인넷 개발 참여를 진행한 바 있습니다.
-                        </p>
-                        <div className="mt-2 rounded overflow-hidden">
-                          <img 
-                            src={hancomAgreement} 
-                            alt="한글과 컴퓨터 한컴위드와 디지털 부동산을 위한 협약식" 
-                            className="w-full h-auto"
-                          />
-                          <p className="text-xs text-center py-1 bg-gray-100">한글과 컴퓨터 한컴위드와 디지털 부동산을 위한 협약식</p>
+                  <Card className="overflow-hidden">
+                    <Collapsible open={isKoreaOfficeOpen} onOpenChange={setIsKoreaOfficeOpen}>
+                      <CardContent className="p-4">
+                        <div className="flex justify-between items-center">
+                          <h4 className="font-semibold">한국 지사</h4>
+                          <CollapsibleTrigger asChild>
+                            <Button variant="ghost" size="sm" className="p-0 h-8 w-8">
+                              {isKoreaOfficeOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                            </Button>
+                          </CollapsibleTrigger>
                         </div>
-                      </div>
-                    </CardContent>
+                        <p className="text-sm text-gray-600">경기도 판교</p>
+                        
+                        <CollapsibleContent>
+                          <div className="pt-3 space-y-2">
+                            <p className="text-xs text-gray-600">
+                              한국 지사에서는 강원도 '평창 반얀트리 레지던트'를 성사시켜 현재 프로젝트 진행 중에 있습니다.
+                              '한글과 컴퓨터' 코스닥 상장사 보안 디지털 기업 '한컴위드'와 '블록체인 디지털 부동산, 금' 메인넷 구축을 위한 
+                              계약을 완료하고 메인넷 개발 참여를 진행한 바 있습니다.
+                            </p>
+                            <div className="mt-2 rounded overflow-hidden border border-gray-200">
+                              <img 
+                                src={hancomAgreement} 
+                                alt="한글과 컴퓨터 한컴위드와 디지털 부동산을 위한 협약식" 
+                                className="w-full h-auto"
+                              />
+                              <p className="text-xs text-center py-1 bg-gray-100">한글과 컴퓨터 한컴위드와 디지털 부동산을 위한 협약식</p>
+                            </div>
+                          </div>
+                        </CollapsibleContent>
+                      </CardContent>
+                    </Collapsible>
                   </Card>
                   <Card className="bg-blue-50 overflow-hidden">
                     <Collapsible open={isCtgInfoOpen} onOpenChange={setIsCtgInfoOpen}>
