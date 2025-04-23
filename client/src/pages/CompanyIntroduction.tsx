@@ -1,11 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ChevronDown, ChevronUp } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { useState } from "react";
 import SEO from "@/components/SEO";
 import dubaiSigningCeremony from "@/assets/dubai-signing-ceremony.png";
 
 export default function CompanyIntroduction() {
+  const [isCtgInfoOpen, setIsCtgInfoOpen] = useState(false);
   return (
     <>
       <SEO 
@@ -81,7 +84,7 @@ export default function CompanyIntroduction() {
                   재단은 유럽 몰타공화국, 한국 회사는 대한민국 경기도 판교에 위치하고 있습니다.
                 </p>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-6">
                   <Card>
                     <CardContent className="p-4">
                       <h4 className="font-semibold">미국 본사</h4>
@@ -99,6 +102,33 @@ export default function CompanyIntroduction() {
                       <h4 className="font-semibold">한국 지사</h4>
                       <p className="text-sm text-gray-600">경기도 판교</p>
                     </CardContent>
+                  </Card>
+                  <Card className="bg-blue-50 overflow-hidden">
+                    <Collapsible open={isCtgInfoOpen} onOpenChange={setIsCtgInfoOpen}>
+                      <CardContent className="p-4">
+                        <div className="flex justify-between items-center">
+                          <h4 className="font-semibold">파트너사 - CTG 그룹</h4>
+                          <CollapsibleTrigger asChild>
+                            <Button variant="ghost" size="sm" className="p-0 h-8 w-8">
+                              {isCtgInfoOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                            </Button>
+                          </CollapsibleTrigger>
+                        </div>
+                        
+                        <CollapsibleContent>
+                          <div className="pt-3 space-y-2">
+                            <p className="text-sm text-gray-600">
+                              호주에 본사를 두고 태국에서 CTG PRIME를 통해 디지털 Bond를 운영하는 디지털 자산 유동화 기업입니다. 
+                              홍콩 나스닥 기업 등이 참여하여 나스닥 디지털 상품을 취급하고 있습니다.
+                            </p>
+                            <p className="text-sm text-gray-600">
+                              태국 대형 정부 프로젝트를 추진 중인 기업으로 한국 디지털 자산 유동화를 위한 파트너 기업입니다. 
+                              사하라 리얼테크 정민호 대표는 CTG 그룹의 아시아 CTO로 임명되어 향후 한국의 실물 자산 자금 유동화를 진행 예정입니다.
+                            </p>
+                          </div>
+                        </CollapsibleContent>
+                      </CardContent>
+                    </Collapsible>
                   </Card>
                 </div>
                 
