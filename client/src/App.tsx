@@ -21,6 +21,7 @@ import RealEstateTokenization from "@/pages/RealEstateTokenization";
 import SecureTransactions from "@/pages/SecureTransactions";
 import LiquidityEnhancement from "@/pages/LiquidityEnhancement";
 import Feedback from "@/pages/Feedback";
+import ChatWidget from "@/components/ui/ChatWidget";
 
 import "./lib/i18n";
 
@@ -49,6 +50,7 @@ function Router() {
         </Switch>
       </main>
       <Footer />
+      <ChatWidget />
     </div>
   );
 }
