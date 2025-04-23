@@ -139,7 +139,7 @@ export default function CompanyIntroduction() {
                     <Collapsible open={isCtgInfoOpen} onOpenChange={setIsCtgInfoOpen}>
                       <CardContent className="p-4">
                         <div className="flex justify-between items-center">
-                          <h4 className="font-semibold">파트너사 - CTG 그룹</h4>
+                          <h4 className="font-semibold">디지털 자산 유동화 기업 - CTG 그룹</h4>
                           <CollapsibleTrigger asChild>
                             <Button variant="ghost" size="sm" className="p-0 h-8 w-8">
                               {isCtgInfoOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
@@ -150,7 +150,7 @@ export default function CompanyIntroduction() {
                         <CollapsibleContent>
                           <div className="pt-3 space-y-2">
                             <p className="text-sm text-gray-600">
-                              호주에 본사를 두고 태국에서 CTG PRIME를 통해 디지털 Bond를 운영하는 디지털 자산 유동화 기업입니다. 
+                              호주에 본사를 둔 시총 약 3조 규모의 기업으로, 태국에서 CTG PRIME를 통해 디지털 Bond를 운영하는 디지털 자산 유동화 기업입니다. 
                               홍콩 나스닥 기업 등이 참여하여 나스닥 디지털 상품을 취급하고 있습니다.
                             </p>
                             <p className="text-sm text-gray-600">
