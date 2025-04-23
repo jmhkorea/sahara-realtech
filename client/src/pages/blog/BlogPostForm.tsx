@@ -64,6 +64,7 @@ export default function BlogPostForm() {
       featured: false,
       imageUrl: "",
       tags: "",
+      author: "관리자", // 기본 저자 추가
     },
   });
   
