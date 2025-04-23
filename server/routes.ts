@@ -15,6 +15,7 @@ import {
 import { z } from "zod";
 import * as path from "path";
 import * as fs from "fs";
+import multer from "multer";
 import { 
   getCashFlowData, 
   getAssetValueData, 
@@ -26,6 +27,38 @@ import { searchContent } from "./services/contentIndexService";
 import { generateResponse } from "./services/chatbotService";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // 이미지 업로드를 위한 multer 설정
+  const multerStorage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      const uploadDir = path.join(__dirname, '../uploads');
+      if (!fs.existsSync(uploadDir)) {
+        fs.mkdirSync(uploadDir, { recursive: true });
+      }
+      cb(null, uploadDir);
+    },
+    filename: function (req, file, cb) {
+      // 원본 파일 확장자 추출
+      const ext = path.extname(file.originalname);
+      // 임의의 문자열 + 타임스탬프 + 확장자로 고유 파일명 생성
+      cb(null, `${Date.now()}-${Math.round(Math.random() * 1E9)}${ext}`);
+    }
+  });
+
+  // 파일 필터: 이미지 파일만 업로드 허용
+  const fileFilter = (req: any, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
+    if (file.mimetype.startsWith('image/')) {
+      cb(null, true);
+    } else {
+      cb(null, false);
+    }
+  };
+
+  const upload = multer({ 
+    storage,
+    fileFilter, 
+    limits: { fileSize: 5 * 1024 * 1024 } // 5MB 제한
+  });
+
   // API endpoints
   const apiRouter = app.route('/api');
   
@@ -434,6 +467,41 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "유효하지 않은 이미지 URL입니다", errors: error.errors });
       }
       res.status(500).json({ message: "이미지 URL을 업데이트하는데 실패했습니다" });
+    }
+  });
+  
+  // 블로그 게시물 이미지 업로드
+  app.post('/api/blog/posts/:id/image/upload', upload.single('image'), async (req: Request, res: Response) => {
+    try {
+      const id = Number(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: "유효하지 않은 게시물 ID입니다" });
+      }
+      
+      const post = await storage.getBlogPost(id);
+      if (!post) {
+        return res.status(404).json({ message: "게시물을 찾을 수 없습니다" });
+      }
+      
+      // 파일이 업로드되었는지 확인
+      if (!req.file) {
+        return res.status(400).json({ message: "이미지 파일이 제공되지 않았습니다" });
+      }
+      
+      // 파일의 상대 경로 생성
+      const relativePath = `/uploads/${req.file.filename}`;
+      
+      // 게시물 이미지 URL 업데이트
+      const updatedPost = await storage.updateBlogPost(id, { imageUrl: relativePath });
+      
+      res.json({
+        success: true,
+        post: updatedPost,
+        imageUrl: relativePath
+      });
+    } catch (error) {
+      console.error('이미지 업로드 중 오류:', error);
+      res.status(500).json({ message: "이미지 업로드에 실패했습니다" });
     }
   });
 
