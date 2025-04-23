@@ -213,8 +213,8 @@ export default function HowItWorks() {
         
         <div className="text-center mt-16">
           <Link href="/properties">
-            <Button className="inline-block px-8 py-4 text-lg">
-              <span className="mx-auto">{t('howItWorks.startNowButton')}</span>
+            <Button className="inline-flex justify-center items-center px-8 py-4 text-lg w-auto">
+              {t('howItWorks.startNowButton')}
             </Button>
           </Link>
         </div>
