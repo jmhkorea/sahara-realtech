@@ -54,7 +54,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   };
 
   const upload = multer({ 
-    storage,
+    storage: multerStorage,
     fileFilter, 
     limits: { fileSize: 5 * 1024 * 1024 } // 5MB 제한
   });

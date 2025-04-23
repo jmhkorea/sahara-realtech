@@ -15,6 +15,7 @@ import Portfolio from "@/pages/Portfolio";
 import TeamPage from "@/pages/TeamPage";
 import BlogPage from "@/pages/blog/BlogPage";
 import BlogPostPage from "@/pages/blog/BlogPostPage";
+import BlogPostForm from "@/pages/blog/BlogPostForm";
 import AdminPage from "@/pages/AdminPage";
 import LaosProjectDetail from "@/pages/LaosProjectDetail";
 import RealEstateTokenization from "@/pages/RealEstateTokenization";
@@ -39,6 +40,7 @@ function Router() {
           <Route path="/portfolio" component={Portfolio} />
           <Route path="/blog" component={BlogPage} />
           <Route path="/blog/:id" component={BlogPostPage} />
+          <Route path="/blog/new" component={BlogPostForm} />
           <Route path="/team" component={TeamPage} />
           <Route path="/admin" component={AdminPage} />
           <Route path="/projects/laos-vientiane" component={LaosProjectDetail} />
