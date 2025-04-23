@@ -152,12 +152,10 @@ export default function PortfolioAnalysis() {
         />
         <Tooltip 
           cursor={{ strokeDasharray: '3 3' }}
-          formatter={(value, name, props) => {
-            if (name === 'allocation') {
-              return [`${value}%`, '투자 비중'];
-            }
-            return [value, name === 'risk' ? '위험도' : '수익률 (%)'];
-          }}
+          /* 
+          formatter는 Tooltip 컴포넌트에서 사용되지 않고, 
+          대신 아래의 content prop이 사용됩니다
+          */
           content={({ active, payload }) => {
             if (active && payload && payload.length) {
               return (

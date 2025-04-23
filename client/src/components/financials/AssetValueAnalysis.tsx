@@ -152,7 +152,7 @@ export default function AssetValueAnalysis({ propertyId }: AssetValueAnalysisPro
         <div className="h-80">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
-              data={data.map((item, index, array) => {
+              data={data.map((item: any, index: number, array: any[]) => {
                 if (index === 0) {
                   return { ...item, growthRate: 0 };
                 }

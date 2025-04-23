@@ -359,7 +359,7 @@ export default function TaxAnalysis() {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis type="number" domain={[0, 100]} tickFormatter={(value) => `${value}%`} />
               <YAxis type="category" dataKey="name" />
-              <Tooltip formatter={(value) => `${value.toFixed(1)}%`} />
+              <Tooltip formatter={(value) => `${typeof value === 'number' ? value.toFixed(1) : value}%`} />
               <Legend />
               <Bar dataKey="value" name="비율">
                 {profitDistributionData.map((entry, index) => (
