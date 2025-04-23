@@ -111,8 +111,8 @@ export async function getAllContent(): Promise<ContentItem[]> {
     const propertyContent = properties.map((property: Property): ContentItem => ({
       id: `property-${property.id}`,
       type: 'property',
-      title: property.title,
-      content: `${property.description} 위치: ${property.location} 가격: ${property.price} 타입: ${property.type} 지역: ${property.region}`,
+      title: property.name,
+      content: `${property.description || ''} 위치: ${property.address} 가격: ${property.totalValue} 타입: ${property.type} 지역: ${property.region}`,
       url: `/properties/${property.id}`,
       category: property.region,
       keywords: [property.type, property.region, '부동산', '투자'],
@@ -127,7 +127,7 @@ export async function getAllContent(): Promise<ContentItem[]> {
       content: post.content,
       url: `/blog/${post.id}`,
       category: post.category,
-      keywords: post.tags ? post.tags.split(',') : [],
+      keywords: post.tags ? post.tags : [],
     }));
     
     // 모든 콘텐츠 합치기

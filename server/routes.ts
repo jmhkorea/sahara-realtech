@@ -22,6 +22,8 @@ import {
   getMarketIndicatorsData,
   getPortfolioAnalysisData 
 } from "./services/financialDataService";
+import { searchContent } from "./services/contentIndexService";
+import { generateResponse } from "./services/chatbotService";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API endpoints
@@ -482,6 +484,46 @@ export async function registerRoutes(app: Express): Promise<Server> {
         property: 105
       }
     });
+  });
+
+  // 콘텐츠 검색 API 엔드포인트
+  app.get('/api/search', async (req: Request, res: Response) => {
+    try {
+      const query = req.query.q as string;
+      
+      if (!query || query.trim().length < 2) {
+        return res.status(400).json({ error: '검색어는 최소 2자 이상이어야 합니다.' });
+      }
+      
+      const results = await searchContent(query);
+      res.json(results);
+    } catch (error) {
+      console.error('검색 중 오류 발생:', error);
+      res.status(500).json({ error: '검색을 처리하는 중 오류가 발생했습니다.' });
+    }
+  });
+
+  // 채팅 API 엔드포인트
+  app.post('/api/chat', async (req: Request, res: Response) => {
+    try {
+      const { message } = req.body;
+      
+      if (!message || message.trim() === '') {
+        return res.status(400).json({ error: '메시지 내용이 필요합니다.' });
+      }
+      
+      // 챗봇 서비스를 통해 응답 생성
+      const response = await generateResponse(message);
+      res.json(response);
+    } catch (error) {
+      console.error('채팅 처리 중 오류 발생:', error);
+      res.status(500).json({
+        id: Date.now(),
+        text: '죄송합니다. 메시지를 처리하는 중 오류가 발생했습니다.',
+        sender: 'bot',
+        timestamp: new Date().toISOString(),
+      });
+    }
   });
 
   const httpServer = createServer(app);
