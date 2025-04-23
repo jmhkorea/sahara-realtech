@@ -65,7 +65,11 @@ export default function CompanyIntroduction() {
                   />
                   <div className="p-4 bg-blue-50">
                     <h3 className="font-semibold text-gray-800 mb-1">두바이 계약 체결식</h3>
-                    <p className="text-sm text-gray-600">사하라 리얼테크와 두바이 KHOORY & PARK LLC 간의 블록체인 부동산 골드 플랫폼 서비스 계약 체결식</p>
+                    <p className="text-sm text-gray-600">
+                      2017년 사하라 리얼테크와 두바이 KHOORY & PARK LLC 간의 블록체인 부동산 골드 플랫폼 서비스 계약 체결식 
+                      (쿠리 그룹은 두바이 정부에서 권한을 위임받아 각종 부동산소유권 인증 및 자국민의 민원을 처리하는 기관으로 
+                      국내 '민원 24'와 같은 역할을 하는 기업으로 온라인과 오프라인 서비스를 진행 중이다)
+                    </p>
                   </div>
                 </div>
               </section>
