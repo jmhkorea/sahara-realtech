@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { ArrowLeft } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import SEO from "@/components/SEO";
+import dubaiSigningCeremony from "@/assets/dubai-signing-ceremony.png";
 
 export default function CompanyIntroduction() {
   return (
@@ -58,7 +59,7 @@ export default function CompanyIntroduction() {
               <section className="mb-6">
                 <div className="rounded-lg overflow-hidden shadow-lg mb-6">
                   <img 
-                    src="/dubai-signing-ceremony.png" 
+                    src={dubaiSigningCeremony} 
                     alt="두바이 계약 체결식 - 사하라 리얼테크와 KHOORY & PARK LLC" 
                     className="w-full object-cover" 
                   />
