@@ -1,4 +1,4 @@
-import type { Express, Request, Response, NextFunction } from "express";
+import express, { type Express, type Request, type Response, type NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { 
@@ -30,7 +30,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // 이미지 업로드를 위한 multer 설정
   const multerStorage = multer.diskStorage({
     destination: function (req, file, cb) {
-      const uploadDir = path.join(__dirname, '../uploads');
+      // ES 모듈에서는 __dirname이 정의되지 않으므로 현재 작업 디렉토리 기준으로 경로 설정
+      const uploadDir = path.join(process.cwd(), 'uploads');
       if (!fs.existsSync(uploadDir)) {
         fs.mkdirSync(uploadDir, { recursive: true });
       }
@@ -59,8 +60,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
     limits: { fileSize: 5 * 1024 * 1024 } // 5MB 제한
   });
 
+  // 업로드된 이미지를 제공하기 위한 정적 파일 서빙 설정
+  const uploadsPath = path.join(process.cwd(), 'uploads');
+  if (!fs.existsSync(uploadsPath)) {
+    fs.mkdirSync(uploadsPath, { recursive: true });
+  }
+  app.use('/uploads', (req, res, next) => {
+    express.static(uploadsPath)(req, res, next);
+  });
+
   // API endpoints
-  const apiRouter = app.route('/api');
   
   // Properties
   app.get('/api/properties', async (req: Request, res: Response) => {
