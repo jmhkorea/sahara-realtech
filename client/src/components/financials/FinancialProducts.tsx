@@ -181,7 +181,7 @@ export default function FinancialProducts() {
               <Tooltip formatter={(value) => formatValue(value as number)} />
               <Bar
                 dataKey="value"
-                fill={(entry: any) => entry.color}
+                fill="#4D72AA"
                 animationDuration={1500}
               />
             </BarChart>

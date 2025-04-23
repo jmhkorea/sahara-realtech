@@ -138,33 +138,23 @@ export default function FinancialAnalytics() {
             </TabsContent>
 
             <TabsContent value="assetValue">
-              <div className="text-center py-16">
-                <p className="text-lg text-neutral-500">구현 중입니다...</p>
-              </div>
+              <AssetValueAnalysis />
             </TabsContent>
 
             <TabsContent value="financialProducts">
-              <div className="text-center py-16">
-                <p className="text-lg text-neutral-500">구현 중입니다...</p>
-              </div>
+              <FinancialProducts />
             </TabsContent>
 
             <TabsContent value="taxAnalysis">
-              <div className="text-center py-16">
-                <p className="text-lg text-neutral-500">구현 중입니다...</p>
-              </div>
+              <TaxAnalysis />
             </TabsContent>
 
             <TabsContent value="portfolioAnalysis">
-              <div className="text-center py-16">
-                <p className="text-lg text-neutral-500">구현 중입니다...</p>
-              </div>
+              <PortfolioAnalysis />
             </TabsContent>
 
             <TabsContent value="marketIndicators">
-              <div className="text-center py-16">
-                <p className="text-lg text-neutral-500">구현 중입니다...</p>
-              </div>
+              <MarketIndicators />
             </TabsContent>
           </div>
         </Tabs>
