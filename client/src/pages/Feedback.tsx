@@ -67,11 +67,7 @@ export default function FeedbackPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="bg-white rounded-lg p-4 border border-neutral-200">
               <h3 className="font-medium mb-2">{t('feedback.contactInfo.email', '이메일')}</h3>
-              <p className="text-neutral-600">support@saharatech.com</p>
-            </div>
-            <div className="bg-white rounded-lg p-4 border border-neutral-200">
-              <h3 className="font-medium mb-2">{t('feedback.contactInfo.phone', '전화')}</h3>
-              <p className="text-neutral-600">+82-2-1234-5678</p>
+              <p className="text-neutral-600">ceo@sahararealtech.com</p>
             </div>
             <div className="bg-white rounded-lg p-4 border border-neutral-200">
               <h3 className="font-medium mb-2">{t('feedback.contactInfo.hours', '운영 시간')}</h3>

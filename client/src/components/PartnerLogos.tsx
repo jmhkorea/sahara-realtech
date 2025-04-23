@@ -6,77 +6,83 @@ const partnerLogos = [
   { 
     id: 1, 
     name: "Binance", 
-    imgSrc: "/assets/partners/binance.png", 
     category: "crypto" 
   },
   { 
     id: 2, 
     name: "Coinbase", 
-    // 임시로 Binance 이미지 사용 (실제 로고 업로드 후 수정 예정)
-    imgSrc: "/assets/partners/binance.png", 
     category: "crypto" 
   },
   { 
     id: 3, 
     name: "Upbit", 
-    // 임시로 Binance 이미지 사용 (실제 로고 업로드 후 수정 예정)
-    imgSrc: "/assets/partners/binance.png", 
     category: "crypto" 
   },
   { 
     id: 4, 
     name: "Bithumb", 
-    // 임시로 Binance 이미지 사용 (실제 로고 업로드 후 수정 예정)
-    imgSrc: "/assets/partners/binance.png", 
     category: "crypto" 
   },
   { 
     id: 5, 
     name: "Kraken", 
-    // 임시로 Binance 이미지 사용 (실제 로고 업로드 후 수정 예정)
-    imgSrc: "/assets/partners/binance.png", 
     category: "crypto" 
   },
   { 
     id: 6, 
     name: "한국투자증권", 
-    // 임시로 Binance 이미지 사용 (실제 로고 업로드 후 수정 예정)
-    imgSrc: "/assets/partners/binance.png", 
     category: "securities" 
   },
   { 
     id: 7, 
     name: "미래에셋증권", 
-    // 임시로 Binance 이미지 사용 (실제 로고 업로드 후 수정 예정)
-    imgSrc: "/assets/partners/binance.png", 
     category: "securities" 
   },
   { 
     id: 8, 
     name: "삼성증권", 
-    // 임시로 Binance 이미지 사용 (실제 로고 업로드 후 수정 예정)
-    imgSrc: "/assets/partners/binance.png", 
     category: "securities" 
   },
   { 
     id: 9, 
     name: "신한투자증권", 
-    // 임시로 Binance 이미지 사용 (실제 로고 업로드 후 수정 예정)
-    imgSrc: "/assets/partners/binance.png", 
     category: "securities" 
   },
   { 
     id: 10, 
     name: "KB증권", 
-    // 임시로 Binance 이미지 사용 (실제 로고 업로드 후 수정 예정)
-    imgSrc: "/assets/partners/binance.png", 
     category: "securities" 
+  },
+  { 
+    id: 11, 
+    name: "서울대학교", 
+    category: "universities" 
+  },
+  { 
+    id: 12, 
+    name: "고려대학교", 
+    category: "universities" 
+  },
+  { 
+    id: 13, 
+    name: "연세대학교", 
+    category: "universities" 
+  },
+  { 
+    id: 14, 
+    name: "카이스트", 
+    category: "universities" 
+  },
+  { 
+    id: 15, 
+    name: "포항공과대학교", 
+    category: "universities" 
   },
 ];
 
 export default function PartnerLogos() {
   const { t } = useTranslation();
-  const [activeTab, setActiveTab] = useState<"all" | "crypto" | "securities">("all");
+  const [activeTab, setActiveTab] = useState<"all" | "crypto" | "securities" | "universities">("all");
   
   // 무한 슬라이드를 위한 상태
   const [position, setPosition] = useState(0);
@@ -111,9 +117,9 @@ export default function PartnerLogos() {
   return (
     <div className="w-full overflow-hidden">
       {/* 필터 탭 */}
-      <div className="flex justify-center mb-6 space-x-4">
+      <div className="flex justify-center mb-6 space-x-4 flex-wrap">
         <button
-          className={`px-4 py-2 rounded-md transition-all ${
+          className={`px-4 py-2 rounded-md transition-all mb-2 ${
             activeTab === "all"
               ? "bg-blue-500 text-white"
               : "bg-neutral-700 text-neutral-200 hover:bg-neutral-600"
@@ -123,7 +129,7 @@ export default function PartnerLogos() {
           {t("partners.all", "전체")}
         </button>
         <button
-          className={`px-4 py-2 rounded-md transition-all ${
+          className={`px-4 py-2 rounded-md transition-all mb-2 ${
             activeTab === "crypto"
               ? "bg-blue-500 text-white"
               : "bg-neutral-700 text-neutral-200 hover:bg-neutral-600"
@@ -133,7 +139,7 @@ export default function PartnerLogos() {
           {t("partners.crypto", "암호화폐 거래소")}
         </button>
         <button
-          className={`px-4 py-2 rounded-md transition-all ${
+          className={`px-4 py-2 rounded-md transition-all mb-2 ${
             activeTab === "securities"
               ? "bg-blue-500 text-white"
               : "bg-neutral-700 text-neutral-200 hover:bg-neutral-600"
@@ -141,6 +147,16 @@ export default function PartnerLogos() {
           onClick={() => setActiveTab("securities")}
         >
           {t("partners.securities", "증권사")}
+        </button>
+        <button
+          className={`px-4 py-2 rounded-md transition-all mb-2 ${
+            activeTab === "universities"
+              ? "bg-blue-500 text-white"
+              : "bg-neutral-700 text-neutral-200 hover:bg-neutral-600"
+          }`}
+          onClick={() => setActiveTab("universities")}
+        >
+          {t("partners.universities", "대학교")}
         </button>
       </div>
       
@@ -160,12 +176,12 @@ export default function PartnerLogos() {
               className="inline-flex items-center justify-center mx-6"
               style={{ minWidth: "180px" }}
             >
-              <img
-                src={logo.imgSrc}
-                alt={logo.name}
-                className="h-16 object-contain transition-all filter grayscale brightness-150 hover:grayscale-0 hover:brightness-110 hover:scale-110"
+              <div
+                className="text-white text-lg font-medium transition-all hover:text-blue-400 hover:scale-110"
                 title={logo.name}
-              />
+              >
+                {logo.name}
+              </div>
             </div>
           ))}
           
@@ -176,12 +192,12 @@ export default function PartnerLogos() {
               className="inline-flex items-center justify-center mx-6"
               style={{ minWidth: "180px" }}
             >
-              <img
-                src={logo.imgSrc}
-                alt={logo.name}
-                className="h-16 object-contain transition-all filter grayscale brightness-150 hover:grayscale-0 hover:brightness-110 hover:scale-110"
+              <div
+                className="text-white text-lg font-medium transition-all hover:text-blue-400 hover:scale-110"
                 title={logo.name}
-              />
+              >
+                {logo.name}
+              </div>
             </div>
           ))}
         </div>

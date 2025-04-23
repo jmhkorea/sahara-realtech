@@ -83,8 +83,8 @@ export default function Footer() {
             </p>
             <div className="flex items-center mb-4">
               <Mail className="h-5 w-5 text-primary mr-2" />
-              <a href="mailto:INFO@SAHARAREALTECH.COM" className="text-neutral-300 hover:text-white transition-colors">
-                INFO@SAHARAREALTECH.COM
+              <a href="mailto:ceo@sahararealtech.com" className="text-neutral-300 hover:text-white transition-colors">
+                ceo@sahararealtech.com
               </a>
             </div>
             <div className="flex space-x-4 mt-4">
