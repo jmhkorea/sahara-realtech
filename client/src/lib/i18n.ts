@@ -22,9 +22,9 @@ const koTranslations = {
     subtitle: '아발란체 프로토콜 기반의 블록체인 기술로 부동산 투자의 진입장벽을 낮추고, 소액으로도 프리미엄 부동산에 투자할 수 있습니다.',
     startInvesting: '투자 시작하기',
     learnMore: '서비스 알아보기',
-    avalancheBased: 'Avalanche 기술 기반',
+    avalancheBased: '기술 기반',
     avalancheDescription: '빠른 거래 처리 속도와 낮은 수수료의 아발란체 프로토콜을 사용합니다',
-    completedTransactions: '완료된 거래'
+    completedTransactions: '현재 진행 중인 거래'
   },
   search: {
     region: '지역',

@@ -63,7 +63,7 @@ export default function Hero() {
               <div className="flex items-center">
                 <span className="font-bold text-white mr-2">Avalanche</span>
                 <span className="font-inter font-medium">
-                  {t('hero.avalancheBased')}
+                  {t('hero.avalancheBased', '기술 기반')}
                 </span>
               </div>
               <p className="text-sm text-white/80 mt-1">
@@ -71,7 +71,7 @@ export default function Hero() {
               </p>
             </div>
             <div className="border-l border-white/20 pl-4">
-              <p className="font-bold font-inter text-xl">30,000+</p>
+              <p className="font-bold font-inter text-xl">10+</p>
               <p className="text-sm text-white/80">{t('hero.completedTransactions')}</p>
             </div>
           </div>
