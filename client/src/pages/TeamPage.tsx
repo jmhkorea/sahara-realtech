@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaLinkedin, FaTwitter, FaGithub } from 'react-icons/fa';
+import SEO from "@/components/SEO";
 
 interface TeamMember {
   id: number;
@@ -197,6 +198,11 @@ export default function TeamPage() {
 
   return (
     <div className="container mx-auto px-4 py-12">
+      <SEO 
+        title={t('team.seo.title', '리더십 팀')}
+        description={t('team.seo.description', 'SaharaRealTech의 리더십 팀을 만나보세요. 우리의 경험 많은 경영진, 기술 전문가, 이사진 및 고문들이 부동산 투자와 블록체인 혁신을 이끕니다.')}
+        keywords={t('team.seo.keywords', '리더십 팀, 경영진, 기술 전문가, 이사진, 고문, 부동산 전문가, 블록체인 전문가')}
+      />
       <div className="mb-12">
         <h1 className="text-3xl font-bold">
           {t('team.title')}

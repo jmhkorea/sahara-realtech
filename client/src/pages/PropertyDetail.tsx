@@ -7,6 +7,7 @@ import TokenPurchaseModal from "@/components/TokenPurchaseModal";
 import PropertyAnalytics from "@/components/PropertyAnalytics";
 import InvestmentSimulator from "@/components/InvestmentSimulator";
 import MarketAnalysis from "@/components/MarketAnalysis";
+import SEO from "@/components/SEO";
 
 import {
   Card,
@@ -209,6 +210,12 @@ export default function PropertyDetail() {
 
   return (
     <div className="py-12 bg-neutral-100">
+      <SEO 
+        title={propertyName}
+        description={`${propertyName}에 블록체인으로 투자하세요. ${property.description.substring(0, 120)}...`}
+        keywords={`${propertyName}, 부동산 투자, 토큰화, ${property.type}, ${property.region}, 블록체인 투자`}
+        ogImage={property.imageUrl || "https://saharatech.com/og-property.jpg"}
+      />
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-xl overflow-hidden shadow-lg mb-8">
