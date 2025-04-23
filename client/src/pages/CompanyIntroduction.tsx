@@ -7,6 +7,7 @@ import { useState } from "react";
 import SEO from "@/components/SEO";
 import dubaiSigningCeremony from "@/assets/dubai-signing-ceremony.png";
 import hancomAgreement from "@/assets/hancom-agreement.png";
+import ctgBusinessCard from "@/assets/ctg-business-card.png";
 
 export default function CompanyIntroduction() {
   const [isCtgInfoOpen, setIsCtgInfoOpen] = useState(false);
@@ -141,6 +142,13 @@ export default function CompanyIntroduction() {
                               태국 대형 정부 프로젝트를 추진 중인 기업으로 한국 디지털 자산 유동화를 위한 파트너 기업입니다. 
                               사하라 리얼테크 정민호 대표는 CTG 그룹의 아시아 CTO로 임명되어 향후 한국의 실물 자산 자금 유동화를 진행 예정입니다.
                             </p>
+                            <div className="mt-3 rounded overflow-hidden border border-gray-200">
+                              <img 
+                                src={ctgBusinessCard} 
+                                alt="Capital Trust Group - Min Ho Jung 명함" 
+                                className="w-full h-auto"
+                              />
+                            </div>
                           </div>
                         </CollapsibleContent>
                       </CardContent>
