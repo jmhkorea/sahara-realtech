@@ -745,20 +745,44 @@ export default function PropertyDetail() {
                       </div>
                     </div>
                     
-                    {property.tokenizationStatus === TokenizationStatus.IN_PROGRESS && (
-                      <div className="flex justify-center my-6">
-                        <TokenPurchaseModal 
-                          property={property}
-                          onPurchaseSuccess={() => {
-                            // 투자 성공 후 데이터 갱신을 위한 로직을 추가할 수 있습니다.
-                            window.location.reload();
-                          }}
-                        />
-                      </div>
-                    )}
-                    
-                    {property.tokenizationStatus !== TokenizationStatus.IN_PROGRESS && (
-                      <div className="flex justify-center my-6">
+                    <div className="flex justify-center my-6">
+                      {property.tokenizationStatus === TokenizationStatus.IN_PROGRESS ? (
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <Button className="w-4/5 text-xl py-8 font-bold bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 shadow-lg rounded-xl">
+                              {t('property.investNow')}
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent className="sm:max-w-[500px]">
+                            <DialogHeader>
+                              <DialogTitle>{t('property.investIn')} {property.name}</DialogTitle>
+                              <DialogDescription>
+                                {t('property.tokenizeDesc')}
+                              </DialogDescription>
+                            </DialogHeader>
+                            
+                            <div className="grid gap-4 py-4">
+                              <div className="flex flex-col items-center justify-center py-6">
+                                <Wallet className="h-12 w-12 text-muted-foreground mb-4" />
+                                <h3 className="text-lg font-medium mb-2">{t('wallet.connectWalletToContinue')}</h3>
+                                <p className="text-sm text-muted-foreground mb-4 text-center">
+                                  {t('wallet.needWalletDesc')}
+                                </p>
+                                <Button>
+                                  <Wallet className="mr-2 h-4 w-4" />
+                                  {t('wallet.connectWallet')}
+                                </Button>
+                              </div>
+                            </div>
+                            
+                            <DialogFooter>
+                              <Button variant="outline">
+                                {t('common.cancel')}
+                              </Button>
+                            </DialogFooter>
+                          </DialogContent>
+                        </Dialog>
+                      ) : (
                         <Button 
                           className="w-4/5 text-xl py-8 font-bold bg-gradient-to-r from-gray-500 to-gray-400 shadow-lg rounded-xl"
                           disabled={true}
@@ -768,8 +792,8 @@ export default function PropertyDetail() {
                             : t('propertyDetail.investmentCard.comingSoon')
                           }
                         </Button>
-                      </div>
-                    )}
+                      )}
+                    </div>
                     
                     <p className="text-xs text-neutral-500 text-center mt-3">
                       {t('propertyDetail.investmentCard.disclaimer')}
