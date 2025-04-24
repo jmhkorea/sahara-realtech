@@ -39,9 +39,9 @@ export default function TeamWorkspace() {
       id: "proj-5",
       name: "리조트 플래너 시스템",
       description: "리조트 및 골프 멤버십 예약 관리를 위한 통합 플래닝 시스템",
-      url: "https://resort-planner-jmhkorea.replit.app/",
+      url: "https://resort-planner.sahararealtech.repl.co/",
       lastUpdated: "2025-04-24",
-      owner: "Han Ko",
+      owner: "sahararealtech",
       teamMembers: ["Jeon Jong-han", "Kim Dae-myung"],
       status: "active",
       type: "fullstack"
@@ -296,12 +296,12 @@ export default function TeamWorkspace() {
                   <div className="space-y-3">
                     <div className="flex items-center text-sm">
                       <FolderGit className="h-5 w-5 mr-2 text-blue-600" />
-                      <span className="text-neutral-700 font-medium">소유자: Han Ko</span>
+                      <span className="text-neutral-700 font-medium">소유자: sahararealtech</span>
                     </div>
                     <div className="flex items-center text-sm">
                       <Link2 className="h-5 w-5 mr-2 text-blue-600" />
                       <span className="text-neutral-700 font-medium">
-                        resort-planner-jmhkorea.replit.app
+                        resort-planner.sahararealtech.repl.co
                       </span>
                     </div>
                     <div className="flex items-center text-sm">
