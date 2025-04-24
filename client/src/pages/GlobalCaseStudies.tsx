@@ -9,7 +9,7 @@ export default function GlobalCaseStudies() {
     <>
       <SEO 
         title="해외 사례로 본 전망 | SaharaRealTech" 
-        description="글로벌 토큰증권(STO)과 실제세계자산(RWA) 성공 사례 및 미래 전망" 
+        description="글로벌 증권형 토큰(STO)과 실제세계자산(RWA) 성공 사례 및 미래 전망" 
       />
       
       <div className="container mx-auto px-4 py-8 max-w-4xl">
@@ -32,13 +32,13 @@ export default function GlobalCaseStudies() {
             <div className="prose prose-lg max-w-none">
               <Tabs defaultValue="sto" className="w-full my-6">
                 <TabsList className="grid w-full grid-cols-2">
-                  <TabsTrigger value="sto">토큰증권(STO) 해외 사례</TabsTrigger>
+                  <TabsTrigger value="sto">증권형 토큰(STO) 해외 사례</TabsTrigger>
                   <TabsTrigger value="rwa">실제세계자산(RWA) 해외 사례</TabsTrigger>
                 </TabsList>
                 
                 <TabsContent value="sto" className="mt-6">
                   <div className="space-y-6">
-                    <h2 className="text-2xl font-bold text-purple-600">미국의 토큰증권(STO) 성공 사례</h2>
+                    <h2 className="text-2xl font-bold text-purple-600">미국의 증권형 토큰(Security Token) 성공 사례</h2>
                     
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="border border-gray-200 rounded-lg p-5 shadow-sm">
@@ -72,7 +72,7 @@ export default function GlobalCaseStudies() {
                             <span className="font-semibold">특징:</span> SEC 정식 등록을 거친 주식 형태의 증권형 토큰
                           </p>
                           <p className="mt-3">
-                            INX는 SEC의 정식 브로커로 등록된 토큰증권 거래 플랫폼이자 IPO 플랫폼입니다. INX 토큰은 회사가 흑자 구간에 진입하면 회사 수익의 40%를 토큰 홀더들에게 배분하도록 설계되었습니다.
+                            INX는 SEC의 정식 브로커로 등록된 증권형 토큰 거래 플랫폼이자 IPO 플랫폼입니다. INX 토큰은 회사가 흑자 구간에 진입하면 회사 수익의 40%를 토큰 홀더들에게 배분하도록 설계되었습니다.
                           </p>
                         </div>
                       </div>
@@ -81,19 +81,19 @@ export default function GlobalCaseStudies() {
                     <div className="bg-purple-50 p-5 rounded-lg border-l-4 border-purple-500 mt-8">
                       <h3 className="text-xl font-bold mb-3">리퍼블릭 노트(Republic Note)</h3>
                       <p>
-                        투자 플랫폼 Republic이 발행한 에버그린형 펀드의 지분과 배당금 권리를 포함한 토큰증권입니다. Republic이 투자한 스타트업이 성공적으로 EXIT할 경우 발생하는 수익을 토큰 홀더들에게 분배하는 구조로 설계되었습니다.
+                        투자 플랫폼 Republic이 발행한 에버그린형 펀드의 지분과 배당금 권리를 포함한 증권형 토큰입니다. Republic이 투자한 스타트업이 성공적으로 EXIT할 경우 발생하는 수익을 토큰 홀더들에게 분배하는 구조로 설계되었습니다.
                       </p>
                     </div>
                     
-                    <h2 className="text-2xl font-bold text-purple-600 mt-10">유럽의 토큰증권(STO) 현황</h2>
+                    <h2 className="text-2xl font-bold text-purple-600 mt-10">유럽의 증권형 토큰(Security Token) 현황</h2>
                     
                     <div className="bg-gray-50 p-5 rounded-lg">
                       <h3 className="text-xl font-bold mb-3">스위스와 리히텐슈타인의 STO 생태계</h3>
                       <p>
-                        유럽에서는 특히 스위스와 리히텐슈타인이 토큰증권 규제와 시장 발전에 앞서 있습니다. 스위스의 '크립토 밸리'로 불리는 주크(Zug) 지역을 중심으로 다양한 블록체인 기업들이 토큰증권 발행 플랫폼을 구축하고 있습니다.
+                        유럽에서는 특히 스위스와 리히텐슈타인이 증권형 토큰 규제와 시장 발전에 앞서 있습니다. 스위스의 '크립토 밸리'로 불리는 주크(Zug) 지역을 중심으로 다양한 블록체인 기업들이 증권형 토큰 발행 플랫폼을 구축하고 있습니다.
                       </p>
                       <p className="mt-2">
-                        SEBA Bank AG와 Sygnum Bank AG는 스위스 금융 감독 당국(FINMA)의 승인을 받은 디지털 자산 은행으로, 토큰증권 발행과 유통에 중요한 역할을 하고 있습니다.
+                        SEBA Bank AG와 Sygnum Bank AG는 스위스 금융 감독 당국(FINMA)의 승인을 받은 디지털 자산 은행으로, 증권형 토큰 발행과 유통에 중요한 역할을 하고 있습니다.
                       </p>
                     </div>
                     
