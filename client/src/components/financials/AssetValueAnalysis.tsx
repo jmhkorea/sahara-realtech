@@ -83,15 +83,25 @@ export default function AssetValueAnalysis({ propertyId }: AssetValueAnalysisPro
           <p className="text-sm text-neutral-500">총 자산 가치 성장률</p>
           <p className="text-xl font-bold text-purple-600">{calculateGrowth()}%</p>
         </div>
-        <Tabs defaultValue={viewType} onValueChange={(value) => setViewType(value as "chart" | "table")}>
-          <TabsList>
-            <TabsTrigger value="chart">차트</TabsTrigger>
-            <TabsTrigger value="table">테이블</TabsTrigger>
-          </TabsList>
-        </Tabs>
+        <div className="flex space-x-2">
+          <Button 
+            variant={viewType === "chart" ? "secondary" : "outline"} 
+            size="sm"
+            onClick={() => setViewType("chart")}
+          >
+            차트
+          </Button>
+          <Button 
+            variant={viewType === "table" ? "secondary" : "outline"} 
+            size="sm"
+            onClick={() => setViewType("table")}
+          >
+            테이블
+          </Button>
+        </div>
       </div>
 
-      <TabsContent value="chart" className={viewType === "chart" ? "block" : "hidden"}>
+      {viewType === "chart" && (
         <div className="h-[200px]">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
@@ -131,9 +141,9 @@ export default function AssetValueAnalysis({ propertyId }: AssetValueAnalysisPro
             </LineChart>
           </ResponsiveContainer>
         </div>
-      </TabsContent>
+      )}
 
-      <TabsContent value="table" className={viewType === "table" ? "block" : "hidden"}>
+      {viewType === "table" && (
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-neutral-200">
             <thead className="bg-neutral-50">
@@ -160,7 +170,7 @@ export default function AssetValueAnalysis({ propertyId }: AssetValueAnalysisPro
             </tbody>
           </table>
         </div>
-      </TabsContent>
+      )}
     </div>
   );
 }
