@@ -18,6 +18,9 @@ import globalEvent4 from "@/assets/global-event-4.jpg";
 import globalEvent5 from "@/assets/global-event-5.jpg";
 import globalEvent6 from "@/assets/global-event-6.jpg";
 import globalEvent7 from "@/assets/global-event-7.jpg";
+import awardInnovation from "@/assets/award-innovation.jpg";
+import awardPatent from "@/assets/award-patent.jpg";
+import awardCto from "@/assets/award-cto.jpg";
 
 export default function CompanyIntroduction() {
   const [isCtgInfoOpen, setIsCtgInfoOpen] = useState(false);
@@ -429,13 +432,64 @@ export default function CompanyIntroduction() {
               </section>
               
               <section className="mb-8">
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">사회적 책임과 인정</h2>
+                <h2 className="text-2xl font-bold text-gray-800 mb-4">사회적 책임과 수상 성과</h2>
                 <p>
                   2024년 사하라 리얼테크는 대한변리사협회가 인정한 특허 대상을 수상하였으며, 
                   강원도 오지 마을을 대상으로 약 5개월 간 연세가 높으신 어르신들을 위한 챗GPT 디지털 
                   무료 강의를 진행한 바 있습니다. 이러한 사회공헌 활동으로 창조경영혁신 대상을 
-                  수상하게 되었습니다.
+                  수상하게 되었습니다. 또한 정민호 대표는 인도 언론에서 '올해의 CTO'로 선정되는 영예를 안았습니다.
                 </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+                  <div className="rounded overflow-hidden border border-gray-200 bg-white">
+                    <div className="h-48 overflow-hidden">
+                      <img 
+                        src={awardInnovation} 
+                        alt="2024년 경영혁신 대상 수상" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="p-3">
+                      <h4 className="font-semibold text-lg">경영혁신 대상 수상</h4>
+                      <p className="text-sm text-gray-600">
+                        2024년 혁신적인
+                        경영 방식과 사회 공헌 활동으로 경영혁신 대상 수상
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="rounded overflow-hidden border border-gray-200 bg-white">
+                    <div className="h-48 overflow-hidden">
+                      <img 
+                        src={awardPatent} 
+                        alt="2024년 대한변리사협회 특허 대상 수상" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="p-3">
+                      <h4 className="font-semibold text-lg">특허 대상 수상</h4>
+                      <p className="text-sm text-gray-600">
+                        2024년 대한변리사협회 주관 특허 대상 수상으로 기술력 인정 받음
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="rounded overflow-hidden border border-gray-200 bg-white">
+                    <div className="h-48 overflow-hidden">
+                      <img 
+                        src={awardCto} 
+                        alt="2024년 인도 언론에서 선정한 올해의 CTO" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="p-3">
+                      <h4 className="font-semibold text-lg">올해의 CTO 선정</h4>
+                      <p className="text-sm text-gray-600">
+                        2024년 인도 언론에서 정민호 대표를 올해의 CTO로 선정
+                      </p>
+                    </div>
+                  </div>
+                </div>
                 
                 <div className="bg-blue-50 p-6 my-6 rounded-lg border border-blue-100">
                   <blockquote className="italic">
