@@ -11,6 +11,13 @@ import ctgBusinessCard from "@/assets/ctg-business-card.png";
 import kimiyiAi from "@/assets/kimiyi-ai.jpg";
 import seniorAiKiosk from "@/assets/senior-ai-kiosk.png";
 import esportMeeting from "@/assets/esport-meeting.jpg";
+import globalEvent1 from "@/assets/global-event-1.jpg";
+import globalEvent2 from "@/assets/global-event-2.jpg";
+import globalEvent3 from "@/assets/global-event-3.jpg";
+import globalEvent4 from "@/assets/global-event-4.jpg";
+import globalEvent5 from "@/assets/global-event-5.jpg";
+import globalEvent6 from "@/assets/global-event-6.jpg";
+import globalEvent7 from "@/assets/global-event-7.jpg";
 
 export default function CompanyIntroduction() {
   const [isCtgInfoOpen, setIsCtgInfoOpen] = useState(false);
@@ -18,6 +25,7 @@ export default function CompanyIntroduction() {
   const [isAiPartnerOpen, setIsAiPartnerOpen] = useState(false);
   const [isSeniorProjectOpen, setIsSeniorProjectOpen] = useState(false);
   const [isEsportProjectOpen, setIsEsportProjectOpen] = useState(false);
+  const [isGlobalEventOpen, setIsGlobalEventOpen] = useState(false);
   return (
     <>
       <SEO 
@@ -280,6 +288,86 @@ export default function CompanyIntroduction() {
                                 <p className="text-xs text-center py-1 bg-gray-100">국제 e-Sport 진흥원 전옥이 이사장과 정민호 대표</p>
                               </div>
                             </div>
+                          </div>
+                        </CollapsibleContent>
+                      </CardContent>
+                    </Collapsible>
+                  </Card>
+                </div>
+                
+                <div className="mt-5">
+                  <Card className="bg-indigo-50 overflow-hidden">
+                    <Collapsible open={isGlobalEventOpen} onOpenChange={setIsGlobalEventOpen}>
+                      <CardContent className="p-4">
+                        <div className="flex justify-between items-center">
+                          <h4 className="font-semibold">국제 행사 참여 및 프로젝트 소개</h4>
+                          <CollapsibleTrigger asChild>
+                            <Button variant="ghost" size="sm" className="p-0 h-8 w-8">
+                              {isGlobalEventOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                            </Button>
+                          </CollapsibleTrigger>
+                        </div>
+                        
+                        <CollapsibleContent>
+                          <div className="pt-3 space-y-2">
+                            <p className="text-sm text-gray-600">
+                              사하라 리얼테크 정민호 대표가 두바이, 인도, 태국, 말레이시아, 일본 등에서 실물 부동산 및 RWA 미래 전망과 
+                              사하라 리얼테크 사업을 소개하는 패널 및 강사로 참여하였습니다.
+                            </p>
+                            <div className="mt-3 grid grid-cols-3 md:grid-cols-4 gap-2">
+                              <div className="rounded overflow-hidden border border-gray-200">
+                                <img 
+                                  src={globalEvent1} 
+                                  alt="싱가포르 마리나베이 블랙록 사업 설명회" 
+                                  className="w-full h-24 object-cover"
+                                />
+                              </div>
+                              <div className="rounded overflow-hidden border border-gray-200">
+                                <img 
+                                  src={globalEvent2} 
+                                  alt="두바이 국제 컨퍼런스" 
+                                  className="w-full h-24 object-cover"
+                                />
+                              </div>
+                              <div className="rounded overflow-hidden border border-gray-200">
+                                <img 
+                                  src={globalEvent3} 
+                                  alt="인도 부동산 토큰화 컨퍼런스" 
+                                  className="w-full h-24 object-cover"
+                                />
+                              </div>
+                              <div className="rounded overflow-hidden border border-gray-200">
+                                <img 
+                                  src={globalEvent4} 
+                                  alt="말레이시아 RWA 컨퍼런스" 
+                                  className="w-full h-24 object-cover"
+                                />
+                              </div>
+                              <div className="rounded overflow-hidden border border-gray-200">
+                                <img 
+                                  src={globalEvent5} 
+                                  alt="일본 블록체인 부동산 포럼" 
+                                  className="w-full h-24 object-cover"
+                                />
+                              </div>
+                              <div className="rounded overflow-hidden border border-gray-200">
+                                <img 
+                                  src={globalEvent6} 
+                                  alt="국제 RWA 컨퍼런스" 
+                                  className="w-full h-24 object-cover"
+                                />
+                              </div>
+                              <div className="rounded overflow-hidden border border-gray-200">
+                                <img 
+                                  src={globalEvent7} 
+                                  alt="글로벌 블록체인 이벤트" 
+                                  className="w-full h-24 object-cover"
+                                />
+                              </div>
+                            </div>
+                            <p className="text-xs text-center mt-2 bg-gray-100 py-1 rounded">
+                              싱가포르 마리나베이 블랙록 사업 설명 및 두바이, 인도, 말레이시아 등 국제 행사 참여
+                            </p>
                           </div>
                         </CollapsibleContent>
                       </CardContent>
