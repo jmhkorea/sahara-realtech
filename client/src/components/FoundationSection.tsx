@@ -24,7 +24,7 @@ export default function FoundationSection() {
           </p>
         </div>
         
-        <div className="max-w-3xl mx-auto space-y-8">
+        <div className="max-w-2xl mx-auto space-y-8">
           <FoundationCard
             title="몰타 공화국 재단 등록증"
             subtitle="유럽 몰타공화국 (Malta Foundation) - 글로벌 본사"
