@@ -49,11 +49,11 @@ import {
   PieChart as PieChartIcon,
   Calendar,
   AlertCircle,
-  AlertCircle,
   CheckCircle,
   Briefcase,
   LineChart as LineChartIcon
 } from "lucide-react";
+import AssetValueAnalysisTab from "@/components/AssetValueAnalysisTab";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
