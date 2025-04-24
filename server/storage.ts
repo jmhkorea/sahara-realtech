@@ -11,6 +11,9 @@ import {
 } from "@shared/schema";
 
 export interface IStorage {
+  // Session store for express-session
+  sessionStore: any;
+  
   // User methods
   getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
@@ -63,6 +66,7 @@ export interface IStorage {
 }
 
 export class MemStorage implements IStorage {
+  sessionStore: any;
   private users: Map<number, User>;
   private properties: Map<number, Property>;
   private investments: Map<number, Investment>;
@@ -82,6 +86,17 @@ export class MemStorage implements IStorage {
   private certificateCurrentId: number;
 
   constructor() {
+    // 메모리 세션 스토어 생성
+    import('memorystore').then(memorystore => {
+      const MemoryStore = memorystore.default(session);
+      this.sessionStore = new MemoryStore({
+        checkPeriod: 86400000 // 24시간마다 만료된 세션 정리
+      });
+    });
+    
+    // 임시로 빈 객체 할당
+    this.sessionStore = {};
+    
     this.users = new Map();
     this.properties = new Map();
     this.investments = new Map();
@@ -746,11 +761,16 @@ export class DatabaseStorage implements IStorage {
   
   // Certificate methods
   async getCertificates(category?: string): Promise<Certificate[]> {
-    let query = db.select().from(certificates).orderBy(asc(certificates.position));
     if (category) {
-      query = query.where(eq(certificates.category, category));
+      return await db.select()
+        .from(certificates)
+        .where(eq(certificates.category, category))
+        .orderBy(asc(certificates.position));
+    } else {
+      return await db.select()
+        .from(certificates)
+        .orderBy(asc(certificates.position));
     }
-    return await query;
   }
   
   async getCertificate(id: number): Promise<Certificate | undefined> {
@@ -777,7 +797,7 @@ export class DatabaseStorage implements IStorage {
   
   async deleteCertificate(id: number): Promise<boolean> {
     const result = await db.delete(certificates).where(eq(certificates.id, id));
-    return result.rowCount > 0;
+    return result.rowCount ? result.rowCount > 0 : false;
   }
   
   // Property methods (using in-memory storage for now)
