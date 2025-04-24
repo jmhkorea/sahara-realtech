@@ -78,6 +78,17 @@ export default function TeamWorkspace() {
       teamMembers: ["Brian Jung", "Kim Dae-myung"],
       status: "active",
       type: "documentation"
+    },
+    {
+      id: "proj-5",
+      name: "리조트 플래너 시스템",
+      description: "리조트 및 골프 멤버십 예약 관리를 위한 통합 플래닝 시스템",
+      url: "https://replit.com/@jmhkorea/ResortPlanner",
+      lastUpdated: "2025-04-23",
+      owner: "Han Ko",
+      teamMembers: ["Jeon Jong-han", "Kim Dae-myung"],
+      status: "active",
+      type: "fullstack"
     }
   ]);
 
