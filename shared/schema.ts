@@ -188,3 +188,22 @@ export type BlogTag = typeof blogTags.$inferSelect;
 export type InsertBlogTag = z.infer<typeof insertBlogTagSchema>;
 export type BlogComment = typeof blogComments.$inferSelect;
 export type InsertBlogComment = z.infer<typeof insertBlogCommentSchema>;
+
+// 인증서 테이블
+export const certificates = pgTable("certificates", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  category: text("category").notNull().default("tech"), // tech, patent 등 카테고리
+  filePath: text("file_path").notNull(),
+  uploadedAt: timestamp("uploaded_at").defaultNow().notNull(),
+  description: text("description"),
+  position: integer("position").notNull().default(0), // 특정 위치에 표시하기 위한 순서
+});
+
+export const insertCertificateSchema = createInsertSchema(certificates).omit({
+  id: true,
+  uploadedAt: true,
+});
+
+export type Certificate = typeof certificates.$inferSelect;
+export type InsertCertificate = z.infer<typeof insertCertificateSchema>;

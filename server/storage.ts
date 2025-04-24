@@ -6,6 +6,7 @@ import {
   blogPosts, type BlogPost, type InsertBlogPost,
   blogComments, type BlogComment, type InsertBlogComment,
   blogTags, type BlogTag, type InsertBlogTag,
+  certificates, type Certificate, type InsertCertificate,
   TokenizationStatus, PropertyType, BlogCategory, type BlogCategoryValue
 } from "@shared/schema";
 
@@ -52,6 +53,13 @@ export interface IStorage {
   // Blog Tag methods
   getBlogTags(): Promise<BlogTag[]>;
   createBlogTag(tag: InsertBlogTag): Promise<BlogTag>;
+  
+  // Certificate methods
+  getCertificates(category?: string): Promise<Certificate[]>;
+  getCertificate(id: number): Promise<Certificate | undefined>;
+  createCertificate(certificate: InsertCertificate): Promise<Certificate>;
+  updateCertificate(id: number, certificate: Partial<InsertCertificate>): Promise<Certificate | undefined>;
+  deleteCertificate(id: number): Promise<boolean>;
 }
 
 export class MemStorage implements IStorage {
@@ -62,6 +70,7 @@ export class MemStorage implements IStorage {
   private blogPosts: Map<number, BlogPost>;
   private blogComments: Map<number, BlogComment>;
   private blogTags: Map<number, BlogTag>;
+  private certificates: Map<number, Certificate>;
   
   private userCurrentId: number;
   private propertyCurrentId: number;
@@ -70,6 +79,7 @@ export class MemStorage implements IStorage {
   private blogPostCurrentId: number;
   private blogCommentCurrentId: number;
   private blogTagCurrentId: number;
+  private certificateCurrentId: number;
 
   constructor() {
     this.users = new Map();
@@ -79,6 +89,7 @@ export class MemStorage implements IStorage {
     this.blogPosts = new Map();
     this.blogComments = new Map();
     this.blogTags = new Map();
+    this.certificates = new Map();
     
     this.userCurrentId = 1;
     this.propertyCurrentId = 1;
@@ -87,6 +98,7 @@ export class MemStorage implements IStorage {
     this.blogPostCurrentId = 1;
     this.blogCommentCurrentId = 1;
     this.blogTagCurrentId = 1;
+    this.certificateCurrentId = 1;
 
     // Add sample properties for development
     this.initSampleData();
