@@ -36,6 +36,17 @@ export default function TeamWorkspace() {
   const { t } = useTranslation();
   const [teamProjects, setTeamProjects] = useState<TeamProject[]>([
     {
+      id: "proj-5",
+      name: "리조트 플래너 시스템",
+      description: "리조트 및 골프 멤버십 예약 관리를 위한 통합 플래닝 시스템",
+      url: "https://resort-planner-jmhkorea.replit.app/",
+      lastUpdated: "2025-04-24",
+      owner: "Han Ko",
+      teamMembers: ["Jeon Jong-han", "Kim Dae-myung"],
+      status: "active",
+      type: "fullstack"
+    },
+    {
       id: "proj-1",
       name: "블록체인 토큰화 스마트 계약 (Avalanche)",
       description: "Avalanche C-Chain ARC 표준을 따르는 부동산 토큰화 스마트 계약 개발 프로젝트",
@@ -78,17 +89,6 @@ export default function TeamWorkspace() {
       teamMembers: ["Brian Jung", "Kim Dae-myung"],
       status: "active",
       type: "documentation"
-    },
-    {
-      id: "proj-5",
-      name: "리조트 플래너 시스템",
-      description: "리조트 및 골프 멤버십 예약 관리를 위한 통합 플래닝 시스템",
-      url: "https://resort-planner-jmhkorea.replit.app/",
-      lastUpdated: "2025-04-24",
-      owner: "Han Ko",
-      teamMembers: ["Jeon Jong-han", "Kim Dae-myung"],
-      status: "active",
-      type: "fullstack"
     }
   ]);
 
@@ -280,8 +280,76 @@ export default function TeamWorkspace() {
           </TabsList>
           
           <TabsContent value="all">
+            {/* 리조트 플래너 시스템 특별 카드 (상단에 크게 배치) */}
+            <Card className="w-full mb-8 border-2 border-blue-300 bg-gradient-to-r from-blue-50 to-indigo-50 hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <div className="flex justify-between items-start">
+                  <CardTitle className="text-xl text-blue-800">🏢 리조트 플래너 시스템</CardTitle>
+                  <span className="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">활성</span>
+                </div>
+                <CardDescription className="text-base text-blue-700">
+                  리조트 및 골프 멤버십 예약 관리를 위한 통합 플래닝 시스템 - 배포 완료
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-3">
+                    <div className="flex items-center text-sm">
+                      <FolderGit className="h-5 w-5 mr-2 text-blue-600" />
+                      <span className="text-neutral-700 font-medium">소유자: Han Ko</span>
+                    </div>
+                    <div className="flex items-center text-sm">
+                      <Link2 className="h-5 w-5 mr-2 text-blue-600" />
+                      <span className="text-neutral-700 font-medium">
+                        resort-planner-jmhkorea.replit.app
+                      </span>
+                    </div>
+                    <div className="flex items-center text-sm">
+                      <span className="px-2 py-1 text-xs font-semibold rounded-full bg-indigo-100 text-indigo-800">풀스택</span>
+                      <span className="text-neutral-600 text-xs ml-2">
+                        최종 수정: 2025-04-24
+                      </span>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="text-sm text-neutral-700">
+                      <p className="mb-2">주요 기능:</p>
+                      <ul className="list-disc list-inside space-y-1 text-xs">
+                        <li>멤버십 회원 관리 및 예약 시스템</li>
+                        <li>리조트 시설 현황 및 예약 가능 일정 확인</li>
+                        <li>관리자 대시보드 및 데이터 분석</li>
+                        <li>결제 시스템 연동</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+              <CardFooter className="flex justify-between border-t pt-4">
+                <div className="flex -space-x-2">
+                  {teamProjects[0].teamMembers.map((member, idx) => (
+                    <div 
+                      key={idx} 
+                      className="w-8 h-8 rounded-full bg-blue-200 border-2 border-white flex items-center justify-center text-xs font-medium overflow-hidden"
+                      title={member}
+                    >
+                      {member.split(' ').map(name => name[0]).join('')}
+                    </div>
+                  ))}
+                </div>
+                <a 
+                  href={teamProjects[0].url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium"
+                >
+                  시스템 열기 <ExternalLink className="h-4 w-4 ml-1" />
+                </a>
+              </CardFooter>
+            </Card>
+            
+            {/* 나머지 프로젝트 카드 */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {teamProjects.map((project) => (
+              {teamProjects.slice(1).map((project) => (
                 <Card key={project.id} className="hover:shadow-lg transition-shadow">
                   <CardHeader>
                     <div className="flex justify-between items-start">
@@ -322,14 +390,9 @@ export default function TeamWorkspace() {
                         </div>
                       ))}
                     </div>
-                    <a 
-                      href={project.url} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="flex items-center text-primary hover:text-primary/80 text-sm font-medium"
-                    >
-                      열기 <ExternalLink className="h-4 w-4 ml-1" />
-                    </a>
+                    <div className="text-gray-400 text-sm italic">
+                      내부 개발 중
+                    </div>
                   </CardFooter>
                 </Card>
               ))}
@@ -385,7 +448,7 @@ export default function TeamWorkspace() {
                       rel="noopener noreferrer"
                       className="flex items-center text-primary hover:text-primary/80 text-sm font-medium"
                     >
-                      열기 <ExternalLink className="h-4 w-4 ml-1" />
+                      내부 개발 중
                     </a>
                   </CardFooter>
                 </Card>
