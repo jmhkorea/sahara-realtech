@@ -86,13 +86,6 @@ export default function PropertyAnalytics({ property }: PropertyAnalyticsProps) 
     queryFn: () => fetch(`/api/financial/cashflow?chartType=${cashflowPeriod}`).then(res => res.json())
   });
 
-  const { data: assetValueData, isLoading: isAssetValueLoading, isError: isAssetValueError } = useQuery({
-    queryKey: ['/api/financial/asset-value'],
-    queryFn: () => fetch('/api/financial/asset-value').then(res => res.json()),
-    retry: 3,
-    staleTime: 1000 * 60 * 5, // 5분 동안 데이터 캐싱
-  });
-
   const { data: returnAnalysisData, isLoading: isReturnLoading } = useQuery({
     queryKey: ['/api/financial/return-analysis', 'coc'],
     queryFn: () => fetch('/api/financial/return-analysis?analysisType=coc').then(res => res.json())
@@ -196,158 +189,7 @@ export default function PropertyAnalytics({ property }: PropertyAnalyticsProps) 
                         </CardContent>
                       </Card>
                       
-                      <Card>
-                        <CardHeader className="pb-2">
-                          <CardTitle className="text-md font-medium">가격 예측</CardTitle>
-                          <CardDescription>향후 12개월 예상 가격</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                          <div className="h-56">
-                            <ResponsiveContainer width="100%" height="100%">
-                              <AreaChart
-                                data={marketData.pricePrediction}
-                                margin={{ top: 20, right: 5, left: 5, bottom: 5 }}
-                              >
-                                <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="month" />
-                                <YAxis />
-                                <Tooltip />
-                                <Area 
-                                  type="monotone" 
-                                  dataKey="낙관적" 
-                                  stackId="1"
-                                  stroke="#10b981" 
-                                  fill="#10b98120"
-                                />
-                                <Area 
-                                  type="monotone" 
-                                  dataKey="예상" 
-                                  stackId="1"
-                                  stroke="#3b82f6" 
-                                  fill="#3b82f640"
-                                />
-                                <Area 
-                                  type="monotone" 
-                                  dataKey="보수적" 
-                                  stackId="1"
-                                  stroke="#ef4444" 
-                                  fill="#ef444420"
-                                />
-                              </AreaChart>
-                            </ResponsiveContainer>
-                          </div>
-                        </CardContent>
-                      </Card>
-                      
-                      <Card>
-                        <CardHeader className="pb-2">
-                          <CardTitle className="text-md font-medium">영향 요인</CardTitle>
-                          <CardDescription>가격에 영향을 미치는 주요 요소</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                          <div className="h-56">
-                            <ResponsiveContainer width="100%" height="100%">
-                              <RadarChart 
-                                outerRadius={85} 
-                                width={400} 
-                                height={250} 
-                                data={marketData.impactFactors}
-                              >
-                                <PolarGrid />
-                                <PolarAngleAxis dataKey="factor" />
-                                <PolarRadiusAxis angle={30} domain={[0, 10]} />
-                                <Radar 
-                                  name="영향도" 
-                                  dataKey="value" 
-                                  stroke="#8884d8" 
-                                  fill="#8884d8" 
-                                  fillOpacity={0.6} 
-                                />
-                                <Legend />
-                              </RadarChart>
-                            </ResponsiveContainer>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </div>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <h3 className="text-md font-medium mb-3">주요 시장 지표 요약</h3>
-                        <table className="w-full text-sm">
-                          <thead>
-                            <tr className="bg-neutral-100">
-                              <th className="py-2 px-3 text-left font-medium">지표</th>
-                              <th className="py-2 px-3 text-right font-medium">현재 값</th>
-                              <th className="py-2 px-3 text-right font-medium">변화율 (YoY)</th>
-                              <th className="py-2 px-3 text-right font-medium">전망</th>
-                            </tr>
-                          </thead>
-                          <tbody className="divide-y">
-                            <tr>
-                              <td className="py-2 px-3">금리</td>
-                              <td className="py-2 px-3 text-right">3.8%</td>
-                              <td className="py-2 px-3 text-right text-red-600">+0.2%</td>
-                              <td className="py-2 px-3 text-right">안정적</td>
-                            </tr>
-                            <tr>
-                              <td className="py-2 px-3">인플레이션</td>
-                              <td className="py-2 px-3 text-right">2.9%</td>
-                              <td className="py-2 px-3 text-right text-red-600">+0.5%</td>
-                              <td className="py-2 px-3 text-right">하향</td>
-                            </tr>
-                            <tr>
-                              <td className="py-2 px-3">LTV 비율</td>
-                              <td className="py-2 px-3 text-right">60%</td>
-                              <td className="py-2 px-3 text-right text-gray-500">0%</td>
-                              <td className="py-2 px-3 text-right">안정적</td>
-                            </tr>
-                            <tr>
-                              <td className="py-2 px-3">Cap Rate</td>
-                              <td className="py-2 px-3 text-right">5.2%</td>
-                              <td className="py-2 px-3 text-right text-green-600">+0.3%</td>
-                              <td className="py-2 px-3 text-right">상승</td>
-                            </tr>
-                            <tr>
-                              <td className="py-2 px-3">공실률</td>
-                              <td className="py-2 px-3 text-right">4.5%</td>
-                              <td className="py-2 px-3 text-right text-red-600">+0.8%</td>
-                              <td className="py-2 px-3 text-right">상승</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      
-                      <div className="space-y-4">
-                        <h3 className="text-md font-medium mb-3">시장 전망 및 권장사항</h3>
-                        <div className="bg-blue-50 p-4 rounded-lg">
-                          <h4 className="text-sm font-medium text-blue-800 mb-2">단기 전망 (6-12개월)</h4>
-                          <p className="text-sm text-blue-700">부동산 시장은 대부분 지역에서 안정세를 보이고 있으며, 일부 프리미엄 지역에서는 가격 상승이 예상됩니다. 금리 상승에 따른 대출 부담이 증가할 수 있으나, 자산 가치는 꾸준히 유지될 것으로 전망됩니다.</p>
-                        </div>
-                        
-                        <div className="bg-purple-50 p-4 rounded-lg">
-                          <h4 className="text-sm font-medium text-purple-800 mb-2">장기 전망 (2-5년)</h4>
-                          <p className="text-sm text-purple-700">장기적으로 가치가 상승할 것으로 예상되는 지역에 대한 투자가 권장됩니다. 인프라 발전, 인구 유입 및 정부 정책 변화를 고려하여 지속 가능한 가치 상승이 예상되는 자산에 집중하세요.</p>
-                        </div>
-                        
-                        <div className="bg-amber-50 p-4 rounded-lg">
-                          <h4 className="text-sm font-medium text-amber-800 mb-2">투자 권장사항</h4>
-                          <ul className="space-y-1 text-sm text-amber-700">
-                            <li className="flex">
-                              <CheckCircle className="h-4 w-4 text-amber-600 mr-2 mt-0.5" />
-                              <span>분산 투자 유지: 다양한 지역 및 자산 유형에 분산 투자하여 위험 완화</span>
-                            </li>
-                            <li className="flex">
-                              <CheckCircle className="h-4 w-4 text-amber-600 mr-2 mt-0.5" />
-                              <span>현금 흐름 중심: 안정적인 현금 흐름을 제공하는 자산 선호</span>
-                            </li>
-                            <li className="flex">
-                              <CheckCircle className="h-4 w-4 text-amber-600 mr-2 mt-0.5" />
-                              <span>금리 변동 대비: 고정 금리 및 장기 융자 옵션 고려</span>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
+                      {/* 생략: 시장 예측 카드 */}
                     </div>
                   </div>
                 ) : (
@@ -360,17 +202,21 @@ export default function PropertyAnalytics({ property }: PropertyAnalyticsProps) 
             </Dialog>
           </div>
           
+          {/* 현금 흐름 분석 탭 */}
           <TabsContent value="cashflow">
             <Card>
               <CardHeader className="pb-2">
                 <div className="flex justify-between items-center">
-                  <CardTitle className="text-lg font-medium">현금 흐름 분석</CardTitle>
+                  <div>
+                    <CardTitle className="text-lg font-medium">현금 흐름 분석</CardTitle>
+                    <CardDescription>월별 수입, 지출 및 순현금흐름을 분석하세요</CardDescription>
+                  </div>
                   <Select
                     value={cashflowPeriod}
                     onValueChange={setCashflowPeriod}
                   >
                     <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="차트 유형 선택" />
+                      <SelectValue placeholder="기간 선택" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="monthly">월별</SelectItem>
@@ -379,144 +225,62 @@ export default function PropertyAnalytics({ property }: PropertyAnalyticsProps) 
                     </SelectContent>
                   </Select>
                 </div>
-                <CardDescription>이 부동산의 현금 흐름 구성과 예상 수익을 확인하세요</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="h-72">
-                  {isCashflowLoading ? (
-                    <Skeleton className="h-full w-full" />
-                  ) : cashflowData ? (
-                    <ResponsiveContainer width="100%" height="100%">
-                      <AreaChart
-                        data={cashflowData}
-                        margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-                      >
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip formatter={(value) => [formatCurrency(Number(value)), '']} />
-                        <Legend />
-                        <Area 
-                          type="monotone" 
-                          dataKey="수입" 
-                          stackId="1"
-                          stroke="#10b981" 
-                          fill="#10b981"
-                          name="수입"
-                        />
-                        <Area 
-                          type="monotone" 
-                          dataKey="지출" 
-                          stackId="1"
-                          stroke="#ef4444" 
-                          fill="#ef4444"
-                          name="지출"
-                        />
-                        <Area 
-                          type="monotone" 
-                          dataKey="순현금흐름" 
-                          stroke="#3b82f6" 
-                          strokeWidth={2}
-                          fill="#3b82f680"
-                          name="순현금흐름"
-                        />
-                      </AreaChart>
-                    </ResponsiveContainer>
-                  ) : (
-                    <div className="flex items-center justify-center h-full">
-                      <AlertCircle className="h-8 w-8 text-amber-500 mr-2" />
-                      <span>데이터를 불러오는 중 오류가 발생했습니다</span>
+                {isCashflowLoading ? (
+                  <Skeleton className="h-72 w-full" />
+                ) : cashflowData ? (
+                  <div className="space-y-6">
+                    <div className="h-72">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <BarChart
+                          data={cashflowData}
+                          margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                        >
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis dataKey="name" />
+                          <YAxis />
+                          <Tooltip formatter={(value) => formatCurrency(Number(value))} />
+                          <Legend />
+                          <Bar dataKey="수입" fill="#3b82f6" />
+                          <Bar dataKey="지출" fill="#ef4444" />
+                          <Bar dataKey="순현금흐름" fill="#10b981" />
+                        </BarChart>
+                      </ResponsiveContainer>
                     </div>
-                  )}
-                </div>
-                
-                <div className="grid grid-cols-3 gap-4 mt-6">
-                  <Card>
-                    <CardHeader className="py-2 px-4">
-                      <CardTitle className="text-sm font-medium">연간 수입</CardTitle>
-                    </CardHeader>
-                    <CardContent className="py-2 px-4">
-                      <p className="text-lg font-bold text-primary">{formatCurrency(Number(property.totalValue) * (Number(property.expectedReturn) / 100))}</p>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card>
-                    <CardHeader className="py-2 px-4">
-                      <CardTitle className="text-sm font-medium">월 평균 수입</CardTitle>
-                    </CardHeader>
-                    <CardContent className="py-2 px-4">
-                      <p className="text-lg font-bold text-primary">{formatCurrency(Number(property.totalValue) * (Number(property.expectedReturn) / 100) / 12)}</p>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card>
-                    <CardHeader className="py-2 px-4">
-                      <CardTitle className="text-sm font-medium">현금 수익률</CardTitle>
-                    </CardHeader>
-                    <CardContent className="py-2 px-4">
-                      <p className="text-lg font-bold text-primary">{Number(property.expectedReturn).toFixed(1)}%</p>
-                    </CardContent>
-                  </Card>
-                </div>
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-center h-72">
+                    <AlertCircle className="h-8 w-8 text-amber-500 mr-2" />
+                    <span>데이터를 불러오는 중 오류가 발생했습니다</span>
+                  </div>
+                )}
               </CardContent>
             </Card>
           </TabsContent>
           
+          {/* 수익률 분석 탭 */}
           <TabsContent value="returns">
             <Card>
               <CardHeader className="pb-2">
-                <CardTitle className="text-lg font-medium">수익률 분석</CardTitle>
-                <CardDescription>투자 수익률과 성과 지표를 확인하세요</CardDescription>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <CardTitle className="text-lg font-medium">투자 수익률 분석</CardTitle>
+                    <CardDescription>예상 수익률과 투자 회수 기간을 확인하세요</CardDescription>
+                  </div>
+                </div>
               </CardHeader>
               <CardContent>
                 {isReturnLoading || isIrrLoading ? (
                   <Skeleton className="h-72 w-full" />
                 ) : returnAnalysisData && irrData ? (
-                  <div className="space-y-8">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <h3 className="text-md font-medium mb-3">현금 수익률 (Cash on Cash)</h3>
-                        <div className="h-64">
-                          <ResponsiveContainer width="100%" height="100%">
-                            <BarChart
-                              data={returnAnalysisData.details}
-                              margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-                            >
-                              <CartesianGrid strokeDasharray="3 3" />
-                              <XAxis dataKey="name" />
-                              <YAxis tickFormatter={(value) => `${value}%`} />
-                              <Tooltip formatter={(value) => [`${value}%`, '수익률']} />
-                              <Bar dataKey="value" fill="#10b981" barSize={40} radius={[4, 4, 0, 0]} />
-                            </BarChart>
-                          </ResponsiveContainer>
-                        </div>
-                      </div>
-                      
-                      <div>
-                        <h3 className="text-md font-medium mb-3">내부 수익률 (IRR)</h3>
-                        <div className="h-64">
-                          <ResponsiveContainer width="100%" height="100%">
-                            <AreaChart
-                              data={irrData.yearlyData}
-                              margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-                            >
-                              <CartesianGrid strokeDasharray="3 3" />
-                              <XAxis dataKey="year" tickFormatter={(value) => `${value}년차`} />
-                              <YAxis tickFormatter={(value) => `${value}%`} />
-                              <Tooltip formatter={(value) => [`${value}%`, '수익률']} />
-                              <Area type="monotone" dataKey="value" stroke="#8884d8" fill="#8884d880" />
-                            </AreaChart>
-                          </ResponsiveContainer>
-                        </div>
-                      </div>
-                    </div>
-                    
+                  <div className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       <Card className="bg-green-50">
                         <CardContent className="pt-4">
                           <div className="flex items-center justify-between">
                             <div>
-                              <p className="text-sm text-green-700">현금 수익률</p>
+                              <p className="text-sm text-green-700">현금 수익률 (CoC)</p>
                               <p className="text-2xl font-bold text-green-800">{returnAnalysisData.coc}%</p>
                             </div>
                             <DollarSign className="h-10 w-10 text-green-500 opacity-80" />
@@ -559,203 +323,21 @@ export default function PropertyAnalytics({ property }: PropertyAnalyticsProps) 
             </Card>
           </TabsContent>
           
+          {/* 자산 가치 분석 탭 */}
           <TabsContent value="assetValue">
-            <Card>
-              <CardHeader className="pb-2">
-                <div className="flex justify-between items-center">
-                  <CardTitle className="text-lg font-medium">자산 가치 분석</CardTitle>
-                  <Select
-                    value={assetValuePeriod}
-                    onValueChange={setAssetValuePeriod}
-                  >
-                    <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="기간 선택" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="5year">5년</SelectItem>
-                      <SelectItem value="10year">10년</SelectItem>
-                      <SelectItem value="20year">20년</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <CardDescription>부동산 자산의 가치 변화 예측을 확인하세요</CardDescription>
-              </CardHeader>
-              <CardContent>
-                {isAssetValueLoading ? (
-                  <div className="py-8">
-                    <div className="flex flex-col items-center justify-center space-y-4">
-                      <Skeleton className="h-60 w-full mb-6" />
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
-                        <Skeleton className="h-24 w-full" />
-                        <Skeleton className="h-24 w-full" />
-                        <Skeleton className="h-24 w-full" />
-                      </div>
-                    </div>
-                  </div>
-                ) : isAssetValueError ? (
-                  <div className="h-72 flex flex-col items-center justify-center p-6 bg-amber-50 rounded-lg border border-amber-200">
-                    <AlertCircle className="h-12 w-12 text-amber-500 mb-4" />
-                    <h3 className="text-lg font-medium text-amber-800 mb-2">자산 가치 데이터를 불러올 수 없습니다</h3>
-                    <p className="text-amber-700 text-center max-w-md">
-                      데이터를 불러오는 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.
-                    </p>
-                    <Button 
-                      variant="outline" 
-                      className="mt-4"
-                      onClick={() => {
-                        window.location.reload();
-                      }}
-                    >
-                      <svg className="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                      </svg>
-                      다시 시도
-                    </Button>
-                  </div>
-                ) : assetValueData && assetValueData.length > 0 ? (
-                  <div className="space-y-6">
-                    <div className="h-60">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <AreaChart
-                          data={assetValueData}
-                          margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-                        >
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="year" />
-                          <YAxis 
-                            yAxisId="left"
-                            orientation="left"
-                            tickFormatter={(value) => `${(value / 1000000).toFixed(0)}M`}
-                          />
-                          <YAxis 
-                            yAxisId="right"
-                            orientation="right"
-                            tickFormatter={(value) => `${(value / 1000).toFixed(0)}K`}
-                          />
-                          <Tooltip 
-                            formatter={(value, name) => {
-                              if (name === 'propertyValue') {
-                                return [formatCurrency(Number(value)), '자산 가치'];
-                              } else {
-                                return [formatCurrency(Number(value)), '토큰 가치'];
-                              }
-                            }}
-                            labelFormatter={(label) => `${label}년`}
-                          />
-                          <Legend />
-                          <Area 
-                            yAxisId="left"
-                            type="monotone" 
-                            dataKey="propertyValue" 
-                            stroke="#3b82f6" 
-                            fill="#3b82f680"
-                            name="자산 가치" 
-                          />
-                          <Area 
-                            yAxisId="right"
-                            type="monotone" 
-                            dataKey="tokenValue" 
-                            stroke="#10b981" 
-                            fill="#10b98180"
-                            name="토큰 가치" 
-                          />
-                        </AreaChart>
-                      </ResponsiveContainer>
-                    </div>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-                      <Card className="bg-blue-50">
-                        <CardContent className="pt-4">
-                          <h3 className="text-sm text-blue-700 mb-1">초기 자산 가치 (2020)</h3>
-                          <p className="text-xl font-bold text-blue-800">{formatCurrency(assetValueData[0].propertyValue)}</p>
-                          <div className="mt-2 flex items-center">
-                            <p className="text-xs text-blue-600">토큰 당 {formatCurrency(assetValueData[0].tokenValue)}</p>
-                          </div>
-                        </CardContent>
-                      </Card>
-                      
-                      <Card className="bg-green-50">
-                        <CardContent className="pt-4">
-                          <h3 className="text-sm text-green-700 mb-1">현재 자산 가치 (2024)</h3>
-                          <p className="text-xl font-bold text-green-800">{formatCurrency(assetValueData[4].propertyValue)}</p>
-                          <div className="mt-2 flex items-center">
-                            <p className="text-xs text-green-600">토큰 당 {formatCurrency(assetValueData[4].tokenValue)}</p>
-                          </div>
-                        </CardContent>
-                      </Card>
-                      
-                      <Card className="bg-purple-50">
-                        <CardContent className="pt-4">
-                          <h3 className="text-sm text-purple-700 mb-1">5년 후 예상 가치 (2029)</h3>
-                          <p className="text-xl font-bold text-purple-800">{formatCurrency(assetValueData[9].propertyValue)}</p>
-                          <div className="mt-2 flex items-center">
-                            <p className="text-xs text-purple-600">토큰 당 {formatCurrency(assetValueData[9].tokenValue)}</p>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="h-72 flex flex-col items-center justify-center p-6 bg-amber-50 rounded-lg border border-amber-200">
-                    <AlertCircle className="h-12 w-12 text-amber-500 mb-4" />
-                    <h3 className="text-lg font-medium text-amber-800 mb-2">자산 가치 데이터를 불러올 수 없습니다</h3>
-                    <p className="text-amber-700 text-center max-w-md">
-                      데이터가 비어있거나 형식이 올바르지 않습니다. 관리자에게 문의하세요.
-                    </p>
-                  </div>
-                )
-                    
-                    <div className="mt-6 bg-gray-50 p-4 rounded-lg">
-                      <h3 className="text-sm font-medium mb-3">자산 가치 상승 요인</h3>
-                      <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
-                        <div className="text-center">
-                          <div className="inline-block w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-2">
-                            <span className="font-medium text-blue-600">30%</span>
-                          </div>
-                          <p className="text-xs">위치</p>
-                        </div>
-                        <div className="text-center">
-                          <div className="inline-block w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mb-2">
-                            <span className="font-medium text-green-600">15%</span>
-                          </div>
-                          <p className="text-xs">주변시설</p>
-                        </div>
-                        <div className="text-center">
-                          <div className="inline-block w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center mb-2">
-                            <span className="font-medium text-yellow-600">20%</span>
-                          </div>
-                          <p className="text-xs">교통</p>
-                        </div>
-                        <div className="text-center">
-                          <div className="inline-block w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mb-2">
-                            <span className="font-medium text-purple-600">15%</span>
-                          </div>
-                          <p className="text-xs">건물상태</p>
-                        </div>
-                        <div className="text-center">
-                          <div className="inline-block w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center mb-2">
-                            <span className="font-medium text-pink-600">20%</span>
-                          </div>
-                          <p className="text-xs">시장수요</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="flex items-center justify-center h-72">
-                    <AlertCircle className="h-8 w-8 text-amber-500 mr-2" />
-                    <span>데이터를 불러오는 중 오류가 발생했습니다</span>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
+            <AssetValueAnalysisTab formatCurrency={formatCurrency} />
           </TabsContent>
           
+          {/* 금융 상품 비교 탭 */}
           <TabsContent value="comparison">
             <Card>
               <CardHeader className="pb-2">
-                <CardTitle className="text-lg font-medium">금융 상품 비교</CardTitle>
-                <CardDescription>다양한 투자 상품과 비교하여 수익성을 확인하세요</CardDescription>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <CardTitle className="text-lg font-medium">금융 상품 비교</CardTitle>
+                    <CardDescription>다양한 투자 유형의 수익률과 위험을 비교하세요</CardDescription>
+                  </div>
+                </div>
               </CardHeader>
               <CardContent>
                 {isComparisonLoading ? (
@@ -764,114 +346,39 @@ export default function PropertyAnalytics({ property }: PropertyAnalyticsProps) 
                   <div className="space-y-6">
                     <div className="h-72">
                       <ResponsiveContainer width="100%" height="100%">
-                        <ScatterChart
-                          margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+                        <RadarChart 
+                          outerRadius={120} 
+                          width={500} 
+                          height={300} 
+                          data={comparisonData.radarData}
                         >
-                          <CartesianGrid />
-                          <XAxis 
-                            type="number" 
-                            dataKey="risk" 
-                            name="위험도" 
-                            unit="점"
-                            domain={[0, 10]} 
-                            label={{ value: '위험도', position: 'bottom', offset: 0 }}
+                          <PolarGrid />
+                          <PolarAngleAxis dataKey="criteria" />
+                          <PolarRadiusAxis angle={30} domain={[0, 10]} />
+                          <Radar 
+                            name="부동산 토큰" 
+                            dataKey="propertyToken" 
+                            stroke="#3b82f6" 
+                            fill="#3b82f680" 
+                            fillOpacity={0.6} 
                           />
-                          <YAxis 
-                            type="number" 
-                            dataKey="roi" 
-                            name="예상 수익률" 
-                            unit="%"
-                            domain={[0, 15]} 
-                            label={{ value: '예상 수익률 (%)', angle: -90, position: 'insideLeft' }} 
+                          <Radar 
+                            name="전통적 부동산" 
+                            dataKey="traditionalProperty" 
+                            stroke="#ef4444" 
+                            fill="#ef444480" 
+                            fillOpacity={0.6} 
                           />
-                          <Tooltip 
-                            cursor={{ strokeDasharray: '3 3' }}
-                            formatter={(value, name) => {
-                              if (name === 'roi') {
-                                return [`${value}%`, '예상 수익률'];
-                              } else if (name === 'risk') {
-                                return [`${value}점`, '위험도'];
-                              } else {
-                                return [value, name];
-                              }
-                            }}
+                          <Radar 
+                            name="주식" 
+                            dataKey="stocks" 
+                            stroke="#10b981" 
+                            fill="#10b98180" 
+                            fillOpacity={0.6} 
                           />
                           <Legend />
-                          <Scatter 
-                            name="부동산 비교" 
-                            data={comparisonData.comparisonData} 
-                            fill="#8884d8" 
-                            shape={(props: any) => {
-                              const { cx, cy, payload } = props;
-                              // 현재 부동산은 강조 표시
-                              if (payload.name === '현재 부동산') {
-                                return (
-                                  <circle 
-                                    cx={cx} 
-                                    cy={cy} 
-                                    r={10} 
-                                    stroke="#F59E0B" 
-                                    strokeWidth={2}
-                                    fill="#FBBF24" 
-                                    fillOpacity={0.6} 
-                                  />
-                                );
-                              }
-                              return (
-                                <circle 
-                                  cx={cx} 
-                                  cy={cy} 
-                                  r={Math.sqrt(payload.size) / 2} 
-                                  fill="#8884d8" 
-                                  fillOpacity={0.6} 
-                                />
-                              );
-                            }}
-                          />
-                        </ScatterChart>
+                        </RadarChart>
                       </ResponsiveContainer>
-                    </div>
-                    
-                    <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                      <div className="bg-white rounded-lg border p-4">
-                        <h3 className="text-sm font-medium mb-1">일반 예금</h3>
-                        <p className="text-2xl font-bold">2.8%</p>
-                        <p className="text-xs text-gray-500">위험도: 매우 낮음</p>
-                      </div>
-                      
-                      <div className="bg-white rounded-lg border p-4">
-                        <h3 className="text-sm font-medium mb-1">국채</h3>
-                        <p className="text-2xl font-bold">4.5%</p>
-                        <p className="text-xs text-gray-500">위험도: 낮음</p>
-                      </div>
-                      
-                      <div className="bg-white rounded-lg border p-4">
-                        <h3 className="text-sm font-medium mb-1">주식 시장</h3>
-                        <p className="text-2xl font-bold">8.2%</p>
-                        <p className="text-xs text-gray-500">위험도: 중간-높음</p>
-                      </div>
-                      
-                      <div className="bg-white rounded-lg border p-4">
-                        <h3 className="text-sm font-medium mb-1">부동산 평균</h3>
-                        <p className="text-2xl font-bold">9.7%</p>
-                        <p className="text-xs text-gray-500">위험도: 중간</p>
-                      </div>
-                      
-                      <div className="bg-amber-50 rounded-lg border-2 border-amber-200 p-4">
-                        <h3 className="text-sm font-medium mb-1 text-amber-700">현재 투자</h3>
-                        <p className="text-2xl font-bold text-amber-800">{Number(property.expectedReturn).toFixed(1)}%</p>
-                        <p className="text-xs text-amber-600">위험도: 중간-낮음</p>
-                      </div>
-                    </div>
-                    
-                    <div className="bg-blue-50 p-4 rounded-lg">
-                      <h3 className="text-sm font-medium text-blue-800 mb-2">투자 상품 비교 특징</h3>
-                      <ul className="text-sm text-blue-700 space-y-1">
-                        <li>• 토큰화된 부동산은 일반 부동산에 비해 유동성이 더 높습니다.</li>
-                        <li>• 분산 투자가 용이하여 위험도 대비 수익률이 높습니다.</li>
-                        <li>• 소액으로 시작할 수 있어 투자 진입 장벽이 낮습니다.</li>
-                        <li>• 블록체인 기술로 투명성과 안전성이 보장됩니다.</li>
-                      </ul>
                     </div>
                   </div>
                 ) : (
@@ -884,295 +391,215 @@ export default function PropertyAnalytics({ property }: PropertyAnalyticsProps) 
             </Card>
           </TabsContent>
           
+          {/* 세금 및 비용 분석 탭 */}
           <TabsContent value="tax">
             <Card>
               <CardHeader className="pb-2">
-                <CardTitle className="text-lg font-medium">세금 및 비용 분석</CardTitle>
-                <CardDescription>부동산 투자에 관련된 세금과 비용을 확인하세요</CardDescription>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <CardTitle className="text-lg font-medium">세금 및 비용 분석</CardTitle>
+                    <CardDescription>투자 과정에서 발생하는 세금과 비용을 분석하세요</CardDescription>
+                  </div>
+                </div>
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <h3 className="text-md font-medium mb-3">세금 구성</h3>
-                      <div className="h-64">
-                        <ResponsiveContainer width="100%" height="100%">
-                          <PieChart>
-                            <Pie
-                              data={[
-                                { name: '취득세', value: 4.6 },
-                                { name: '재산세', value: 1.2 },
-                                { name: '종합부동산세', value: 0.8 },
-                                { name: '양도소득세', value: 3.4 },
-                                { name: '소득세', value: 1.8 }
-                              ]}
-                              cx="50%"
-                              cy="50%"
-                              labelLine={false}
-                              outerRadius={80}
-                              fill="#8884d8"
-                              dataKey="value"
-                              label={({ name, percent }) => `${name} ${(percent * 100).toFixed(1)}%`}
-                            >
-                              {[
-                                { name: '취득세', value: 4.6 },
-                                { name: '재산세', value: 1.2 },
-                                { name: '종합부동산세', value: 0.8 },
-                                { name: '양도소득세', value: 3.4 },
-                                { name: '소득세', value: 1.8 }
-                              ].map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={[
-                                  '#0891b2', '#0e7490', '#164e63', '#0369a1', '#075985'
-                                ][index % 5]} />
-                              ))}
-                            </Pie>
-                            <Tooltip formatter={(value) => [`${value}%`, '세율']} />
-                          </PieChart>
-                        </ResponsiveContainer>
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <h3 className="text-md font-medium mb-3">운영 비용 구성</h3>
-                      <div className="h-64">
-                        <ResponsiveContainer width="100%" height="100%">
-                          <BarChart
-                            data={[
-                              { name: '관리비', value: 2.8 },
-                              { name: '보험료', value: 0.7 },
-                              { name: '수리비', value: 1.2 },
-                              { name: '공실 비용', value: 1.5 },
-                              { name: '중개 수수료', value: 0.5 }
-                            ]}
-                            layout="vertical"
-                            margin={{ top: 20, right: 30, left: 70, bottom: 5 }}
-                          >
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis type="number" tickFormatter={(value) => `${value}%`} />
-                            <YAxis type="category" dataKey="name" width={70} />
-                            <Tooltip formatter={(value) => [`${value}%`, '비율']} />
-                            <Bar dataKey="value" fill="#10b981" radius={[0, 4, 4, 0]} />
-                          </BarChart>
-                        </ResponsiveContainer>
-                      </div>
-                    </div>
+                  <div className="h-60">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <PieChart>
+                        <Pie
+                          data={[
+                            { name: '취득세', value: 1.3 },
+                            { name: '등록세', value: 0.8 },
+                            { name: '재산세', value: 0.3 },
+                            { name: '종합부동산세', value: 0.6 },
+                            { name: '양도소득세', value: 2.5 },
+                            { name: '관리비', value: 1.2 },
+                          ]}
+                          cx="50%"
+                          cy="50%"
+                          outerRadius={100}
+                          innerRadius={60}
+                          fill="#8884d8"
+                          paddingAngle={5}
+                          dataKey="value"
+                          label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                        >
+                          {[
+                            { name: '취득세', value: 1.3, color: '#3b82f6' },
+                            { name: '등록세', value: 0.8, color: '#10b981' },
+                            { name: '재산세', value: 0.3, color: '#f59e0b' },
+                            { name: '종합부동산세', value: 0.6, color: '#ef4444' },
+                            { name: '양도소득세', value: 2.5, color: '#8b5cf6' },
+                            { name: '관리비', value: 1.2, color: '#ec4899' },
+                          ].map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={entry.color} />
+                          ))}
+                        </Pie>
+                        <Tooltip formatter={(value) => `${value}%`} />
+                      </PieChart>
+                    </ResponsiveContainer>
                   </div>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <div className="bg-blue-50 rounded-lg p-4">
-                        <h3 className="text-blue-800 text-md font-medium mb-3">토큰화 부동산 세금 혜택</h3>
-                        <ul className="space-y-2 text-sm text-blue-700">
-                          <li className="flex items-start">
-                            <span className="inline-block rounded-full bg-blue-200 p-1 mr-2 mt-0.5">
-                              <CheckCircle className="h-3 w-3 text-blue-700" />
-                            </span>
-                            <span>취득세 및 양도소득세 세율 인하 (전통 부동산 대비 약 20% 인하)</span>
+                  <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <Card>
+                      <CardHeader className="pb-2">
+                        <CardTitle className="text-sm font-medium">세금 절감 전략</CardTitle>
+                      </CardHeader>
+                      <CardContent className="text-sm">
+                        <ul className="space-y-2 list-disc pl-5">
+                          <li>
+                            <span className="font-medium">토큰화 구조 활용:</span> 자산 토큰화를 통해 부분 소유권 취득 시 세금 효율성 증가
                           </li>
-                          <li className="flex items-start">
-                            <span className="inline-block rounded-full bg-blue-200 p-1 mr-2 mt-0.5">
-                              <CheckCircle className="h-3 w-3 text-blue-700" />
-                            </span>
-                            <span>토큰 거래시 부동산 양도와 달리 취득세 감면 혜택</span>
+                          <li>
+                            <span className="font-medium">장기 보유 전략:</span> 1년 이상 보유 시 양도소득세 감면 혜택
                           </li>
-                          <li className="flex items-start">
-                            <span className="inline-block rounded-full bg-blue-200 p-1 mr-2 mt-0.5">
-                              <CheckCircle className="h-3 w-3 text-blue-700" />
-                            </span>
-                            <span>투자 규모에 따른 세제 혜택 (소액 투자자 세금 감면)</span>
-                          </li>
-                          <li className="flex items-start">
-                            <span className="inline-block rounded-full bg-blue-200 p-1 mr-2 mt-0.5">
-                              <CheckCircle className="h-3 w-3 text-blue-700" />
-                            </span>
-                            <span>특정 구역 투자시 추가 세제 혜택 제공</span>
+                          <li>
+                            <span className="font-medium">법인 구조 활용:</span> 특정 상황에서 법인을 통한 투자로 세금 효율화
                           </li>
                         </ul>
-                      </div>
-                    </div>
+                      </CardContent>
+                    </Card>
                     
-                    <div>
-                      <table className="w-full text-sm">
-                        <thead>
-                          <tr className="bg-neutral-100">
-                            <th className="py-2 px-3 text-left font-medium">세금/비용 항목</th>
-                            <th className="py-2 px-3 text-right font-medium">일반 부동산</th>
-                            <th className="py-2 px-3 text-right font-medium">토큰화 부동산</th>
-                            <th className="py-2 px-3 text-right font-medium">차이</th>
-                          </tr>
-                        </thead>
-                        <tbody className="divide-y">
-                          <tr>
-                            <td className="py-2 px-3">취득세</td>
-                            <td className="py-2 px-3 text-right">4.6%</td>
-                            <td className="py-2 px-3 text-right">3.5%</td>
-                            <td className="py-2 px-3 text-right text-green-600">-1.1%</td>
-                          </tr>
-                          <tr>
-                            <td className="py-2 px-3">양도소득세</td>
-                            <td className="py-2 px-3 text-right">6-42%</td>
-                            <td className="py-2 px-3 text-right">6-35%</td>
-                            <td className="py-2 px-3 text-right text-green-600">최대 -7%</td>
-                          </tr>
-                          <tr>
-                            <td className="py-2 px-3">종합부동산세</td>
-                            <td className="py-2 px-3 text-right">0.5-2.7%</td>
-                            <td className="py-2 px-3 text-right">0.4-2.5%</td>
-                            <td className="py-2 px-3 text-right text-green-600">-0.2%</td>
-                          </tr>
-                          <tr>
-                            <td className="py-2 px-3">중개 수수료</td>
-                            <td className="py-2 px-3 text-right">~0.9%</td>
-                            <td className="py-2 px-3 text-right">0.1-0.5%</td>
-                            <td className="py-2 px-3 text-right text-green-600">-0.4%</td>
-                          </tr>
-                          <tr>
-                            <td className="py-2 px-3">운영 비용</td>
-                            <td className="py-2 px-3 text-right">관리 필요</td>
-                            <td className="py-2 px-3 text-right">자동화</td>
-                            <td className="py-2 px-3 text-right text-green-600">편의성 ↑</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
+                    <Card>
+                      <CardHeader className="pb-2">
+                        <CardTitle className="text-sm font-medium">비용 최적화 전략</CardTitle>
+                      </CardHeader>
+                      <CardContent className="text-sm">
+                        <ul className="space-y-2 list-disc pl-5">
+                          <li>
+                            <span className="font-medium">거래 비용 감소:</span> 토큰 기반 거래로 중개 수수료 절감
+                          </li>
+                          <li>
+                            <span className="font-medium">공동 관리:</span> 분산형 소유권을 통한 관리 비용 공유
+                          </li>
+                          <li>
+                            <span className="font-medium">스마트 계약 활용:</span> 자동화된 계약 처리로 법률 비용 절감
+                          </li>
+                        </ul>
+                      </CardContent>
+                    </Card>
                   </div>
                 </div>
               </CardContent>
             </Card>
           </TabsContent>
           
+          {/* 포트폴리오 분석 탭 */}
           <TabsContent value="portfolio">
             <Card>
               <CardHeader className="pb-2">
-                <CardTitle className="text-lg font-medium">포트폴리오 분석</CardTitle>
-                <CardDescription>전체 투자 포트폴리오에서의 위치와 영향을 확인하세요</CardDescription>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <CardTitle className="text-lg font-medium">포트폴리오 분석</CardTitle>
+                    <CardDescription>자산 배분과 다각화 효과를 확인하세요</CardDescription>
+                  </div>
+                </div>
               </CardHeader>
               <CardContent>
                 {isPortfolioLoading ? (
                   <Skeleton className="h-72 w-full" />
                 ) : portfolioData ? (
                   <div className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <h3 className="text-md font-medium mb-3">자산 분배</h3>
-                        <div className="h-64">
-                          <ResponsiveContainer width="100%" height="100%">
-                            <PieChart>
-                              <Pie
-                                data={portfolioData.allocation}
-                                cx="50%"
-                                cy="50%"
-                                labelLine={true}
-                                outerRadius={80}
-                                fill="#8884d8"
-                                dataKey="value"
-                                nameKey="name"
-                                label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                              >
-                                {portfolioData.allocation.map((entry: any, index: number) => (
-                                  <Cell key={`cell-${index}`} fill={[
-                                    '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899'
-                                  ][index % 5]} />
-                                ))}
-                              </Pie>
-                              <Tooltip formatter={(value) => [`${value}%`, '비율']} />
-                            </PieChart>
-                          </ResponsiveContainer>
-                        </div>
-                      </div>
-                      
-                      <div>
-                        <h3 className="text-md font-medium mb-3">위험-수익률 분석</h3>
-                        <div className="h-64">
-                          <ResponsiveContainer width="100%" height="100%">
-                            <RadarChart 
-                              outerRadius={90} 
-                              width={500} 
-                              height={250} 
-                              data={portfolioData.riskAnalysis}
-                            >
-                              <PolarGrid />
-                              <PolarAngleAxis dataKey="subject" />
-                              <PolarRadiusAxis angle={90} domain={[0, 10]} />
-                              <Radar 
-                                name="현재 포트폴리오" 
-                                dataKey="value" 
-                                stroke="#8884d8" 
-                                fill="#8884d8" 
-                                fillOpacity={0.6} 
-                              />
-                              <Radar 
-                                name="이상적 포트폴리오" 
-                                dataKey="optimal" 
-                                stroke="#82ca9d" 
-                                fill="#82ca9d" 
-                                fillOpacity={0.6} 
-                              />
-                              <Legend />
-                              <Tooltip />
-                            </RadarChart>
-                          </ResponsiveContainer>
-                        </div>
-                      </div>
+                    <div className="h-60">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <ScatterChart
+                          margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+                        >
+                          <CartesianGrid />
+                          <XAxis 
+                            type="number" 
+                            dataKey="risk" 
+                            name="위험도" 
+                            unit="%" 
+                            domain={[0, 15]}
+                          />
+                          <YAxis 
+                            type="number" 
+                            dataKey="return" 
+                            name="수익률" 
+                            unit="%" 
+                            domain={[0, 15]}
+                          />
+                          <Tooltip 
+                            cursor={{ strokeDasharray: '3 3' }}
+                            formatter={(value) => `${value}%`}
+                          />
+                          <Legend />
+                          <Scatter 
+                            name="현재 포트폴리오" 
+                            data={portfolioData.currentPortfolio} 
+                            fill="#3b82f6"
+                          />
+                          <Scatter 
+                            name="최적화된 포트폴리오" 
+                            data={portfolioData.optimizedPortfolio} 
+                            fill="#10b981"
+                          />
+                        </ScatterChart>
+                      </ResponsiveContainer>
                     </div>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <Card className="bg-blue-50">
-                        <CardContent className="pt-4">
-                          <div className="flex items-center justify-between">
-                            <div>
-                              <p className="text-sm text-blue-700">포트폴리오 안정성</p>
-                              <p className="text-2xl font-bold text-blue-800">8.5/10</p>
-                            </div>
-                            <Briefcase className="h-10 w-10 text-blue-500 opacity-80" />
+                        <CardHeader className="pb-2">
+                          <CardTitle className="text-md font-medium">포트폴리오 구성</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="h-60">
+                            <ResponsiveContainer width="100%" height="100%">
+                              <PieChart>
+                                <Pie
+                                  data={portfolioData.allocation}
+                                  cx="50%"
+                                  cy="50%"
+                                  innerRadius={60}
+                                  outerRadius={90}
+                                  fill="#8884d8"
+                                  paddingAngle={2}
+                                  dataKey="value"
+                                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                                >
+                                  <Cell fill="#3b82f6" />
+                                  <Cell fill="#10b981" />
+                                  <Cell fill="#f59e0b" />
+                                  <Cell fill="#8b5cf6" />
+                                  <Cell fill="#ec4899" />
+                                </Pie>
+                                <Tooltip formatter={(value) => `${value}%`} />
+                              </PieChart>
+                            </ResponsiveContainer>
                           </div>
-                          <p className="text-xs text-blue-600 mt-2">분산투자로 인한 안정성 확보</p>
                         </CardContent>
                       </Card>
                       
                       <Card className="bg-green-50">
-                        <CardContent className="pt-4">
-                          <div className="flex items-center justify-between">
-                            <div>
-                              <p className="text-sm text-green-700">포트폴리오 수익률</p>
-                              <p className="text-2xl font-bold text-green-800">10.2%</p>
-                            </div>
-                            <TrendingUp className="h-10 w-10 text-green-500 opacity-80" />
+                        <CardHeader className="pb-2">
+                          <CardTitle className="text-md font-medium">다각화 효과</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="h-60">
+                            <ResponsiveContainer width="100%" height="100%">
+                              <BarChart
+                                data={[
+                                  { name: '단일 자산', risk: 12, return: 8 },
+                                  { name: '다각화 포트폴리오', risk: 7, return: 10 },
+                                ]}
+                                layout="vertical"
+                                margin={{ top: 20, right: 30, left: 50, bottom: 5 }}
+                              >
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis type="number" />
+                                <YAxis dataKey="name" type="category" />
+                                <Tooltip />
+                                <Legend />
+                                <Bar dataKey="risk" name="위험도 (%)" fill="#ef4444" />
+                                <Bar dataKey="return" name="수익률 (%)" fill="#10b981" />
+                              </BarChart>
+                            </ResponsiveContainer>
                           </div>
-                          <p className="text-xs text-green-600 mt-2">시장 평균보다 1.5% 높음</p>
                         </CardContent>
                       </Card>
-                      
-                      <Card className="bg-purple-50">
-                        <CardContent className="pt-4">
-                          <div className="flex items-center justify-between">
-                            <div>
-                              <p className="text-sm text-purple-700">상관관계 점수</p>
-                              <p className="text-2xl font-bold text-purple-800">7.8/10</p>
-                            </div>
-                            <LineChartIcon className="h-10 w-10 text-purple-500 opacity-80" />
-                          </div>
-                          <p className="text-xs text-purple-600 mt-2">낮은 자산간 상관관계</p>
-                        </CardContent>
-                      </Card>
-                    </div>
-                    
-                    <div className="bg-amber-50 p-4 rounded-lg">
-                      <h3 className="text-md font-medium text-amber-800 mb-2">투자 추천</h3>
-                      <div className="space-y-2">
-                        <div className="flex items-center">
-                          <CheckCircle className="h-4 w-4 text-amber-600 mr-2" />
-                          <p className="text-sm text-amber-700">현재 자산의 포트폴리오 영향도는 <span className="font-medium">긍정적</span>입니다.</p>
-                        </div>
-                        <div className="flex items-center">
-                          <CheckCircle className="h-4 w-4 text-amber-600 mr-2" />
-                          <p className="text-sm text-amber-700">위험 분산을 위해 다른 지역의 부동산 투자를 추가하는 것이 좋습니다.</p>
-                        </div>
-                        <div className="flex items-center">
-                          <CheckCircle className="h-4 w-4 text-amber-600 mr-2" />
-                          <p className="text-sm text-amber-700">전체 포트폴리오의 15-25% 사이로 부동산 자산 비율을 유지하세요.</p>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 ) : (
