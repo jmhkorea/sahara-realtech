@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { 
@@ -16,7 +16,7 @@ export default function FoundationSection() {
   const [certificates, setCertificates] = useState({
     malta: null,
     usa: null,
-    korea: '/uploads/certificates/korean_business_certificate.jpg', // 한국 사업자등록증 이미지 기본 설정
+    korea: null,
     china: null
   });
   
@@ -27,6 +27,39 @@ export default function FoundationSection() {
     korea: false,
     china: false
   });
+
+  // 컴포넌트 마운트 시 DB에서 인증서 가져오기
+  useEffect(() => {
+    const fetchCertificates = async () => {
+      try {
+        const response = await axios.get('/api/certificates?category=foundation');
+        
+        if (response.data && response.data.length > 0) {
+          // 국가별 인증서 분류
+          const updatedCertificates = { ...certificates };
+          
+          response.data.forEach((cert: any) => {
+            // 인증서 이름에 국가명이 포함되어 있다고 가정
+            if (cert.name.toLowerCase().includes('malta')) {
+              updatedCertificates.malta = cert.filePath;
+            } else if (cert.name.toLowerCase().includes('usa') || cert.name.toLowerCase().includes('미국')) {
+              updatedCertificates.usa = cert.filePath;
+            } else if (cert.name.toLowerCase().includes('korea') || cert.name.toLowerCase().includes('한국')) {
+              updatedCertificates.korea = cert.filePath;
+            } else if (cert.name.toLowerCase().includes('china') || cert.name.toLowerCase().includes('중국')) {
+              updatedCertificates.china = cert.filePath;
+            }
+          });
+          
+          setCertificates(updatedCertificates);
+        }
+      } catch (error) {
+        console.error('인증서 목록 불러오기 오류:', error);
+      }
+    };
+    
+    fetchCertificates();
+  }, []);
 
   // 파일 업로드 핸들러
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, country: string) => {
@@ -41,16 +74,37 @@ export default function FoundationSection() {
     try {
       setUploading({...uploading, [country]: true});
       
-      const response = await axios.post('/api/certificates/upload', formData, {
+      // 1. 이미지 업로드
+      const uploadResponse = await axios.post('/api/certificates/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
       
-      if (response.data.success) {
+      if (uploadResponse.data.filePath) {
+        // 2. 인증서 메타데이터 저장
+        const countryNames = {
+          malta: "몰타",
+          usa: "미국",
+          korea: "한국",
+          china: "중국"
+        };
+        
+        const certificateData = {
+          name: `${countryNames[country]} 사업자등록증`,
+          category: 'foundation',
+          filePath: uploadResponse.data.filePath,
+          position: Object.keys(countryNames).indexOf(country),
+          description: `${countryNames[country]} 법인 사업자 등록증`
+        };
+        
+        // 3. 인증서 데이터베이스에 저장
+        await axios.post('/api/certificates', certificateData);
+        
+        // 4. 상태 업데이트
         setCertificates({
           ...certificates,
-          [country]: response.data.filePath
+          [country]: uploadResponse.data.filePath
         });
       }
     } catch (error) {
