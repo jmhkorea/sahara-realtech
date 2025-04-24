@@ -34,7 +34,7 @@ export default function Hero() {
               <Button 
                 className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white hover:from-blue-600 hover:to-cyan-600 font-bold px-4 py-3 md:px-6 md:py-4 w-full sm:w-auto"
               >
-                토큰증권(STO) 제대로 알기
+                증권형 토큰(Security Token) 제대로 알기
               </Button>
             </Link>
             <Link href="/real-world-assets-guide">
@@ -58,7 +58,7 @@ export default function Hero() {
                 variant="outline" 
                 className="bg-transparent border border-white text-white hover:bg-white/10 font-bold px-4 py-3 md:px-6 md:py-4 w-full sm:w-auto text-sm md:text-base"
               >
-                토큰증권(STO) 상장 의뢰
+                증권형 토큰(Security Token) 상장 의뢰
               </Button>
             </Link>
             <Link href="/how-to-invest">
@@ -79,23 +79,25 @@ export default function Hero() {
             </Link>
           </div>
           
-          <div className="flex items-center mt-8 bg-white/10 rounded-lg p-4 backdrop-blur-sm">
-            <div className="flex-1">
-              <div className="flex items-center">
-                <span className="font-bold text-white mr-2">Avalanche</span>
-                <span className="font-inter font-medium">
-                  {t('hero.avalancheBased', '기술 기반')}
-                </span>
+          <Link href="/avalanche-tech">
+            <div className="flex items-center mt-8 bg-white/10 rounded-lg p-4 backdrop-blur-sm hover:bg-white/20 transition-colors cursor-pointer">
+              <div className="flex-1">
+                <div className="flex items-center">
+                  <span className="font-bold text-white mr-2">Avalanche</span>
+                  <span className="font-inter font-medium">
+                    {t('hero.avalancheBased', '기술 기반')}
+                  </span>
+                </div>
+                <p className="text-sm text-white/80 mt-1">
+                  {t('hero.avalancheDescription')}
+                </p>
               </div>
-              <p className="text-sm text-white/80 mt-1">
-                {t('hero.avalancheDescription')}
-              </p>
+              <div className="border-l border-white/20 pl-4">
+                <p className="font-bold font-inter text-xl">10+</p>
+                <p className="text-sm text-white/80">{t('hero.completedTransactions')}</p>
+              </div>
             </div>
-            <div className="border-l border-white/20 pl-4">
-              <p className="font-bold font-inter text-xl">10+</p>
-              <p className="text-sm text-white/80">{t('hero.completedTransactions')}</p>
-            </div>
-          </div>
+          </Link>
           
           <div className="mt-6 bg-gradient-to-r from-blue-600/20 to-blue-800/20 rounded-lg p-4 backdrop-blur-sm border border-blue-400/30 relative">
             <div className="absolute -top-3 -right-2 transform rotate-12">

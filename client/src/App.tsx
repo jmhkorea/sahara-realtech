@@ -27,6 +27,7 @@ import RealWorldAssetsGuide from "@/pages/RealWorldAssetsGuide";
 import RwaLiquidation from "@/pages/RwaLiquidation";
 import GlobalCaseStudies from "@/pages/GlobalCaseStudies";
 import TokenSecuritiesGuide from "@/pages/TokenSecuritiesGuide";
+import AvalancheTech from "@/pages/AvalancheTech";
 import CompanyIntroduction from "@/pages/CompanyIntroduction";
 import TeamWorkspace from "@/pages/TeamWorkspace";
 import InvestmentProcessPage from "@/pages/InvestmentProcessPage";
@@ -73,6 +74,7 @@ function Router() {
       <Route path="/global-case-studies" component={() => <RouteWithHeaderAndFooter component={GlobalCaseStudies} />} />
       <Route path="/rwa-liquidation" component={() => <RouteWithHeaderAndFooter component={RwaLiquidation} />} />
       <Route path="/token-securities-guide" component={() => <RouteWithHeaderAndFooter component={TokenSecuritiesGuide} />} />
+      <Route path="/avalanche-tech" component={() => <RouteWithHeaderAndFooter component={AvalancheTech} />} />
       <Route path="/company-introduction" component={() => <RouteWithHeaderAndFooter component={CompanyIntroduction} />} />
       <Route path="/team-workspace" component={() => <RouteWithHeaderAndFooter component={TeamWorkspace} />} />
       <Route path="/investment-process" component={() => <RouteWithHeaderAndFooter component={InvestmentProcessPage} />} />
