@@ -84,7 +84,7 @@ export default function FeaturedProperties() {
           </Link>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="flex flex-wrap justify-center gap-8">
           {properties?.map((property) => (
             <PropertyCard key={property.id} property={property} />
           ))}
