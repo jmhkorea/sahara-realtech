@@ -33,6 +33,7 @@ interface TeamProject {
   url: string; 
   lastUpdated: string;
   owner: string;
+  ownerProfileUrl?: string;
   teamMembers: string[];
   status: "active" | "archived" | "development";
   type: "frontend" | "backend" | "fullstack" | "documentation";
