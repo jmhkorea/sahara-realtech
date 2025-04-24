@@ -185,7 +185,7 @@ export default function TokenPurchaseModal({ property, onPurchaseSuccess }: Toke
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="w-full">
+        <Button className="w-full text-lg py-6 font-semibold bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 shadow-lg">
           {t('property.investNow')}
         </Button>
       </DialogTrigger>
