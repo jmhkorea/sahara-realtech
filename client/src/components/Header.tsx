@@ -58,13 +58,13 @@ export default function Header() {
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
-      <div className="container mx-auto px-4 py-3">
+      <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center space-x-2 mr-8">
             <span className="text-xl font-bold text-gray-800">SaharaRealTech</span>
           </Link>
           
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-12">
             <Link href="/" className="font-medium text-neutral-500 hover:text-primary transition-colors">
               {t('nav.home')}
             </Link>
@@ -81,17 +81,17 @@ export default function Header() {
               {t('nav.blog', '블로그')}
             </Link>
             <Link href="/company-introduction" className="font-medium text-neutral-500 hover:text-primary transition-colors">
-              {t('nav.company', '사하라 리얼테크 소개')}
+              {t('nav.company', '소개')}
             </Link>
             <Link href="/team" className="font-medium text-neutral-500 hover:text-primary transition-colors">
-              {t('nav.team')}
+              {t('nav.team', '팀')}
             </Link>
             <Link href="/feedback" className="font-medium text-neutral-500 hover:text-primary transition-colors">
               {t('nav.feedback', '피드백')}
             </Link>
-            <Link href="/team-workspace" className="font-medium text-neutral-500 hover:text-primary transition-colors flex items-center">
+            <Link href="/team-workspace" className="font-medium text-neutral-500 hover:text-primary transition-colors flex items-center whitespace-nowrap">
               <FolderGit className="h-4 w-4 mr-1" />
-              팀 워크스페이스
+              워크스페이스
             </Link>
             <Link href="/admin" className="font-medium text-neutral-500 hover:text-primary transition-colors flex items-center">
               <Settings className="h-4 w-4 mr-1" />
