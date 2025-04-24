@@ -29,7 +29,7 @@ export default function FoundationCard({
 
   return (
     <Card className="overflow-hidden transition-all duration-300 border border-gray-200 shadow-sm">
-      {headerImageSrc && (
+      {headerImageSrc && false && (
         <div 
           className="w-full cursor-pointer relative" 
           onClick={toggleExpanded}
@@ -65,15 +65,13 @@ export default function FoundationCard({
               {subtitle && <p className="text-sm text-gray-500 mt-1">{subtitle}</p>}
             </div>
           </div>
-          {!headerImageSrc && (
-            <div className="rounded-full p-1 hover:bg-gray-200 transition-colors">
-              {isExpanded ? (
-                <ChevronUp className="h-5 w-5 text-gray-500" />
-              ) : (
-                <ChevronDown className="h-5 w-5 text-gray-500" />
-              )}
-            </div>
-          )}
+          <div className="rounded-full p-1 hover:bg-gray-200 transition-colors">
+            {isExpanded ? (
+              <ChevronUp className="h-5 w-5 text-gray-500" />
+            ) : (
+              <ChevronDown className="h-5 w-5 text-gray-500" />
+            )}
+          </div>
         </div>
       </CardHeader>
       
@@ -103,7 +101,8 @@ export default function FoundationCard({
                   <img 
                     src={certImageSrc} 
                     alt="법인 등록증" 
-                    className="w-full h-auto"
+                    className="w-full h-auto object-contain mx-auto"
+                    style={{ maxHeight: '600px' }}
                   />
                 </div>
               </div>

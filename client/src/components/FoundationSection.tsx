@@ -28,8 +28,7 @@ export default function FoundationSection() {
             title="몰타 공화국 재단 등록증"
             subtitle="유럽 몰타공화국"
             imageSrc={foundationLogoSrc}
-            certImageSrc={maltaCompanyCertSrc}
-            headerImageSrc={foundationHeaderSrc}
+            certImageSrc="/images/malta_company_cert.png"
           />
           
           <FoundationCard
@@ -37,7 +36,6 @@ export default function FoundationSection() {
             subtitle="미국 법인"
             imageSrc={foundationLogoSrc}
             certImageSrc={companyCertificationSrc}
-            headerImageSrc={foundationHeaderSrc}
           />
           
           <FoundationCard
@@ -45,7 +43,6 @@ export default function FoundationSection() {
             subtitle="한국 법인"
             imageSrc={foundationLogoSrc}
             certImageSrc={companyCertificationSrc}
-            headerImageSrc={foundationHeaderSrc}
           />
           
           <FoundationCard
@@ -53,7 +50,6 @@ export default function FoundationSection() {
             subtitle="중국 법인"
             imageSrc={foundationLogoSrc}
             certImageSrc={companyCertificationSrc}
-            headerImageSrc={foundationHeaderSrc}
           />
         </div>
         
