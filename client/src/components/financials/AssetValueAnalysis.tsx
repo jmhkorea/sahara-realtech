@@ -1,186 +1,166 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useQuery } from '@tanstack/react-query';
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { 
-  LineChart, Line, AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell,
-  XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer 
-} from 'recharts';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { AlertTriangle } from 'lucide-react';
-import { CollapsibleCard } from "@/components/ui/collapsible-card";
+  LineChart, 
+  Line, 
+  BarChart,
+  Bar,
+  XAxis, 
+  YAxis, 
+  CartesianGrid, 
+  Tooltip, 
+  Legend, 
+  ResponsiveContainer 
+} from "recharts";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/ui/button";
 
 interface AssetValueAnalysisProps {
-  propertyId?: number;
+  propertyId: number;
+}
+
+interface AssetValueData {
+  year: string;
+  propertyValue: number;
+  tokenValue: number;
+  appreciation: number;
+  marketAverage?: number;
 }
 
 export default function AssetValueAnalysis({ propertyId }: AssetValueAnalysisProps) {
-  const { t } = useTranslation();
+  const [viewType, setViewType] = useState<"chart" | "table">("chart");
   
-  // 자산 가치 데이터 가져오기
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['assetValue', propertyId],
+  const { data, isLoading, error } = useQuery<AssetValueData[]>({
+    queryKey: ["/api/financial/asset-value", propertyId],
     queryFn: async () => {
-      const response = await fetch(`/api/financial/asset-value${propertyId ? `?propertyId=${propertyId}` : ''}`);
+      const params = new URLSearchParams({
+        propertyId: propertyId.toString()
+      });
+      const response = await fetch(`/api/financial/asset-value?${params.toString()}`);
       if (!response.ok) {
-        throw new Error('Failed to fetch asset value data');
+        throw new Error("Failed to fetch asset value data");
       }
       return response.json();
     }
   });
 
-  // 로딩 상태 표시
   if (isLoading) {
     return (
-      <div className="h-full flex flex-col justify-center items-center p-4">
-        <Skeleton className="h-[250px] w-full mb-4" />
-        <div className="w-full space-y-2">
-          <Skeleton className="h-4 w-3/4" />
-          <Skeleton className="h-4 w-1/2" />
-        </div>
+      <div className="w-full h-[200px] flex items-center justify-center">
+        <Skeleton className="w-full h-full rounded-md" />
       </div>
     );
   }
 
-  // 에러 처리
   if (error || !data) {
     return (
-      <Alert variant="destructive" className="bg-red-50 text-red-800 border border-red-200">
-        <AlertTriangle className="h-4 w-4 mr-2" />
-        <AlertDescription>
-          {t('common.errorLoading', '데이터를 불러오는 중 문제가 발생했습니다. 나중에 다시 시도해주세요.')}
-        </AlertDescription>
-      </Alert>
+      <div className="text-center p-4">
+        <p className="text-red-500">자산 가치 데이터를 불러올 수 없습니다.</p>
+        <Button
+          variant="outline"
+          className="mt-2"
+          onClick={() => window.location.reload()}
+        >
+          다시 시도
+        </Button>
+      </div>
     );
   }
 
+  const calculateGrowth = (): number => {
+    if (data.length < 2) return 0;
+    const startValue = data[0].propertyValue;
+    const endValue = data[data.length - 1].propertyValue;
+    return parseFloat(((endValue - startValue) / startValue * 100).toFixed(1));
+  };
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <CollapsibleCard
-        title="자산 가치 추세"
-        description="시간에 따른 부동산 및 토큰 가치 추이"
-        className="md:col-span-2"
-      >
-        <div className="h-96">
-          <ResponsiveContainer width="100%" height="100%">
-            <AreaChart
-              data={data}
-              margin={{ top: 10, right: 30, left: 40, bottom: 30 }}
-            >
-              <CartesianGrid strokeDasharray="3 3" stroke="#f5f5f5" />
-              <XAxis dataKey="year" angle={-15} textAnchor="end" height={60} />
-              <YAxis
-                yAxisId="left"
-                orientation="left"
-                stroke="#4D72AA"
-                tickFormatter={(value) => `${value / 1000000}M`}
-                label={{ value: '부동산 가치 (백만원)', angle: -90, position: 'insideLeft', offset: 15 }}
-              />
-              <YAxis
-                yAxisId="right"
-                orientation="right"
-                stroke="#82ca9d"
-                tickFormatter={(value) => `${value / 1000}K`}
-                label={{ value: '토큰 가치 (천원)', angle: 90, position: 'insideRight', offset: 15 }}
-              />
-              <Tooltip
-                formatter={(value, name) => {
-                  if (name === 'propertyValue') {
-                    return [`${(value as number).toLocaleString()}원`, '부동산 가치'];
-                  }
-                  return [`${(value as number).toLocaleString()}원`, '토큰 가치'];
-                }}
-              />
-              <Legend
-                verticalAlign="top"
-                wrapperStyle={{ lineHeight: '40px' }}
-                formatter={(value) => value === 'propertyValue' ? '부동산 가치' : '토큰 가치'}
-              />
-              <Area
-                yAxisId="left"
-                type="monotone"
-                dataKey="propertyValue"
-                stroke="#4D72AA"
-                fill="#4D72AA"
-                fillOpacity={0.3}
-                activeDot={{ r: 8 }}
-              />
-              <Area
-                yAxisId="right"
-                type="monotone"
-                dataKey="tokenValue"
-                stroke="#82ca9d"
-                fill="#82ca9d"
-                fillOpacity={0.3}
-                activeDot={{ r: 8 }}
-              />
-            </AreaChart>
-          </ResponsiveContainer>
+    <div className="w-full">
+      <div className="flex justify-between items-center mb-4">
+        <div>
+          <p className="text-sm text-neutral-500">총 자산 가치 성장률</p>
+          <p className="text-xl font-bold text-purple-600">{calculateGrowth()}%</p>
         </div>
-      </CollapsibleCard>
+        <Tabs defaultValue={viewType} onValueChange={(value) => setViewType(value as "chart" | "table")}>
+          <TabsList>
+            <TabsTrigger value="chart">차트</TabsTrigger>
+            <TabsTrigger value="table">테이블</TabsTrigger>
+          </TabsList>
+        </Tabs>
+      </div>
 
-      <CollapsibleCard
-        title="현재 시장 가치 분석"
-        description="현재 부동산 시장 가치 및 토큰화 가치 비교"
-      >
-        <div className="h-80">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-              data={data.slice(-5)} // 최근 5개 데이터만 사용
-              margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="year" />
-              <YAxis tickFormatter={(value) => `${value / 1000000}M`} />
-              <Tooltip formatter={(value) => `${(value as number).toLocaleString()}원`} />
-              <Legend />
-              <Bar
-                name="부동산 가치"
-                dataKey="propertyValue"
-                fill="#4D72AA"
-                barSize={30}
-              />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-      </CollapsibleCard>
-
-      <CollapsibleCard
-        title="토큰 가치 성장률"
-        description="연도별 토큰 가치 성장률"
-      >
-        <div className="h-80">
+      <TabsContent value="chart" className={viewType === "chart" ? "block" : "hidden"}>
+        <div className="h-[200px]">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
-              data={data.map((item: any, index: number, array: any[]) => {
-                if (index === 0) {
-                  return { ...item, growthRate: 0 };
-                }
-                const prevValue = array[index - 1].tokenValue;
-                const currentValue = item.tokenValue;
-                const growthRate = ((currentValue - prevValue) / prevValue) * 100;
-                return { ...item, growthRate: parseFloat(growthRate.toFixed(2)) };
-              }).slice(1)} // 첫 번째 항목은 제외 (성장률 0)
+              data={data}
               margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
             >
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="year" />
               <YAxis />
-              <Tooltip formatter={(value) => `${value}%`} />
+              <Tooltip 
+                formatter={(value) => [`${value.toLocaleString()} 만원`, '']}
+                labelFormatter={(label) => `${label}년`}
+              />
               <Legend />
               <Line
                 type="monotone"
-                name="성장률"
-                dataKey="growthRate"
-                stroke="#FF6B6B"
-                strokeWidth={2}
-                dot={{ r: 5 }}
+                dataKey="propertyValue"
+                name="자산 가치"
+                stroke="#8884d8"
                 activeDot={{ r: 8 }}
               />
+              <Line 
+                type="monotone" 
+                dataKey="tokenValue" 
+                name="토큰 가치" 
+                stroke="#82ca9d" 
+              />
+              {data[0].marketAverage && (
+                <Line
+                  type="monotone"
+                  dataKey="marketAverage"
+                  name="시장 평균"
+                  stroke="#ffc658"
+                  strokeDasharray="5 5"
+                />
+              )}
             </LineChart>
           </ResponsiveContainer>
         </div>
-      </CollapsibleCard>
+      </TabsContent>
+
+      <TabsContent value="table" className={viewType === "table" ? "block" : "hidden"}>
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-neutral-200">
+            <thead className="bg-neutral-50">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">연도</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">자산 가치</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">토큰 가치</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider">가치 상승률</th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-neutral-200">
+              {data.map((item, index) => (
+                <tr key={index}>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-neutral-900">{item.year}년</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-neutral-900">₩ {item.propertyValue.toLocaleString()} 만원</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-neutral-900">₩ {item.tokenValue.toLocaleString()} 만원</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-neutral-900">
+                    <span className={item.appreciation > 0 ? "text-green-600" : "text-red-600"}>
+                      {item.appreciation > 0 ? "+" : ""}{item.appreciation}%
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </TabsContent>
     </div>
   );
 }

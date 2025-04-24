@@ -7,6 +7,9 @@ import TokenPurchaseModal from "@/components/TokenPurchaseModal";
 import PropertyAnalytics from "@/components/PropertyAnalytics";
 import InvestmentSimulator from "@/components/InvestmentSimulator";
 import MarketAnalysis from "@/components/MarketAnalysis";
+import CashFlowAnalysis from "@/components/financials/CashFlowAnalysis";
+import ReturnAnalysis from "@/components/financials/ReturnAnalysis";
+import AssetValueAnalysis from "@/components/financials/AssetValueAnalysis";
 import SEO from "@/components/SEO";
 
 import {
@@ -284,10 +287,6 @@ export default function PropertyDetail() {
                     <TabsTrigger value="investment" className="flex-1">투자 정보</TabsTrigger>
                     <TabsTrigger value="blockchain" className="flex-1">블록체인 정보</TabsTrigger>
                     <TabsTrigger value="propertyInfo" className="flex-1">투자자산 정보</TabsTrigger>
-                    <TabsTrigger value="analytics" className="flex-1">
-                      <BarChart2 className="h-4 w-4 mr-1" />
-                      금융 분석
-                    </TabsTrigger>
                   </TabsList>
                   
                   <TabsContent value="details">
@@ -382,92 +381,7 @@ export default function PropertyDetail() {
                     </div>
                   </TabsContent>
                   
-                  <TabsContent value="analytics">
-                    <div>
-                      <div className="mb-6">
-                        <Tabs defaultValue="cashflow" className="w-full">
-                          <TabsList className="grid grid-cols-6 mb-4">
-                            <TabsTrigger value="cashflow">현금 흐름 분석</TabsTrigger>
-                            <TabsTrigger value="returns">수익률 분석</TabsTrigger>
-                            <TabsTrigger value="value">자산 가치 분석</TabsTrigger>
-                            <TabsTrigger value="comparison">금융 상품 비교</TabsTrigger>
-                            <TabsTrigger value="tax">세금 및 비용 분석</TabsTrigger>
-                            <TabsTrigger value="portfolio">포트폴리오 분석</TabsTrigger>
-                          </TabsList>
-                          
-                          <div className="mx-auto text-center mb-4">
-                            <Button variant="outline" className="bg-primary/5 text-primary">
-                              시장 지표 및 예측
-                            </Button>
-                          </div>
-                          
-                          <TabsContent value="cashflow" className="space-y-4">
-                            <div className="border-b pb-4">
-                              <h3 className="text-lg font-semibold mb-4 flex items-center">
-                                <ChartLine className="h-5 w-5 mr-2 text-primary" />
-                                현금 흐름 분석
-                              </h3>
-                              <PropertyAnalytics property={property} />
-                            </div>
-                          </TabsContent>
-                          
-                          <TabsContent value="returns" className="space-y-4">
-                            <div className="border-b pb-4">
-                              <h3 className="text-lg font-semibold mb-4 flex items-center">
-                                <Calculator className="h-5 w-5 mr-2 text-primary" />
-                                수익률 분석
-                              </h3>
-                              <InvestmentSimulator property={property} />
-                            </div>
-                          </TabsContent>
-                          
-                          <TabsContent value="value" className="space-y-4">
-                            <div className="border-b pb-4">
-                              <h3 className="text-lg font-semibold mb-4 flex items-center">
-                                <Coins className="h-5 w-5 mr-2 text-primary" />
-                                자산 가치 분석
-                              </h3>
-                              <PropertyAnalytics property={property} />
-                            </div>
-                          </TabsContent>
-                          
-                          <TabsContent value="comparison" className="space-y-4">
-                            <div className="border-b pb-4">
-                              <h3 className="text-lg font-semibold mb-4 flex items-center">
-                                <BarChart2 className="h-5 w-5 mr-2 text-primary" />
-                                금융 상품 비교
-                              </h3>
-                              <MarketAnalysis property={property} />
-                            </div>
-                          </TabsContent>
-                          
-                          <TabsContent value="tax" className="space-y-4">
-                            <div className="border-b pb-4">
-                              <h3 className="text-lg font-semibold mb-4 flex items-center">
-                                <Calculator className="h-5 w-5 mr-2 text-primary" />
-                                세금 및 비용 분석
-                              </h3>
-                              <div className="p-8 text-center bg-neutral-50 rounded-lg">
-                                <p className="text-neutral-500">구현 중입니다...</p>
-                              </div>
-                            </div>
-                          </TabsContent>
-                          
-                          <TabsContent value="portfolio" className="space-y-4">
-                            <div className="border-b pb-4">
-                              <h3 className="text-lg font-semibold mb-4 flex items-center">
-                                <Trophy className="h-5 w-5 mr-2 text-primary" />
-                                포트폴리오 분석
-                              </h3>
-                              <div className="p-8 text-center bg-neutral-50 rounded-lg">
-                                <p className="text-neutral-500">구현 중입니다...</p>
-                              </div>
-                            </div>
-                          </TabsContent>
-                        </Tabs>
-                      </div>
-                    </div>
-                  </TabsContent>
+  
                   
                   <TabsContent value="propertyInfo">
                     <div className="space-y-6">
@@ -588,6 +502,72 @@ export default function PropertyDetail() {
                     </div>
                   </TabsContent>
                 </Tabs>
+              </div>
+            </div>
+            
+            {/* 금융 분석 섹션 */}
+            <div className="md:col-span-3 mb-6">
+              <div className="bg-gradient-to-r from-blue-500 to-blue-700 text-white p-4 rounded-t-xl">
+                <h2 className="text-xl font-bold flex items-center">
+                  <BarChart2 className="h-5 w-5 mr-2" />
+                  금융 분석
+                </h2>
+                <p className="text-sm opacity-90">투자 결정에 도움이 되는 상세 금융 분석 데이터</p>
+              </div>
+              
+              <div className="bg-white shadow-md rounded-b-xl p-5">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <Card className="overflow-hidden shadow-sm border border-blue-100">
+                    <CardHeader className="bg-blue-50 pb-2">
+                      <CardTitle className="text-lg flex items-center text-blue-700">
+                        <TrendingUp className="h-5 w-5 mr-2" />
+                        현금 흐름 분석
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-5">
+                      <div className="h-[200px]">
+                        <CashFlowAnalysis chartType="monthly" propertyId={Number(id)} />
+                      </div>
+                      <Button variant="outline" size="sm" className="w-full mt-2">
+                        상세 보기
+                      </Button>
+                    </CardContent>
+                  </Card>
+                  
+                  <Card className="overflow-hidden shadow-sm border border-emerald-100">
+                    <CardHeader className="bg-emerald-50 pb-2">
+                      <CardTitle className="text-lg flex items-center text-emerald-700">
+                        <BarChart3 className="h-5 w-5 mr-2" />
+                        수익률 분석
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-5">
+                      <div className="h-[200px]">
+                        <ReturnAnalysis analysisType="coc" propertyId={Number(id)} />
+                      </div>
+                      <Button variant="outline" size="sm" className="w-full mt-2">
+                        상세 보기
+                      </Button>
+                    </CardContent>
+                  </Card>
+                  
+                  <Card className="overflow-hidden shadow-sm border border-purple-100">
+                    <CardHeader className="bg-purple-50 pb-2">
+                      <CardTitle className="text-lg flex items-center text-purple-700">
+                        <Coins className="h-5 w-5 mr-2" />
+                        자산 가치 분석
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-5">
+                      <div className="h-[200px]">
+                        <PropertyAnalytics property={property} />
+                      </div>
+                      <Button variant="outline" size="sm" className="w-full mt-2">
+                        상세 보기
+                      </Button>
+                    </CardContent>
+                  </Card>
+                </div>
               </div>
             </div>
             

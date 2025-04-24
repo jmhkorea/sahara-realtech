@@ -1,126 +1,123 @@
-import React, { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useQuery } from '@tanstack/react-query';
-import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { AlertTriangle } from 'lucide-react';
+import { useEffect, useState } from "react";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import { useQuery } from "@tanstack/react-query";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface CashFlowAnalysisProps {
-  chartType: 'monthly' | 'trend' | 'composition';
-  propertyId?: number;
+  propertyId: number;
+  chartType?: "monthly" | "yearly" | "breakdown";
 }
 
-export default function CashFlowAnalysis({ chartType, propertyId }: CashFlowAnalysisProps) {
-  const { t } = useTranslation();
-  
-  // 재무 데이터 API에서 데이터 가져오기
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['cashflow', chartType, propertyId],
+interface CashFlowData {
+  name: string;
+  수입?: number;
+  지출?: number;
+  순현금흐름?: number;
+  [key: string]: string | number | undefined;
+}
+
+export default function CashFlowAnalysis({ propertyId, chartType = "monthly" }: CashFlowAnalysisProps) {
+  const [selectedChartType, setSelectedChartType] = useState<string>(chartType);
+
+  // Fetch data based on chart type
+  const { data, isLoading, error } = useQuery<CashFlowData[]>({
+    queryKey: ["/api/financial/cashflow", selectedChartType, propertyId],
     queryFn: async () => {
-      const response = await fetch(`/api/financial/cashflow?chartType=${chartType}${propertyId ? `&propertyId=${propertyId}` : ''}`);
+      const params = new URLSearchParams({
+        chartType: selectedChartType,
+        propertyId: propertyId.toString()
+      });
+      const response = await fetch(`/api/financial/cashflow?${params.toString()}`);
       if (!response.ok) {
-        throw new Error('Failed to fetch cash flow data');
+        throw new Error('데이터를 가져오는데 실패했습니다');
       }
       return response.json();
     }
   });
 
-  // 로딩 상태 표시
+  const handleChartTypeChange = (type: string) => {
+    setSelectedChartType(type);
+  };
+
   if (isLoading) {
     return (
-      <div className="h-full flex flex-col justify-center items-center p-4">
-        <Skeleton className="h-[250px] w-full mb-4" />
-        <div className="w-full space-y-2">
-          <Skeleton className="h-4 w-3/4" />
-          <Skeleton className="h-4 w-1/2" />
-        </div>
+      <div className="w-full h-[200px] flex items-center justify-center">
+        <Skeleton className="w-full h-full rounded-md" />
       </div>
     );
   }
 
-  // 에러 처리
   if (error || !data) {
     return (
-      <Alert variant="destructive" className="bg-red-50 text-red-800 border border-red-200">
-        <AlertTriangle className="h-4 w-4 mr-2" />
-        <AlertDescription>
-          {t('common.errorLoading', '데이터를 불러오는 중 문제가 발생했습니다. 나중에 다시 시도해주세요.')}
-        </AlertDescription>
-      </Alert>
-    );
-  }
-
-  // 월별 현금 흐름 차트
-  if (chartType === 'monthly') {
-    return (
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart
-          data={data}
-          margin={{ top: 5, right: 30, left: 20, bottom: 55 }}
+      <div className="text-center p-4">
+        <p className="text-red-500">데이터를 불러올 수 없습니다.</p>
+        <Button
+          variant="outline"
+          className="mt-2"
+          onClick={() => window.location.reload()}
         >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" angle={-45} textAnchor="end" height={50} />
-          <YAxis />
-          <Tooltip formatter={(value) => `₩${value.toLocaleString()}`} />
-          <Legend />
-          <Bar dataKey="수입" fill="#4D72AA" barSize={20} />
-          <Bar dataKey="지출" fill="#FF6B6B" barSize={20} />
-          <Bar dataKey="순현금흐름" fill="#82ca9d" barSize={20} />
-        </BarChart>
-      </ResponsiveContainer>
+          다시 시도
+        </Button>
+      </div>
     );
   }
 
-  // 현금 흐름 트렌드 차트
-  if (chartType === 'trend') {
-    return (
-      <ResponsiveContainer width="100%" height="100%">
-        <LineChart
-          data={data}
-          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip formatter={(value) => `₩${value.toLocaleString()}`} />
-          <Legend />
-          <Line 
-            type="monotone" 
-            dataKey="순현금흐름" 
-            stroke="#8884d8" 
-            strokeWidth={2}
-            activeDot={{ r: 8 }}
-          />
-        </LineChart>
-      </ResponsiveContainer>
-    );
-  }
-
-  // 현금 흐름 구성 요소 파이 차트
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8', '#FF6B6B'];
+  // Colors for different data series
+  const colors = {
+    수입: "#4ade80",
+    지출: "#f87171",
+    순현금흐름: "#60a5fa",
+    임대: "#8b5cf6",
+    세금: "#ec4899",
+    유지보수: "#f59e0b",
+    관리비: "#06b6d4"
+  };
   
+  // Dynamically determine which values are present in the data
+  const dataKeys = data.length > 0 
+    ? Object.keys(data[0]).filter(key => key !== 'name' && data[0][key] !== undefined)
+    : [];
+
   return (
-    <ResponsiveContainer width="100%" height="100%">
-      <PieChart>
-        <Pie
-          data={data}
-          cx="50%"
-          cy="50%"
-          labelLine={false}
-          outerRadius={80}
-          fill="#8884d8"
-          dataKey="value"
-          nameKey="name"
-          label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-        >
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-        <Tooltip formatter={(value) => `${value}%`} />
-        <Legend />
-      </PieChart>
-    </ResponsiveContainer>
+    <div className="w-full">
+      <Tabs defaultValue={selectedChartType} onValueChange={handleChartTypeChange}>
+        <TabsList className="grid grid-cols-3 mb-4">
+          <TabsTrigger value="monthly">월별 현금 흐름</TabsTrigger>
+          <TabsTrigger value="yearly">연도별 현금 흐름</TabsTrigger>
+          <TabsTrigger value="breakdown">항목별 분석</TabsTrigger>
+        </TabsList>
+        
+        <TabsContent value={selectedChartType}>
+          <div className="h-[200px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart
+                data={data}
+                margin={{ top: 5, right: 5, left: 5, bottom: 5 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" fontSize={11} />
+                <YAxis fontSize={11} tickFormatter={(value) => `${value >= 1000 ? `${value/1000}K` : value}`} />
+                <Tooltip 
+                  formatter={(value) => [`${value.toLocaleString()} 만원`, '']}
+                  labelFormatter={(label) => `${label}`}
+                />
+                <Legend />
+                {dataKeys.map((key, index) => (
+                  <Bar 
+                    key={index}
+                    dataKey={key} 
+                    fill={colors[key as keyof typeof colors] || `hsl(${index * 40}, 70%, 60%)`}
+                    name={key}
+                  />
+                ))}
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </TabsContent>
+      </Tabs>
+    </div>
   );
 }
