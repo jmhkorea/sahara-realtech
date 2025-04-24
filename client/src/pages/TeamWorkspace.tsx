@@ -98,6 +98,7 @@ export default function TeamWorkspace() {
       url: "https://replit.com/@SaharaRealTech/avalanche-property-tokenization",
       lastUpdated: "2025-04-20",
       owner: "Brian Jung",
+      ownerProfileUrl: "https://www.linkedin.com/in/jungminho/",
       teamMembers: ["Han Ko", "Jeon Jong-han"],
       status: "development",
       type: "backend"

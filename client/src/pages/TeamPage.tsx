@@ -27,7 +27,7 @@ export default function TeamPage() {
       title: 'Co-Founder/CEO & CTO',
       bio: 'Computer Science Expert specializing in blockchain architecture development and DevOps. International e-Sports Federation Global Chief with education from Seoul National University GLP MBA and Dongguk University Fintech MBA. CTG Group 동아시아(한국 일본 외) 디지털 금융 상품 CTO.',
       imageUrl: 'https://randomuser.me/api/portraits/men/2.jpg',
-      linkedin: 'https://linkedin.com/in/brianjung',
+      linkedin: 'https://www.linkedin.com/in/jungminho/',
       department: 'executive'
     },
     {
