@@ -26,6 +26,8 @@ import {
 import { searchContent } from "./services/contentIndexService";
 import { generateResponse } from "./services/chatbotService";
 
+// 사업자등록증 업로드를 위한 multer 설정 추가 - 이미 multer 설정이 있으므로 별도로 추가할 필요 없음
+
 export async function registerRoutes(app: Express): Promise<Server> {
   // 이미지 업로드를 위한 multer 설정
   const multerStorage = multer.diskStorage({
@@ -79,6 +81,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // API endpoints
+  
+  // 사업자등록증 이미지 업로드 API
+  app.post('/api/certificates/upload', upload.single('certificateImage'), async (req: Request, res: Response) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ message: '이미지가 업로드되지 않았습니다.' });
+      }
+      
+      // 파일 경로를 클라이언트에 반환
+      const filePath = `/uploads/${req.file.filename}`;
+      
+      res.status(200).json({ 
+        success: true,
+        filePath: filePath,
+        message: '이미지가 성공적으로 업로드되었습니다.' 
+      });
+    } catch (error) {
+      console.error('이미지 업로드 에러:', error);
+      res.status(500).json({ 
+        success: false,
+        message: '이미지 업로드 중 오류가 발생했습니다.' 
+      });
+    }
+  });
   
   // Properties
   app.get('/api/properties', async (req: Request, res: Response) => {
