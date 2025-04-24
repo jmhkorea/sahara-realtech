@@ -517,7 +517,7 @@ export default function PropertyDetail() {
               
               <div className="bg-white shadow-md rounded-b-xl p-5">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <Card className="overflow-hidden shadow-sm border border-blue-100 flex flex-col h-[330px]">
+                  <Card className="overflow-hidden shadow-sm border border-blue-100 flex flex-col h-[350px]">
                     <CardHeader className="bg-blue-50 pb-2">
                       <CardTitle className="text-lg flex items-center text-blue-700">
                         <TrendingUp className="h-5 w-5 mr-2" />
@@ -534,7 +534,7 @@ export default function PropertyDetail() {
                     </CardContent>
                   </Card>
                   
-                  <Card className="overflow-hidden shadow-sm border border-emerald-100 flex flex-col h-[330px]">
+                  <Card className="overflow-hidden shadow-sm border border-emerald-100 flex flex-col h-[350px]">
                     <CardHeader className="bg-emerald-50 pb-2">
                       <CardTitle className="text-lg flex items-center text-emerald-700">
                         <BarChart3 className="h-5 w-5 mr-2" />
@@ -551,7 +551,7 @@ export default function PropertyDetail() {
                     </CardContent>
                   </Card>
                   
-                  <Card className="overflow-hidden shadow-sm border border-purple-100 flex flex-col h-[330px]">
+                  <Card className="overflow-hidden shadow-sm border border-purple-100 flex flex-col h-[350px]">
                     <CardHeader className="bg-purple-50 pb-2">
                       <CardTitle className="text-lg flex items-center text-purple-700">
                         <Coins className="h-5 w-5 mr-2" />
@@ -752,15 +752,17 @@ export default function PropertyDetail() {
                     )}
                     
                     {property.tokenizationStatus !== TokenizationStatus.IN_PROGRESS && (
-                      <Button 
-                        className="w-full"
-                        disabled={true}
-                      >
-                        {property.tokenizationStatus === TokenizationStatus.COMPLETED
-                          ? t('propertyDetail.investmentCard.soldOut')
-                          : t('propertyDetail.investmentCard.comingSoon')
-                        }
-                      </Button>
+                      <div className="flex justify-center my-4">
+                        <Button 
+                          className="w-4/5 text-xl py-8 font-bold bg-gradient-to-r from-gray-500 to-gray-400 shadow-lg rounded-xl"
+                          disabled={true}
+                        >
+                          {property.tokenizationStatus === TokenizationStatus.COMPLETED
+                            ? t('propertyDetail.investmentCard.soldOut')
+                            : t('propertyDetail.investmentCard.comingSoon')
+                          }
+                        </Button>
+                      </div>
                     )}
                     
                     <p className="text-xs text-neutral-500 text-center">
