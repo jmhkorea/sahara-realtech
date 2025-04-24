@@ -301,7 +301,7 @@ export default function TeamWorkspace() {
                     <div className="flex items-center text-sm">
                       <Link2 className="h-5 w-5 mr-2 text-blue-600" />
                       <span className="text-neutral-700 font-medium">
-                        resort-planner.sahararealtech.repl.co
+                        [접근 URL 비공개]
                       </span>
                     </div>
                     <div className="flex items-center text-sm">
