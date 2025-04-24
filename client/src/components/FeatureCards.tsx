@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "wouter";
-import { ArrowRight, Building, Shield, Clock } from "lucide-react";
+import { ArrowRight, Building, Shield, Clock, Globe, ExternalLink } from "lucide-react";
 
 export default function FeatureCards() {
   const { t } = useTranslation();
@@ -77,6 +77,25 @@ export default function FeatureCards() {
                     <ArrowRight className="ml-1 h-4 w-4" />
                   </div>
                 </Link>
+              </div>
+            </div>
+          </div>
+          
+          {/* 글로벌 유동성 파트너사 */}
+          <div className="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow group w-full md:w-[320px] h-[350px] flex flex-col">
+            <div className="p-6 flex flex-col h-full">
+              <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mb-4">
+                <Globe className="h-8 w-8 text-indigo-600" />
+              </div>
+              <h3 className="text-xl font-bold mb-2">글로벌 유동성 파트너사</h3>
+              <p className="text-sm text-gray-600 mb-6">
+                CTG Prime과의 파트너십을 통해 글로벌 시장에서 부동산 토큰의 유동성을 확보하고 국제 투자자와 연결됩니다.
+              </p>
+              <div className="mt-auto">
+                <a href="https://www.ctgprime.com/platform" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-indigo-600 text-sm font-medium group-hover:underline">
+                  파트너사 방문하기
+                  <ExternalLink className="ml-1 h-4 w-4" />
+                </a>
               </div>
             </div>
           </div>
