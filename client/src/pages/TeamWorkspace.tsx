@@ -442,14 +442,9 @@ export default function TeamWorkspace() {
                         </div>
                       ))}
                     </div>
-                    <a 
-                      href={project.url} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="flex items-center text-primary hover:text-primary/80 text-sm font-medium"
-                    >
+                    <div className="text-gray-400 text-sm italic">
                       내부 개발 중
-                    </a>
+                    </div>
                   </CardFooter>
                 </Card>
               ))}
@@ -499,14 +494,9 @@ export default function TeamWorkspace() {
                         </div>
                       ))}
                     </div>
-                    <a 
-                      href={project.url} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="flex items-center text-primary hover:text-primary/80 text-sm font-medium"
-                    >
-                      열기 <ExternalLink className="h-4 w-4 ml-1" />
-                    </a>
+                    <div className="text-gray-400 text-sm italic">
+                      내부 개발 중
+                    </div>
                   </CardFooter>
                 </Card>
               ))}
@@ -557,14 +547,9 @@ export default function TeamWorkspace() {
                           </div>
                         ))}
                       </div>
-                      <a 
-                        href={project.url} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="flex items-center text-primary hover:text-primary/80 text-sm font-medium"
-                      >
-                        열기 <ExternalLink className="h-4 w-4 ml-1" />
-                      </a>
+                      <div className="text-gray-400 text-sm italic">
+                        내부 개발 중
+                      </div>
                     </CardFooter>
                   </Card>
                 ))
