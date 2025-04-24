@@ -99,7 +99,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
   const propertyAddress = currentLang === 'ko' ? property.address : property.addressEn;
 
   return (
-    <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+    <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow w-full max-w-[320px] mx-auto h-[550px] flex flex-col">
       <div className="relative">
         <img 
           src={property.imageUrl || ''} 
@@ -120,7 +120,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
         </div>
       </div>
       
-      <div className="p-6">
+      <div className="p-6 flex-1 flex flex-col">
         <div className="flex justify-between items-start mb-2">
           <h3 className="text-lg font-bold">{propertyName}</h3>
           <div className="flex items-center text-secondary">
@@ -218,21 +218,23 @@ export default function PropertyCard({ property }: PropertyCardProps) {
           </div>
         </div>
         
-        <Link href={`/properties/${property.id}`}>
-          <Button 
-            className={`w-full h-12 py-3 flex items-center justify-center ${
-              property.tokenizationStatus === TokenizationStatus.UPCOMING 
-                ? 'border-2 border-accent text-accent hover:bg-accent/5' 
-                : property.tokenizationStatus === TokenizationStatus.COMPLETED 
-                  ? 'bg-neutral-300 text-neutral-500 cursor-not-allowed' 
-                  : ''
-            }`}
-            variant={buttonState.variant}
-            disabled={buttonState.disabled}
-          >
-            {buttonState.label}
-          </Button>
-        </Link>
+        <div className="mt-auto">
+          <Link href={`/properties/${property.id}`}>
+            <Button 
+              className={`w-full h-12 py-3 flex items-center justify-center ${
+                property.tokenizationStatus === TokenizationStatus.UPCOMING 
+                  ? 'border-2 border-accent text-accent hover:bg-accent/5' 
+                  : property.tokenizationStatus === TokenizationStatus.COMPLETED 
+                    ? 'bg-neutral-300 text-neutral-500 cursor-not-allowed' 
+                    : ''
+              }`}
+              variant={buttonState.variant}
+              disabled={buttonState.disabled}
+            >
+              {buttonState.label}
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   );
