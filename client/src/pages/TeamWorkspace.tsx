@@ -350,50 +350,57 @@ export default function TeamWorkspace() {
             {/* 나머지 프로젝트 카드 */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {teamProjects.slice(1).map((project) => (
-                <Card key={project.id} className="hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <div className="flex justify-between items-start">
-                      <CardTitle className="text-lg">{project.name}</CardTitle>
-                      {getStatusBadge(project.status)}
-                    </div>
-                    <CardDescription className="line-clamp-2">{project.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-2">
-                      <div className="flex items-center text-sm">
-                        <FolderGit className="h-4 w-4 mr-2 text-neutral-500" />
-                        <span className="text-neutral-700">소유자: {project.owner}</span>
-                      </div>
-                      <div className="flex items-center text-sm">
-                        <Link2 className="h-4 w-4 mr-2 text-neutral-500" />
-                        <span className="text-neutral-700 truncate">
-                          {project.url.replace('https://replit.com/', '')}
-                        </span>
-                      </div>
-                      <div className="flex items-center text-sm mt-2">
-                        {getTypeBadge(project.type)}
-                        <span className="text-neutral-500 text-xs ml-2">
-                          최종 수정: {project.lastUpdated}
-                        </span>
+                <Card key={project.id} className="hover:shadow-lg transition-shadow opacity-80 cursor-not-allowed">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-neutral-100 bg-opacity-50 z-10 flex items-center justify-center">
+                      <div className="bg-neutral-800 bg-opacity-80 text-white px-4 py-2 rounded-md text-sm font-medium">
+                        접근 제한됨
                       </div>
                     </div>
-                  </CardContent>
-                  <CardFooter className="flex justify-between border-t pt-4">
-                    <div className="flex -space-x-2">
-                      {project.teamMembers.map((member, idx) => (
-                        <div 
-                          key={idx} 
-                          className="w-8 h-8 rounded-full bg-neutral-200 border-2 border-white flex items-center justify-center text-xs font-medium overflow-hidden"
-                          title={member}
-                        >
-                          {member.split(' ').map(name => name[0]).join('')}
+                    <CardHeader className="pointer-events-none">
+                      <div className="flex justify-between items-start">
+                        <CardTitle className="text-lg">{project.name}</CardTitle>
+                        {getStatusBadge(project.status)}
+                      </div>
+                      <CardDescription className="line-clamp-2">{project.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent className="pointer-events-none">
+                      <div className="space-y-2">
+                        <div className="flex items-center text-sm">
+                          <FolderGit className="h-4 w-4 mr-2 text-neutral-500" />
+                          <span className="text-neutral-700">소유자: {project.owner}</span>
                         </div>
-                      ))}
-                    </div>
-                    <div className="text-gray-400 text-sm italic">
-                      내부 개발 중
-                    </div>
-                  </CardFooter>
+                        <div className="flex items-center text-sm">
+                          <Link2 className="h-4 w-4 mr-2 text-neutral-500" />
+                          <span className="text-neutral-700 truncate">
+                            {project.url.replace('https://replit.com/', '')}
+                          </span>
+                        </div>
+                        <div className="flex items-center text-sm mt-2">
+                          {getTypeBadge(project.type)}
+                          <span className="text-neutral-500 text-xs ml-2">
+                            최종 수정: {project.lastUpdated}
+                          </span>
+                        </div>
+                      </div>
+                    </CardContent>
+                    <CardFooter className="flex justify-between border-t pt-4 pointer-events-none">
+                      <div className="flex -space-x-2">
+                        {project.teamMembers.map((member, idx) => (
+                          <div 
+                            key={idx} 
+                            className="w-8 h-8 rounded-full bg-neutral-200 border-2 border-white flex items-center justify-center text-xs font-medium overflow-hidden"
+                            title={member}
+                          >
+                            {member.split(' ').map(name => name[0]).join('')}
+                          </div>
+                        ))}
+                      </div>
+                      <div className="text-gray-400 text-sm italic">
+                        내부 개발 중
+                      </div>
+                    </CardFooter>
+                  </div>
                 </Card>
               ))}
             </div>
@@ -402,111 +409,7 @@ export default function TeamWorkspace() {
           <TabsContent value="active">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {teamProjects.filter(p => p.status === 'active').map((project) => (
-                <Card key={project.id} className="hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <div className="flex justify-between items-start">
-                      <CardTitle className="text-lg">{project.name}</CardTitle>
-                      {getStatusBadge(project.status)}
-                    </div>
-                    <CardDescription className="line-clamp-2">{project.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-2">
-                      <div className="flex items-center text-sm">
-                        <FolderGit className="h-4 w-4 mr-2 text-neutral-500" />
-                        <span className="text-neutral-700">소유자: {project.owner}</span>
-                      </div>
-                      <div className="flex items-center text-sm">
-                        <Link2 className="h-4 w-4 mr-2 text-neutral-500" />
-                        <span className="text-neutral-700 truncate">
-                          {project.url.replace('https://replit.com/', '')}
-                        </span>
-                      </div>
-                      <div className="flex items-center text-sm mt-2">
-                        {getTypeBadge(project.type)}
-                        <span className="text-neutral-500 text-xs ml-2">
-                          최종 수정: {project.lastUpdated}
-                        </span>
-                      </div>
-                    </div>
-                  </CardContent>
-                  <CardFooter className="flex justify-between border-t pt-4">
-                    <div className="flex -space-x-2">
-                      {project.teamMembers.map((member, idx) => (
-                        <div 
-                          key={idx} 
-                          className="w-8 h-8 rounded-full bg-neutral-200 border-2 border-white flex items-center justify-center text-xs font-medium overflow-hidden"
-                          title={member}
-                        >
-                          {member.split(' ').map(name => name[0]).join('')}
-                        </div>
-                      ))}
-                    </div>
-                    <div className="text-gray-400 text-sm italic">
-                      내부 개발 중
-                    </div>
-                  </CardFooter>
-                </Card>
-              ))}
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="development">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {teamProjects.filter(p => p.status === 'development').map((project) => (
-                <Card key={project.id} className="hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <div className="flex justify-between items-start">
-                      <CardTitle className="text-lg">{project.name}</CardTitle>
-                      {getStatusBadge(project.status)}
-                    </div>
-                    <CardDescription className="line-clamp-2">{project.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-2">
-                      <div className="flex items-center text-sm">
-                        <FolderGit className="h-4 w-4 mr-2 text-neutral-500" />
-                        <span className="text-neutral-700">소유자: {project.owner}</span>
-                      </div>
-                      <div className="flex items-center text-sm">
-                        <Link2 className="h-4 w-4 mr-2 text-neutral-500" />
-                        <span className="text-neutral-700 truncate">
-                          {project.url.replace('https://replit.com/', '')}
-                        </span>
-                      </div>
-                      <div className="flex items-center text-sm mt-2">
-                        {getTypeBadge(project.type)}
-                        <span className="text-neutral-500 text-xs ml-2">
-                          최종 수정: {project.lastUpdated}
-                        </span>
-                      </div>
-                    </div>
-                  </CardContent>
-                  <CardFooter className="flex justify-between border-t pt-4">
-                    <div className="flex -space-x-2">
-                      {project.teamMembers.map((member, idx) => (
-                        <div 
-                          key={idx} 
-                          className="w-8 h-8 rounded-full bg-neutral-200 border-2 border-white flex items-center justify-center text-xs font-medium overflow-hidden"
-                          title={member}
-                        >
-                          {member.split(' ').map(name => name[0]).join('')}
-                        </div>
-                      ))}
-                    </div>
-                    <div className="text-gray-400 text-sm italic">
-                      내부 개발 중
-                    </div>
-                  </CardFooter>
-                </Card>
-              ))}
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="archived">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {teamProjects.filter(p => p.status === 'archived').length > 0 ? (
-                teamProjects.filter(p => p.status === 'archived').map((project) => (
+                project.id === "proj-5" ? (
                   <Card key={project.id} className="hover:shadow-lg transition-shadow">
                     <CardHeader>
                       <div className="flex justify-between items-start">
@@ -547,10 +450,188 @@ export default function TeamWorkspace() {
                           </div>
                         ))}
                       </div>
+                      <a 
+                        href={project.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium"
+                      >
+                        시스템 열기 <ExternalLink className="h-4 w-4 ml-1" />
+                      </a>
+                    </CardFooter>
+                  </Card>
+                ) : (
+                  <Card key={project.id} className="hover:shadow-lg transition-shadow opacity-80 cursor-not-allowed">
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-neutral-100 bg-opacity-50 z-10 flex items-center justify-center">
+                        <div className="bg-neutral-800 bg-opacity-80 text-white px-4 py-2 rounded-md text-sm font-medium">
+                          접근 제한됨
+                        </div>
+                      </div>
+                      <CardHeader className="pointer-events-none">
+                        <div className="flex justify-between items-start">
+                          <CardTitle className="text-lg">{project.name}</CardTitle>
+                          {getStatusBadge(project.status)}
+                        </div>
+                        <CardDescription className="line-clamp-2">{project.description}</CardDescription>
+                      </CardHeader>
+                      <CardContent className="pointer-events-none">
+                        <div className="space-y-2">
+                          <div className="flex items-center text-sm">
+                            <FolderGit className="h-4 w-4 mr-2 text-neutral-500" />
+                            <span className="text-neutral-700">소유자: {project.owner}</span>
+                          </div>
+                          <div className="flex items-center text-sm">
+                            <Link2 className="h-4 w-4 mr-2 text-neutral-500" />
+                            <span className="text-neutral-700 truncate">
+                              {project.url.replace('https://replit.com/', '')}
+                            </span>
+                          </div>
+                          <div className="flex items-center text-sm mt-2">
+                            {getTypeBadge(project.type)}
+                            <span className="text-neutral-500 text-xs ml-2">
+                              최종 수정: {project.lastUpdated}
+                            </span>
+                          </div>
+                        </div>
+                      </CardContent>
+                      <CardFooter className="flex justify-between border-t pt-4 pointer-events-none">
+                        <div className="flex -space-x-2">
+                          {project.teamMembers.map((member, idx) => (
+                            <div 
+                              key={idx} 
+                              className="w-8 h-8 rounded-full bg-neutral-200 border-2 border-white flex items-center justify-center text-xs font-medium overflow-hidden"
+                              title={member}
+                            >
+                              {member.split(' ').map(name => name[0]).join('')}
+                            </div>
+                          ))}
+                        </div>
+                        <div className="text-gray-400 text-sm italic">
+                          내부 개발 중
+                        </div>
+                      </CardFooter>
+                    </div>
+                  </Card>
+                )
+              ))}
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="development">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {teamProjects.filter(p => p.status === 'development').map((project) => (
+                <Card key={project.id} className="hover:shadow-lg transition-shadow opacity-80 cursor-not-allowed">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-neutral-100 bg-opacity-50 z-10 flex items-center justify-center">
+                      <div className="bg-neutral-800 bg-opacity-80 text-white px-4 py-2 rounded-md text-sm font-medium">
+                        접근 제한됨
+                      </div>
+                    </div>
+                    <CardHeader className="pointer-events-none">
+                      <div className="flex justify-between items-start">
+                        <CardTitle className="text-lg">{project.name}</CardTitle>
+                        {getStatusBadge(project.status)}
+                      </div>
+                      <CardDescription className="line-clamp-2">{project.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent className="pointer-events-none">
+                      <div className="space-y-2">
+                        <div className="flex items-center text-sm">
+                          <FolderGit className="h-4 w-4 mr-2 text-neutral-500" />
+                          <span className="text-neutral-700">소유자: {project.owner}</span>
+                        </div>
+                        <div className="flex items-center text-sm">
+                          <Link2 className="h-4 w-4 mr-2 text-neutral-500" />
+                          <span className="text-neutral-700 truncate">
+                            {project.url.replace('https://replit.com/', '')}
+                          </span>
+                        </div>
+                        <div className="flex items-center text-sm mt-2">
+                          {getTypeBadge(project.type)}
+                          <span className="text-neutral-500 text-xs ml-2">
+                            최종 수정: {project.lastUpdated}
+                          </span>
+                        </div>
+                      </div>
+                    </CardContent>
+                    <CardFooter className="flex justify-between border-t pt-4 pointer-events-none">
+                      <div className="flex -space-x-2">
+                        {project.teamMembers.map((member, idx) => (
+                          <div 
+                            key={idx} 
+                            className="w-8 h-8 rounded-full bg-neutral-200 border-2 border-white flex items-center justify-center text-xs font-medium overflow-hidden"
+                            title={member}
+                          >
+                            {member.split(' ').map(name => name[0]).join('')}
+                          </div>
+                        ))}
+                      </div>
                       <div className="text-gray-400 text-sm italic">
                         내부 개발 중
                       </div>
                     </CardFooter>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="archived">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {teamProjects.filter(p => p.status === 'archived').length > 0 ? (
+                teamProjects.filter(p => p.status === 'archived').map((project) => (
+                  <Card key={project.id} className="hover:shadow-lg transition-shadow opacity-80 cursor-not-allowed">
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-neutral-100 bg-opacity-50 z-10 flex items-center justify-center">
+                        <div className="bg-neutral-800 bg-opacity-80 text-white px-4 py-2 rounded-md text-sm font-medium">
+                          접근 제한됨
+                        </div>
+                      </div>
+                      <CardHeader className="pointer-events-none">
+                        <div className="flex justify-between items-start">
+                          <CardTitle className="text-lg">{project.name}</CardTitle>
+                          {getStatusBadge(project.status)}
+                        </div>
+                        <CardDescription className="line-clamp-2">{project.description}</CardDescription>
+                      </CardHeader>
+                      <CardContent className="pointer-events-none">
+                        <div className="space-y-2">
+                          <div className="flex items-center text-sm">
+                            <FolderGit className="h-4 w-4 mr-2 text-neutral-500" />
+                            <span className="text-neutral-700">소유자: {project.owner}</span>
+                          </div>
+                          <div className="flex items-center text-sm">
+                            <Link2 className="h-4 w-4 mr-2 text-neutral-500" />
+                            <span className="text-neutral-700 truncate">
+                              {project.url.replace('https://replit.com/', '')}
+                            </span>
+                          </div>
+                          <div className="flex items-center text-sm mt-2">
+                            {getTypeBadge(project.type)}
+                            <span className="text-neutral-500 text-xs ml-2">
+                              최종 수정: {project.lastUpdated}
+                            </span>
+                          </div>
+                        </div>
+                      </CardContent>
+                      <CardFooter className="flex justify-between border-t pt-4 pointer-events-none">
+                        <div className="flex -space-x-2">
+                          {project.teamMembers.map((member, idx) => (
+                            <div 
+                              key={idx} 
+                              className="w-8 h-8 rounded-full bg-neutral-200 border-2 border-white flex items-center justify-center text-xs font-medium overflow-hidden"
+                              title={member}
+                            >
+                              {member.split(' ').map(name => name[0]).join('')}
+                            </div>
+                          ))}
+                        </div>
+                        <div className="text-gray-400 text-sm italic">
+                          내부 개발 중
+                        </div>
+                      </CardFooter>
+                    </div>
                   </Card>
                 ))
               ) : (
