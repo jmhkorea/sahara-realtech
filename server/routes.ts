@@ -631,8 +631,25 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get('/api/certificates', async (req: Request, res: Response) => {
     try {
       const category = req.query.category as string | undefined;
-      const certificates = await storage.getCertificates(category);
-      res.json(certificates);
+      const countryCode = req.query.countryCode as string | undefined;
+      
+      if (category && countryCode) {
+        // 카테고리와 국가 코드 모두로 필터링
+        const certificates = await storage.getCertificatesByFilter({ category, countryCode });
+        return res.json(certificates);
+      } else if (category) {
+        // 카테고리로만 필터링
+        const certificates = await storage.getCertificates(category);
+        return res.json(certificates);
+      } else if (countryCode) {
+        // 국가 코드로만 필터링
+        const certificates = await storage.getCertificatesByCountry(countryCode);
+        return res.json(certificates);
+      } else {
+        // 필터 없이 모든 인증서 조회
+        const certificates = await storage.getCertificates();
+        return res.json(certificates);
+      }
     } catch (error) {
       console.error('인증서 조회 에러:', error);
       res.status(500).json({ message: '인증서 정보를 가져오는데 실패했습니다.' });
@@ -688,7 +705,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         category: z.string().default("tech"),
         filePath: z.string().min(1, "파일 경로는 필수입니다"),
         description: z.string().nullable().optional(),
-        position: z.number().default(0)
+        position: z.number().default(0),
+        countryCode: z.string().optional(),
+        issueDate: z.string().optional(),
+        expiryDate: z.string().optional(),
+        issuer: z.string().optional(),
+        registrationNumber: z.string().optional()
       });
       
       const validatedData = certificateSchema.parse(req.body);
