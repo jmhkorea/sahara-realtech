@@ -122,6 +122,46 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
     }
   };
 
+  // 특허 등록증 상태 관리
+  const [isPatentExpanded, setIsPatentExpanded] = useState(false);
+  const [patentImage, setPatentImage] = useState<string | null>(
+    localStorage.getItem('patentCertificateImage')
+  );
+  const [isPatentUploading, setIsPatentUploading] = useState(false);
+  
+  // 특허 등록증 업로드 핸들러
+  const handlePatentUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+    
+    const file = files[0];
+    const formData = new FormData();
+    formData.append('certificateImage', file);
+    
+    setIsPatentUploading(true);
+    
+    try {
+      const response = await axios.post('/api/certificates/upload', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+      
+      if (response.data.success) {
+        const filePath = response.data.filePath;
+        setPatentImage(filePath);
+        localStorage.setItem('patentCertificateImage', filePath);
+      }
+    } catch (error) {
+      console.error('특허 등록증 업로드 오류:', error);
+      alert('특허 등록증 업로드에 실패했습니다. 다시 시도해주세요.');
+    } finally {
+      setIsPatentUploading(false);
+    }
+  };
+  
+  const togglePatentExpanded = () => {
+    setIsPatentExpanded(!isPatentExpanded);
+  };
+  
   return (
     <div className="space-y-4">
       <Card className={cn("overflow-hidden transition-all duration-300 border border-gray-200 shadow-sm", className)}>
@@ -385,6 +425,174 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
                     사하라 리얼테크가 획득한 다양한 기관의 인증서를 열람할 수 있습니다.
                   </p>
                 )}
+              </div>
+            </div>
+          </CardContent>
+        </div>
+      </Card>
+      
+      {/* 특허 등록증 카드 */}
+      <Card className="overflow-hidden transition-all duration-300 border border-gray-200 shadow-sm">
+        <CardHeader 
+          className="bg-gradient-to-r from-green-50 to-teal-50 py-4 cursor-pointer"
+          onClick={togglePatentExpanded}
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <CardTitle className="text-md flex items-center">
+                <FileCheck className="h-5 w-5 text-green-600 mr-2" />
+                특허 등록증
+              </CardTitle>
+              <CardDescription className="text-sm mt-1">
+                사하라 리얼테크의 블록체인 기술 특허 등록증
+              </CardDescription>
+            </div>
+            <div className="rounded-full p-1 hover:bg-green-100 transition-colors">
+              {isPatentExpanded ? (
+                <ChevronUp className="h-5 w-5 text-green-500" />
+              ) : (
+                <ChevronDown className="h-5 w-5 text-green-500" />
+              )}
+            </div>
+          </div>
+        </CardHeader>
+        
+        <div 
+          className={cn(
+            "transition-all duration-300 ease-in-out overflow-hidden",
+            isPatentExpanded ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
+          )}
+        >
+          <CardContent className="pt-4 pb-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* 특허 등록증 이미지 */}
+              <div className="border border-gray-200 rounded-lg overflow-hidden bg-white shadow-sm">
+                <div className="p-3 bg-green-50 border-b">
+                  <h3 className="font-medium text-sm text-green-800">특허 등록증 원본</h3>
+                </div>
+                <div className="h-[400px] flex items-center justify-center overflow-hidden bg-gray-50 relative">
+                  {patentImage ? (
+                    <div className="relative w-full h-full">
+                      <img 
+                        src={patentImage} 
+                        alt="특허 등록증" 
+                        className="w-full h-full object-contain"
+                      />
+                      {ADMIN_ENABLED && (
+                        <button 
+                          onClick={() => {
+                            setPatentImage(null);
+                            localStorage.removeItem('patentCertificateImage');
+                          }}
+                          className="absolute top-2 right-2 bg-white p-1 rounded-full shadow-md text-red-500 hover:text-red-700 focus:outline-none"
+                          title="관리자 전용: 특허 등록증 제거"
+                        >
+                          <X className="h-5 w-5" />
+                        </button>
+                      )}
+                    </div>
+                  ) : ADMIN_ENABLED ? (
+                    // 특허 등록증 업로드 UI (관리자 모드)
+                    <div className="text-center p-4">
+                      {isPatentUploading ? (
+                        <div className="flex flex-col items-center">
+                          <RefreshCw className="h-8 w-8 text-green-500 animate-spin mb-3" />
+                          <p className="text-sm text-green-600">업로드 중...</p>
+                        </div>
+                      ) : (
+                        <div>
+                          <div className="mx-auto w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
+                            <Upload className="h-8 w-8 text-green-600" />
+                          </div>
+                          <p className="text-gray-600 mb-3">특허 등록증을 업로드하세요</p>
+                          <label className="cursor-pointer px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 text-sm">
+                            파일 선택
+                            <input 
+                              type="file" 
+                              className="hidden" 
+                              accept="image/*"
+                              onChange={handlePatentUpload}
+                              disabled={isPatentUploading}
+                            />
+                          </label>
+                          <p className="text-xs text-gray-500 mt-3">이미지 파일만 업로드 가능합니다 (JPG, PNG)</p>
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    // 일반 사용자에게 표시되는 빈 슬롯 UI
+                    <div className="text-center p-4">
+                      <div className="mx-auto w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mb-3">
+                        <Lock className="h-8 w-8 text-gray-400" />
+                      </div>
+                      <p className="text-gray-500">특허 등록증 이미지가 준비 중입니다</p>
+                    </div>
+                  )}
+                </div>
+                {patentImage && (
+                  <div className="p-2 bg-white border-t flex justify-center">
+                    <a 
+                      href={patentImage}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-green-600 flex items-center hover:underline"
+                    >
+                      <ExternalLink className="h-4 w-4 mr-1" /> 
+                      특허 등록증 크게 보기
+                    </a>
+                  </div>
+                )}
+              </div>
+              
+              {/* 특허 설명 부분 */}
+              <div className="flex flex-col justify-between">
+                <div>
+                  <h3 className="text-lg font-bold text-gray-800 mb-3">블록체인 기반 부동산 자산 토큰화 시스템</h3>
+                  
+                  <div className="space-y-4 text-sm text-gray-600">
+                    <p>
+                      본 특허는 실물 부동산 자산을 디지털 토큰으로 변환하여 소유권을 
+                      효율적으로 분할, 거래할 수 있는 블록체인 기반 시스템에 관한 것입니다.
+                    </p>
+                    
+                    <div className="bg-green-50 p-3 rounded-md">
+                      <p className="font-medium text-green-700 mb-1">주요 기술 요소:</p>
+                      <ul className="list-disc list-inside space-y-1 text-green-800">
+                        <li>분산 원장 기술을 활용한 소유권 증명 시스템</li>
+                        <li>스마트 계약 기반의 자동화된 권리 이전 메커니즘</li>
+                        <li>실물 자산과 디지털 토큰 간의 법적 연계성 보장</li>
+                        <li>다중 서명 방식의 거래 검증 알고리즘</li>
+                        <li>하이브리드 합의 알고리즘을 통한 트랜잭션 검증</li>
+                      </ul>
+                    </div>
+                    
+                    <p>
+                      이 특허 기술은 사하라 리얼테크의 핵심 서비스인 부동산 토큰화 플랫폼의 
+                      기술적 기반을 제공하며, 국내 특허청에 등록되었습니다.
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="mt-4 bg-gray-50 p-3 rounded-md border border-gray-200">
+                  <div className="grid grid-cols-2 gap-4 text-xs">
+                    <div>
+                      <p className="text-gray-500">특허 등록 번호</p>
+                      <p className="font-medium text-gray-800">제10-2145678호</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-500">등록일</p>
+                      <p className="font-medium text-gray-800">2023년 9월 15일</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-500">출원인</p>
+                      <p className="font-medium text-gray-800">주식회사 사하라 리얼테크</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-500">발명자</p>
+                      <p className="font-medium text-gray-800">한 고, 브라이언 정</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </CardContent>
