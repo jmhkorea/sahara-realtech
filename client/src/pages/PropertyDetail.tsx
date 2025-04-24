@@ -572,19 +572,19 @@ export default function PropertyDetail() {
             </div>
             
             <div>
-              <Card>
-                <CardHeader>
+              <Card className="bg-gradient-to-b from-white to-blue-50 shadow-lg border-blue-100">
+                <CardHeader className="pb-3 border-b border-blue-100">
                   {isResortOrMembership ? (
                     <>
-                      <CardTitle className="flex items-center">
+                      <CardTitle className="flex items-center text-2xl font-bold text-blue-700">
                         {isInternational ? (
-                          <Palmtree className="h-5 w-5 mr-2 text-primary" />
+                          <Palmtree className="h-6 w-6 mr-2 text-primary" />
                         ) : (
-                          <Hotel className="h-5 w-5 mr-2 text-primary" />
+                          <Hotel className="h-6 w-6 mr-2 text-primary" />
                         )}
                         {isGolfCourse ? "골프 멤버십 투자하기" : "리조트 멤버십 투자하기"}
                       </CardTitle>
-                      <CardDescription>
+                      <CardDescription className="text-blue-600">
                         {isGolfCourse 
                           ? "골프 회원권과 리조트 시설 이용 혜택을 포함한 투자 상품입니다." 
                           : "리조트 시설 이용 혜택을 포함한 멤버십 투자 상품입니다."}
@@ -592,24 +592,26 @@ export default function PropertyDetail() {
                     </>
                   ) : (
                     <>
-                      <CardTitle>{t('propertyDetail.investmentCard.title')}</CardTitle>
-                      <CardDescription>
+                      <CardTitle className="text-2xl font-bold text-blue-700">
+                        {t('propertyDetail.investmentCard.title')}
+                      </CardTitle>
+                      <CardDescription className="text-blue-600">
                         {t('propertyDetail.investmentCard.description')}
                       </CardDescription>
                     </>
                   )}
                 </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
+                <CardContent className="pt-6">
+                  <div className="space-y-5">
                     {isResortOrMembership && (
                       <div className="mb-6">
-                        <h4 className="text-sm font-medium mb-3">멤버십 등급 선택</h4>
+                        <h4 className="text-base font-medium mb-3">멤버십 등급 선택</h4>
                         <RadioGroup 
                           value={membershipTier} 
                           onValueChange={setMembershipTier}
-                          className="grid grid-cols-1 gap-2"
+                          className="grid grid-cols-1 gap-3"
                         >
-                          <div className="flex items-center space-x-2 border rounded-md p-3 cursor-pointer hover:bg-neutral-50">
+                          <div className="flex items-center space-x-3 border border-blue-200 rounded-md p-4 cursor-pointer hover:bg-blue-50">
                             <RadioGroupItem value="standard" id="standard" />
                             <Label htmlFor="standard" className="flex flex-col cursor-pointer">
                               <span className="font-medium">스탠다드</span>
@@ -620,7 +622,7 @@ export default function PropertyDetail() {
                             </div>
                           </div>
                           
-                          <div className="flex items-center space-x-2 border rounded-md p-3 cursor-pointer hover:bg-neutral-50">
+                          <div className="flex items-center space-x-3 border border-blue-200 rounded-md p-4 cursor-pointer hover:bg-blue-50">
                             <RadioGroupItem value="premium" id="premium" />
                             <Label htmlFor="premium" className="flex flex-col cursor-pointer">
                               <span className="font-medium">프리미엄</span>
@@ -631,7 +633,7 @@ export default function PropertyDetail() {
                             </div>
                           </div>
                           
-                          <div className="flex items-center space-x-2 border rounded-md p-3 cursor-pointer hover:bg-neutral-50">
+                          <div className="flex items-center space-x-3 border border-blue-200 rounded-md p-4 cursor-pointer hover:bg-blue-50">
                             <RadioGroupItem value="platinum" id="platinum" />
                             <Label htmlFor="platinum" className="flex flex-col cursor-pointer">
                               <span className="font-medium">플래티넘</span>
@@ -643,11 +645,11 @@ export default function PropertyDetail() {
                           </div>
                         </RadioGroup>
 
-                        <div className="mt-4">
-                          <h4 className="text-sm font-medium mb-3">추가 옵션</h4>
-                          <div className="space-y-2">
+                        <div className="mt-5">
+                          <h4 className="text-base font-medium mb-3">추가 옵션</h4>
+                          <div className="space-y-3">
                             {isGolfCourse && (
-                              <div className="flex items-start space-x-2 border rounded-md p-3">
+                              <div className="flex items-start space-x-3 border border-blue-200 rounded-md p-4">
                                 <Checkbox 
                                   id="golf-lessons" 
                                   checked={additionalOptions.includes("golf-lessons")}
@@ -661,7 +663,7 @@ export default function PropertyDetail() {
                               </div>
                             )}
                             
-                            <div className="flex items-start space-x-2 border rounded-md p-3">
+                            <div className="flex items-start space-x-3 border border-blue-200 rounded-md p-4">
                               <Checkbox 
                                 id="room-upgrade" 
                                 checked={additionalOptions.includes("room-upgrade")}
@@ -674,7 +676,7 @@ export default function PropertyDetail() {
                               <div className="ml-auto font-medium">₩ 50만</div>
                             </div>
                             
-                            <div className="flex items-start space-x-2 border rounded-md p-3">
+                            <div className="flex items-start space-x-3 border border-blue-200 rounded-md p-4">
                               <Checkbox 
                                 id="dining-credit" 
                                 checked={additionalOptions.includes("dining-credit")}
@@ -691,51 +693,53 @@ export default function PropertyDetail() {
                       </div>
                     )}
                     
-                    <div>
-                      <label className="block text-sm font-medium text-neutral-500 mb-1">
-                        {t('propertyDetail.investmentCard.tokenCount')}
-                      </label>
-                      <div className="relative">
-                        <input 
-                          type="number" 
-                          min="0"
-                          value={tokenCount || ''}
-                          onChange={handleTokenCountChange}
-                          className="w-full p-3 border rounded-md"
-                          disabled={property.tokenizationStatus !== TokenizationStatus.IN_PROGRESS}
-                        />
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                      <div>
+                        <label className="block text-base font-medium text-blue-700 mb-2">
+                          {t('propertyDetail.investmentCard.tokenCount')}
+                        </label>
+                        <div className="relative">
+                          <input 
+                            type="number" 
+                            min="0"
+                            value={tokenCount || ''}
+                            onChange={handleTokenCountChange}
+                            className="w-full p-4 border border-blue-200 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            disabled={property.tokenizationStatus !== TokenizationStatus.IN_PROGRESS}
+                          />
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <label className="block text-base font-medium text-blue-700 mb-2">
+                          {t('propertyDetail.investmentCard.amount')}
+                        </label>
+                        <div className="relative">
+                          <input 
+                            type="number" 
+                            min="0"
+                            value={investmentAmount || ''}
+                            onChange={handleInvestmentAmountChange}
+                            className="w-full p-4 border border-blue-200 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            disabled={property.tokenizationStatus !== TokenizationStatus.IN_PROGRESS}
+                          />
+                          <span className="absolute right-4 top-4 text-blue-500 font-medium">₩</span>
+                        </div>
                       </div>
                     </div>
                     
-                    <div>
-                      <label className="block text-sm font-medium text-neutral-500 mb-1">
-                        {t('propertyDetail.investmentCard.amount')}
-                      </label>
-                      <div className="relative">
-                        <input 
-                          type="number" 
-                          min="0"
-                          value={investmentAmount || ''}
-                          onChange={handleInvestmentAmountChange}
-                          className="w-full p-3 border rounded-md"
-                          disabled={property.tokenizationStatus !== TokenizationStatus.IN_PROGRESS}
-                        />
-                        <span className="absolute right-3 top-3 text-neutral-500">₩</span>
+                    <div className="py-5 px-4 mt-2 bg-blue-50 border border-blue-100 rounded-lg">
+                      <div className="flex justify-between mb-3">
+                        <span className="text-sm font-medium text-blue-700">{t('propertyDetail.investmentCard.tokenPrice')}:</span>
+                        <span className="font-bold">{formatCurrency(property.tokenPrice)}</span>
                       </div>
-                    </div>
-                    
-                    <div className="pt-4 border-t">
-                      <div className="flex justify-between mb-2">
-                        <span className="text-sm text-neutral-500">{t('propertyDetail.investmentCard.tokenPrice')}:</span>
-                        <span className="font-medium">{formatCurrency(property.tokenPrice)}</span>
-                      </div>
-                      <div className="flex justify-between mb-2">
-                        <span className="text-sm text-neutral-500">{t('propertyDetail.investmentCard.expectedAnnualReturn')}:</span>
-                        <span className="font-medium text-secondary">{property.expectedReturn}%</span>
+                      <div className="flex justify-between mb-3">
+                        <span className="text-sm font-medium text-blue-700">{t('propertyDetail.investmentCard.expectedAnnualReturn')}:</span>
+                        <span className="font-bold text-green-600">{property.expectedReturn}%</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-sm text-neutral-500">{t('propertyDetail.investmentCard.estimatedYearlyIncome')}:</span>
-                        <span className="font-medium">
+                        <span className="text-sm font-medium text-blue-700">{t('propertyDetail.investmentCard.estimatedYearlyIncome')}:</span>
+                        <span className="font-bold text-green-600">
                           {formatCurrency(investmentAmount * parseFloat(property.expectedReturn) / 100)}
                         </span>
                       </div>
@@ -752,7 +756,7 @@ export default function PropertyDetail() {
                     )}
                     
                     {property.tokenizationStatus !== TokenizationStatus.IN_PROGRESS && (
-                      <div className="flex justify-center my-4">
+                      <div className="flex justify-center my-6">
                         <Button 
                           className="w-4/5 text-xl py-8 font-bold bg-gradient-to-r from-gray-500 to-gray-400 shadow-lg rounded-xl"
                           disabled={true}
@@ -765,7 +769,7 @@ export default function PropertyDetail() {
                       </div>
                     )}
                     
-                    <p className="text-xs text-neutral-500 text-center">
+                    <p className="text-xs text-neutral-500 text-center mt-3">
                       {t('propertyDetail.investmentCard.disclaimer')}
                     </p>
                   </div>
