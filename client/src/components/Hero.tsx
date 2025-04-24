@@ -34,7 +34,7 @@ export default function Hero() {
               <Button 
                 className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white hover:from-blue-600 hover:to-cyan-600 font-bold px-4 py-3 md:px-6 md:py-4 w-full sm:w-auto"
               >
-                증권형 토큰(Security Token) 제대로 알기
+                토큰 증권(STO) 제대로 알기
               </Button>
             </Link>
             <Link href="/real-world-assets-guide">
@@ -58,7 +58,7 @@ export default function Hero() {
                 variant="outline" 
                 className="bg-transparent border border-white text-white hover:bg-white/10 font-bold px-4 py-3 md:px-6 md:py-4 w-full sm:w-auto text-sm md:text-base"
               >
-                증권형 토큰(Security Token) 상장 의뢰
+                토큰증권(STO) 상장 의뢰
               </Button>
             </Link>
             <Link href="/how-to-invest">
