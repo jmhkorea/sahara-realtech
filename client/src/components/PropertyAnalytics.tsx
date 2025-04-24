@@ -49,6 +49,7 @@ import {
   PieChart as PieChartIcon,
   Calendar,
   AlertCircle,
+  AlertCircle,
   CheckCircle,
   Briefcase,
   LineChart as LineChartIcon
@@ -85,9 +86,11 @@ export default function PropertyAnalytics({ property }: PropertyAnalyticsProps) 
     queryFn: () => fetch(`/api/financial/cashflow?chartType=${cashflowPeriod}`).then(res => res.json())
   });
 
-  const { data: assetValueData, isLoading: isAssetValueLoading } = useQuery({
+  const { data: assetValueData, isLoading: isAssetValueLoading, isError: isAssetValueError } = useQuery({
     queryKey: ['/api/financial/asset-value'],
-    queryFn: () => fetch('/api/financial/asset-value').then(res => res.json())
+    queryFn: () => fetch('/api/financial/asset-value').then(res => res.json()),
+    retry: 3,
+    staleTime: 1000 * 60 * 5, // 5분 동안 데이터 캐싱
   });
 
   const { data: returnAnalysisData, isLoading: isReturnLoading } = useQuery({
@@ -579,8 +582,37 @@ export default function PropertyAnalytics({ property }: PropertyAnalyticsProps) 
               </CardHeader>
               <CardContent>
                 {isAssetValueLoading ? (
-                  <Skeleton className="h-72 w-full" />
-                ) : assetValueData ? (
+                  <div className="py-8">
+                    <div className="flex flex-col items-center justify-center space-y-4">
+                      <Skeleton className="h-60 w-full mb-6" />
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+                        <Skeleton className="h-24 w-full" />
+                        <Skeleton className="h-24 w-full" />
+                        <Skeleton className="h-24 w-full" />
+                      </div>
+                    </div>
+                  </div>
+                ) : isAssetValueError ? (
+                  <div className="h-72 flex flex-col items-center justify-center p-6 bg-amber-50 rounded-lg border border-amber-200">
+                    <AlertCircle className="h-12 w-12 text-amber-500 mb-4" />
+                    <h3 className="text-lg font-medium text-amber-800 mb-2">자산 가치 데이터를 불러올 수 없습니다</h3>
+                    <p className="text-amber-700 text-center max-w-md">
+                      데이터를 불러오는 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.
+                    </p>
+                    <Button 
+                      variant="outline" 
+                      className="mt-4"
+                      onClick={() => {
+                        window.location.reload();
+                      }}
+                    >
+                      <svg className="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                      </svg>
+                      다시 시도
+                    </Button>
+                  </div>
+                ) : assetValueData && assetValueData.length > 0 ? (
                   <div className="space-y-6">
                     <div className="h-60">
                       <ResponsiveContainer width="100%" height="100%">
@@ -662,6 +694,16 @@ export default function PropertyAnalytics({ property }: PropertyAnalyticsProps) 
                         </CardContent>
                       </Card>
                     </div>
+                  </div>
+                ) : (
+                  <div className="h-72 flex flex-col items-center justify-center p-6 bg-amber-50 rounded-lg border border-amber-200">
+                    <AlertCircle className="h-12 w-12 text-amber-500 mb-4" />
+                    <h3 className="text-lg font-medium text-amber-800 mb-2">자산 가치 데이터를 불러올 수 없습니다</h3>
+                    <p className="text-amber-700 text-center max-w-md">
+                      데이터가 비어있거나 형식이 올바르지 않습니다. 관리자에게 문의하세요.
+                    </p>
+                  </div>
+                )
                     
                     <div className="mt-6 bg-gray-50 p-4 rounded-lg">
                       <h3 className="text-sm font-medium mb-3">자산 가치 상승 요인</h3>
