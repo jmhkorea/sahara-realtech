@@ -33,23 +33,23 @@ export default function FoundationSection() {
           
           <FoundationCard
             title="미국 사업자 등록증"
-            subtitle="미국 법인"
+            subtitle="미국 미주리주 법인"
             imageSrc={foundationLogoSrc}
-            certImageSrc={companyCertificationSrc}
+            certImageSrc="/images/us_company_cert.jpg"
           />
           
           <FoundationCard
             title="한국 사업자 등록증"
-            subtitle="한국 법인"
+            subtitle="한국 경기도 성남시 법인"
             imageSrc={foundationLogoSrc}
-            certImageSrc={companyCertificationSrc}
+            certImageSrc="/images/korea_company_cert.jpg"
           />
           
           <FoundationCard
             title="중국 사업자 등록증"
-            subtitle="중국 법인"
+            subtitle="중국 쓰촨성 법인"
             imageSrc={foundationLogoSrc}
-            certImageSrc={companyCertificationSrc}
+            certImageSrc="/images/china_company_cert.jpg"
           />
         </div>
         

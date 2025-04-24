@@ -113,19 +113,40 @@ export default function FoundationCard({
               <div className="bg-gray-50 p-4 rounded-md space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-gray-500">설립일:</span>
-                  <span className="font-medium">2018년 8월 13일</span>
+                  <span className="font-medium">
+                    {title.includes("몰타") ? "2018년 8월 13일" : 
+                     title.includes("미국") ? "2021년 4월 20일" : 
+                     title.includes("중국") ? "2017년 1월 20일" : 
+                     title.includes("한국") ? "2017년 6월 13일" : 
+                    "2018년 8월 13일"}
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-500">등록 국가:</span>
-                  <span className="font-medium">몰타</span>
+                  <span className="font-medium">
+                    {title.includes("몰타") ? "몰타" : 
+                     title.includes("미국") ? "미국 미주리주" : 
+                     title.includes("한국") ? "대한민국" : 
+                     title.includes("중국") ? "중국" : ""}
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-500">등록 번호:</span>
-                  <span className="font-medium">C 87803</span>
+                  <span className="font-medium">
+                    {title.includes("몰타") ? "C 87803" : 
+                     title.includes("미국") ? "LC1780821" : 
+                     title.includes("한국") ? "123-45-67890" : 
+                     title.includes("중국") ? "GSXT35789458" : ""}
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-500">주소:</span>
-                  <span className="font-medium">152/No. 8, Naxxar Road, San Gwann, SGN 9030, Malta</span>
+                  <span className="font-medium">
+                    {title.includes("몰타") ? "152/No. 8, Naxxar Road, San Gwann, SGN 9030, Malta" : 
+                     title.includes("미국") ? "Jefferson City, Missouri, USA" : 
+                     title.includes("한국") ? "서울시 강남구 테헤란로 123" : 
+                     title.includes("중국") ? "베이징시 차오양구 123번지" : ""}
+                  </span>
                 </div>
               </div>
             </div>
@@ -133,10 +154,38 @@ export default function FoundationCard({
             <div>
               <h3 className="text-lg font-medium mb-2">주요 업무</h3>
               <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700">
-                <li>블록체인 기반 부동산 자산 토큰화</li>
-                <li>디지털 자산 관리 및 거래 플랫폼 운영</li>
-                <li>부동산 투자 전략 개발 및 컨설팅</li>
-                <li>글로벌 부동산 시장 리서치 및 분석</li>
+                {title.includes("몰타") && (
+                  <>
+                    <li>토큰증권(STO) 발행</li>
+                    <li>실물자산 디지털화 관리</li>
+                    <li>자산 토큰화 플랫폼 운영</li>
+                    <li>국제적 디지털 자산 유동화 기술 개발</li>
+                  </>
+                )}
+                {title.includes("미국") && (
+                  <>
+                    <li>북미 지역 블록체인 사업 개발</li>
+                    <li>미국 내 부동산 자산 토큰화</li>
+                    <li>투자자 관계 및 마케팅</li>
+                    <li>미국 증권법 준수 자문</li>
+                  </>
+                )}
+                {title.includes("한국") && (
+                  <>
+                    <li>한국 시장 사업 개발 및 운영</li>
+                    <li>부동산 자산 실사 및 평가</li>
+                    <li>국내 투자자 교육</li>
+                    <li>금융위원회 규제 준수</li>
+                  </>
+                )}
+                {title.includes("중국") && (
+                  <>
+                    <li>아시아 지역 사업 개발</li>
+                    <li>디지털 자산 파트너십 구축</li>
+                    <li>중국 투자자 관계</li>
+                    <li>국제 시장 확장 전략</li>
+                  </>
+                )}
               </ul>
             </div>
             
