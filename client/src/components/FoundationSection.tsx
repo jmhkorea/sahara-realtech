@@ -26,8 +26,9 @@ export default function FoundationSection() {
         <div className="max-w-3xl mx-auto space-y-8">
           <FoundationCard
             title="몰타 공화국 재단 등록증"
-            subtitle="유럽 몰타공화국"
+            subtitle="유럽 몰타공화국 (Malta Foundation)"
             imageSrc={foundationLogoSrc}
+            headerImageSrc="/images/malta_cert.png"
             certImageSrc="/images/malta_company_cert.png"
           />
           

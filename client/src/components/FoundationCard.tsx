@@ -29,7 +29,7 @@ export default function FoundationCard({
 
   return (
     <Card className="overflow-hidden transition-all duration-300 border border-gray-200 shadow-sm">
-      {headerImageSrc && false && (
+      {headerImageSrc && (
         <div 
           className="w-full cursor-pointer relative" 
           onClick={toggleExpanded}
@@ -190,10 +190,12 @@ export default function FoundationCard({
               <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700">
                 {title.includes("몰타") && (
                   <>
-                    <li>토큰증권(STO) 발행</li>
-                    <li>실물자산 디지털화 관리</li>
-                    <li>자산 토큰화 플랫폼 운영</li>
+                    <li>토큰증권(STO) 발행 및 관리</li>
+                    <li>유럽 내 실물자산 디지털화 사업</li>
+                    <li>자산 토큰화 플랫폼 글로벌 운영</li>
                     <li>국제적 디지털 자산 유동화 기술 개발</li>
+                    <li>유럽 연합 블록체인 규제 준수</li>
+                    <li>MFSA(몰타 금융감독원) 인증 금융기관</li>
                   </>
                 )}
                 {title.includes("미국") && (
