@@ -539,9 +539,6 @@ export default function PropertyDetail() {
                         <div className="flex-grow">
                           <CashFlowAnalysis chartType="monthly" propertyId={Number(id)} />
                         </div>
-                        <Button variant="outline" size="sm" className="w-full mt-auto">
-                          상세 보기
-                        </Button>
                       </CardContent>
                     </Card>
                   </div>
@@ -558,9 +555,6 @@ export default function PropertyDetail() {
                         <div className="flex-grow">
                           <ReturnAnalysis analysisType="coc" propertyId={Number(id)} />
                         </div>
-                        <Button variant="outline" size="sm" className="w-full mt-auto">
-                          상세 보기
-                        </Button>
                       </CardContent>
                     </Card>
                   </div>
