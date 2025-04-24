@@ -25,28 +25,49 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
   const [isRetrying, setIsRetrying] = useState(false);
   const [isTechCertExpanded, setIsTechCertExpanded] = useState(false);
   
-  // 인증서 목록 상태 (로컬스토리지에서 불러오거나 초기화)
-  const [certificates, setCertificates] = useState<Certificate[]>(() => {
-    // 로컬스토리지에서 저장된 인증서 정보 불러오기 시도
-    const savedCertificates = localStorage.getItem('techCertificates');
-    
-    if (savedCertificates) {
-      try {
-        // 저장된 데이터가 있으면 파싱하여 사용
-        return JSON.parse(savedCertificates);
-      } catch (error) {
-        console.error('인증서 정보 불러오기 오류:', error);
-      }
-    }
-    
-    // 저장된 데이터가 없거나 오류 발생 시 초기값으로 설정
-    return Array.from({ length: 28 }, (_, index) => ({
+  // 인증서 목록 상태 (서버 API에서 불러오거나 초기화)
+  const [certificates, setCertificates] = useState<Certificate[]>(
+    Array.from({ length: 28 }, (_, index) => ({
       id: `cert-${index + 1}`,
       name: `인증서 ${index + 1}`,
       filePath: null,
       isUploading: false
-    }));
-  });
+    }))
+  );
+  
+  // 컴포넌트 마운트 시 API에서 인증서 목록 불러오기
+  useEffect(() => {
+    const fetchCertificates = async () => {
+      try {
+        const response = await axios.get('/api/certificates?category=tech');
+        
+        if (response.data && response.data.length > 0) {
+          // API 응답 데이터를 인증서 상태 형식에 맞게 변환
+          const apiCertificates = response.data.map((cert: any) => ({
+            id: cert.id.toString(),
+            name: cert.name,
+            filePath: cert.filePath,
+            isUploading: false
+          }));
+          
+          // 기존 28개 슬롯에 API 데이터 매핑
+          const updatedCertificates = [...certificates];
+          apiCertificates.forEach((cert: Certificate) => {
+            const index = parseInt(cert.id.toString().replace('cert-', '')) - 1;
+            if (index >= 0 && index < 28) {
+              updatedCertificates[index] = cert;
+            }
+          });
+          
+          setCertificates(updatedCertificates);
+        }
+      } catch (error) {
+        console.error('인증서 목록 불러오기 오류:', error);
+      }
+    };
+    
+    fetchCertificates();
+  }, []);
 
   const toggleExpanded = () => {
     setIsExpanded(!isExpanded);
@@ -59,15 +80,6 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
   const handleRetry = () => {
     setIsRetrying(true);
     setTimeout(() => setIsRetrying(false), 1500);
-  };
-  
-  // 인증서 정보를 localStorage에 저장하는 함수
-  const saveCertificatesToLocalStorage = (certs: Certificate[]) => {
-    try {
-      localStorage.setItem('techCertificates', JSON.stringify(certs));
-    } catch (error) {
-      console.error('인증서 정보 저장 오류:', error);
-    }
   };
   
   // 인증서 이미지 업로드 핸들러
@@ -88,25 +100,44 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
     setCertificates(updatedCerts);
     
     try {
-      const response = await axios.post('/api/certificates/upload', formData, {
+      // 1. 이미지 파일 업로드
+      const uploadResponse = await axios.post('/api/certificates/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       
-      if (response.data.success) {
-        // 업로드 성공 시 인증서 정보 업데이트
+      if (uploadResponse.data.filePath) {
+        // 2. 인증서 메타데이터 저장
+        const certificateData = {
+          name: `인증서 ${certId.replace('cert-', '')}`,
+          category: 'tech',
+          filePath: uploadResponse.data.filePath,
+          position: parseInt(certId.replace('cert-', '')) - 1,
+          description: '기술 인증서'
+        };
+        
+        // 기존 인증서가 있는지 확인하기 위해 현재 인증서 찾기
+        const currentCert = certificates.find(c => c.id === certId);
+        
+        let apiResponse;
+        if (currentCert && currentCert.filePath !== null) {
+          // 기존 인증서 업데이트
+          apiResponse = await axios.patch(`/api/certificates/${certId}`, certificateData);
+        } else {
+          // 새 인증서 생성
+          apiResponse = await axios.post('/api/certificates', certificateData);
+        }
+        
+        // 3. 응답 처리
         const newCerts = certificates.map(cert => 
           cert.id === certId 
             ? { 
                 ...cert, 
-                filePath: response.data.filePath,
+                filePath: uploadResponse.data.filePath,
                 isUploading: false 
               } 
             : cert
         );
         setCertificates(newCerts);
-        
-        // localStorage에 저장
-        saveCertificatesToLocalStorage(newCerts);
       }
     } catch (error) {
       console.error('인증서 이미지 업로드 오류:', error);
@@ -124,10 +155,26 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
 
   // 특허 등록증 상태 관리
   const [isPatentExpanded, setIsPatentExpanded] = useState(false);
-  const [patentImage, setPatentImage] = useState<string | null>(
-    localStorage.getItem('patentCertificateImage')
-  );
+  const [patentImage, setPatentImage] = useState<string | null>(null);
   const [isPatentUploading, setIsPatentUploading] = useState(false);
+  
+  // 특허 인증서 불러오기
+  useEffect(() => {
+    const fetchPatentCertificate = async () => {
+      try {
+        const response = await axios.get('/api/certificates?category=patent');
+        
+        if (response.data && response.data.length > 0) {
+          // 특허 인증서 중 첫 번째 항목 사용
+          setPatentImage(response.data[0].filePath);
+        }
+      } catch (error) {
+        console.error('특허 인증서 불러오기 오류:', error);
+      }
+    };
+    
+    fetchPatentCertificate();
+  }, []);
   
   // 특허 등록증 업로드 핸들러
   const handlePatentUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -141,14 +188,34 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
     setIsPatentUploading(true);
     
     try {
-      const response = await axios.post('/api/certificates/upload', formData, {
+      // 1. 이미지 파일 업로드
+      const uploadResponse = await axios.post('/api/certificates/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       
-      if (response.data.success) {
-        const filePath = response.data.filePath;
-        setPatentImage(filePath);
-        localStorage.setItem('patentCertificateImage', filePath);
+      if (uploadResponse.data.filePath) {
+        // 2. 인증서 메타데이터 저장
+        const certificateData = {
+          name: '특허 등록증',
+          category: 'patent',
+          filePath: uploadResponse.data.filePath,
+          position: 0,
+          description: '블록체인 기술 특허 등록증'
+        };
+        
+        // 기존 특허 인증서가 있는지 확인
+        let apiResponse;
+        if (patentImage) {
+          // 기존 특허 인증서가 있으면 업데이트
+          // 실제 ID를 모르므로 특별한 엔드포인트가 필요할 수 있음
+          apiResponse = await axios.post('/api/certificates', certificateData);
+        } else {
+          // 새 특허 인증서 생성
+          apiResponse = await axios.post('/api/certificates', certificateData);
+        }
+        
+        // 3. 화면에 표시할 이미지 경로 업데이트
+        setPatentImage(uploadResponse.data.filePath);
       }
     } catch (error) {
       console.error('특허 등록증 업로드 오류:', error);
@@ -341,8 +408,8 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
                             );
                             setCertificates(updatedCerts);
                             
-                            // localStorage에 저장
-                            saveCertificatesToLocalStorage(updatedCerts);
+                            // 인증서 DB에서 삭제 요청
+                            axios.delete(`/api/certificates/${cert.id}`)
                           }}
                           className="text-red-500 hover:text-red-700 focus:outline-none"
                           title="관리자 전용: 인증서 제거"
@@ -480,9 +547,19 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
                       />
                       {ADMIN_ENABLED && (
                         <button 
-                          onClick={() => {
-                            setPatentImage(null);
-                            localStorage.removeItem('patentCertificateImage');
+                          onClick={async () => {
+                            // 카테고리가 'patent'인 인증서 찾아서 삭제
+                            try {
+                              const response = await axios.get('/api/certificates?category=patent');
+                              if (response.data && response.data.length > 0) {
+                                const patentCert = response.data[0];
+                                await axios.delete(`/api/certificates/${patentCert.id}`);
+                              }
+                              setPatentImage(null);
+                            } catch (error) {
+                              console.error('특허 인증서 삭제 오류:', error);
+                              alert('특허 인증서 삭제에 실패했습니다.');
+                            }
                           }}
                           className="absolute top-2 right-2 bg-white p-1 rounded-full shadow-md text-red-500 hover:text-red-700 focus:outline-none"
                           title="관리자 전용: 특허 등록증 제거"
