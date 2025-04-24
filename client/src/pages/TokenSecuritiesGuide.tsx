@@ -8,8 +8,8 @@ export default function TokenSecuritiesGuide() {
   return (
     <>
       <SEO 
-        title="토큰증권(STO) 제대로 알기 | SaharaRealTech" 
-        description="토큰증권(STO)의 개념과 혁신적인 가치에 대한 상세 가이드" 
+        title="증권형 토큰(STO) 제대로 알기 | SaharaRealTech" 
+        description="증권형 토큰(STO)의 개념과 혁신적인 가치에 대한 상세 가이드" 
       />
       
       <div className="container mx-auto px-4 py-8 max-w-4xl">
@@ -24,16 +24,16 @@ export default function TokenSecuritiesGuide() {
         
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
           <div className="bg-gradient-to-r from-blue-600 to-cyan-500 py-10 px-6 text-white">
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">토큰증권(STO) 제대로 알기</h1>
+            <h1 className="text-3xl md:text-4xl font-bold mb-4">증권형 토큰(STO) 제대로 알기</h1>
             <p className="text-lg opacity-90">블록체인 기술을 활용한 증권 혁신의 시작</p>
           </div>
           
           <div className="p-6 md:p-8">
             <div className="prose prose-lg max-w-none">
-              <h2 className="text-2xl font-bold text-blue-600 mb-4">토큰증권발행(STO)의 개념과 구성요소</h2>
+              <h2 className="text-2xl font-bold text-blue-600 mb-4">증권형 토큰발행(STO)의 개념과 구성요소</h2>
               
               <p>
-                토큰증권발행(STO: Security Token Offering)은 분산원장 기술(블록체인)을 기반으로 디지털화된 자본시장법상 증권을 발행하는 것을 의미합니다. 
+                증권형 토큰발행(STO: Security Token Offering)은 분산원장 기술(블록체인)을 기반으로 디지털화된 자본시장법상 증권을 발행하는 것을 의미합니다. 
                 STO를 정확히 이해하기 위해서는 다음 세 가지 구성요소를 파악해야 합니다:
               </p>
               
@@ -58,7 +58,7 @@ export default function TokenSecuritiesGuide() {
                 </div>
               </div>
               
-              <h2 className="text-2xl font-bold text-blue-600 mb-4">토큰증권(STO)이 불러올 3가지 혁신</h2>
+              <h2 className="text-2xl font-bold text-blue-600 mb-4">증권형 토큰(STO)이 불러올 3가지 혁신</h2>
               
               <Accordion type="single" collapsible className="w-full my-6">
                 <AccordionItem value="item-1">
@@ -82,7 +82,7 @@ export default function TokenSecuritiesGuide() {
                   <AccordionTrigger className="text-xl font-semibold">2. 증권 발행의 혁신</AccordionTrigger>
                   <AccordionContent className="text-base">
                     <p>
-                      토큰증권은 투자자의 자본효율성을 크게 향상시킬 수 있습니다. 기존의 IPO 방식에서는 투자자가 기업 전체의 지분에 투자해야 했습니다.
+                      증권형 토큰은 투자자의 자본효율성을 크게 향상시킬 수 있습니다. 기존의 IPO 방식에서는 투자자가 기업 전체의 지분에 투자해야 했습니다.
                     </p>
                     <p className="mt-2">
                       <strong>STO 방식의 장점:</strong>
@@ -103,7 +103,7 @@ export default function TokenSecuritiesGuide() {
                   <AccordionTrigger className="text-xl font-semibold">3. 자산 유동화의 혁신</AccordionTrigger>
                   <AccordionContent className="text-base">
                     <p>
-                      토큰증권은 기존에 상장할 방법이 없었던 다양한 자산들을 유동화할 수 있는 기회를 제공합니다.
+                      증권형 토큰은 기존에 상장할 방법이 없었던 다양한 자산들을 유동화할 수 있는 기회를 제공합니다.
                     </p>
                     <p className="mt-2">
                       <strong>유동화 가능한 자산 예시:</strong>
@@ -124,10 +124,10 @@ export default function TokenSecuritiesGuide() {
               <h2 className="text-2xl font-bold text-blue-600 mb-4">투자자 인식 변화와 마케팅 패러다임 전환</h2>
               
               <div className="bg-gray-50 p-6 rounded-lg my-6 border border-gray-200">
-                <h3 className="text-xl font-bold mb-4">토큰증권의 등장으로 예상되는 변화:</h3>
+                <h3 className="text-xl font-bold mb-4">증권형 토큰의 등장으로 예상되는 변화:</h3>
                 <ol className="list-decimal pl-6 space-y-3">
                   <li>
-                    <strong>토큰에 대한 인식 개선:</strong> 토큰증권이 합법적으로 거래되면서 암호화폐와 같은 토큰에 대한 부정적 인식이 개선될 수 있습니다.
+                    <strong>토큰에 대한 인식 개선:</strong> 증권형 토큰이 합법적으로 거래되면서 암호화폐와 같은 토큰에 대한 부정적 인식이 개선될 수 있습니다.
                   </li>
                   <li>
                     <strong>수량에서 가치 개념으로 전환:</strong> 기존의 "테슬라 5주", "삼성전자 10주"와 같은 수량 개념에서 "테슬라 300만원어치", "삼성전자 100만원어치"와 같은 가치 개념으로 투자 접근이 변화할 것입니다.
