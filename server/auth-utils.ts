@@ -29,14 +29,24 @@ export async function hashPassword(password: string): Promise<string> {
  * @returns 일치 여부
  */
 export async function verifyPassword(password: string, storedHash: string): Promise<boolean> {
-  // 저장된 해시에서 솔트와 해시 추출
-  const [hash, salt] = storedHash.split('.');
-  
-  // 입력된 비밀번호를 동일한 솔트로 해싱
-  const derivedKey = await scrypt(password, salt, 64) as Buffer;
-  
-  // 해싱된 비밀번호와 저장된 해시 비교
-  return hash === derivedKey.toString('hex');
+  try {
+    // 저장된 해시에서 솔트와 해시 추출
+    const [hash, salt] = storedHash.split('.');
+    
+    if (!hash || !salt) {
+      console.error('Invalid hash format:', storedHash);
+      return false;
+    }
+    
+    // 입력된 비밀번호를 동일한 솔트로 해싱
+    const derivedKey = await scrypt(password, salt, 64) as Buffer;
+    
+    // 해싱된 비밀번호와 저장된 해시 비교
+    return hash === derivedKey.toString('hex');
+  } catch (error) {
+    console.error('Password verification error:', error);
+    return false;
+  }
 }
 
 /**
