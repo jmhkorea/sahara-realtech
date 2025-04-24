@@ -16,6 +16,7 @@ export default function CompanyIntroduction() {
   const [isKoreaOfficeOpen, setIsKoreaOfficeOpen] = useState(false);
   const [isAiPartnerOpen, setIsAiPartnerOpen] = useState(false);
   const [isSeniorProjectOpen, setIsSeniorProjectOpen] = useState(false);
+  const [isEsportProjectOpen, setIsEsportProjectOpen] = useState(false);
   return (
     <>
       <SEO 
@@ -236,6 +237,41 @@ export default function CompanyIntroduction() {
                                   alt="대한노인회 경로당 건강 AI 키오스크" 
                                   className="w-full h-auto"
                                 />
+                              </div>
+                            </div>
+                          </div>
+                        </CollapsibleContent>
+                      </CardContent>
+                    </Collapsible>
+                  </Card>
+                </div>
+                
+                <div className="mt-5">
+                  <Card className="bg-amber-50 overflow-hidden">
+                    <Collapsible open={isEsportProjectOpen} onOpenChange={setIsEsportProjectOpen}>
+                      <CardContent className="p-4">
+                        <div className="flex justify-between items-center">
+                          <h4 className="font-semibold">국제 e-Sport 진흥원 프로젝트</h4>
+                          <CollapsibleTrigger asChild>
+                            <Button variant="ghost" size="sm" className="p-0 h-8 w-8">
+                              {isEsportProjectOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                            </Button>
+                          </CollapsibleTrigger>
+                        </div>
+                        
+                        <CollapsibleContent>
+                          <div className="pt-3 space-y-2">
+                            <p className="text-sm text-gray-600">
+                              e-Sport는 각 국제 스포츠 공인 메달 종목으로 승인되어 북경 아시안 게임부터 올림픽 종목까지 진행되고 있습니다. 
+                              사하라 리얼테크는 국내 국제 e-Sport 진흥원과 프로 선수 및 각종 사업의 NFT 및 토큰 개발 기업으로 선정되어 준비 중에 있습니다.
+                            </p>
+                            <p className="text-sm text-gray-600 mt-2">
+                              선수단들의 아카데미 및 구단 등과 지역 청소년들을 위한 사회 고용창출 등, 전국 이스포츠 전용 부동산을 활용한 
+                              실물 자산 디지털 사업에 사하라 리얼테크가 선정되어 진행 중에 있습니다.
+                            </p>
+                            <div className="mt-2 flex justify-center">
+                              <div className="rounded overflow-hidden border border-gray-200 max-w-sm bg-white p-3">
+                                <p className="text-xs text-center py-1 mb-2 bg-gray-100">국제 e-Sport 진흥원 전옥이 이사장과 정민호 대표</p>
                               </div>
                             </div>
                           </div>
