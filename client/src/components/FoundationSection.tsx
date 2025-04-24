@@ -1,12 +1,4 @@
 import { useTranslation } from "react-i18next";
-import FoundationCard from "@/components/FoundationCard";
-
-// 이미지를 public 폴더 경로로 변경
-const maltaFoundationCertSrc = "/images/malta_cert.png";
-const maltaCompanyCertSrc = "/images/malta_company_cert.png";
-const foundationLogoSrc = "/images/foundation_logo.png";
-const foundationHeaderSrc = "/images/foundation_header.png";
-const companyCertificationSrc = "/images/company_certification.png";
 
 export default function FoundationSection() {
   const { t } = useTranslation();
@@ -22,34 +14,6 @@ export default function FoundationSection() {
             글로벌 부동산 자산 디지털화를 주도하는 사하라 리얼테크의 국가별 공식 법인 등록증입니다.
             각 국가의 법률 및 규제를 준수하며 토큰증권과 실물자산 디지털화를 위한 안전한 블록체인 기술을 개발합니다.
           </p>
-        </div>
-        
-        <div className="max-w-full mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <FoundationCard
-              title="미국 사업자 등록증"
-              subtitle="미국 미주리주 법인 - 북미 지역 본부"
-              imageSrc={foundationLogoSrc}
-              headerImageSrc="/images/company_certification.png"
-              certImageSrc="/images/us_company_cert.jpg"
-            />
-            
-            <FoundationCard
-              title="한국 사업자 등록증"
-              subtitle="한국 경기도 성남시 법인 - 아시아 지역 총괄"
-              imageSrc={foundationLogoSrc}
-              headerImageSrc="/images/company_certification.png"
-              certImageSrc="/images/korea_company_cert.jpg"
-            />
-            
-            <FoundationCard
-              title="중국 사업자 등록증"
-              subtitle="중국 쓰촨성 법인 - 중국 시장 진출"
-              imageSrc={foundationLogoSrc}
-              headerImageSrc="/images/company_certification.png"
-              certImageSrc="/images/china_company_cert.jpg"
-            />
-          </div>
         </div>
         
         <div className="mt-12 text-center">

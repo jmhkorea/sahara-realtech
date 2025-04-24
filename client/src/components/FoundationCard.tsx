@@ -109,7 +109,6 @@ export default function FoundationCard({
                     <a 
                       href={certImageSrc}
                       download={
-                        title.includes("몰타") ? "malta_company_cert.png" : 
                         title.includes("미국") ? "us_company_cert.jpg" : 
                         title.includes("한국") ? "korea_company_cert.jpg" : 
                         title.includes("중국") ? "china_company_cert.jpg" : ""
@@ -125,8 +124,7 @@ export default function FoundationCard({
                   <div className="flex justify-between items-center mb-1">
                     <span className="font-medium text-xs">등록증 유형:</span>
                     <span className="text-xs text-gray-600">
-                      {title.includes("몰타") ? "몰타 법인 등록증 (LLC)" : 
-                       title.includes("미국") ? "미주리주 법인 증서" : 
+                      {title.includes("미국") ? "미주리주 법인 증서" : 
                        title.includes("한국") ? "대한민국 사업자등록증" : 
                        title.includes("중국") ? "중국 영업집조" : ""}
                     </span>
