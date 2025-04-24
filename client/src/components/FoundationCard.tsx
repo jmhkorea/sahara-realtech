@@ -97,13 +97,26 @@ export default function FoundationCard({
             {certImageSrc && (
               <div className="mt-4">
                 <h3 className="text-lg font-medium mb-3">법인 등록증</h3>
-                <div className="overflow-hidden border border-gray-200 rounded-md">
-                  <img 
-                    src={certImageSrc} 
-                    alt="법인 등록증" 
-                    className="w-full h-auto object-contain mx-auto"
-                    style={{ maxHeight: '600px' }}
-                  />
+                <div className="overflow-hidden border border-gray-200 rounded-md p-2 bg-white">
+                  <a href={certImageSrc} target="_blank" rel="noopener noreferrer">
+                    <img 
+                      src={certImageSrc} 
+                      alt="법인 등록증" 
+                      className="w-full h-auto object-contain mx-auto"
+                      style={{ maxHeight: '500px' }}
+                      loading="lazy"
+                    />
+                  </a>
+                </div>
+                <div className="mt-2 text-center">
+                  <a 
+                    href={certImageSrc}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-blue-500 hover:underline"
+                  >
+                    원본 이미지 보기
+                  </a>
                 </div>
               </div>
             )}
