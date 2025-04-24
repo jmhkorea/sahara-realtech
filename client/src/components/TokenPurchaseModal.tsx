@@ -185,11 +185,9 @@ export default function TokenPurchaseModal({ property, onPurchaseSuccess }: Toke
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <div className="flex justify-center my-4">
-          <Button className="w-4/5 text-xl py-8 font-bold bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 shadow-lg rounded-xl">
-            {t('property.investNow')}
-          </Button>
-        </div>
+        <Button className="w-4/5 text-xl py-8 font-bold bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 shadow-lg rounded-xl">
+          {t('property.investNow')}
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>

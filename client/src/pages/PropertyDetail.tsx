@@ -746,13 +746,15 @@ export default function PropertyDetail() {
                     </div>
                     
                     {property.tokenizationStatus === TokenizationStatus.IN_PROGRESS && (
-                      <TokenPurchaseModal 
-                        property={property}
-                        onPurchaseSuccess={() => {
-                          // 투자 성공 후 데이터 갱신을 위한 로직을 추가할 수 있습니다.
-                          window.location.reload();
-                        }}
-                      />
+                      <div className="flex justify-center my-6">
+                        <TokenPurchaseModal 
+                          property={property}
+                          onPurchaseSuccess={() => {
+                            // 투자 성공 후 데이터 갱신을 위한 로직을 추가할 수 있습니다.
+                            window.location.reload();
+                          }}
+                        />
+                      </div>
                     )}
                     
                     {property.tokenizationStatus !== TokenizationStatus.IN_PROGRESS && (
