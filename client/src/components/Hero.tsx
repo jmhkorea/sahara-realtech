@@ -9,11 +9,11 @@ export default function Hero() {
     <section className="relative bg-gradient-to-r from-primary to-primary/80 text-white py-16 overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4">
-            {t('hero.title')}
+          <h1 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent">
+            실제 세계 자산을 디지털화 하세요
           </h1>
           <p className="text-lg md:text-xl text-white/90 mb-4">
-            {t('hero.subtitle')}
+            아발란체 프로토콜 기반의 블록체인 기술로 부동산 투자의 진입장벽을 낮추고, 소액으로도 프리미엄 부동산에 투자할 수 있습니다.
           </p>
           
           <div className="p-3 bg-white/20 backdrop-blur-sm border-l-4 border-white rounded-md mb-4">
@@ -95,6 +95,13 @@ export default function Hero() {
               <p className="font-bold font-inter text-xl">10+</p>
               <p className="text-sm text-white/80">{t('hero.completedTransactions')}</p>
             </div>
+          </div>
+          
+          <div className="mt-6 bg-gradient-to-r from-blue-600/20 to-blue-800/20 rounded-lg p-4 backdrop-blur-sm border border-blue-400/30">
+            <p className="text-sm text-white">
+              본 사이트의 다양한 데이터 분석 차트는 국내외 전문 기관의 API를 통해 실시간으로 제공되며, 
+              이 모든 서비스는 본사만의 독자적인 기술로 직접 개발되었습니다.
+            </p>
           </div>
         </div>
       </div>
