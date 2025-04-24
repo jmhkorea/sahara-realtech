@@ -60,6 +60,8 @@ export interface IStorage {
   // Certificate methods
   getCertificates(category?: string): Promise<Certificate[]>;
   getCertificate(id: number): Promise<Certificate | undefined>;
+  getCertificatesByCountry(countryCode: string): Promise<Certificate[]>;
+  getCertificatesByFilter(filter: { category?: string, countryCode?: string }): Promise<Certificate[]>;
   createCertificate(certificate: InsertCertificate): Promise<Certificate>;
   updateCertificate(id: number, certificate: Partial<InsertCertificate>): Promise<Certificate | undefined>;
   deleteCertificate(id: number): Promise<boolean>;
@@ -384,6 +386,26 @@ export class MemStorage implements IStorage {
   
   async getCertificate(id: number): Promise<Certificate | undefined> {
     return this.certificates.get(id);
+  }
+  
+  async getCertificatesByCountry(countryCode: string): Promise<Certificate[]> {
+    return Array.from(this.certificates.values())
+      .filter(cert => cert.countryCode === countryCode.toLowerCase())
+      .sort((a, b) => a.position - b.position);
+  }
+  
+  async getCertificatesByFilter(filter: { category?: string, countryCode?: string }): Promise<Certificate[]> {
+    let certificates = Array.from(this.certificates.values());
+    
+    if (filter.category) {
+      certificates = certificates.filter(cert => cert.category === filter.category);
+    }
+    
+    if (filter.countryCode) {
+      certificates = certificates.filter(cert => cert.countryCode === filter.countryCode?.toLowerCase());
+    }
+    
+    return certificates.sort((a, b) => a.position - b.position);
   }
   
   async createCertificate(insertCertificate: InsertCertificate): Promise<Certificate> {
@@ -764,7 +786,7 @@ export class DatabaseStorage implements IStorage {
     if (category) {
       return await db.select()
         .from(certificates)
-        .where(eq(certificates.category, category))
+        .where(eq(certificates.category, category as any))
         .orderBy(asc(certificates.position));
     } else {
       return await db.select()
@@ -776,6 +798,27 @@ export class DatabaseStorage implements IStorage {
   async getCertificate(id: number): Promise<Certificate | undefined> {
     const [certificate] = await db.select().from(certificates).where(eq(certificates.id, id));
     return certificate;
+  }
+  
+  async getCertificatesByCountry(countryCode: string): Promise<Certificate[]> {
+    return await db.select()
+      .from(certificates)
+      .where(eq(certificates.countryCode, countryCode.toLowerCase() as any))
+      .orderBy(asc(certificates.position));
+  }
+  
+  async getCertificatesByFilter(filter: { category?: string, countryCode?: string }): Promise<Certificate[]> {
+    let query = db.select().from(certificates);
+    
+    if (filter.category) {
+      query = query.where(eq(certificates.category, filter.category as any));
+    }
+    
+    if (filter.countryCode) {
+      query = query.where(eq(certificates.countryCode, filter.countryCode.toLowerCase() as any));
+    }
+    
+    return await query.orderBy(asc(certificates.position));
   }
   
   async createCertificate(insertCertificate: InsertCertificate): Promise<Certificate> {
