@@ -246,6 +246,7 @@ export default function BusinessRegistrationCard({ countryCode, countryName }: B
       usa: "🇺🇸",
       korea: "🇰🇷",
       china: "🇨🇳",
+      brazil: "🇧🇷",
       other: "🌍"
     };
     

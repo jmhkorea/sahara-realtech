@@ -12,7 +12,8 @@ export default function BusinessRegistrationSection() {
     { code: "malta", name: "몰타공화국" },
     { code: "usa", name: "미국" },
     { code: "korea", name: "한국" },
-    { code: "china", name: "중국" }
+    { code: "china", name: "중국" },
+    { code: "brazil", name: "브라질" }
   ];
 
   return (
