@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 interface CashFlowAnalysisProps {
   propertyId: number;
   chartType?: "monthly" | "yearly" | "breakdown";
+  className?: string;
 }
 
 interface CashFlowData {
@@ -19,7 +20,7 @@ interface CashFlowData {
   [key: string]: string | number | undefined;
 }
 
-export default function CashFlowAnalysis({ propertyId, chartType = "monthly" }: CashFlowAnalysisProps) {
+export default function CashFlowAnalysis({ propertyId, chartType = "monthly", className }: CashFlowAnalysisProps) {
   const [selectedChartType, setSelectedChartType] = useState<string>(chartType);
 
   // Fetch data based on chart type
@@ -44,7 +45,7 @@ export default function CashFlowAnalysis({ propertyId, chartType = "monthly" }: 
 
   if (isLoading) {
     return (
-      <div className="w-full h-[200px] flex items-center justify-center">
+      <div className={`w-full h-[200px] flex items-center justify-center ${className}`}>
         <Skeleton className="w-full h-full rounded-md" />
       </div>
     );
@@ -52,7 +53,7 @@ export default function CashFlowAnalysis({ propertyId, chartType = "monthly" }: 
 
   if (error || !data) {
     return (
-      <div className="text-center p-4">
+      <div className={`text-center p-4 ${className}`}>
         <p className="text-red-500">데이터를 불러올 수 없습니다.</p>
         <Button
           variant="outline"
@@ -82,7 +83,7 @@ export default function CashFlowAnalysis({ propertyId, chartType = "monthly" }: 
     : [];
 
   return (
-    <div className="w-full">
+    <div className={`w-full ${className}`}>
       <Tabs defaultValue={selectedChartType} onValueChange={handleChartTypeChange}>
         <TabsList className="grid grid-cols-3 mb-4">
           <TabsTrigger value="monthly">월별 현금 흐름</TabsTrigger>

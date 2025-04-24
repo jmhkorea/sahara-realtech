@@ -527,7 +527,7 @@ export default function PropertyDetail() {
               
               <div className="bg-white shadow-md rounded-b-xl p-5">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <Card className="overflow-hidden shadow-sm border border-blue-100 flex flex-col h-[350px]">
+                  <Card className="overflow-hidden shadow-sm border border-blue-100 flex flex-col h-[350px] w-full max-w-[400px] mx-auto">
                     <CardHeader className="bg-blue-50 pb-2">
                       <CardTitle className="text-lg flex items-center text-blue-700">
                         <TrendingUp className="h-5 w-5 mr-2" />
@@ -544,7 +544,7 @@ export default function PropertyDetail() {
                     </CardContent>
                   </Card>
                   
-                  <Card className="overflow-hidden shadow-sm border border-emerald-100 flex flex-col h-[350px]">
+                  <Card className="overflow-hidden shadow-sm border border-emerald-100 flex flex-col h-[350px] w-full max-w-[400px] mx-auto">
                     <CardHeader className="bg-emerald-50 pb-2">
                       <CardTitle className="text-lg flex items-center text-emerald-700">
                         <BarChart3 className="h-5 w-5 mr-2" />
@@ -561,7 +561,7 @@ export default function PropertyDetail() {
                     </CardContent>
                   </Card>
                   
-                  <Card className="overflow-hidden shadow-sm border border-purple-100 flex flex-col h-[350px]">
+                  <Card className="overflow-hidden shadow-sm border border-purple-100 flex flex-col h-[350px] w-full max-w-[400px] mx-auto">
                     <CardHeader className="bg-purple-50 pb-2">
                       <CardTitle className="text-lg flex items-center text-purple-700">
                         <Coins className="h-5 w-5 mr-2" />

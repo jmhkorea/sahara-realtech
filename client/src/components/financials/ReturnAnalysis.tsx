@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 interface ReturnAnalysisProps {
   propertyId: number;
   analysisType?: 'coc' | 'irr' | 'comparison';
+  className?: string;
 }
 
 // Types for different return analysis data structures
@@ -39,7 +40,7 @@ interface ComparisonData {
   }[];
 }
 
-export default function ReturnAnalysis({ propertyId, analysisType = 'coc' }: ReturnAnalysisProps) {
+export default function ReturnAnalysis({ propertyId, analysisType = 'coc', className }: ReturnAnalysisProps) {
   const [selectedAnalysisType, setSelectedAnalysisType] = useState<string>(analysisType);
 
   // API call to get return analysis data
@@ -60,7 +61,7 @@ export default function ReturnAnalysis({ propertyId, analysisType = 'coc' }: Ret
 
   if (isLoading) {
     return (
-      <div className="w-full h-[200px] flex items-center justify-center">
+      <div className={`w-full h-[200px] flex items-center justify-center ${className}`}>
         <Skeleton className="w-full h-full rounded-md" />
       </div>
     );
@@ -68,7 +69,7 @@ export default function ReturnAnalysis({ propertyId, analysisType = 'coc' }: Ret
 
   if (error || !data) {
     return (
-      <div className="text-center p-4">
+      <div className={`text-center p-4 ${className}`}>
         <p className="text-red-500">수익률 데이터를 불러올 수 없습니다.</p>
         <Button
           variant="outline"
@@ -160,7 +161,7 @@ export default function ReturnAnalysis({ propertyId, analysisType = 'coc' }: Ret
   };
 
   return (
-    <div className="w-full">
+    <div className={`w-full ${className}`}>
       <Tabs defaultValue={selectedAnalysisType} onValueChange={setSelectedAnalysisType}>
         <TabsList className="grid grid-cols-3 mb-4">
           <TabsTrigger value="coc">현금 수익률</TabsTrigger>

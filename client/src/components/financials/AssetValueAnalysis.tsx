@@ -19,6 +19,7 @@ import { Button } from "@/components/ui/button";
 
 interface AssetValueAnalysisProps {
   propertyId: number;
+  className?: string;
 }
 
 interface AssetValueData {
@@ -29,7 +30,7 @@ interface AssetValueData {
   marketAverage?: number;
 }
 
-export default function AssetValueAnalysis({ propertyId }: AssetValueAnalysisProps) {
+export default function AssetValueAnalysis({ propertyId, className }: AssetValueAnalysisProps) {
   const [viewType, setViewType] = useState<"chart" | "table">("chart");
   
   const { data, isLoading, error } = useQuery<AssetValueData[]>({
@@ -48,7 +49,7 @@ export default function AssetValueAnalysis({ propertyId }: AssetValueAnalysisPro
 
   if (isLoading) {
     return (
-      <div className="w-full h-[200px] flex items-center justify-center">
+      <div className={`w-full h-[200px] flex items-center justify-center ${className}`}>
         <Skeleton className="w-full h-full rounded-md" />
       </div>
     );
@@ -56,7 +57,7 @@ export default function AssetValueAnalysis({ propertyId }: AssetValueAnalysisPro
 
   if (error || !data) {
     return (
-      <div className="text-center p-4">
+      <div className={`text-center p-4 ${className}`}>
         <p className="text-red-500">자산 가치 데이터를 불러올 수 없습니다.</p>
         <Button
           variant="outline"
@@ -77,7 +78,7 @@ export default function AssetValueAnalysis({ propertyId }: AssetValueAnalysisPro
   };
 
   return (
-    <div className="w-full">
+    <div className={`w-full ${className}`}>
       <div className="flex justify-between items-center mb-4">
         <div>
           <p className="text-sm text-neutral-500">총 자산 가치 성장률</p>
