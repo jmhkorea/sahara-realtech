@@ -26,12 +26,20 @@ interface AssetValueAnalysisTabProps {
 }
 
 export default function AssetValueAnalysisTab({ formatCurrency }: AssetValueAnalysisTabProps) {
+  console.log("AssetValueAnalysisTab 렌더링");
   const { data: assetValueData, isLoading: isAssetValueLoading, isError: isAssetValueError } = useQuery({
     queryKey: ['/api/financial/asset-value'],
-    queryFn: () => fetch('/api/financial/asset-value').then(res => res.json()),
+    queryFn: () => fetch('/api/financial/asset-value').then(res => {
+      if (!res.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return res.json();
+    }),
     retry: 3,
     staleTime: 1000 * 60 * 5, // 5분 동안 데이터 캐싱
   });
+  
+  console.log("자산 가치 데이터:", assetValueData);
 
   return (
     <Card>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Property } from "@shared/schema";
 import { useQuery } from "@tanstack/react-query";
@@ -76,6 +76,11 @@ export default function PropertyAnalytics({ property }: PropertyAnalyticsProps) 
   const [chartType, setChartType] = useState("cashflow");
   const [selectedAnalysisTab, setSelectedAnalysisTab] = useState("cashflow");
   const [assetValuePeriod, setAssetValuePeriod] = useState("5year");
+  
+  // 탭 변경 시, 콘솔에 로그 출력
+  useEffect(() => {
+    console.log("선택된 탭:", selectedAnalysisTab);
+  }, [selectedAnalysisTab]);
 
   // 헤더 설명 텍스트
   const headerDescription = "SaharaRealTech의 고급 금융 분석 도구를 통해 부동산 투자의 수익성, 현금 흐름, 세금 효과 및 포트폴리오 성과를 분석해보세요. 전문가 수준의 부동산 금융 분석으로 더 나은 투자 결정을 내리실 수 있습니다.";
@@ -325,7 +330,9 @@ export default function PropertyAnalytics({ property }: PropertyAnalyticsProps) 
           
           {/* 자산 가치 분석 탭 */}
           <TabsContent value="assetValue">
-            <AssetValueAnalysisTab formatCurrency={formatCurrency} />
+            {selectedAnalysisTab === 'assetValue' && (
+              <AssetValueAnalysisTab formatCurrency={formatCurrency} />
+            )}
           </TabsContent>
           
           {/* 금융 상품 비교 탭 */}
