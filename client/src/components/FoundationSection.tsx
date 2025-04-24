@@ -5,6 +5,7 @@ import FoundationCard from "@/components/FoundationCard";
 const maltaCertSrc = "/images/malta_cert.png";
 const foundationLogoSrc = "/images/foundation_logo.png";
 const foundationHeaderSrc = "/images/foundation_header.png";
+const companyCertificationSrc = "/images/company_certification.png";
 
 export default function FoundationSection() {
   const { t } = useTranslation();
@@ -21,12 +22,36 @@ export default function FoundationSection() {
           </p>
         </div>
         
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto space-y-8">
           <FoundationCard
-            title="재단"
+            title="몰타 공화국 재단 등록증"
             subtitle="유럽 몰타공화국"
             imageSrc={foundationLogoSrc}
             certImageSrc={maltaCertSrc}
+            headerImageSrc={foundationHeaderSrc}
+          />
+          
+          <FoundationCard
+            title="미국 사업자 등록증"
+            subtitle="미국 법인"
+            imageSrc={foundationLogoSrc}
+            certImageSrc={companyCertificationSrc}
+            headerImageSrc={foundationHeaderSrc}
+          />
+          
+          <FoundationCard
+            title="한국 사업자 등록증"
+            subtitle="한국 법인"
+            imageSrc={foundationLogoSrc}
+            certImageSrc={companyCertificationSrc}
+            headerImageSrc={foundationHeaderSrc}
+          />
+          
+          <FoundationCard
+            title="중국 사업자 등록증"
+            subtitle="중국 법인"
+            imageSrc={foundationLogoSrc}
+            certImageSrc={companyCertificationSrc}
             headerImageSrc={foundationHeaderSrc}
           />
         </div>
