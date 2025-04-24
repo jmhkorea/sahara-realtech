@@ -36,6 +36,7 @@ export async function getAssetValueData(req: Request, res: Response) {
     // 실제 API 호출은 향후에 구현
     // 현재는 샘플 데이터 반환
     const data = getSampleAssetValueData();
+    console.log('Asset value data being returned:', data.valueTrend);
     return res.status(200).json(data.valueTrend);
   } catch (error) {
     console.error('Failed to fetch asset value data:', error);

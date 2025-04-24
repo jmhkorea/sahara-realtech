@@ -29,17 +29,26 @@ export default function AssetValueAnalysisTab({ formatCurrency }: AssetValueAnal
   console.log("AssetValueAnalysisTab 렌더링");
   const { data: assetValueData, isLoading: isAssetValueLoading, isError: isAssetValueError } = useQuery({
     queryKey: ['/api/financial/asset-value'],
-    queryFn: () => fetch('/api/financial/asset-value').then(res => {
+    queryFn: () => fetch('/api/financial/asset-value').then(async res => {
       if (!res.ok) {
+        console.error('API 응답 오류:', res.status, res.statusText);
         throw new Error('Network response was not ok');
       }
-      return res.json();
+      const data = await res.json();
+      console.log('API 응답 데이터:', data);
+      return data;
     }),
-    retry: 3,
+    retry: 1,
     staleTime: 1000 * 60 * 5, // 5분 동안 데이터 캐싱
   });
   
-  console.log("자산 가치 데이터:", assetValueData);
+  console.log("자산 가치 데이터 상태:", { 
+    isLoading: isAssetValueLoading, 
+    isError: isAssetValueError, 
+    dataExists: Boolean(assetValueData),
+    dataLength: assetValueData ? assetValueData.length : 0,
+    data: assetValueData 
+  });
 
   return (
     <Card>
