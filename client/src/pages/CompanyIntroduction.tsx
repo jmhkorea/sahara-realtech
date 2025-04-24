@@ -10,6 +10,7 @@ import hancomAgreement from "@/assets/hancom-agreement.png";
 import ctgBusinessCard from "@/assets/ctg-business-card.png";
 import kimiyiAi from "@/assets/kimiyi-ai.jpg";
 import seniorAiKiosk from "@/assets/senior-ai-kiosk.png";
+import esportMeeting from "@/assets/esport-meeting.jpg";
 
 export default function CompanyIntroduction() {
   const [isCtgInfoOpen, setIsCtgInfoOpen] = useState(false);
@@ -270,8 +271,13 @@ export default function CompanyIntroduction() {
                               실물 자산 디지털 사업에 사하라 리얼테크가 선정되어 진행 중에 있습니다.
                             </p>
                             <div className="mt-2 flex justify-center">
-                              <div className="rounded overflow-hidden border border-gray-200 max-w-sm bg-white p-3">
-                                <p className="text-xs text-center py-1 mb-2 bg-gray-100">국제 e-Sport 진흥원 전옥이 이사장과 정민호 대표</p>
+                              <div className="rounded overflow-hidden border border-gray-200 max-w-sm">
+                                <img 
+                                  src={esportMeeting} 
+                                  alt="국제 e-Sport 진흥원 전옥이 이사장과 정민호 대표" 
+                                  className="w-full h-auto"
+                                />
+                                <p className="text-xs text-center py-1 bg-gray-100">국제 e-Sport 진흥원 전옥이 이사장과 정민호 대표</p>
                               </div>
                             </div>
                           </div>
