@@ -5,6 +5,7 @@ import path from "path";
 import session from "express-session";
 import { Pool } from '@neondatabase/serverless';
 import connectPg from "connect-pg-simple";
+import { initializeAuth } from "./auth-init";
 
 // 세션 관리를 위한 PostgreSQL 스토어 설정
 const PostgresSessionStore = connectPg(session);
@@ -65,7 +66,12 @@ app.use((req, res, next) => {
 
 (async () => {
   const server = await registerRoutes(app);
-
+  
+  // 서버 시작 시 초기 관리자 계정 설정
+  setTimeout(() => {
+    initializeAuth();
+  }, 2000); // 서버가 완전히 시작된 후 초기화 수행
+  
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";

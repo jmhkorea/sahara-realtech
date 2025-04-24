@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { 
   ArrowLeft, 
@@ -17,6 +17,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Link } from "wouter";
 import SEO from "@/components/SEO";
+import { useSystemAuth } from "@/hooks/use-system-auth";
 
 // 인증 폼 스키마 정의
 const authFormSchema = z.object({
@@ -28,8 +29,8 @@ type AuthFormValues = z.infer<typeof authFormSchema>;
 
 export default function SystemAuthPage() {
   const [, navigate] = useLocation();
+  const { authenticateAndRedirect, isLoading, error: authApiError, clearError } = useSystemAuth();
   const [authError, setAuthError] = useState<string | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   
   // URL에서 쿼리 파라미터 파싱
   const params = new URLSearchParams(window.location.search);
@@ -37,6 +38,13 @@ export default function SystemAuthPage() {
   // 리디렉션 URL 가져오기
   const redirectUrl = params.get("redirectUrl");
   const systemName = params.get("name") || "시스템";
+  
+  // API 에러 업데이트
+  useEffect(() => {
+    if (authApiError) {
+      setAuthError(authApiError);
+    }
+  }, [authApiError]);
   
   // 폼 상태 관리
   const form = useForm<AuthFormValues>({
@@ -50,26 +58,34 @@ export default function SystemAuthPage() {
   // 인증 처리 함수
   const onSubmit = async (values: AuthFormValues) => {
     try {
-      setIsSubmitting(true);
+      clearError();
       setAuthError(null);
       
-      // 실제 운영 환경에서는 서버에 인증 요청을 보내야 함
-      // 현재는 간단한 하드코딩된 검증으로 대체 (데모용)
-      if (values.username === "admin" && values.password === "password") {
-        if (redirectUrl) {
-          // 인증 성공 시 원래 요청된 URL로 리디렉션
-          window.location.href = decodeURIComponent(redirectUrl);
-        } else {
-          // 리디렉션 URL이 없는 경우 팀 워크스페이스로 돌아감
-          navigate("/team-workspace");
+      if (!redirectUrl) {
+        // 리디렉션 URL이 없는 경우 서버에 인증 요청만 하고 성공 시 팀 워크스페이스로 이동
+        const result = await authenticateAndRedirect(
+          values, 
+          "/team-workspace"
+        );
+        
+        if (!result) {
+          // authenticateAndRedirect에서 이미 오류 처리가 되므로 추가 처리 불필요
+          // error state는 useSystemAuth 훅에서 자동으로 설정됨
+          console.log("인증 실패");
         }
       } else {
-        setAuthError("사용자 ID 또는 비밀번호가 올바르지 않습니다");
+        // 리디렉션 URL이 있는 경우 해당 URL로 리디렉션
+        const result = await authenticateAndRedirect(
+          values, 
+          decodeURIComponent(redirectUrl)
+        );
+        
+        if (!result) {
+          console.log("인증 실패");
+        }
       }
     } catch (error) {
       setAuthError("인증 중 오류가 발생했습니다. 다시 시도해주세요.");
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
@@ -155,9 +171,9 @@ export default function SystemAuthPage() {
                 <Button 
                   type="submit" 
                   className="w-full bg-blue-600 hover:bg-blue-700" 
-                  disabled={isSubmitting}
+                  disabled={isLoading}
                 >
-                  {isSubmitting ? "인증 중..." : "접근 요청"}
+                  {isLoading ? "인증 중..." : "접근 요청"}
                 </Button>
               </form>
             </Form>
