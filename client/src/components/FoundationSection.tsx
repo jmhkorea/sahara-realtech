@@ -27,14 +27,6 @@ export default function FoundationSection() {
         <div className="max-w-full mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FoundationCard
-              title="몰타 공화국 재단 등록증"
-              subtitle="유럽 몰타공화국 (Malta Foundation) - 글로벌 본사"
-              imageSrc={foundationLogoSrc}
-              headerImageSrc="/images/malta_cert.png"
-              certImageSrc="/images/malta_company_cert.png"
-            />
-            
-            <FoundationCard
               title="미국 사업자 등록증"
               subtitle="미국 미주리주 법인 - 북미 지역 본부"
               imageSrc={foundationLogoSrc}
@@ -62,8 +54,8 @@ export default function FoundationSection() {
         
         <div className="mt-12 text-center">
           <p className="text-sm text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            사하라 리얼테크 재단은 글로벌 블록체인 기술을 통해 부동산 자산의 토큰화를 추진하는 선도적인 기관으로, 
-            유럽, 북미, 아시아에 지사를 두고 글로벌 부동산 시장의 민주화와 접근성 향상을 위해 노력하고 있습니다. 
+            사하라 리얼테크는 글로벌 블록체인 기술을 통해 부동산 자산의 토큰화를 추진하는 선도적인 기관으로, 
+            북미, 아시아, 중국에 지사를 두고 글로벌 부동산 시장의 민주화와 접근성 향상을 위해 노력하고 있습니다. 
             각 국가별 금융 규제 준수와 함께 안정적인 토큰증권(STO) 발행 및 실물자산(RWA) 디지털화를 위한 
             표준 기술을 개발하고 있습니다.
           </p>
