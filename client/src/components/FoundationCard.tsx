@@ -97,26 +97,43 @@ export default function FoundationCard({
             {certImageSrc && (
               <div className="mt-4">
                 <h3 className="text-lg font-medium mb-3">법인 등록증</h3>
-                <div className="overflow-hidden border border-gray-200 rounded-md p-2 bg-white">
-                  <a href={certImageSrc} target="_blank" rel="noopener noreferrer">
-                    <img 
-                      src={certImageSrc} 
-                      alt="법인 등록증" 
-                      className="w-full h-auto object-contain mx-auto"
-                      style={{ maxHeight: '500px' }}
-                      loading="lazy"
-                    />
-                  </a>
+                
+                <div className="flex items-center justify-center py-8 px-4 bg-gray-50 border border-gray-200 rounded-md">
+                  <div className="flex flex-col items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-500 mb-3">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                      <polyline points="7 10 12 15 17 10"></polyline>
+                      <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    <p className="text-gray-700 text-sm mb-2">법인 등록증 이미지를 보시려면 아래 버튼을 클릭하세요</p>
+                    <a 
+                      href={certImageSrc}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md transition-colors"
+                    >
+                      등록증 이미지 보기
+                    </a>
+                  </div>
                 </div>
-                <div className="mt-2 text-center">
-                  <a 
-                    href={certImageSrc}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-blue-500 hover:underline"
-                  >
-                    원본 이미지 보기
-                  </a>
+
+                <div className="mt-6 p-4 bg-white border border-gray-200 rounded-md">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="font-medium text-sm">등록증 유형:</span>
+                    <span className="text-sm text-gray-600">
+                      {title.includes("몰타") ? "몰타 법인 등록증 (LLC)" : 
+                       title.includes("미국") ? "미주리주 CERTIFICATE OF ORGANIZATION" : 
+                       title.includes("한국") ? "대한민국 사업자등록증" : 
+                       title.includes("중국") ? "중국 영업집조(营业执照)" : ""}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="font-medium text-sm">등록증 형식:</span>
+                    <span className="text-sm text-gray-600">
+                      {certImageSrc.endsWith('.jpg') || certImageSrc.endsWith('.jpeg') ? 'JPEG 이미지' : 
+                       certImageSrc.endsWith('.png') ? 'PNG 이미지' : '이미지 파일'}
+                    </span>
+                  </div>
                 </div>
               </div>
             )}
@@ -148,8 +165,8 @@ export default function FoundationCard({
                   <span className="font-medium">
                     {title.includes("몰타") ? "C 87803" : 
                      title.includes("미국") ? "LC1780821" : 
-                     title.includes("한국") ? "123-45-67890" : 
-                     title.includes("중국") ? "GSXT35789458" : ""}
+                     title.includes("한국") ? "145-86-00817" : 
+                     title.includes("중국") ? "91510100M62PXCA4A" : ""}
                   </span>
                 </div>
                 <div className="flex justify-between">
@@ -157,8 +174,8 @@ export default function FoundationCard({
                   <span className="font-medium">
                     {title.includes("몰타") ? "152/No. 8, Naxxar Road, San Gwann, SGN 9030, Malta" : 
                      title.includes("미국") ? "Jefferson City, Missouri, USA" : 
-                     title.includes("한국") ? "서울시 강남구 테헤란로 123" : 
-                     title.includes("중국") ? "베이징시 차오양구 123번지" : ""}
+                     title.includes("한국") ? "경기도 성남시 분당구 백현로 97, 1226호" : 
+                     title.includes("중국") ? "사천성 성도 고신구 디부광장 2호 804, 805" : ""}
                   </span>
                 </div>
               </div>
