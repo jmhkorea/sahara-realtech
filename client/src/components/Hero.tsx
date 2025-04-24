@@ -97,7 +97,14 @@ export default function Hero() {
             </div>
           </div>
           
-          <div className="mt-6 bg-gradient-to-r from-blue-600/20 to-blue-800/20 rounded-lg p-4 backdrop-blur-sm border border-blue-400/30">
+          <div className="mt-6 bg-gradient-to-r from-blue-600/20 to-blue-800/20 rounded-lg p-4 backdrop-blur-sm border border-blue-400/30 relative">
+            <div className="absolute -top-3 -right-2 transform rotate-12">
+              <div className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg flex items-center gap-1 animate-pulse">
+                <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-white opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                <span>NEW</span>
+              </div>
+            </div>
             <p className="text-sm text-white">
               본 사이트의 다양한 데이터 분석 차트는 국내외 전문 기관의 API를 통해 실시간으로 제공되며, 
               이 모든 서비스는 본사만의 독자적인 기술로 직접 개발되었습니다.
