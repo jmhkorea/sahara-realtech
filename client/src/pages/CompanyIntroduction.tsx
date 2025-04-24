@@ -9,11 +9,13 @@ import dubaiSigningCeremony from "@/assets/dubai-signing-ceremony.png";
 import hancomAgreement from "@/assets/hancom-agreement.png";
 import ctgBusinessCard from "@/assets/ctg-business-card.png";
 import kimiyiAi from "@/assets/kimiyi-ai.jpg";
+import seniorAiKiosk from "@/assets/senior-ai-kiosk.png";
 
 export default function CompanyIntroduction() {
   const [isCtgInfoOpen, setIsCtgInfoOpen] = useState(false);
   const [isKoreaOfficeOpen, setIsKoreaOfficeOpen] = useState(false);
   const [isAiPartnerOpen, setIsAiPartnerOpen] = useState(false);
+  const [isSeniorProjectOpen, setIsSeniorProjectOpen] = useState(false);
   return (
     <>
       <SEO 
@@ -196,6 +198,42 @@ export default function CompanyIntroduction() {
                                 <img 
                                   src={kimiyiAi} 
                                   alt="Kimiyi AI - 생성형 AI 기업" 
+                                  className="w-full h-auto"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </CollapsibleContent>
+                      </CardContent>
+                    </Collapsible>
+                  </Card>
+                </div>
+                
+                <div className="mt-5">
+                  <Card className="bg-green-50 overflow-hidden">
+                    <Collapsible open={isSeniorProjectOpen} onOpenChange={setIsSeniorProjectOpen}>
+                      <CardContent className="p-4">
+                        <div className="flex justify-between items-center">
+                          <h4 className="font-semibold">대한노인회 경로당 프로젝트 진행</h4>
+                          <CollapsibleTrigger asChild>
+                            <Button variant="ghost" size="sm" className="p-0 h-8 w-8">
+                              {isSeniorProjectOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                            </Button>
+                          </CollapsibleTrigger>
+                        </div>
+                        
+                        <CollapsibleContent>
+                          <div className="pt-3 space-y-2">
+                            <p className="text-sm text-gray-600">
+                              대한노인회 회원 약 1000만명을 대상으로 경로당 약 55,000개 경로당 리뉴얼 프로젝트로 
+                              '건강 AI 키오스크 시범 서비스'를 위한 프로젝트입니다. 데일리뉴스와 사하라 리얼테크의 
+                              기술력을 통해 진행 중입니다.
+                            </p>
+                            <div className="mt-2 flex justify-center">
+                              <div className="rounded overflow-hidden border border-gray-200 max-w-sm">
+                                <img 
+                                  src={seniorAiKiosk} 
+                                  alt="대한노인회 경로당 건강 AI 키오스크" 
                                   className="w-full h-auto"
                                 />
                               </div>
