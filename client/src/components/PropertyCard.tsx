@@ -99,7 +99,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
   const propertyAddress = currentLang === 'ko' ? property.address : property.addressEn;
 
   return (
-    <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow w-full max-w-[320px] mx-auto h-[650px] flex flex-col">
+    <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow w-full max-w-[320px] mx-auto h-[720px] flex flex-col">
       <div className="relative">
         <img 
           src={property.imageUrl || ''} 
