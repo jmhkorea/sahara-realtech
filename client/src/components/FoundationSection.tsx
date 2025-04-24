@@ -1,7 +1,56 @@
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
+import axios from "axios";
 
 export default function FoundationSection() {
   const { t } = useTranslation();
+  
+  // 각 국가별 인증서 이미지 상태 관리
+  const [certificates, setCertificates] = useState({
+    malta: null,
+    usa: null,
+    korea: '/uploads/certificates/korean_business_certificate.jpg', // 한국 사업자등록증 이미지 기본 설정
+    china: null
+  });
+  
+  // 업로드 진행 상태
+  const [uploading, setUploading] = useState({
+    malta: false,
+    usa: false,
+    korea: false,
+    china: false
+  });
+
+  // 파일 업로드 핸들러
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, country: string) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    const formData = new FormData();
+    formData.append('certificateImage', file);
+    
+    try {
+      setUploading({...uploading, [country]: true});
+      
+      const response = await axios.post('/api/certificates/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      
+      if (response.data.success) {
+        setCertificates({
+          ...certificates,
+          [country]: response.data.filePath
+        });
+      }
+    } catch (error) {
+      console.error('이미지 업로드 오류:', error);
+      alert('이미지 업로드 중 오류가 발생했습니다.');
+    } finally {
+      setUploading({...uploading, [country]: false});
+    }
+  };
 
   return (
     <section className="py-16 bg-neutral-50">
@@ -32,8 +81,38 @@ export default function FoundationSection() {
                 <p className="text-xs text-gray-500">유럽 지역 본부</p>
               </div>
             </div>
-            <div className="bg-gray-100 rounded-lg h-48 flex items-center justify-center">
-              <p className="text-gray-500 text-sm">사업자등록증 이미지가 추가될 예정입니다</p>
+            <div className="rounded-lg h-52 flex items-center justify-center overflow-hidden bg-gray-100 relative">
+              {certificates.malta ? (
+                <img src={certificates.malta} alt="몰타공화국 사업자등록증" className="w-full h-full object-contain" />
+              ) : (
+                <div className="text-center p-4">
+                  <p className="text-gray-500 text-sm mb-2">사업자등록증 이미지를 업로드해주세요</p>
+                  <label className="cursor-pointer px-3 py-1.5 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm">
+                    이미지 업로드
+                    <input 
+                      type="file" 
+                      className="hidden" 
+                      accept="image/*"
+                      onChange={(e) => handleFileUpload(e, 'malta')}
+                      disabled={uploading.malta}
+                    />
+                  </label>
+                  {uploading.malta && <p className="text-xs text-blue-500 mt-2">업로드 중...</p>}
+                </div>
+              )}
+              {certificates.malta && (
+                <div className="absolute bottom-2 right-2">
+                  <label className="cursor-pointer px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 text-xs">
+                    변경
+                    <input 
+                      type="file" 
+                      className="hidden" 
+                      accept="image/*"
+                      onChange={(e) => handleFileUpload(e, 'malta')} 
+                    />
+                  </label>
+                </div>
+              )}
             </div>
           </div>
           
@@ -51,8 +130,38 @@ export default function FoundationSection() {
                 <p className="text-xs text-gray-500">북미 지역 본부</p>
               </div>
             </div>
-            <div className="bg-gray-100 rounded-lg h-48 flex items-center justify-center">
-              <p className="text-gray-500 text-sm">사업자등록증 이미지가 추가될 예정입니다</p>
+            <div className="rounded-lg h-52 flex items-center justify-center overflow-hidden bg-gray-100 relative">
+              {certificates.usa ? (
+                <img src={certificates.usa} alt="미국 사업자등록증" className="w-full h-full object-contain" />
+              ) : (
+                <div className="text-center p-4">
+                  <p className="text-gray-500 text-sm mb-2">사업자등록증 이미지를 업로드해주세요</p>
+                  <label className="cursor-pointer px-3 py-1.5 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm">
+                    이미지 업로드
+                    <input 
+                      type="file" 
+                      className="hidden" 
+                      accept="image/*"
+                      onChange={(e) => handleFileUpload(e, 'usa')}
+                      disabled={uploading.usa}
+                    />
+                  </label>
+                  {uploading.usa && <p className="text-xs text-blue-500 mt-2">업로드 중...</p>}
+                </div>
+              )}
+              {certificates.usa && (
+                <div className="absolute bottom-2 right-2">
+                  <label className="cursor-pointer px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 text-xs">
+                    변경
+                    <input 
+                      type="file" 
+                      className="hidden" 
+                      accept="image/*"
+                      onChange={(e) => handleFileUpload(e, 'usa')} 
+                    />
+                  </label>
+                </div>
+              )}
             </div>
           </div>
           
@@ -70,27 +179,87 @@ export default function FoundationSection() {
                 <p className="text-xs text-gray-500">아시아 지역 총괄</p>
               </div>
             </div>
-            <div className="bg-gray-100 rounded-lg h-48 flex items-center justify-center">
-              <p className="text-gray-500 text-sm">사업자등록증 이미지가 추가될 예정입니다</p>
+            <div className="rounded-lg h-52 flex items-center justify-center overflow-hidden bg-gray-100 relative">
+              {certificates.korea ? (
+                <img src={certificates.korea} alt="한국 사업자등록증" className="w-full h-full object-contain" />
+              ) : (
+                <div className="text-center p-4">
+                  <p className="text-gray-500 text-sm mb-2">사업자등록증 이미지를 업로드해주세요</p>
+                  <label className="cursor-pointer px-3 py-1.5 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm">
+                    이미지 업로드
+                    <input 
+                      type="file" 
+                      className="hidden" 
+                      accept="image/*"
+                      onChange={(e) => handleFileUpload(e, 'korea')}
+                      disabled={uploading.korea}
+                    />
+                  </label>
+                  {uploading.korea && <p className="text-xs text-blue-500 mt-2">업로드 중...</p>}
+                </div>
+              )}
+              {certificates.korea && (
+                <div className="absolute bottom-2 right-2">
+                  <label className="cursor-pointer px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 text-xs">
+                    변경
+                    <input 
+                      type="file" 
+                      className="hidden" 
+                      accept="image/*"
+                      onChange={(e) => handleFileUpload(e, 'korea')} 
+                    />
+                  </label>
+                </div>
+              )}
             </div>
           </div>
           
           {/* 중국 등록증 폼 */}
-          <div className="bg-white rounded-lg shadow-sm p-3 border border-gray-200">
-            <div className="flex items-center mb-2">
-              <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-600">
+          <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200">
+            <div className="flex items-center mb-3">
+              <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-600">
                   <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                   <polyline points="9 22 9 12 15 12 15 22"></polyline>
                 </svg>
               </div>
               <div>
-                <h3 className="font-bold text-sm">중국 등록증</h3>
+                <h3 className="font-bold text-base">중국 등록증</h3>
                 <p className="text-xs text-gray-500">중국 시장 진출</p>
               </div>
             </div>
-            <div className="bg-gray-100 rounded-lg h-32 flex items-center justify-center">
-              <p className="text-gray-500 text-xs">사업자등록증 이미지가 추가될 예정입니다</p>
+            <div className="rounded-lg h-52 flex items-center justify-center overflow-hidden bg-gray-100 relative">
+              {certificates.china ? (
+                <img src={certificates.china} alt="중국 사업자등록증" className="w-full h-full object-contain" />
+              ) : (
+                <div className="text-center p-4">
+                  <p className="text-gray-500 text-sm mb-2">사업자등록증 이미지를 업로드해주세요</p>
+                  <label className="cursor-pointer px-3 py-1.5 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm">
+                    이미지 업로드
+                    <input 
+                      type="file" 
+                      className="hidden" 
+                      accept="image/*"
+                      onChange={(e) => handleFileUpload(e, 'china')}
+                      disabled={uploading.china}
+                    />
+                  </label>
+                  {uploading.china && <p className="text-xs text-blue-500 mt-2">업로드 중...</p>}
+                </div>
+              )}
+              {certificates.china && (
+                <div className="absolute bottom-2 right-2">
+                  <label className="cursor-pointer px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 text-xs">
+                    변경
+                    <input 
+                      type="file" 
+                      className="hidden" 
+                      accept="image/*"
+                      onChange={(e) => handleFileUpload(e, 'china')} 
+                    />
+                  </label>
+                </div>
+              )}
             </div>
           </div>
         </div>
