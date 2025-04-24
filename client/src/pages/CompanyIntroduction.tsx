@@ -18,6 +18,7 @@ import globalEvent4 from "@/assets/global-event-4.jpg";
 import globalEvent5 from "@/assets/global-event-5.jpg";
 import globalEvent6 from "@/assets/global-event-6.jpg";
 import globalEvent7 from "@/assets/global-event-7.jpg";
+import globalEventAfrica from "@/assets/global-event-africa.png";
 import awardInnovation from "@/assets/award-innovation.jpg";
 import awardPatent from "@/assets/award-patent.jpg";
 import awardCto from "@/assets/award-cto.jpg";
@@ -371,6 +372,18 @@ export default function CompanyIntroduction() {
                             <p className="text-xs text-center mt-2 bg-gray-100 py-1 rounded">
                               싱가포르 마리나베이 블랙록 사업 설명 및 두바이, 인도, 말레이시아 등 국제 행사 참여
                             </p>
+                            
+                            <div className="mt-5 border-t pt-4">
+                              <h5 className="text-sm font-semibold mb-2">아프리카 현지 청년 교육 프로그램</h5>
+                              <img 
+                                src={globalEventAfrica} 
+                                alt="아프리카 현지 청년 교육 프로그램" 
+                                className="w-full h-auto rounded border border-gray-200"
+                              />
+                              <p className="text-xs text-center mt-2 bg-gray-100 py-1 rounded">
+                                아프리카 현지 청년들을 대상으로 블록체인 기술 및 디지털 자산 교육 프로그램 진행
+                              </p>
+                            </div>
                           </div>
                         </CollapsibleContent>
                       </CardContent>
