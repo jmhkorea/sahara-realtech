@@ -22,15 +22,28 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
   const [isRetrying, setIsRetrying] = useState(false);
   const [isTechCertExpanded, setIsTechCertExpanded] = useState(false);
   
-  // 인증서 목록 상태 (초기에는 28개의 빈 슬롯으로 시작)
-  const [certificates, setCertificates] = useState<Certificate[]>(
-    Array.from({ length: 28 }, (_, index) => ({
+  // 인증서 목록 상태 (로컬스토리지에서 불러오거나 초기화)
+  const [certificates, setCertificates] = useState<Certificate[]>(() => {
+    // 로컬스토리지에서 저장된 인증서 정보 불러오기 시도
+    const savedCertificates = localStorage.getItem('techCertificates');
+    
+    if (savedCertificates) {
+      try {
+        // 저장된 데이터가 있으면 파싱하여 사용
+        return JSON.parse(savedCertificates);
+      } catch (error) {
+        console.error('인증서 정보 불러오기 오류:', error);
+      }
+    }
+    
+    // 저장된 데이터가 없거나 오류 발생 시 초기값으로 설정
+    return Array.from({ length: 28 }, (_, index) => ({
       id: `cert-${index + 1}`,
       name: `인증서 ${index + 1}`,
       filePath: null,
       isUploading: false
-    }))
-  );
+    }));
+  });
 
   const toggleExpanded = () => {
     setIsExpanded(!isExpanded);
@@ -45,6 +58,15 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
     setTimeout(() => setIsRetrying(false), 1500);
   };
   
+  // 인증서 정보를 localStorage에 저장하는 함수
+  const saveCertificatesToLocalStorage = (certs: Certificate[]) => {
+    try {
+      localStorage.setItem('techCertificates', JSON.stringify(certs));
+    } catch (error) {
+      console.error('인증서 정보 저장 오류:', error);
+    }
+  };
+  
   // 인증서 이미지 업로드 핸들러
   const handleCertificateUpload = async (e: React.ChangeEvent<HTMLInputElement>, certId: string) => {
     const files = e.target.files;
@@ -55,13 +77,12 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
     formData.append('certificateImage', file);
     
     // 현재 인증서의 상태를 업로딩 중으로 업데이트
-    setCertificates(prevCerts => 
-      prevCerts.map(cert => 
-        cert.id === certId 
-          ? { ...cert, isUploading: true } 
-          : cert
-      )
+    const updatedCerts = certificates.map(cert => 
+      cert.id === certId 
+        ? { ...cert, isUploading: true } 
+        : cert
     );
+    setCertificates(updatedCerts);
     
     try {
       const response = await axios.post('/api/certificates/upload', formData, {
@@ -70,17 +91,19 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
       
       if (response.data.success) {
         // 업로드 성공 시 인증서 정보 업데이트
-        setCertificates(prevCerts => 
-          prevCerts.map(cert => 
-            cert.id === certId 
-              ? { 
-                  ...cert, 
-                  filePath: response.data.filePath,
-                  isUploading: false 
-                } 
-              : cert
-          )
+        const newCerts = certificates.map(cert => 
+          cert.id === certId 
+            ? { 
+                ...cert, 
+                filePath: response.data.filePath,
+                isUploading: false 
+              } 
+            : cert
         );
+        setCertificates(newCerts);
+        
+        // localStorage에 저장
+        saveCertificatesToLocalStorage(newCerts);
       }
     } catch (error) {
       console.error('인증서 이미지 업로드 오류:', error);
@@ -259,13 +282,15 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
                         <button 
                           onClick={() => {
                             // 인증서 제거 로직
-                            setCertificates(prevCerts => 
-                              prevCerts.map(c => 
-                                c.id === cert.id 
-                                  ? { ...c, filePath: null } 
-                                  : c
-                              )
+                            const updatedCerts = certificates.map(c => 
+                              c.id === cert.id 
+                                ? { ...c, filePath: null } 
+                                : c
                             );
+                            setCertificates(updatedCerts);
+                            
+                            // localStorage에 저장
+                            saveCertificatesToLocalStorage(updatedCerts);
                           }}
                           className="text-red-500 hover:text-red-700 focus:outline-none"
                           title="인증서 제거"
