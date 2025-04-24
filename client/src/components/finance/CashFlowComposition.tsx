@@ -22,9 +22,9 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
   const [isRetrying, setIsRetrying] = useState(false);
   const [isTechCertExpanded, setIsTechCertExpanded] = useState(false);
   
-  // 인증서 목록 상태 (초기에는 24개의 빈 슬롯으로 시작)
+  // 인증서 목록 상태 (초기에는 28개의 빈 슬롯으로 시작)
   const [certificates, setCertificates] = useState<Certificate[]>(
-    Array.from({ length: 24 }, (_, index) => ({
+    Array.from({ length: 28 }, (_, index) => ({
       id: `cert-${index + 1}`,
       name: `인증서 ${index + 1}`,
       filePath: null,
@@ -238,16 +238,16 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
               </p>
             </div>
             
-            {/* 인증서 업로드 섹션 - 가로 4개씩, 6줄 그리드 */}
+            {/* 인증서 업로드 섹션 - 가로 4개씩, 7줄 그리드 (총 28개) */}
             <div className="mt-6">
               <h3 className="text-base font-semibold mb-4 text-gray-800 flex items-center">
                 <Award className="h-5 w-5 text-blue-600 mr-2" />
-                회사 인증서 업로드 (총 24개)
+                회사 인증서 업로드 (총 28개)
               </h3>
               
-              {/* 인증서 그리드 - 6줄, 각 줄에 4개씩 */}
+              {/* 인증서 그리드 - 7줄, 각 줄에 4개씩 */}
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                {/* 24개의 인증서 슬롯 렌더링 */}
+                {/* 28개의 인증서 슬롯 렌더링 */}
                 {certificates.map((cert, index) => (
                   <div 
                     key={cert.id}
