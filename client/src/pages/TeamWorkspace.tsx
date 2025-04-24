@@ -657,60 +657,60 @@ export default function TeamWorkspace() {
               <AccordionContent className="px-6 pb-4">
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <a 
-                      href="https://github.com/sahararealtech/contracts" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="flex items-center p-4 border rounded-lg hover:bg-neutral-50"
-                    >
-                      <div className="mr-4 p-2 bg-neutral-100 rounded-md">
+                    <div className="flex items-center p-4 border rounded-lg bg-neutral-50 cursor-not-allowed opacity-80 relative">
+                      <div className="absolute inset-0 bg-neutral-100 bg-opacity-50 z-10 flex items-center justify-center">
+                        <div className="bg-neutral-800 bg-opacity-80 text-white px-4 py-2 rounded-md text-sm font-medium">
+                          접근 제한됨
+                        </div>
+                      </div>
+                      <div className="mr-4 p-2 bg-neutral-100 rounded-md pointer-events-none">
                         <Github className="h-6 w-6 text-neutral-700" />
                       </div>
-                      <div>
+                      <div className="pointer-events-none">
                         <h3 className="font-medium">스마트 계약 리포지토리</h3>
                         <p className="text-sm text-neutral-500">토큰화 스마트 계약 코드</p>
                       </div>
-                    </a>
+                    </div>
                     
-                    <a 
-                      href="https://github.com/sahararealtech/frontend" 
-                      target="_blank"
-                      rel="noopener noreferrer" 
-                      className="flex items-center p-4 border rounded-lg hover:bg-neutral-50"
-                    >
-                      <div className="mr-4 p-2 bg-neutral-100 rounded-md">
+                    <div className="flex items-center p-4 border rounded-lg bg-neutral-50 cursor-not-allowed opacity-80 relative">
+                      <div className="absolute inset-0 bg-neutral-100 bg-opacity-50 z-10 flex items-center justify-center">
+                        <div className="bg-neutral-800 bg-opacity-80 text-white px-4 py-2 rounded-md text-sm font-medium">
+                          접근 제한됨
+                        </div>
+                      </div>
+                      <div className="mr-4 p-2 bg-neutral-100 rounded-md pointer-events-none">
                         <Github className="h-6 w-6 text-neutral-700" />
                       </div>
-                      <div>
+                      <div className="pointer-events-none">
                         <h3 className="font-medium">프론트엔드 리포지토리</h3>
                         <p className="text-sm text-neutral-500">웹 애플리케이션 소스 코드</p>
                       </div>
-                    </a>
+                    </div>
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <a 
-                      href="https://docs.sahararealtech.com" 
-                      target="_blank"
-                      rel="noopener noreferrer" 
-                      className="flex items-center p-4 border rounded-lg hover:bg-neutral-50"
-                    >
-                      <div className="mr-4 p-2 bg-neutral-100 rounded-md">
+                    <div className="flex items-center p-4 border rounded-lg bg-neutral-50 cursor-not-allowed opacity-80 relative">
+                      <div className="absolute inset-0 bg-neutral-100 bg-opacity-50 z-10 flex items-center justify-center">
+                        <div className="bg-neutral-800 bg-opacity-80 text-white px-4 py-2 rounded-md text-sm font-medium">
+                          접근 제한됨
+                        </div>
+                      </div>
+                      <div className="mr-4 p-2 bg-neutral-100 rounded-md pointer-events-none">
                         <Layers className="h-6 w-6 text-neutral-700" />
                       </div>
-                      <div>
+                      <div className="pointer-events-none">
                         <h3 className="font-medium">기술 문서</h3>
                         <p className="text-sm text-neutral-500">API 및 개발 문서</p>
                       </div>
-                    </a>
+                    </div>
                     
-                    <a 
-                      href="https://replit.com/@SaharaRealTech" 
-                      target="_blank"
-                      rel="noopener noreferrer" 
-                      className="flex items-center p-4 border rounded-lg hover:bg-neutral-50"
-                    >
-                      <div className="mr-4 p-2 bg-neutral-100 rounded-md">
+                    <div className="flex items-center p-4 border rounded-lg bg-neutral-50 cursor-not-allowed opacity-80 relative">
+                      <div className="absolute inset-0 bg-neutral-100 bg-opacity-50 z-10 flex items-center justify-center">
+                        <div className="bg-neutral-800 bg-opacity-80 text-white px-4 py-2 rounded-md text-sm font-medium">
+                          접근 제한됨
+                        </div>
+                      </div>
+                      <div className="mr-4 p-2 bg-neutral-100 rounded-md pointer-events-none">
                         <svg viewBox="0 0 32 32" className="h-6 w-6 text-neutral-700">
                           <path
                             d="M7.25 16C7.25 11.1875 11.1875 7.25 16 7.25C20.8125 7.25 24.75 11.1875 24.75 16C24.75 20.8125 20.8125 24.75 16 24.75C11.1875 24.75 7.25 20.8125 7.25 16Z"
@@ -726,11 +726,11 @@ export default function TeamWorkspace() {
                           />
                         </svg>
                       </div>
-                      <div>
+                      <div className="pointer-events-none">
                         <h3 className="font-medium">Replit 팀 페이지</h3>
                         <p className="text-sm text-neutral-500">모든 Replit 프로젝트</p>
                       </div>
-                    </a>
+                    </div>
                   </div>
                 </div>
               </AccordionContent>
