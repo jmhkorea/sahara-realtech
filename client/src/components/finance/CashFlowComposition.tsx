@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { ChevronDown, ChevronUp, RefreshCw, Award, ExternalLink, FileCheck, Upload, X, Plus } from 'lucide-react';
+import { ChevronDown, ChevronUp, RefreshCw, Award, ExternalLink, FileCheck, Upload, X, Plus, Lock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import axios from 'axios';
@@ -16,6 +16,9 @@ interface Certificate {
   filePath: string | null;
   isUploading: boolean;
 }
+
+// 관리자 권한 확인을 위한 상수 (실제 로그인 시스템과 연동 필요)
+const ADMIN_ENABLED = process.env.NODE_ENV === 'development'; // 개발 환경에서만 관리자 기능 활성화
 
 export default function CashFlowComposition({ className }: CashFlowCompositionProps) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -263,10 +266,19 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
             
             {/* 인증서 업로드 섹션 - 가로 4개씩, 7줄 그리드 (총 28개) */}
             <div className="mt-6">
-              <h3 className="text-base font-semibold mb-4 text-gray-800 flex items-center">
+              <h3 className="text-base font-semibold mb-2 text-gray-800 flex items-center">
                 <Award className="h-5 w-5 text-blue-600 mr-2" />
                 회사 인증서 업로드 (총 28개)
               </h3>
+              
+              {ADMIN_ENABLED && (
+                <div className="mb-4 p-2 bg-amber-50 border border-amber-200 rounded-md flex items-center text-amber-700">
+                  <Lock className="h-4 w-4 mr-2 flex-shrink-0" />
+                  <p className="text-xs">
+                    <span className="font-medium">관리자 모드</span>: 배포 환경에서는 인증서 업로드 및 삭제 기능이 비활성화됩니다.
+                  </p>
+                </div>
+              )}
               
               {/* 인증서 그리드 - 7줄, 각 줄에 4개씩 */}
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
@@ -278,7 +290,7 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
                   >
                     <div className="p-3 bg-gray-50 border-b flex items-center justify-between">
                       <span className="text-xs font-medium text-gray-700">인증서 {index + 1}</span>
-                      {cert.filePath && (
+                      {cert.filePath && ADMIN_ENABLED && (
                         <button 
                           onClick={() => {
                             // 인증서 제거 로직
@@ -293,7 +305,7 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
                             saveCertificatesToLocalStorage(updatedCerts);
                           }}
                           className="text-red-500 hover:text-red-700 focus:outline-none"
-                          title="인증서 제거"
+                          title="관리자 전용: 인증서 제거"
                         >
                           <X className="h-4 w-4" />
                         </button>
@@ -308,8 +320,8 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
                           alt={`인증서 ${index + 1}`} 
                           className="w-full h-full object-contain"
                         />
-                      ) : (
-                        // 인증서 업로드 UI
+                      ) : ADMIN_ENABLED ? (
+                        // 인증서 업로드 UI (관리자 모드)
                         <div className="text-center p-4">
                           {cert.isUploading ? (
                             <div className="flex flex-col items-center">
@@ -335,6 +347,14 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
                             </div>
                           )}
                         </div>
+                      ) : (
+                        // 일반 사용자에게 표시되는 빈 슬롯 UI
+                        <div className="text-center p-4">
+                          <div className="mx-auto w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mb-2">
+                            <Lock className="h-5 w-5 text-gray-400" />
+                          </div>
+                          <p className="text-gray-500 text-xs">사용 가능한 인증서 슬롯</p>
+                        </div>
                       )}
                     </div>
                     
@@ -356,9 +376,15 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
               </div>
               
               <div className="mt-4 text-center">
-                <p className="text-sm text-gray-500">
-                  다양한 기관에서 획득한 인증서를 업로드하여 회사의 신뢰성을 증명해보세요.
-                </p>
+                {ADMIN_ENABLED ? (
+                  <p className="text-sm text-gray-500">
+                    다양한 기관에서 획득한 인증서를 업로드하여 회사의 신뢰성을 증명해보세요.
+                  </p>
+                ) : (
+                  <p className="text-sm text-gray-500">
+                    사하라 리얼테크가 획득한 다양한 기관의 인증서를 열람할 수 있습니다.
+                  </p>
+                )}
               </div>
             </div>
           </CardContent>
