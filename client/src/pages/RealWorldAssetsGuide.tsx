@@ -3,6 +3,8 @@ import { Link } from "wouter";
 import { ArrowLeft } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import SEO from "@/components/SEO";
+import rwaConceptImg from "../assets/rwa_concept.png";
+import tokenizationBridgeImg from "../assets/tokenization_bridge.png";
 
 export default function RealWorldAssetsGuide() {
   return (
@@ -33,27 +35,58 @@ export default function RealWorldAssetsGuide() {
               <h2 className="text-2xl font-bold text-green-600 mb-4">RWA의 개념과 의의</h2>
               
               <p>
-                실제세계자산(RWA, Real World Assets)은 블록체인 기술을 활용하여 현실 세계에 존재하는 유형·무형의 자산을 디지털 토큰으로 표현한 것입니다. 
-                부동산, 예술품, 금융상품, 지적재산권 등 다양한 실물 자산을 블록체인상에서 디지털화함으로써 자산의 분할 소유, 거래 효율성 증대, 유동성 향상 등의 이점을 제공합니다.
+                실제세계자산(RWA, Real World Assets)은 블록체인 기술을 활용하여 현실 세계에 존재하는 유형·무형의 자산을 디지털 토큰으로 변환하여 블록체인 상에서 거래할 수 있게 하는 혁신적인 기술입니다. 
+                부동산, 예술품, 채권, 주식 등의 실물 자산을 블록체인상에서 토큰화함으로써 전통적인 금융과 디지털 금융의 경계를 허물고, 실물 자산 시장의 비효율성을 해결하는 솔루션으로 주목받고 있습니다.
               </p>
               
+              <div className="my-6 bg-gray-50 rounded-lg overflow-hidden border border-gray-200">
+                <img 
+                  src={rwaConceptImg} 
+                  alt="RWA 개념 설명 - 오프체인에서 온체인으로" 
+                  className="w-full h-auto object-contain"
+                />
+                <div className="p-4 text-sm text-gray-600 text-center">
+                  <p>오프체인 실물 자산이 토큰화를 통해 온체인으로 이동하는 과정</p>
+                </div>
+              </div>
+              
               <p>
-                RWA는 디지털 자산과 전통적인 금융 시스템을 연결하는 가교 역할을 하며, 분산금융(DeFi)의 혁신을 실물 경제에 접목시키는 중요한 수단으로 주목받고 있습니다.
-                실물 경제와 암호화폐 생태계의 통합을 통해 더 포용적이고 효율적인 금융 시스템을 구축하는 데 기여할 수 있습니다.
+                기존의 실물 자산 거래는 낮은 유동성, 높은 진입 장벽, 복잡한 절차로 인해 접근성이 제한적이었습니다. RWA는 블록체인의 투명성, 보안성, 분할 가능성을 활용하여 이러한 문제를 해결합니다.
               </p>
+              
+              <div className="bg-green-50 p-5 rounded-lg border border-green-200 my-4">
+                <h3 className="text-lg font-bold text-green-700 mb-2">STO vs RWA: 주요 차이점</h3>
+                <p className="text-sm">
+                  STO(Security Token Offering)와 유사하지만, RWA는 더 광범위한 자산을 포괄하며 주로 퍼블릭 블록체인에서 탈중앙화된 방식으로 운영됩니다. 반면 STO는 증권성 자산에 한정되어 있고, 주로 프라이빗 블록체인에서 중앙화된 방식으로 운영됩니다.
+                </p>
+              </div>
               
               <h2 className="text-2xl font-bold text-green-600 mb-4">RWA 토큰화의 작동 원리</h2>
               
+              <div className="my-6 bg-black rounded-lg overflow-hidden border border-gray-200">
+                <img 
+                  src={tokenizationBridgeImg} 
+                  alt="토큰화 브릿지 - 오프체인 자산을 온체인으로 연결" 
+                  className="w-full h-auto object-contain"
+                />
+                <div className="p-4 text-sm text-gray-300 text-center">
+                  <p>토큰화 브릿지(Tokenization Bridge)를 통한 오프체인-온체인 자산 연결</p>
+                </div>
+              </div>
+              
               <div className="bg-gray-50 p-6 rounded-lg my-6 border border-gray-200">
-                <h3 className="text-xl font-bold mb-4">기본 프로세스</h3>
+                <h3 className="text-xl font-bold mb-4">RWA 토큰화 프로세스</h3>
                 <ol className="list-decimal pl-6 space-y-2">
-                  <li><strong>자산 식별 및 평가:</strong> 토큰화할 실물 자산 선정 및 가치 평가</li>
-                  <li><strong>법적 구조 설계:</strong> 토큰 소유자의 권리와 의무를 정의하는 법적 프레임워크 구축</li>
-                  <li><strong>특수목적법인(SPV) 설립:</strong> 자산을 보유하고 관리하기 위한 법적 실체 설립</li>
-                  <li><strong>토큰 발행:</strong> 블록체인에서 자산을 대표하는 디지털 토큰 생성</li>
-                  <li><strong>토큰 배포 및 유통:</strong> 토큰 배포 및 2차 시장 거래 활성화</li>
-                  <li><strong>자산 관리 및 수익 분배:</strong> 기초 자산 관리 및 수익 분배</li>
+                  <li><strong>자산 선택과 평가:</strong> 토큰화할 자산을 식별하고 가치를 평가</li>
+                  <li><strong>법적 규제 확인:</strong> 관련 법적 이슈와 규제 검토</li>
+                  <li><strong>토큰 구조 설정:</strong> 토크노믹스, 운영 방식, 네트워크 등 결정</li>
+                  <li><strong>발행 및 배포:</strong> 실물 자산에 대응하는 토큰 발행</li>
+                  <li><strong>거래:</strong> 온체인 상에서 토큰 거래 진행</li>
+                  <li><strong>유통 및 소각:</strong> 토큰의 지속적 유통과 필요시 소각</li>
                 </ol>
+                <p className="mt-4 text-sm text-gray-600">
+                  이 과정에서 오라클은 실물 자산의 가치나 상태 변화를 실시간으로 스마트 컨트랙트에 업데이트하여 토큰의 가치가 실제 자산 가치와 연동되도록 합니다.
+                </p>
               </div>
               
               <div className="grid md:grid-cols-2 gap-4 my-6">
@@ -160,28 +193,48 @@ export default function RealWorldAssetsGuide() {
                 </div>
               </div>
               
-              <h2 className="text-2xl font-bold text-green-600 mb-4">RWA 관련 도전 과제와 해결 방안</h2>
+              <h2 className="text-2xl font-bold text-green-600 mb-4">RWA가 직면한 과제</h2>
               
-              <div className="my-6 space-y-4">
-                <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-amber-500">
-                  <h3 className="text-xl font-bold mb-2">법적 및 규제적 문제</h3>
-                  <p>국가별 상이한 증권법, 부동산법, 금융 규제 등이 글로벌 프로젝트 구현의 장벽이 됩니다.</p>
-                  <p className="font-semibold mt-2">해결 방안:</p>
-                  <ul className="list-disc pl-6">
-                    <li>RegTech 솔루션을 통한 규제 준수 자동화</li>
-                    <li>규제 당국과의 협력 및 샌드박스 프로그램 참여</li>
-                    <li>관할권별 맞춤형 법적 구조 설계</li>
+              <div className="grid md:grid-cols-2 gap-6 my-6">
+                <div className="border border-red-100 rounded-lg p-5 bg-red-50">
+                  <h3 className="text-xl font-bold text-red-700 mb-3">규제 위험</h3>
+                  <ul className="list-disc pl-6 mt-2 space-y-1 text-sm">
+                    <li>법적 지위의 불확실성(증권 vs. 상품)</li>
+                    <li>KYC/AML 요구사항 준수 필요성</li>
+                    <li>국가별 상이한 규제 체계</li>
+                    <li>규제 변경에 따른 리스크</li>
                   </ul>
                 </div>
                 
-                <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-amber-500">
-                  <h3 className="text-xl font-bold mb-2">오라클 문제와 신뢰성</h3>
-                  <p>블록체인과 실물 자산 간 연결 과정에서 데이터의 정확성과 신뢰성 문제가 발생할 수 있습니다.</p>
-                  <p className="font-semibold mt-2">해결 방안:</p>
-                  <ul className="list-disc pl-6">
-                    <li>분산형 오라클 네트워크 활용</li>
-                    <li>다중 데이터 소스 및 검증 메커니즘 구현</li>
-                    <li>평판 시스템 및 인센티브 모델 구축</li>
+                <div className="border border-orange-100 rounded-lg p-5 bg-orange-50">
+                  <h3 className="text-xl font-bold text-orange-700 mb-3">오프체인 자산 연동과 관리</h3>
+                  <ul className="list-disc pl-6 mt-2 space-y-1 text-sm">
+                    <li>실물 자산의 정확한 가치 반영 문제</li>
+                    <li>다양한 자산군의 토큰화 기준 정립 필요</li>
+                    <li>실물 자산의 보관 및 관리 문제</li>
+                    <li>오라클 신뢰성과 데이터 정확성 보장</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-6 my-6">
+                <div className="border border-yellow-100 rounded-lg p-5 bg-yellow-50">
+                  <h3 className="text-xl font-bold text-yellow-700 mb-3">유동성 문제</h3>
+                  <ul className="list-disc pl-6 mt-2 space-y-1 text-sm">
+                    <li>초기 시장의 낮은 참여도</li>
+                    <li>경기 침체기의 유동성 고갈</li>
+                    <li>타 가상자산 대비 낮은 수익률 가능성</li>
+                    <li>진입 및 퇴출 경로의 제한</li>
+                  </ul>
+                </div>
+                
+                <div className="border border-cyan-100 rounded-lg p-5 bg-cyan-50">
+                  <h3 className="text-xl font-bold text-cyan-700 mb-3">기술적 문제</h3>
+                  <ul className="list-disc pl-6 mt-2 space-y-1 text-sm">
+                    <li>블록체인 고유의 보안 및 확장성 문제</li>
+                    <li>토큰화 메커니즘의 복잡성</li>
+                    <li>중앙화와 탈중앙화 간의 균형 유지</li>
+                    <li>스마트 컨트랙트 취약점 및 위험</li>
                   </ul>
                 </div>
               </div>
@@ -190,28 +243,33 @@ export default function RealWorldAssetsGuide() {
               
               <div className="bg-green-50 p-6 rounded-lg my-6 border border-green-200">
                 <h3 className="text-xl font-bold mb-4">향후 발전 방향</h3>
-                <ul className="list-disc pl-6 space-y-3">
+                <ol className="list-decimal pl-6 space-y-3">
                   <li>
-                    <strong>기관 투자자의 참여 확대:</strong> 대형 자산 운용사, 연기금, 보험사 등이 RWA를 포트폴리오 다각화 수단으로 채택
+                    <strong>단계적 시장 확장:</strong> 초기 비유동 자산(예술품, 명품)에서 시작하여 점차 부동산, 증권, 채권 등으로 확대
                   </li>
                   <li>
-                    <strong>하이브리드 금융(HyFi) 생태계의 발전:</strong> 전통 금융(TradFi)과 분산 금융(DeFi)을 연결하는 하이브리드 금융 생태계가 RWA를 중심으로 발전
+                    <strong>규제 체계 정립:</strong> 명확한 규제 프레임워크 수립으로 시장 불확실성 감소
                   </li>
                   <li>
-                    <strong>기술 발전과 표준화:</strong> 레이어 2 솔루션, 크로스체인 호환성, RWA 토큰화를 위한 산업 표준 및 프로토콜 개발
+                    <strong>기술 인프라 발전:</strong> 영지식증명, DID, 발전된 스마트 컨트랙트 등 기술 혁신
                   </li>
                   <li>
-                    <strong>새로운 자산 클래스의 토큰화:</strong> 탄소 크레딧, 지적재산권, 인프라 프로젝트, 무형 자산 등으로 확장
+                    <strong>비즈니스 모델 다양화:</strong> RWA 담보 DeFi, 권리 투자, 임대 등 다양한 서비스 등장
                   </li>
-                </ul>
+                </ol>
+                <p className="mt-4 text-sm text-gray-600">
+                  특히 실물 경제 시장이 블록체인과 접목되면 그 잠재력은 현재의 가상자산 시장보다 훨씬 더 클 것으로 전망됩니다.
+                </p>
               </div>
               
               <h2 className="text-2xl font-bold text-green-600 mb-4">결론</h2>
               
               <div className="bg-green-50 p-6 rounded-lg my-6 border-l-4 border-green-500">
-                <p className="italic text-lg">
-                  "실제세계자산(RWA)의 토큰화는 단순한 기술적 혁신을 넘어, 자산 소유, 거래, 관리 방식에 대한 근본적인 변화를 가져올 수 있는 패러다임 전환입니다. 
-                  이는 자본 시장의 효율성을 높이고, 더 많은 사람들에게 다양한 자산에 대한 접근성을 제공하며, 자산 가치의 발견과 분배 방식을 재정의할 것입니다."
+                <p className="text-lg">
+                  RWA는 디지털 금융과 전통 금융의 경계를 허물고, 실물 자산의 접근성과 유동성을 혁신적으로 높일 수 있는 잠재력을 가지고 있습니다. 그러나 이러한 잠재력을 최대한 발휘하기 위해서는 규제 정립, 토큰 표준 개발, 오라클 기술 향상, DID 기반 KYC/AML 솔루션 등 다양한 인프라 구축이 선행되어야 합니다.
+                </p>
+                <p className="text-lg mt-4 italic">
+                  "앞으로 RWA 시장이 성숙하고 발전함에 따라, 전통적인 금융과 디지털 금융이 유기적으로 연결되는 새로운 금융 생태계가 구축될 것으로 기대됩니다. 이러한 변화는 금융 시장의 효율성과 접근성을 획기적으로 향상시키며, 블록체인 기술의 실질적인 활용 사례로서 산업 전반에 긍정적인 영향을 미칠 것입니다."
                 </p>
               </div>
               
