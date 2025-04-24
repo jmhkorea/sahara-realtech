@@ -2,7 +2,8 @@ import { useTranslation } from "react-i18next";
 import FoundationCard from "@/components/FoundationCard";
 
 // 이미지를 public 폴더 경로로 변경
-const maltaCertSrc = "/images/malta_cert.png";
+const maltaFoundationCertSrc = "/images/malta_cert.png";
+const maltaCompanyCertSrc = "/images/malta_company_cert.png";
 const foundationLogoSrc = "/images/foundation_logo.png";
 const foundationHeaderSrc = "/images/foundation_header.png";
 const companyCertificationSrc = "/images/company_certification.png";
@@ -27,7 +28,7 @@ export default function FoundationSection() {
             title="몰타 공화국 재단 등록증"
             subtitle="유럽 몰타공화국"
             imageSrc={foundationLogoSrc}
-            certImageSrc={maltaCertSrc}
+            certImageSrc={maltaCompanyCertSrc}
             headerImageSrc={foundationHeaderSrc}
           />
           
