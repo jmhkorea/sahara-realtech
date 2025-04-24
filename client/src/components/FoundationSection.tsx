@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
 import FoundationCard from "@/components/FoundationCard";
 
-// 이미지를 직접 경로로 변경
-const maltaCertSrc = "/attached_assets/image_1745464360772.png";
-const foundationLogoSrc = "/attached_assets/image_1745464260836.png";
+// 이미지를 public 폴더 경로로 변경
+const maltaCertSrc = "/images/malta_cert.png";
+const foundationLogoSrc = "/images/foundation_logo.png";
 
 export default function FoundationSection() {
   const { t } = useTranslation();
