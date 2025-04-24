@@ -160,7 +160,7 @@ export default function TokenSecuritiesGuide() {
               
               <div className="bg-blue-50 p-6 rounded-lg my-6 border-l-4 border-blue-500">
                 <p className="italic text-lg">
-                  "토큰증권은 아직 초기 단계이지만, 앞으로 금융 시장에 획기적인 변화를 가져올 것으로 기대됩니다. 이는 블록체인과 금융 기관을 연결하고, 대중에게 토큰에 대한 경험을 제공하는 혁신의 가교 역할을 할 것입니다."
+                  "증권형 토큰은 아직 초기 단계이지만, 앞으로 금융 시장에 획기적인 변화를 가져올 것으로 기대됩니다. 이는 블록체인과 금융 기관을 연결하고, 대중에게 토큰에 대한 경험을 제공하는 혁신의 가교 역할을 할 것입니다."
                 </p>
               </div>
               
