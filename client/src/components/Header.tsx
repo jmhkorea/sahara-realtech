@@ -74,6 +74,9 @@ export default function Header() {
             <Link href="/how-to-invest" className="font-medium text-neutral-500 hover:text-primary transition-colors">
               {t('nav.howToInvest')}
             </Link>
+            <Link href="/investment-process" className="font-medium text-neutral-500 hover:text-primary transition-colors">
+              투자 프로세스
+            </Link>
             <Link href="/portfolio" className="font-medium text-neutral-500 hover:text-primary transition-colors">
               {t('nav.portfolio')}
             </Link>
@@ -165,6 +168,9 @@ export default function Header() {
                   </Link>
                   <Link href="/how-to-invest" className="px-4 py-2 hover:bg-neutral-100 rounded-md">
                     {t('nav.howToInvest')}
+                  </Link>
+                  <Link href="/investment-process" className="px-4 py-2 hover:bg-neutral-100 rounded-md">
+                    투자 프로세스
                   </Link>
                   <Link href="/portfolio" className="px-4 py-2 hover:bg-neutral-100 rounded-md">
                     {t('nav.portfolio')}

@@ -27,6 +27,7 @@ import RealWorldAssetsGuide from "@/pages/RealWorldAssetsGuide";
 import GlobalCaseStudies from "@/pages/GlobalCaseStudies";
 import CompanyIntroduction from "@/pages/CompanyIntroduction";
 import TeamWorkspace from "@/pages/TeamWorkspace";
+import InvestmentProcessPage from "@/pages/InvestmentProcessPage";
 import ChatWidget from "@/components/ui/ChatWidget";
 
 import "./lib/i18n";
@@ -58,6 +59,7 @@ function Router() {
           <Route path="/global-case-studies" component={GlobalCaseStudies} />
           <Route path="/company-introduction" component={CompanyIntroduction} />
           <Route path="/team-workspace" component={TeamWorkspace} />
+          <Route path="/investment-process" component={InvestmentProcessPage} />
           <Route component={NotFound} />
         </Switch>
       </main>
