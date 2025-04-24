@@ -1,6 +1,7 @@
 import express, { type Express, type Request, type Response, type NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import { setupAuthRoutes } from "./auth-routes";
 import { 
   insertUserSchema, 
   insertPropertySchema,
@@ -743,6 +744,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // 인증 관련 라우트 설정
+  setupAuthRoutes(app);
+  
   const httpServer = createServer(app);
   return httpServer;
 }
