@@ -24,6 +24,7 @@ import LiquidityEnhancement from "@/pages/LiquidityEnhancement";
 import Feedback from "@/pages/Feedback";
 
 import RealWorldAssetsGuide from "@/pages/RealWorldAssetsGuide";
+import RwaLiquidation from "@/pages/RwaLiquidation";
 import GlobalCaseStudies from "@/pages/GlobalCaseStudies";
 import CompanyIntroduction from "@/pages/CompanyIntroduction";
 import TeamWorkspace from "@/pages/TeamWorkspace";
@@ -69,6 +70,7 @@ function Router() {
 
       <Route path="/real-world-assets-guide" component={() => <RouteWithHeaderAndFooter component={RealWorldAssetsGuide} />} />
       <Route path="/global-case-studies" component={() => <RouteWithHeaderAndFooter component={GlobalCaseStudies} />} />
+      <Route path="/rwa-liquidation" component={() => <RouteWithHeaderAndFooter component={RwaLiquidation} />} />
       <Route path="/company-introduction" component={() => <RouteWithHeaderAndFooter component={CompanyIntroduction} />} />
       <Route path="/team-workspace" component={() => <RouteWithHeaderAndFooter component={TeamWorkspace} />} />
       <Route path="/investment-process" component={() => <RouteWithHeaderAndFooter component={InvestmentProcessPage} />} />
