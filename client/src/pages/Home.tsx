@@ -8,6 +8,7 @@ import FAQ from "@/components/FAQ";
 import Newsletter from "@/components/Newsletter";
 import InvestmentGuide from "@/components/InvestmentGuide";
 import FeatureCards from "@/components/FeatureCards";
+import FoundationSection from "@/components/FoundationSection";
 import SEO from "@/components/SEO";
 import { useTranslation } from "react-i18next";
 
@@ -28,6 +29,7 @@ export default function Home() {
       <FeatureCards />
       <FeaturedProperties />
       <HowItWorks />
+      <FoundationSection />
       <InvestmentVisualizations />
       <FinancialAnalytics />
       <FAQ />
