@@ -526,57 +526,63 @@ export default function PropertyDetail() {
               </div>
               
               <div className="bg-white shadow-md rounded-b-xl p-5">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <Card className="overflow-hidden shadow-sm border border-blue-100 flex flex-col h-[350px] w-full max-w-[400px] mx-auto">
-                    <CardHeader className="bg-blue-50 pb-2">
-                      <CardTitle className="text-lg flex items-center text-blue-700">
-                        <TrendingUp className="h-5 w-5 mr-2" />
-                        현금 흐름 분석
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-5 flex-grow flex flex-col">
-                      <div className="flex-grow">
-                        <CashFlowAnalysis chartType="monthly" propertyId={Number(id)} />
-                      </div>
-                      <Button variant="outline" size="sm" className="w-full mt-auto">
-                        상세 보기
-                      </Button>
-                    </CardContent>
-                  </Card>
+                <div className="flex flex-col md:flex-row justify-center gap-6">
+                  <div className="w-full md:w-[320px]">
+                    <Card className="overflow-hidden shadow-sm border border-blue-100 flex flex-col h-[350px]">
+                      <CardHeader className="bg-blue-50 pb-2">
+                        <CardTitle className="text-lg flex items-center text-blue-700">
+                          <TrendingUp className="h-5 w-5 mr-2" />
+                          현금 흐름 분석
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="pt-5 flex-grow flex flex-col">
+                        <div className="flex-grow">
+                          <CashFlowAnalysis chartType="monthly" propertyId={Number(id)} />
+                        </div>
+                        <Button variant="outline" size="sm" className="w-full mt-auto">
+                          상세 보기
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  </div>
                   
-                  <Card className="overflow-hidden shadow-sm border border-emerald-100 flex flex-col h-[350px] w-full max-w-[400px] mx-auto">
-                    <CardHeader className="bg-emerald-50 pb-2">
-                      <CardTitle className="text-lg flex items-center text-emerald-700">
-                        <BarChart3 className="h-5 w-5 mr-2" />
-                        수익률 분석
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-5 flex-grow flex flex-col">
-                      <div className="flex-grow">
-                        <ReturnAnalysis analysisType="coc" propertyId={Number(id)} />
-                      </div>
-                      <Button variant="outline" size="sm" className="w-full mt-auto">
-                        상세 보기
-                      </Button>
-                    </CardContent>
-                  </Card>
+                  <div className="w-full md:w-[320px]">
+                    <Card className="overflow-hidden shadow-sm border border-emerald-100 flex flex-col h-[350px]">
+                      <CardHeader className="bg-emerald-50 pb-2">
+                        <CardTitle className="text-lg flex items-center text-emerald-700">
+                          <BarChart3 className="h-5 w-5 mr-2" />
+                          수익률 분석
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="pt-5 flex-grow flex flex-col">
+                        <div className="flex-grow">
+                          <ReturnAnalysis analysisType="coc" propertyId={Number(id)} />
+                        </div>
+                        <Button variant="outline" size="sm" className="w-full mt-auto">
+                          상세 보기
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  </div>
                   
-                  <Card className="overflow-hidden shadow-sm border border-purple-100 flex flex-col h-[350px] w-full max-w-[400px] mx-auto">
-                    <CardHeader className="bg-purple-50 pb-2">
-                      <CardTitle className="text-lg flex items-center text-purple-700">
-                        <Coins className="h-5 w-5 mr-2" />
-                        자산 가치 분석
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-5 flex-grow flex flex-col">
-                      <div className="flex-grow">
-                        <AssetValueAnalysis propertyId={Number(id)} />
-                      </div>
-                      <Button variant="outline" size="sm" className="w-full mt-auto">
-                        상세 보기
-                      </Button>
-                    </CardContent>
-                  </Card>
+                  <div className="w-full md:w-[320px]">
+                    <Card className="overflow-hidden shadow-sm border border-purple-100 flex flex-col h-[350px]">
+                      <CardHeader className="bg-purple-50 pb-2">
+                        <CardTitle className="text-lg flex items-center text-purple-700">
+                          <Coins className="h-5 w-5 mr-2" />
+                          자산 가치 분석
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="pt-5 flex-grow flex flex-col">
+                        <div className="flex-grow">
+                          <AssetValueAnalysis propertyId={Number(id)} />
+                        </div>
+                        <Button variant="outline" size="sm" className="w-full mt-auto">
+                          상세 보기
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  </div>
                 </div>
               </div>
             </div>
