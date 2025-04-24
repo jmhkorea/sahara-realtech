@@ -22,6 +22,15 @@ import {
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { 
   AlertCircle,
   Building,
@@ -41,7 +50,8 @@ import {
   Hotel,
   Calendar,
   Sparkles,
-  Trophy
+  Trophy,
+  Wallet
 } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
@@ -747,41 +757,13 @@ export default function PropertyDetail() {
                     
                     <div className="flex justify-center my-6">
                       {property.tokenizationStatus === TokenizationStatus.IN_PROGRESS ? (
-                        <Dialog>
-                          <DialogTrigger asChild>
-                            <Button className="w-4/5 text-xl py-8 font-bold bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 shadow-lg rounded-xl">
-                              {t('property.investNow')}
-                            </Button>
-                          </DialogTrigger>
-                          <DialogContent className="sm:max-w-[500px]">
-                            <DialogHeader>
-                              <DialogTitle>{t('property.investIn')} {property.name}</DialogTitle>
-                              <DialogDescription>
-                                {t('property.tokenizeDesc')}
-                              </DialogDescription>
-                            </DialogHeader>
-                            
-                            <div className="grid gap-4 py-4">
-                              <div className="flex flex-col items-center justify-center py-6">
-                                <Wallet className="h-12 w-12 text-muted-foreground mb-4" />
-                                <h3 className="text-lg font-medium mb-2">{t('wallet.connectWalletToContinue')}</h3>
-                                <p className="text-sm text-muted-foreground mb-4 text-center">
-                                  {t('wallet.needWalletDesc')}
-                                </p>
-                                <Button>
-                                  <Wallet className="mr-2 h-4 w-4" />
-                                  {t('wallet.connectWallet')}
-                                </Button>
-                              </div>
-                            </div>
-                            
-                            <DialogFooter>
-                              <Button variant="outline">
-                                {t('common.cancel')}
-                              </Button>
-                            </DialogFooter>
-                          </DialogContent>
-                        </Dialog>
+                        <TokenPurchaseModal 
+                          property={property}
+                          onPurchaseSuccess={() => {
+                            // 투자 성공 후 데이터 갱신을 위한 로직을 추가할 수 있습니다.
+                            window.location.reload();
+                          }}
+                        />
                       ) : (
                         <Button 
                           className="w-4/5 text-xl py-8 font-bold bg-gradient-to-r from-gray-500 to-gray-400 shadow-lg rounded-xl"
