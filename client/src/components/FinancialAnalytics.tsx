@@ -13,6 +13,11 @@ import TaxAnalysis from './financials/TaxAnalysis';
 import PortfolioAnalysis from './financials/PortfolioAnalysis';
 import MarketIndicators from './financials/MarketIndicators';
 
+// 새로운 금융 분석 컴포넌트
+import CashFlowComposition from './finance/CashFlowComposition';
+import IRRSimulation from './finance/IRRSimulation';
+import AssetValueAnalysisNew from './finance/AssetValueAnalysis';
+
 export default function FinancialAnalytics() {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState('cashFlow');
@@ -95,35 +100,23 @@ export default function FinancialAnalytics() {
                     <CashFlowAnalysis chartType="trend" />
                   </div>
                 </CollapsibleCard>
-                <CollapsibleCard
-                  title="현금 흐름 구성 요소"
-                  description="현금 흐름을 구성하는 수입과 지출 항목의 비율"
-                  className="md:col-span-2"
-                >
-                  <div className="h-80">
-                    <CashFlowAnalysis chartType="composition" />
-                  </div>
-                </CollapsibleCard>
+                <div className="md:col-span-2">
+                  <CashFlowComposition />
+                </div>
               </div>
             </TabsContent>
 
             <TabsContent value="returnAnalysis">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <CollapsibleCard
-                  title="내부수익률(IRR) 시뮬레이션"
-                  description="다양한 시나리오에 따른 내부수익률 시뮬레이션"
-                  className="md:col-span-2"
-                >
-                  <div className="h-96">
-                    <ReturnAnalysis analysisType="irr" />
-                  </div>
-                </CollapsibleCard>
+                <div className="md:col-span-2">
+                  <IRRSimulation />
+                </div>
                 <CollapsibleCard
                   title="현금-현-현금 수익률"
                   description="투자 기간에 따른 CoC 수익률 변화"
                 >
                   <div className="h-80">
-                    <ReturnAnalysis analysisType="coc" />
+                    <ReturnAnalysis propertyId={1} analysisType="coc" />
                   </div>
                 </CollapsibleCard>
                 <CollapsibleCard
@@ -131,14 +124,14 @@ export default function FinancialAnalytics() {
                   description="세금 및 비용 공제 전후 수익률 비교"
                 >
                   <div className="h-80">
-                    <ReturnAnalysis analysisType="comparison" />
+                    <ReturnAnalysis propertyId={1} analysisType="comparison" />
                   </div>
                 </CollapsibleCard>
               </div>
             </TabsContent>
 
             <TabsContent value="assetValue">
-              <AssetValueAnalysis />
+              <AssetValueAnalysisNew className="md:col-span-2" />
             </TabsContent>
 
             <TabsContent value="financialProducts">
