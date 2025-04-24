@@ -560,7 +560,7 @@ export default function PropertyDetail() {
                     </CardHeader>
                     <CardContent className="pt-5">
                       <div className="h-[200px]">
-                        <PropertyAnalytics property={property} />
+                        <AssetValueAnalysis propertyId={Number(id)} />
                       </div>
                       <Button variant="outline" size="sm" className="w-full mt-2">
                         상세 보기
