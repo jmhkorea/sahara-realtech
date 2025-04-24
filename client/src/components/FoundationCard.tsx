@@ -9,25 +9,50 @@ interface FoundationCardProps {
   subtitle?: string;
   imageSrc?: string;
   certImageSrc?: string;
+  headerImageSrc?: string;
 }
 
 export default function FoundationCard({ 
   title, 
   subtitle,
   imageSrc,
-  certImageSrc 
+  certImageSrc,
+  headerImageSrc = '/images/foundation_header.png'
 }: FoundationCardProps) {
   const { t } = useTranslation();
-  const [isExpanded, setIsExpanded] = useState(false);
+  // 기본 상태를 펼쳐진(확장된) 상태로 설정
+  const [isExpanded, setIsExpanded] = useState(true);
 
   const toggleExpanded = () => {
     setIsExpanded(!isExpanded);
   };
 
   return (
-    <Card className="overflow-hidden transition-all duration-300">
+    <Card className="overflow-hidden transition-all duration-300 border border-gray-200 shadow-sm">
+      {headerImageSrc && (
+        <div 
+          className="w-full cursor-pointer relative" 
+          onClick={toggleExpanded}
+        >
+          <img 
+            src={headerImageSrc} 
+            alt={title} 
+            className="w-full h-auto rounded-t-md"
+          />
+          <div className="absolute top-0 right-0 m-3 bg-white bg-opacity-80 rounded-full p-1.5 shadow-sm">
+            {isExpanded ? (
+              <ChevronUp className="h-5 w-5 text-gray-600" />
+            ) : (
+              <ChevronDown className="h-5 w-5 text-gray-600" />
+            )}
+          </div>
+        </div>
+      )}
       <CardHeader 
-        className="bg-gray-50 py-4 cursor-pointer"
+        className={cn(
+          "py-4 cursor-pointer border-t border-gray-100",
+          headerImageSrc ? "bg-white" : "bg-gray-50"
+        )}
         onClick={toggleExpanded}
       >
         <div className="flex items-center justify-between">
@@ -40,13 +65,15 @@ export default function FoundationCard({
               {subtitle && <p className="text-sm text-gray-500 mt-1">{subtitle}</p>}
             </div>
           </div>
-          <div className="rounded-full p-1 hover:bg-gray-200 transition-colors">
-            {isExpanded ? (
-              <ChevronUp className="h-5 w-5 text-gray-500" />
-            ) : (
-              <ChevronDown className="h-5 w-5 text-gray-500" />
-            )}
-          </div>
+          {!headerImageSrc && (
+            <div className="rounded-full p-1 hover:bg-gray-200 transition-colors">
+              {isExpanded ? (
+                <ChevronUp className="h-5 w-5 text-gray-500" />
+              ) : (
+                <ChevronDown className="h-5 w-5 text-gray-500" />
+              )}
+            </div>
+          )}
         </div>
       </CardHeader>
       

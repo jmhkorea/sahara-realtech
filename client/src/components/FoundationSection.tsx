@@ -4,6 +4,7 @@ import FoundationCard from "@/components/FoundationCard";
 // 이미지를 public 폴더 경로로 변경
 const maltaCertSrc = "/images/malta_cert.png";
 const foundationLogoSrc = "/images/foundation_logo.png";
+const foundationHeaderSrc = "/images/foundation_header.png";
 
 export default function FoundationSection() {
   const { t } = useTranslation();
@@ -26,6 +27,7 @@ export default function FoundationSection() {
             subtitle="유럽 몰타공화국"
             imageSrc={foundationLogoSrc}
             certImageSrc={maltaCertSrc}
+            headerImageSrc={foundationHeaderSrc}
           />
         </div>
         
