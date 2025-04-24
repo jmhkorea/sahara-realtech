@@ -336,14 +336,12 @@ export default function TeamWorkspace() {
                     </div>
                   ))}
                 </div>
-                <a 
-                  href={teamProjects[0].url} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
+                <Link 
+                  href={`/system-auth?redirectUrl=${encodeURIComponent(teamProjects[0].url)}&name=리조트 플래너 시스템`}
                   className="flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium"
                 >
                   시스템 열기 <ExternalLink className="h-4 w-4 ml-1" />
-                </a>
+                </Link>
               </CardFooter>
             </Card>
             
@@ -450,14 +448,12 @@ export default function TeamWorkspace() {
                           </div>
                         ))}
                       </div>
-                      <a 
-                        href={project.url} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
+                      <Link 
+                        href={`/system-auth?redirectUrl=${encodeURIComponent(project.url)}&name=리조트 플래너 시스템`}
                         className="flex items-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium"
                       >
                         시스템 열기 <ExternalLink className="h-4 w-4 ml-1" />
-                      </a>
+                      </Link>
                     </CardFooter>
                   </Card>
                 ) : (

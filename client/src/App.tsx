@@ -28,6 +28,7 @@ import GlobalCaseStudies from "@/pages/GlobalCaseStudies";
 import CompanyIntroduction from "@/pages/CompanyIntroduction";
 import TeamWorkspace from "@/pages/TeamWorkspace";
 import InvestmentProcessPage from "@/pages/InvestmentProcessPage";
+import SystemAuthPage from "@/pages/SystemAuthPage";
 import ChatWidget from "@/components/ui/ChatWidget";
 
 import "./lib/i18n";
@@ -60,6 +61,7 @@ function Router() {
           <Route path="/company-introduction" component={CompanyIntroduction} />
           <Route path="/team-workspace" component={TeamWorkspace} />
           <Route path="/investment-process" component={InvestmentProcessPage} />
+          <Route path="/system-auth" component={SystemAuthPage} />
           <Route component={NotFound} />
         </Switch>
       </main>
