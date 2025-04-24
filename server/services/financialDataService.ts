@@ -37,6 +37,18 @@ export async function getAssetValueData(req: Request, res: Response) {
     // 현재는 샘플 데이터 반환
     const data = getSampleAssetValueData();
     console.log('Asset value data being returned:', data.valueTrend);
+    
+    // CORS 헤더 추가
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    
+    // 응답 캐시 방지
+    res.header('Cache-Control', 'no-store, no-cache, must-revalidate');
+    res.header('Pragma', 'no-cache');
+    
+    // 데이터 반환 전 로깅
+    console.log('Returning data with status 200');
     return res.status(200).json(data.valueTrend);
   } catch (error) {
     console.error('Failed to fetch asset value data:', error);
