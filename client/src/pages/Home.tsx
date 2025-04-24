@@ -9,6 +9,7 @@ import Newsletter from "@/components/Newsletter";
 import InvestmentGuide from "@/components/InvestmentGuide";
 import FeatureCards from "@/components/FeatureCards";
 import FoundationSection from "@/components/FoundationSection";
+import InvestmentProcess from "@/components/InvestmentProcess";
 import SEO from "@/components/SEO";
 import { useTranslation } from "react-i18next";
 
@@ -28,6 +29,19 @@ export default function Home() {
       <InvestmentGuide />
       <FeatureCards />
       <FeaturedProperties />
+      <div className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">
+              부동산 투자 프로세스
+            </h2>
+            <p className="text-gray-500">
+              사하라 리얼테크의 간편한 4단계 투자 프로세스를 통해 블록체인 부동산 투자를 시작하세요.
+            </p>
+          </div>
+          <InvestmentProcess />
+        </div>
+      </div>
       <HowItWorks />
       <FoundationSection />
       <InvestmentVisualizations />
