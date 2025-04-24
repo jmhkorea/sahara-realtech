@@ -61,7 +61,7 @@ export default function AssetValueAnalysis({ className }: AssetValueAnalysisProp
               <p className="text-red-500 text-sm">자산 가치 데이터를 불러올 수 없습니다.</p>
               <div className="mt-4 mb-6">
                 <img 
-                  src="/images/asset_value_error.png" 
+                  src="/images/asset_value_analysis_error.png" 
                   alt="자산 가치 분석 에러" 
                   className="mx-auto max-w-full rounded-md border border-gray-200"
                   style={{ maxHeight: "250px" }}
