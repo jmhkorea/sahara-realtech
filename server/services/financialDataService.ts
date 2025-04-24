@@ -7,9 +7,34 @@ const PROPERTY_API_KEY = process.env.PROPERTY_API_KEY;
 
 // 현금 흐름 데이터 가져오기
 export async function getCashFlowData(req: Request, res: Response) {
-  const { propertyId, chartType } = req.query;
+  const { propertyId, chartType = 'monthly', type = '' } = req.query;
   
   try {
+    // CORS 헤더 추가
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    
+    // 응답 캐시 방지
+    res.header('Cache-Control', 'no-store, no-cache, must-revalidate');
+    res.header('Pragma', 'no-cache');
+    
+    // 현금 흐름 구성 요소 데이터 요청인 경우
+    if (type === 'composition') {
+      console.log('현금 흐름 구성 요소 데이터 요청 받음');
+      // 구성 요소 데이터 반환 (파이 차트용)
+      const compositionData = [
+        { name: '임대 수입', value: 55 },
+        { name: '기타 수입', value: 10 },
+        { name: '관리비', value: 15 },
+        { name: '세금', value: 10 },
+        { name: '보험료', value: 5 },
+        { name: '수리비', value: 5 }
+      ];
+      console.log('구성 데이터 응답:', compositionData);
+      return res.status(200).json(compositionData);
+    }
+    
     // 실제 API 호출은 여기에서 하지만, API가 없으므로 지금은 샘플 데이터를 리턴
     // 실제 구현 시에는 아래와 같은 방식으로 API 호출
     // const response = await axios.get(`https://api.example.com/property/${propertyId}/cashflow?type=${chartType}`, {
@@ -18,9 +43,10 @@ export async function getCashFlowData(req: Request, res: Response) {
     //   }
     // });
     
-    // 현재는 샘플 데이터 반환
+    // 일반 현금 흐름 데이터 반환
+    console.log(`현금 흐름 데이터 요청: chartType=${chartType}`);
     const sampleData = getSampleCashFlowData(chartType as string);
-    
+    console.log('데이터 응답 크기:', sampleData.length);
     return res.status(200).json(sampleData);
   } catch (error) {
     console.error('Failed to fetch cash flow data:', error);

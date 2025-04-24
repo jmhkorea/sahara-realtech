@@ -4,6 +4,7 @@ import { ChevronDown, ChevronUp, RefreshCw, Award, ExternalLink, FileCheck, Uplo
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import axios from 'axios';
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 
 interface CashFlowCompositionProps {
   className?: string;
@@ -20,10 +21,20 @@ interface Certificate {
 // 관리자 권한 확인을 위한 상수 (실제 로그인 시스템과 연동 필요)
 const ADMIN_ENABLED = process.env.NODE_ENV === 'development'; // 개발 환경에서만 관리자 기능 활성화
 
+interface CashFlowData {
+  name: string;
+  수입?: number;
+  지출?: number;
+  순현금흐름?: number;
+  value?: number;
+}
+
 export default function CashFlowComposition({ className }: CashFlowCompositionProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isRetrying, setIsRetrying] = useState(false);
   const [isTechCertExpanded, setIsTechCertExpanded] = useState(false);
+  const [cashFlowData, setCashFlowData] = useState<CashFlowData[] | null>(null);
+  const [cashFlowError, setCashFlowError] = useState<boolean>(false);
   
   // 인증서 목록 상태 (서버 API에서 불러오거나 초기화)
   const [certificates, setCertificates] = useState<Certificate[]>(
@@ -34,6 +45,43 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
       isUploading: false
     }))
   );
+  
+  // 현금 흐름 데이터 가져오기
+  const fetchCashFlowData = async () => {
+    setIsRetrying(true);
+    setCashFlowError(false);
+    
+    try {
+      // 캐시 방지를 위한 타임스탬프 추가
+      const timestamp = new Date().getTime();
+      const response = await axios.get(`/api/financial/cashflow?type=composition&_=${timestamp}`, {
+        headers: {
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache'
+        }
+      });
+      
+      if (response.data && Array.isArray(response.data)) {
+        console.log('현금 흐름 데이터 응답:', response.data);
+        setCashFlowData(response.data);
+      } else {
+        console.error('현금 흐름 데이터 형식 오류:', response.data);
+        setCashFlowError(true);
+      }
+    } catch (error) {
+      console.error('현금 흐름 데이터 불러오기 오류:', error);
+      setCashFlowError(true);
+    } finally {
+      setTimeout(() => setIsRetrying(false), 1000);
+    }
+  };
+  
+  // 컴포넌트 마운트 시 데이터 불러오기
+  useEffect(() => {
+    if (isExpanded && !cashFlowData && !isRetrying) {
+      fetchCashFlowData();
+    }
+  }, [isExpanded, cashFlowData, isRetrying]);
   
   // 컴포넌트 마운트 시 API에서 인증서 목록 불러오기
   useEffect(() => {
@@ -71,6 +119,11 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
 
   const toggleExpanded = () => {
     setIsExpanded(!isExpanded);
+    
+    // 확장될 때 데이터가 없으면 불러오기
+    if (!isExpanded && !cashFlowData && !isRetrying) {
+      fetchCashFlowData();
+    }
   };
 
   const toggleTechCertExpanded = () => {
@@ -78,8 +131,7 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
   };
 
   const handleRetry = () => {
-    setIsRetrying(true);
-    setTimeout(() => setIsRetrying(false), 1500);
+    fetchCashFlowData();
   };
   
   // 인증서 이미지 업로드 핸들러
@@ -265,16 +317,78 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
                 </div>
                 <p className="text-gray-500">데이터를 불러오는 중...</p>
               </div>
-            ) : (
+            ) : cashFlowError ? (
               <div className="text-center">
                 <p className="text-red-500 text-sm">데이터를 불러올 수 없습니다.</p>
                 <div className="mt-4 mb-6">
-                  <img 
-                    src="/images/cash_flow_composition_error.png" 
-                    alt="현금 흐름 구성 에러" 
-                    className="mx-auto max-w-full rounded-md border border-gray-200"
-                    style={{ maxHeight: "250px" }}
-                  />
+                  <div className="mx-auto max-w-full rounded-md border border-gray-200 bg-gray-50 p-8 flex items-center justify-center" style={{ height: "200px" }}>
+                    <p className="text-gray-500">현금 흐름 데이터 로드 오류</p>
+                  </div>
+                </div>
+                <Button 
+                  variant="outline"
+                  size="sm"
+                  className="mt-3 flex items-center mx-auto"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleRetry();
+                  }}
+                >
+                  <RefreshCw className="h-4 w-4 mr-2" /> 다시 시도
+                </Button>
+              </div>
+            ) : cashFlowData && cashFlowData.length > 0 ? (
+              <div className="space-y-6">
+                <div className="h-64">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie
+                        dataKey="value"
+                        data={cashFlowData}
+                        cx="50%"
+                        cy="50%"
+                        outerRadius={80}
+                        fill="#8884d8"
+                        label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                      >
+                        {cashFlowData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF', '#FF4560'][index % 6]} />
+                        ))}
+                      </Pie>
+                      <Tooltip 
+                        formatter={(value) => [`${value}%`, '비율']}
+                      />
+                      <Legend layout="vertical" verticalAlign="middle" align="right" />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
+                
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-4">
+                  {cashFlowData.map((item, index) => (
+                    <div 
+                      key={index}
+                      className="flex items-center p-2 rounded-md border" 
+                      style={{ borderColor: ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF', '#FF4560'][index % 6] }}
+                    >
+                      <div 
+                        className="w-3 h-3 rounded-full mr-2"
+                        style={{ backgroundColor: ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF', '#FF4560'][index % 6] }}
+                      ></div>
+                      <div>
+                        <p className="text-xs font-medium">{item.name}</p>
+                        <p className="text-xs text-gray-500">{item.value}%</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="text-center">
+                <p className="text-amber-500 text-sm">데이터를 불러올 수 없습니다.</p>
+                <div className="mt-4 mb-6">
+                  <div className="mx-auto max-w-full rounded-md border border-gray-200 bg-gray-50 p-8 flex items-center justify-center" style={{ height: "200px" }}>
+                    <p className="text-gray-500">현금 흐름 데이터 없음</p>
+                  </div>
                 </div>
                 <Button 
                   variant="outline"
