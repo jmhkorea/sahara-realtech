@@ -571,9 +571,6 @@ export default function PropertyDetail() {
                         <div className="flex-grow">
                           <AssetValueAnalysis propertyId={Number(id)} />
                         </div>
-                        <Button variant="outline" size="sm" className="w-full mt-auto">
-                          상세 보기
-                        </Button>
                       </CardContent>
                     </Card>
                   </div>
