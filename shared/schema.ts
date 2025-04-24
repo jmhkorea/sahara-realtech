@@ -10,6 +10,8 @@ export const users = pgTable("users", {
   walletAddress: text("wallet_address"),
   email: text("email"),
   isVerified: boolean("is_verified").default(false),
+  role: text("role").default("user"), // 'admin', 'manager', 'user'
+  lastLogin: timestamp("last_login"),
 });
 
 export const insertUserSchema = createInsertSchema(users).pick({
@@ -207,3 +209,47 @@ export const insertCertificateSchema = createInsertSchema(certificates).omit({
 
 export type Certificate = typeof certificates.$inferSelect;
 export type InsertCertificate = z.infer<typeof insertCertificateSchema>;
+
+// 시스템 접근 권한 관리 테이블
+export const systemAccess = pgTable("system_access", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").references(() => users.id),
+  systemId: text("system_id").notNull(), // 시스템 식별자 (예: "resort-planner", "analytics-dashboard" 등)
+  canAccess: boolean("can_access").default(false).notNull(),
+  accessLevel: text("access_level").default("view").notNull(), // 'view', 'edit', 'admin'
+  grantedAt: timestamp("granted_at").defaultNow().notNull(),
+  expiresAt: timestamp("expires_at"), // 만료 날짜 (null이면 무기한)
+  grantedBy: integer("granted_by").references(() => users.id),
+  lastAccessed: timestamp("last_accessed"),
+  accessCount: integer("access_count").default(0),
+});
+
+// 시스템 접근 로그 테이블
+export const accessLogs = pgTable("access_logs", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id").references(() => users.id),
+  systemId: text("system_id").notNull(),
+  accessedAt: timestamp("accessed_at").defaultNow().notNull(),
+  ipAddress: text("ip_address"),
+  userAgent: text("user_agent"),
+  requestPath: text("request_path"),
+  status: text("status").notNull(), // 'success', 'denied'
+  reason: text("reason"), // 실패 시 이유
+});
+
+export const insertSystemAccessSchema = createInsertSchema(systemAccess).omit({
+  id: true,
+  grantedAt: true,
+  lastAccessed: true,
+  accessCount: true,
+});
+
+export const insertAccessLogSchema = createInsertSchema(accessLogs).omit({
+  id: true,
+  accessedAt: true,
+});
+
+export type SystemAccess = typeof systemAccess.$inferSelect;
+export type InsertSystemAccess = z.infer<typeof insertSystemAccessSchema>;
+export type AccessLog = typeof accessLogs.$inferSelect;
+export type InsertAccessLog = z.infer<typeof insertAccessLogSchema>;

@@ -2,11 +2,36 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import path from "path";
+import session from "express-session";
+import { Pool } from '@neondatabase/serverless';
+import connectPg from "connect-pg-simple";
+
+// 세션 관리를 위한 PostgreSQL 스토어 설정
+const PostgresSessionStore = connectPg(session);
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const sessionStore = new PostgresSessionStore({ 
+  pool,
+  tableName: 'user_sessions', // 세션 테이블 이름
+  createTableIfMissing: true  // 테이블이 없으면 자동 생성
+});
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use('/attached_assets', express.static(path.resolve(process.cwd(), 'attached_assets')));
+
+// 세션 미들웨어 설정
+app.use(session({
+  store: sessionStore,
+  secret: process.env.SESSION_SECRET || 'sahararealtech-secure-secret', // 실제 운영 환경에서는 환경변수 사용 권장
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: process.env.NODE_ENV === 'production', // HTTPS 환경에서만 secure 쿠키 사용
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60 * 24 * 7 // 7일 유효기간
+  }
+}));
 
 app.use((req, res, next) => {
   const start = Date.now();
