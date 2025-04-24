@@ -568,7 +568,7 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
                     
                     <p>
                       이 특허 기술은 사하라 리얼테크의 핵심 서비스인 부동산 토큰화 플랫폼의 
-                      기술적 기반을 제공하며, 국내 특허청에 등록되었습니다.
+                      기술적 기반을 제공하며, 국내 특허청에 등록되었습니다. 2024년 12월 대한변리사협회 특허 대상 선정 된 바 있습니다.
                     </p>
                   </div>
                 </div>
@@ -577,19 +577,19 @@ export default function CashFlowComposition({ className }: CashFlowCompositionPr
                   <div className="grid grid-cols-2 gap-4 text-xs">
                     <div>
                       <p className="text-gray-500">특허 등록 번호</p>
-                      <p className="font-medium text-gray-800">제10-2145678호</p>
+                      <p className="font-medium text-gray-800">제10-2068689호</p>
                     </div>
                     <div>
                       <p className="text-gray-500">등록일</p>
-                      <p className="font-medium text-gray-800">2023년 9월 15일</p>
+                      <p className="font-medium text-gray-800">2020년 01월 17일</p>
                     </div>
                     <div>
                       <p className="text-gray-500">출원인</p>
-                      <p className="font-medium text-gray-800">주식회사 사하라 리얼테크</p>
+                      <p className="font-medium text-gray-800">정민호, 정채리</p>
                     </div>
                     <div>
-                      <p className="text-gray-500">발명자</p>
-                      <p className="font-medium text-gray-800">한 고, 브라이언 정</p>
+                      <p className="text-gray-500">주관회사</p>
+                      <p className="font-medium text-gray-800">주식회사 사하라 리얼테크</p>
                     </div>
                   </div>
                 </div>
