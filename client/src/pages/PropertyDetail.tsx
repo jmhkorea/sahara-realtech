@@ -534,35 +534,35 @@ export default function PropertyDetail() {
                     </CardContent>
                   </Card>
                   
-                  <Card className="overflow-hidden shadow-sm border border-emerald-100">
+                  <Card className="overflow-hidden shadow-sm border border-emerald-100 flex flex-col h-[330px]">
                     <CardHeader className="bg-emerald-50 pb-2">
                       <CardTitle className="text-lg flex items-center text-emerald-700">
                         <BarChart3 className="h-5 w-5 mr-2" />
                         수익률 분석
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="pt-5">
-                      <div className="h-[200px]">
+                    <CardContent className="pt-5 flex-grow flex flex-col">
+                      <div className="flex-grow">
                         <ReturnAnalysis analysisType="coc" propertyId={Number(id)} />
                       </div>
-                      <Button variant="outline" size="sm" className="w-full mt-2">
+                      <Button variant="outline" size="sm" className="w-full mt-auto">
                         상세 보기
                       </Button>
                     </CardContent>
                   </Card>
                   
-                  <Card className="overflow-hidden shadow-sm border border-purple-100">
+                  <Card className="overflow-hidden shadow-sm border border-purple-100 flex flex-col h-[330px]">
                     <CardHeader className="bg-purple-50 pb-2">
                       <CardTitle className="text-lg flex items-center text-purple-700">
                         <Coins className="h-5 w-5 mr-2" />
                         자산 가치 분석
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="pt-5">
-                      <div className="h-[200px]">
+                    <CardContent className="pt-5 flex-grow flex flex-col">
+                      <div className="flex-grow">
                         <AssetValueAnalysis propertyId={Number(id)} />
                       </div>
-                      <Button variant="outline" size="sm" className="w-full mt-2">
+                      <Button variant="outline" size="sm" className="w-full mt-auto">
                         상세 보기
                       </Button>
                     </CardContent>
