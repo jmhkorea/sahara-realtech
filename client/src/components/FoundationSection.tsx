@@ -24,35 +24,37 @@ export default function FoundationSection() {
           </p>
         </div>
         
-        <div className="max-w-2xl mx-auto space-y-8">
-          <FoundationCard
-            title="몰타 공화국 재단 등록증"
-            subtitle="유럽 몰타공화국 (Malta Foundation) - 글로벌 본사"
-            imageSrc={foundationLogoSrc}
-            headerImageSrc="/images/malta_cert.png"
-            certImageSrc="/images/malta_company_cert.png"
-          />
-          
-          <FoundationCard
-            title="미국 사업자 등록증"
-            subtitle="미국 미주리주 법인 - 북미 지역 본부"
-            imageSrc={foundationLogoSrc}
-            certImageSrc="/images/us_company_cert.jpg"
-          />
-          
-          <FoundationCard
-            title="한국 사업자 등록증"
-            subtitle="한국 경기도 성남시 법인 - 아시아 지역 총괄"
-            imageSrc={foundationLogoSrc}
-            certImageSrc="/images/korea_company_cert.jpg"
-          />
-          
-          <FoundationCard
-            title="중국 사업자 등록증"
-            subtitle="중국 쓰촨성 법인 - 중국 시장 진출"
-            imageSrc={foundationLogoSrc}
-            certImageSrc="/images/china_company_cert.jpg"
-          />
+        <div className="max-w-full mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <FoundationCard
+              title="몰타 공화국 재단 등록증"
+              subtitle="유럽 몰타공화국 (Malta Foundation) - 글로벌 본사"
+              imageSrc={foundationLogoSrc}
+              headerImageSrc="/images/malta_cert.png"
+              certImageSrc="/images/malta_company_cert.png"
+            />
+            
+            <FoundationCard
+              title="미국 사업자 등록증"
+              subtitle="미국 미주리주 법인 - 북미 지역 본부"
+              imageSrc={foundationLogoSrc}
+              certImageSrc="/images/us_company_cert.jpg"
+            />
+            
+            <FoundationCard
+              title="한국 사업자 등록증"
+              subtitle="한국 경기도 성남시 법인 - 아시아 지역 총괄"
+              imageSrc={foundationLogoSrc}
+              certImageSrc="/images/korea_company_cert.jpg"
+            />
+            
+            <FoundationCard
+              title="중국 사업자 등록증"
+              subtitle="중국 쓰촨성 법인 - 중국 시장 진출"
+              imageSrc={foundationLogoSrc}
+              certImageSrc="/images/china_company_cert.jpg"
+            />
+          </div>
         </div>
         
         <div className="mt-12 text-center">

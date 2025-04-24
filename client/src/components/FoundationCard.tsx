@@ -28,7 +28,7 @@ export default function FoundationCard({
   };
 
   return (
-    <Card className="overflow-hidden transition-all duration-300 border border-gray-200 shadow-sm">
+    <Card className="overflow-hidden transition-all duration-300 border border-gray-200 shadow-sm max-w-sm">
       {headerImageSrc && (
         <div 
           className="w-full cursor-pointer relative" 
@@ -50,26 +50,26 @@ export default function FoundationCard({
       )}
       <CardHeader 
         className={cn(
-          "py-4 cursor-pointer border-t border-gray-100",
+          "py-3 cursor-pointer border-t border-gray-100",
           headerImageSrc ? "bg-white" : "bg-gray-50"
         )}
         onClick={toggleExpanded}
       >
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-              <Building className="h-6 w-6 text-blue-600" />
+          <div className="flex items-center space-x-2">
+            <div className="w-9 h-9 bg-blue-100 rounded-full flex items-center justify-center">
+              <Building className="h-4 w-4 text-blue-600" />
             </div>
             <div>
-              <CardTitle className="text-xl">{title}</CardTitle>
-              {subtitle && <p className="text-sm text-gray-500 mt-1">{subtitle}</p>}
+              <CardTitle className="text-base">{title}</CardTitle>
+              {subtitle && <p className="text-xs text-gray-500 mt-0.5">{subtitle}</p>}
             </div>
           </div>
           <div className="rounded-full p-1 hover:bg-gray-200 transition-colors">
             {isExpanded ? (
-              <ChevronUp className="h-5 w-5 text-gray-500" />
+              <ChevronUp className="h-4 w-4 text-gray-500" />
             ) : (
-              <ChevronDown className="h-5 w-5 text-gray-500" />
+              <ChevronDown className="h-4 w-4 text-gray-500" />
             )}
           </div>
         </div>
@@ -81,8 +81,8 @@ export default function FoundationCard({
           isExpanded ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
         )}
       >
-        <CardContent className="p-5">
-          <div className="space-y-5">
+        <CardContent className="p-3">
+          <div className="space-y-3">
             {imageSrc && (
               <div className="flex justify-center mb-4">
                 <img 
@@ -98,14 +98,13 @@ export default function FoundationCard({
               <div className="mt-4">
                 <h3 className="text-base font-medium mb-2">법인 등록증</h3>
                 
-                <div className="flex items-center justify-center py-4 px-2 bg-gray-50 border border-gray-200 rounded-md">
-                  <div className="flex flex-col items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-500 mb-2">
+                <div className="flex items-center justify-center py-2 px-2 bg-gray-50 border border-gray-200 rounded-md">
+                  <div className="flex items-center space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-500">
                       <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                       <polyline points="7 10 12 15 17 10"></polyline>
                       <line x1="12" y1="15" x2="12" y2="3"></line>
                     </svg>
-                    <p className="text-gray-700 text-xs mb-2">법인 등록증 다운로드</p>
                     <a 
                       href={certImageSrc}
                       download={
@@ -114,9 +113,9 @@ export default function FoundationCard({
                         title.includes("한국") ? "korea_company_cert.jpg" : 
                         title.includes("중국") ? "china_company_cert.jpg" : ""
                       }
-                      className="bg-blue-500 hover:bg-blue-600 text-white font-medium text-xs py-1.5 px-3 rounded-md transition-colors"
+                      className="bg-blue-500 hover:bg-blue-600 text-white font-medium text-xs py-1 px-2 rounded-md transition-colors"
                     >
-                      등록증 이미지 보기
+                      등록증 다운로드
                     </a>
                   </div>
                 </div>
