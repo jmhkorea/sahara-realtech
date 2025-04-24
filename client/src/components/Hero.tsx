@@ -79,25 +79,41 @@ export default function Hero() {
             </Link>
           </div>
           
-          <Link href="/avalanche-tech">
-            <div className="flex items-center mt-8 bg-white/10 rounded-lg p-4 backdrop-blur-sm hover:bg-white/20 transition-colors cursor-pointer">
-              <div className="flex-1">
-                <div className="flex items-center">
-                  <span className="font-bold text-white mr-2">Avalanche</span>
-                  <span className="font-inter font-medium">
-                    {t('hero.avalancheBased', '기술 기반')}
-                  </span>
-                </div>
-                <p className="text-sm text-white/80 mt-1">
-                  {t('hero.avalancheDescription')}
-                </p>
+          <div className="flex items-center mt-8 bg-white/10 rounded-lg p-4 backdrop-blur-sm relative overflow-hidden">
+            <div className="flex-1">
+              <div className="flex items-center">
+                <span className="font-bold text-white mr-2">Avalanche</span>
+                <span className="font-inter font-medium">
+                  {t('hero.avalancheBased', '기술 기반')}
+                </span>
               </div>
-              <div className="border-l border-white/20 pl-4">
-                <p className="font-bold font-inter text-xl">10+</p>
-                <p className="text-sm text-white/80">{t('hero.completedTransactions')}</p>
-              </div>
+              <p className="text-sm text-white/80 mt-1">
+                {t('hero.avalancheDescription')}
+              </p>
+              <Link href="/avalanche-tech" className="mt-3 inline-block">
+                <Button 
+                  size="sm" 
+                  className="bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 font-medium text-xs"
+                >
+                  기술 상세 보기
+                </Button>
+              </Link>
             </div>
-          </Link>
+            <div className="border-l border-white/20 pl-4">
+              <p className="font-bold font-inter text-xl">10+</p>
+              <p className="text-sm text-white/80">{t('hero.completedTransactions')}</p>
+              <Link href="/avalanche-tech" className="mt-3 hidden md:block">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="border-white/40 text-white hover:bg-white/10 font-medium text-xs"
+                >
+                  자세히 알아보기 →
+                </Button>
+              </Link>
+            </div>
+            <div className="absolute -right-8 -bottom-8 w-24 h-24 rounded-full bg-gradient-to-r from-blue-500/20 to-transparent blur-xl"></div>
+          </div>
           
           <div className="mt-6 bg-gradient-to-r from-blue-600/20 to-blue-800/20 rounded-lg p-4 backdrop-blur-sm border border-blue-400/30 relative">
             <div className="absolute -top-3 -right-2 transform rotate-12">
