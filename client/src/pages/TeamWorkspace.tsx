@@ -59,7 +59,7 @@ export default function TeamWorkspace() {
         if (!hasAccess) {
           // 접근 권한이 없는 경우 인증 페이지로 리디렉션
           const currentPath = encodeURIComponent(window.location.pathname);
-          navigate(`/auth?redirectUrl=${currentPath}&name=팀 워크스페이스`);
+          navigate(`/system-auth?redirectUrl=${currentPath}&name=팀 워크스페이스`);
           return;
         }
         
@@ -219,7 +219,7 @@ export default function TeamWorkspace() {
             <p className="text-neutral-600 text-center mb-6">
               이 페이지에 접근하려면 로그인이 필요합니다. 인증 페이지로 이동하여 로그인해 주세요.
             </p>
-            <Button className="w-full" onClick={() => navigate('/auth?redirectUrl=%2Fteam-workspace&name=팀 워크스페이스')}>
+            <Button className="w-full" onClick={() => navigate('/system-auth?redirectUrl=%2Fteam-workspace&name=팀 워크스페이스')}>
               인증 페이지로 이동
             </Button>
           </div>
