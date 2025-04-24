@@ -516,6 +516,16 @@ export default function PropertyDetail() {
               </div>
             </div>
             
+            {/* 투자하기 카드 - 라오스 비엔티안 탓루앙 경제특구 속성일 때만 표시 */}
+            {property.id === 4 && (
+              <div className="md:col-span-1">
+                <InvestmentCard 
+                  property={property} 
+                  onInvest={handleInvest} 
+                />
+              </div>
+            )}
+            
             {/* 금융 분석 섹션 */}
             <div className="md:col-span-3 mb-6">
               <div className="bg-gradient-to-r from-blue-500 to-blue-700 text-white p-4 rounded-t-xl">
