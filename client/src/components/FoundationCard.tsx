@@ -105,14 +105,18 @@ export default function FoundationCard({
                       <polyline points="7 10 12 15 17 10"></polyline>
                       <line x1="12" y1="15" x2="12" y2="3"></line>
                     </svg>
-                    <p className="text-gray-700 text-sm mb-2">법인 등록증 이미지를 보시려면 아래 버튼을 클릭하세요</p>
+                    <p className="text-gray-700 text-sm mb-2">법인 등록증 이미지를 다운로드하시려면 아래 버튼을 클릭하세요</p>
                     <a 
                       href={certImageSrc}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      download={
+                        title.includes("몰타") ? "malta_company_cert.png" : 
+                        title.includes("미국") ? "us_company_cert.jpg" : 
+                        title.includes("한국") ? "korea_company_cert.jpg" : 
+                        title.includes("중국") ? "china_company_cert.jpg" : ""
+                      }
                       className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md transition-colors"
                     >
-                      등록증 이미지 보기
+                      등록증 이미지 다운로드
                     </a>
                   </div>
                 </div>

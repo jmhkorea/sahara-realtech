@@ -68,6 +68,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.use('/uploads', (req, res, next) => {
     express.static(uploadsPath)(req, res, next);
   });
+  
+  // 정적 이미지 파일 서빙 설정
+  const imagesPath = path.join(process.cwd(), 'public', 'images');
+  if (!fs.existsSync(imagesPath)) {
+    fs.mkdirSync(imagesPath, { recursive: true });
+  }
+  app.use('/images', (req, res, next) => {
+    express.static(imagesPath)(req, res, next);
+  });
 
   // API endpoints
   
