@@ -54,7 +54,7 @@ export function canAccessSystem(user: User, systemAccesses: SystemAccess[], syst
   
   // 일반 사용자는 부여된 접근 권한에 해당 시스템이 포함되어 있는지 확인
   return systemAccesses.some(access => 
-    access.systemId === systemId && access.userId === user.id && access.active
+    access.systemId === systemId && access.userId === user.id && access.canAccess
   );
 }
 
