@@ -25,7 +25,7 @@ export default function TeamPage() {
       id: 1,
       name: 'Brian Jung',
       title: 'Co-Founder/CEO & CTO',
-      bio: 'Computer Science Expert specializing in blockchain architecture development and <a href="https://www.devops.com/" target="_blank" className="text-blue-600 hover:underline">DevOps</a>. International e-Sports Federation Global Chief with education from Seoul National University GLP MBA and Dongguk University Fintech MBA. CTG Group 동아시아(한국 일본 외) 디지털 금융 상품 CTO.',
+      bio: 'Computer Science Expert specializing in blockchain architecture development and DevOps. International e-Sports Federation Global Chief with education from Seoul National University GLP MBA and Dongguk University Fintech MBA. CTG Group 동아시아(한국 일본 외) 디지털 금융 상품 CTO.',
       imageUrl: 'https://randomuser.me/api/portraits/men/2.jpg',
       linkedin: 'https://www.linkedin.com/in/jungminho/',
       department: 'executive'
