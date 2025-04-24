@@ -623,6 +623,104 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // 인증서 관련 API
+  // 인증서 목록 조회
+  app.get('/api/certificates', async (req: Request, res: Response) => {
+    try {
+      const category = req.query.category as string | undefined;
+      const certificates = await storage.getCertificates(category);
+      res.json(certificates);
+    } catch (error) {
+      console.error('인증서 조회 에러:', error);
+      res.status(500).json({ message: '인증서 정보를 가져오는데 실패했습니다.' });
+    }
+  });
+
+  // 특정 인증서 조회
+  app.get('/api/certificates/:id', async (req: Request, res: Response) => {
+    try {
+      const id = Number(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: '유효하지 않은 인증서 ID입니다.' });
+      }
+      
+      const certificate = await storage.getCertificate(id);
+      if (!certificate) {
+        return res.status(404).json({ message: '인증서를 찾을 수 없습니다.' });
+      }
+      
+      res.json(certificate);
+    } catch (error) {
+      console.error('인증서 조회 에러:', error);
+      res.status(500).json({ message: '인증서 정보를 가져오는데 실패했습니다.' });
+    }
+  });
+
+  // 인증서 생성
+  app.post('/api/certificates', async (req: Request, res: Response) => {
+    try {
+      // 인증서 정보 유효성 검사
+      const certificateSchema = z.object({
+        name: z.string().min(1, "이름은 필수입니다"),
+        category: z.string().default("tech"),
+        filePath: z.string().min(1, "파일 경로는 필수입니다"),
+        description: z.string().nullable().optional(),
+        position: z.number().default(0)
+      });
+      
+      const validatedData = certificateSchema.parse(req.body);
+      const certificate = await storage.createCertificate(validatedData);
+      res.status(201).json(certificate);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: '유효하지 않은 인증서 데이터입니다', errors: error.errors });
+      }
+      console.error('인증서 생성 에러:', error);
+      res.status(500).json({ message: '인증서를 저장하는데 실패했습니다.' });
+    }
+  });
+
+  // 인증서 업데이트
+  app.patch('/api/certificates/:id', async (req: Request, res: Response) => {
+    try {
+      const id = Number(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: '유효하지 않은 인증서 ID입니다.' });
+      }
+      
+      const certificate = await storage.getCertificate(id);
+      if (!certificate) {
+        return res.status(404).json({ message: '인증서를 찾을 수 없습니다.' });
+      }
+      
+      const updatedCertificate = await storage.updateCertificate(id, req.body);
+      res.json(updatedCertificate);
+    } catch (error) {
+      console.error('인증서 업데이트 에러:', error);
+      res.status(500).json({ message: '인증서를 업데이트하는데 실패했습니다.' });
+    }
+  });
+
+  // 인증서 삭제
+  app.delete('/api/certificates/:id', async (req: Request, res: Response) => {
+    try {
+      const id = Number(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ message: '유효하지 않은 인증서 ID입니다.' });
+      }
+      
+      const success = await storage.deleteCertificate(id);
+      if (success) {
+        res.status(204).send();
+      } else {
+        res.status(404).json({ message: '인증서를 찾을 수 없습니다.' });
+      }
+    } catch (error) {
+      console.error('인증서 삭제 에러:', error);
+      res.status(500).json({ message: '인증서를 삭제하는데 실패했습니다.' });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

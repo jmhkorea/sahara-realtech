@@ -354,6 +354,50 @@ export class MemStorage implements IStorage {
     this.blogTags.set(id, tag);
     return tag;
   }
+  
+  // Certificate methods
+  async getCertificates(category?: string): Promise<Certificate[]> {
+    let certificates = Array.from(this.certificates.values());
+    
+    if (category) {
+      certificates = certificates.filter(cert => cert.category === category);
+    }
+    
+    // 위치 순서대로 정렬
+    return certificates.sort((a, b) => a.position - b.position);
+  }
+  
+  async getCertificate(id: number): Promise<Certificate | undefined> {
+    return this.certificates.get(id);
+  }
+  
+  async createCertificate(insertCertificate: InsertCertificate): Promise<Certificate> {
+    const id = this.certificateCurrentId++;
+    const certificate: Certificate = {
+      ...insertCertificate,
+      id,
+      uploadedAt: new Date()
+    };
+    this.certificates.set(id, certificate);
+    return certificate;
+  }
+  
+  async updateCertificate(id: number, certUpdate: Partial<InsertCertificate>): Promise<Certificate | undefined> {
+    const certificate = await this.getCertificate(id);
+    if (!certificate) return undefined;
+    
+    const updatedCertificate: Certificate = {
+      ...certificate,
+      ...certUpdate,
+      id
+    };
+    this.certificates.set(id, updatedCertificate);
+    return updatedCertificate;
+  }
+  
+  async deleteCertificate(id: number): Promise<boolean> {
+    return this.certificates.delete(id);
+  }
 
   // Initialize sample data
   private initSampleData() {
@@ -655,4 +699,195 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+import { db } from "./db";
+import { eq, desc, asc } from "drizzle-orm";
+import session from "express-session";
+import connectPg from "connect-pg-simple";
+import { pool } from "./db";
+
+const PostgresSessionStore = connectPg(session);
+
+export class DatabaseStorage implements IStorage {
+  sessionStore: any; // session.Store 타입 대신 any로 변경
+  
+  constructor() {
+    this.sessionStore = new PostgresSessionStore({ pool, createTableIfMissing: true });
+  }
+  
+  // User methods
+  async getUser(id: number): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user;
+  }
+
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user;
+  }
+
+  async createUser(insertUser: InsertUser): Promise<User> {
+    const [user] = await db.insert(users).values({
+      ...insertUser,
+      isVerified: false,
+      walletAddress: insertUser.walletAddress || null,
+      email: insertUser.email || null
+    }).returning();
+    return user;
+  }
+
+  async updateUserWallet(userId: number, walletAddress: string): Promise<User | undefined> {
+    const [user] = await db
+      .update(users)
+      .set({ walletAddress })
+      .where(eq(users.id, userId))
+      .returning();
+    return user;
+  }
+  
+  // Certificate methods
+  async getCertificates(category?: string): Promise<Certificate[]> {
+    let query = db.select().from(certificates).orderBy(asc(certificates.position));
+    if (category) {
+      query = query.where(eq(certificates.category, category));
+    }
+    return await query;
+  }
+  
+  async getCertificate(id: number): Promise<Certificate | undefined> {
+    const [certificate] = await db.select().from(certificates).where(eq(certificates.id, id));
+    return certificate;
+  }
+  
+  async createCertificate(insertCertificate: InsertCertificate): Promise<Certificate> {
+    const [certificate] = await db
+      .insert(certificates)
+      .values(insertCertificate)
+      .returning();
+    return certificate;
+  }
+  
+  async updateCertificate(id: number, certUpdate: Partial<InsertCertificate>): Promise<Certificate | undefined> {
+    const [certificate] = await db
+      .update(certificates)
+      .set(certUpdate)
+      .where(eq(certificates.id, id))
+      .returning();
+    return certificate;
+  }
+  
+  async deleteCertificate(id: number): Promise<boolean> {
+    const result = await db.delete(certificates).where(eq(certificates.id, id));
+    return result.rowCount > 0;
+  }
+  
+  // Property methods (using in-memory storage for now)
+  private propertyStorage = new MemStorage();
+  
+  async getProperties(): Promise<Property[]> {
+    return this.propertyStorage.getProperties();
+  }
+  
+  async getProperty(id: number): Promise<Property | undefined> {
+    return this.propertyStorage.getProperty(id);
+  }
+  
+  async getPropertiesByRegion(region: string): Promise<Property[]> {
+    return this.propertyStorage.getPropertiesByRegion(region);
+  }
+  
+  async getPropertiesByType(type: string): Promise<Property[]> {
+    return this.propertyStorage.getPropertiesByType(type);
+  }
+  
+  async createProperty(property: InsertProperty): Promise<Property> {
+    return this.propertyStorage.createProperty(property);
+  }
+  
+  async updatePropertyTokenizationProgress(propertyId: number, progress: number): Promise<Property | undefined> {
+    return this.propertyStorage.updatePropertyTokenizationProgress(propertyId, progress);
+  }
+  
+  // Investment methods (using in-memory storage for now)
+  async getInvestments(userId: number): Promise<Investment[]> {
+    return this.propertyStorage.getInvestments(userId);
+  }
+  
+  async getInvestmentsByProperty(propertyId: number): Promise<Investment[]> {
+    return this.propertyStorage.getInvestmentsByProperty(propertyId);
+  }
+  
+  async createInvestment(investment: InsertInvestment): Promise<Investment> {
+    return this.propertyStorage.createInvestment(investment);
+  }
+  
+  // Transaction methods (using in-memory storage for now)
+  async getTransactions(userId: number): Promise<Transaction[]> {
+    return this.propertyStorage.getTransactions(userId);
+  }
+  
+  async getRecentTransactions(limit: number): Promise<Transaction[]> {
+    return this.propertyStorage.getRecentTransactions(limit);
+  }
+  
+  async createTransaction(transaction: InsertTransaction): Promise<Transaction> {
+    return this.propertyStorage.createTransaction(transaction);
+  }
+  
+  // Blog methods (using in-memory storage for now)
+  async getBlogPosts(limit?: number, offset?: number): Promise<BlogPost[]> {
+    return this.propertyStorage.getBlogPosts(limit, offset);
+  }
+  
+  async getBlogPost(id: number): Promise<BlogPost | undefined> {
+    return this.propertyStorage.getBlogPost(id);
+  }
+  
+  async getBlogPostsByCategory(category: BlogCategoryValue, limit?: number): Promise<BlogPost[]> {
+    return this.propertyStorage.getBlogPostsByCategory(category, limit);
+  }
+  
+  async getFeaturedBlogPosts(limit?: number): Promise<BlogPost[]> {
+    return this.propertyStorage.getFeaturedBlogPosts(limit);
+  }
+  
+  async getRelatedBlogPosts(postId: number, limit?: number): Promise<BlogPost[]> {
+    return this.propertyStorage.getRelatedBlogPosts(postId, limit);
+  }
+  
+  async createBlogPost(post: InsertBlogPost): Promise<BlogPost> {
+    return this.propertyStorage.createBlogPost(post);
+  }
+  
+  async updateBlogPost(id: number, post: Partial<InsertBlogPost>): Promise<BlogPost | undefined> {
+    return this.propertyStorage.updateBlogPost(id, post);
+  }
+  
+  async deleteBlogPost(id: number): Promise<boolean> {
+    return this.propertyStorage.deleteBlogPost(id);
+  }
+  
+  async incrementBlogPostViews(id: number): Promise<boolean> {
+    return this.propertyStorage.incrementBlogPostViews(id);
+  }
+  
+  // Blog Comment methods (using in-memory storage for now)
+  async getBlogComments(postId: number): Promise<BlogComment[]> {
+    return this.propertyStorage.getBlogComments(postId);
+  }
+  
+  async createBlogComment(comment: InsertBlogComment): Promise<BlogComment> {
+    return this.propertyStorage.createBlogComment(comment);
+  }
+  
+  // Blog Tag methods (using in-memory storage for now)
+  async getBlogTags(): Promise<BlogTag[]> {
+    return this.propertyStorage.getBlogTags();
+  }
+  
+  async createBlogTag(tag: InsertBlogTag): Promise<BlogTag> {
+    return this.propertyStorage.createBlogTag(tag);
+  }
+}
+
+// 인증서 기능만 데이터베이스에 저장하고 다른 데이터는 현재 메모리에 유지
+export const storage = new DatabaseStorage();
