@@ -38,6 +38,7 @@ export default function FoundationSection() {
               title="미국 사업자 등록증"
               subtitle="미국 미주리주 법인 - 북미 지역 본부"
               imageSrc={foundationLogoSrc}
+              headerImageSrc="/images/company_certification.png"
               certImageSrc="/images/us_company_cert.jpg"
             />
             
@@ -45,6 +46,7 @@ export default function FoundationSection() {
               title="한국 사업자 등록증"
               subtitle="한국 경기도 성남시 법인 - 아시아 지역 총괄"
               imageSrc={foundationLogoSrc}
+              headerImageSrc="/images/company_certification.png"
               certImageSrc="/images/korea_company_cert.jpg"
             />
             
@@ -52,6 +54,7 @@ export default function FoundationSection() {
               title="중국 사업자 등록증"
               subtitle="중국 쓰촨성 법인 - 중국 시장 진출"
               imageSrc={foundationLogoSrc}
+              headerImageSrc="/images/company_certification.png"
               certImageSrc="/images/china_company_cert.jpg"
             />
           </div>
