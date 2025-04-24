@@ -191,15 +191,42 @@ export type InsertBlogTag = z.infer<typeof insertBlogTagSchema>;
 export type BlogComment = typeof blogComments.$inferSelect;
 export type InsertBlogComment = z.infer<typeof insertBlogCommentSchema>;
 
+// 인증서 카테고리 정의
+export const CertificateCategory = {
+  TECH: "tech",
+  PATENT: "patent",
+  BUSINESS: "business", // 사업자 등록증
+  FOUNDATION: "foundation", // 재단 인증서
+  OTHER: "other",
+} as const;
+
+export type CertificateCategoryValue = typeof CertificateCategory[keyof typeof CertificateCategory];
+
+// 인증서 국가 코드 정의
+export const CountryCode = {
+  MALTA: "malta",
+  USA: "usa",
+  KOREA: "korea",
+  CHINA: "china",
+  OTHER: "other",
+} as const;
+
+export type CountryCodeValue = typeof CountryCode[keyof typeof CountryCode];
+
 // 인증서 테이블
 export const certificates = pgTable("certificates", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
-  category: text("category").notNull().default("tech"), // tech, patent 등 카테고리
+  category: text("category").$type<CertificateCategoryValue>().notNull().default("tech"), // tech, patent, business 등 카테고리
   filePath: text("file_path").notNull(),
   uploadedAt: timestamp("uploaded_at").defaultNow().notNull(),
   description: text("description"),
   position: integer("position").notNull().default(0), // 특정 위치에 표시하기 위한 순서
+  countryCode: text("country_code").$type<CountryCodeValue>(), // 국가 코드 (사업자등록증 등 국가별 인증서용)
+  issueDate: timestamp("issue_date"), // 발급일
+  expiryDate: timestamp("expiry_date"), // 만료일
+  issuer: text("issuer"), // 발급 기관
+  registrationNumber: text("registration_number"), // 등록번호
 });
 
 export const insertCertificateSchema = createInsertSchema(certificates).omit({
