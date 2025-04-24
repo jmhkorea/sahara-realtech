@@ -99,7 +99,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
   const propertyAddress = currentLang === 'ko' ? property.address : property.addressEn;
 
   return (
-    <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow w-full max-w-[320px] mx-auto h-[550px] flex flex-col">
+    <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow w-full max-w-[320px] mx-auto h-[600px] flex flex-col">
       <div className="relative">
         <img 
           src={property.imageUrl || ''} 
@@ -169,8 +169,8 @@ export default function PropertyCard({ property }: PropertyCardProps) {
         </div>
         
         {/* 금융 분석 정보 카드 */}
-        <div className="mb-4 border border-neutral-200 rounded-lg p-3">
-          <div className="flex items-center justify-between mb-2">
+        <div className="mb-2 border border-neutral-200 rounded-lg p-2">
+          <div className="flex items-center justify-between mb-1">
             <h4 className="text-sm font-bold text-primary flex items-center">
               <TrendingUp className="mr-1 h-4 w-4" />
               {t('property.financialAnalysis')}
@@ -180,7 +180,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
             </div>
           </div>
           
-          <div className="grid grid-cols-2 gap-2 text-xs mb-2">
+          <div className="grid grid-cols-2 gap-1 text-xs mb-1">
             <div className="flex justify-between">
               <span className="text-neutral-500">{t('property.cashReturn')}</span>
               <span className="font-semibold text-primary">8.5%</span>
@@ -198,35 +198,17 @@ export default function PropertyCard({ property }: PropertyCardProps) {
               <span className="font-semibold text-primary">12.3%</span>
             </div>
           </div>
-          
-          <div className="w-full h-10 bg-neutral-50 rounded flex items-center justify-between px-2">
-            <span className="text-xs text-neutral-500">{t('property.priceHistory')}</span>
-            <div className="flex items-center h-full">
-              {[100, 105, 112, 118, 125].map((val, i) => (
-                <div key={i} className="flex flex-col items-center mx-1">
-                  <div 
-                    className="bg-primary h-5" 
-                    style={{ 
-                      width: '4px', 
-                      height: `${val * 0.15}px`,
-                      opacity: 0.5 + (i * 0.1)
-                    }} 
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
         
-        <div className="mt-auto">
+        <div className="mt-auto pt-4">
           <Link href={`/properties/${property.id}`}>
             <Button 
-              className={`w-full h-12 py-3 flex items-center justify-center ${
+              className={`w-full h-14 text-base font-bold py-3 flex items-center justify-center ${
                 property.tokenizationStatus === TokenizationStatus.UPCOMING 
                   ? 'border-2 border-accent text-accent hover:bg-accent/5' 
                   : property.tokenizationStatus === TokenizationStatus.COMPLETED 
                     ? 'bg-neutral-300 text-neutral-500 cursor-not-allowed' 
-                    : ''
+                    : 'bg-gradient-to-r from-primary to-blue-600'
               }`}
               variant={buttonState.variant}
               disabled={buttonState.disabled}
