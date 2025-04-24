@@ -33,41 +33,48 @@ import ChatWidget from "@/components/ui/ChatWidget";
 
 import "./lib/i18n";
 
-function Router() {
+// 클라이언트 사이드 라우팅 시 발생하는 히스토리 관련 이슈 대응을 위한 래퍼 컴포넌트
+const RouteWithHeaderAndFooter = ({ component: Component, ...rest }: { component: React.ComponentType<any>, [key: string]: any }) => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-grow">
-        <Switch>
-          <Route path="/" component={Home} />
-          <Route path="/properties" component={PropertyList} />
-          <Route path="/properties/:id" component={PropertyDetail} />
-          <Route path="/token-project" component={TokenProjectDetail} />
-          <Route path="/how-to-invest" component={HowToInvest} />
-          <Route path="/portfolio" component={Portfolio} />
-          <Route path="/blog" component={BlogPage} />
-          <Route path="/blog/new" component={BlogPostForm} />
-          <Route path="/blog/:id" component={BlogPostPage} />
-          <Route path="/team" component={TeamPage} />
-          <Route path="/admin" component={AdminPage} />
-          <Route path="/projects/laos-vientiane" component={LaosProjectDetail} />
-          <Route path="/real-estate-tokenization" component={RealEstateTokenization} />
-          <Route path="/secure-transactions" component={SecureTransactions} />
-          <Route path="/liquidity-enhancement" component={LiquidityEnhancement} />
-          <Route path="/feedback" component={Feedback} />
-
-          <Route path="/real-world-assets-guide" component={RealWorldAssetsGuide} />
-          <Route path="/global-case-studies" component={GlobalCaseStudies} />
-          <Route path="/company-introduction" component={CompanyIntroduction} />
-          <Route path="/team-workspace" component={TeamWorkspace} />
-          <Route path="/investment-process" component={InvestmentProcessPage} />
-          <Route path="/system-auth" component={SystemAuthPage} />
-          <Route component={NotFound} />
-        </Switch>
+        <Component {...rest} />
       </main>
       <Footer />
       <ChatWidget />
     </div>
+  );
+};
+
+function Router() {
+  return (
+    <Switch>
+      <Route path="/" component={() => <RouteWithHeaderAndFooter component={Home} />} />
+      <Route path="/properties" component={() => <RouteWithHeaderAndFooter component={PropertyList} />} />
+      <Route path="/properties/:id" component={(params) => <RouteWithHeaderAndFooter component={PropertyDetail} params={params} />} />
+      <Route path="/token-project" component={() => <RouteWithHeaderAndFooter component={TokenProjectDetail} />} />
+      <Route path="/how-to-invest" component={() => <RouteWithHeaderAndFooter component={HowToInvest} />} />
+      <Route path="/portfolio" component={() => <RouteWithHeaderAndFooter component={Portfolio} />} />
+      <Route path="/blog" component={() => <RouteWithHeaderAndFooter component={BlogPage} />} />
+      <Route path="/blog/new" component={() => <RouteWithHeaderAndFooter component={BlogPostForm} />} />
+      <Route path="/blog/:id" component={(params) => <RouteWithHeaderAndFooter component={BlogPostPage} params={params} />} />
+      <Route path="/team" component={() => <RouteWithHeaderAndFooter component={TeamPage} />} />
+      <Route path="/admin" component={() => <RouteWithHeaderAndFooter component={AdminPage} />} />
+      <Route path="/projects/laos-vientiane" component={() => <RouteWithHeaderAndFooter component={LaosProjectDetail} />} />
+      <Route path="/real-estate-tokenization" component={() => <RouteWithHeaderAndFooter component={RealEstateTokenization} />} />
+      <Route path="/secure-transactions" component={() => <RouteWithHeaderAndFooter component={SecureTransactions} />} />
+      <Route path="/liquidity-enhancement" component={() => <RouteWithHeaderAndFooter component={LiquidityEnhancement} />} />
+      <Route path="/feedback" component={() => <RouteWithHeaderAndFooter component={Feedback} />} />
+
+      <Route path="/real-world-assets-guide" component={() => <RouteWithHeaderAndFooter component={RealWorldAssetsGuide} />} />
+      <Route path="/global-case-studies" component={() => <RouteWithHeaderAndFooter component={GlobalCaseStudies} />} />
+      <Route path="/company-introduction" component={() => <RouteWithHeaderAndFooter component={CompanyIntroduction} />} />
+      <Route path="/team-workspace" component={() => <RouteWithHeaderAndFooter component={TeamWorkspace} />} />
+      <Route path="/investment-process" component={() => <RouteWithHeaderAndFooter component={InvestmentProcessPage} />} />
+      <Route path="/system-auth" component={() => <RouteWithHeaderAndFooter component={SystemAuthPage} />} />
+      <Route component={() => <RouteWithHeaderAndFooter component={NotFound} />} />
+    </Switch>
   );
 }
 
