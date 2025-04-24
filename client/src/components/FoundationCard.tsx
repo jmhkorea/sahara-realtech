@@ -22,6 +22,7 @@ export default function FoundationCard({
   const { t } = useTranslation();
   // 기본 상태를 펼쳐진(확장된) 상태로 설정
   const [isExpanded, setIsExpanded] = useState(true);
+  // 몰타 관련 텍스트 제거
 
   const toggleExpanded = () => {
     setIsExpanded(!isExpanded);
@@ -142,23 +143,21 @@ export default function FoundationCard({
             )}
             
             <div>
-              <h3 className="text-base font-medium mb-2">재단 정보</h3>
+              <h3 className="text-base font-medium mb-2">회사 정보</h3>
               <div className="bg-gray-50 p-3 rounded-md space-y-1 text-xs">
                 <div className="flex justify-between">
                   <span className="text-gray-500">설립일:</span>
                   <span className="font-medium">
-                    {title.includes("몰타") ? "2018년 8월 13일" : 
-                     title.includes("미국") ? "2021년 4월 20일" : 
+                    {title.includes("미국") ? "2021년 4월 20일" : 
                      title.includes("중국") ? "2017년 1월 20일" : 
                      title.includes("한국") ? "2017년 6월 13일" : 
-                    "2018년 8월 13일"}
+                     "2018년 8월 13일"}
                   </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-500">등록 국가:</span>
                   <span className="font-medium">
-                    {title.includes("몰타") ? "몰타" : 
-                     title.includes("미국") ? "미국 미주리주" : 
+                    {title.includes("미국") ? "미국 미주리주" : 
                      title.includes("한국") ? "대한민국" : 
                      title.includes("중국") ? "중국" : ""}
                   </span>
@@ -166,8 +165,7 @@ export default function FoundationCard({
                 <div className="flex justify-between">
                   <span className="text-gray-500">등록 번호:</span>
                   <span className="font-medium">
-                    {title.includes("몰타") ? "C 87803" : 
-                     title.includes("미국") ? "LC1780821" : 
+                    {title.includes("미국") ? "LC1780821" : 
                      title.includes("한국") ? "145-86-00817" : 
                      title.includes("중국") ? "91510100M62PXCA4A" : ""}
                   </span>
@@ -175,8 +173,7 @@ export default function FoundationCard({
                 <div className="flex justify-between">
                   <span className="text-gray-500">주소:</span>
                   <span className="font-medium text-right max-w-[65%]">
-                    {title.includes("몰타") ? "152/No. 8, Naxxar Road, San Gwann, Malta" : 
-                     title.includes("미국") ? "Jefferson City, Missouri, USA" : 
+                    {title.includes("미국") ? "Jefferson City, Missouri, USA" : 
                      title.includes("한국") ? "경기도 성남시 분당구 백현로 97, 1226호" : 
                      title.includes("중국") ? "사천성 성도 고신구 디부광장 2호 804" : ""}
                   </span>
@@ -187,16 +184,7 @@ export default function FoundationCard({
             <div>
               <h3 className="text-base font-medium mb-1">주요 업무</h3>
               <ul className="list-disc pl-4 space-y-0.5 text-xs text-gray-700">
-                {title.includes("몰타") && (
-                  <>
-                    <li>토큰증권(STO) 발행 및 관리</li>
-                    <li>유럽 내 실물자산 디지털화 사업</li>
-                    <li>자산 토큰화 플랫폼 글로벌 운영</li>
-                    <li>국제적 디지털 자산 유동화 기술 개발</li>
-                    <li>유럽 연합 블록체인 규제 준수</li>
-                    <li>MFSA(몰타 금융감독원) 인증</li>
-                  </>
-                )}
+                {/* 몰타 부분은 더 이상 표시하지 않습니다 */}
                 {title.includes("미국") && (
                   <>
                     <li>북미 지역 블록체인 사업 개발</li>
