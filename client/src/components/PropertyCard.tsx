@@ -99,7 +99,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
   const propertyAddress = currentLang === 'ko' ? property.address : property.addressEn;
 
   return (
-    <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow w-full max-w-[320px] mx-auto h-[600px] flex flex-col">
+    <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow w-full max-w-[320px] mx-auto h-[650px] flex flex-col">
       <div className="relative">
         <img 
           src={property.imageUrl || ''} 
@@ -149,22 +149,22 @@ export default function PropertyCard({ property }: PropertyCardProps) {
           />
         </div>
         
-        <div className="grid grid-cols-3 gap-2 text-sm mb-4">
-          <div className="bg-neutral-100 p-2 rounded-lg">
-            <div className="text-neutral-400">{t('property.tokenPrice')}</div>
-            <div className="font-medium font-inter">{formatCurrency(property.tokenPrice)}</div>
+        <div className="grid grid-cols-3 gap-1 text-sm mb-3">
+          <div className="bg-neutral-100 p-1.5 rounded-lg">
+            <div className="text-neutral-400 text-xs">{t('property.tokenPrice')}</div>
+            <div className="font-medium font-inter text-xs">{formatCurrency(property.tokenPrice)}</div>
           </div>
-          <div className="bg-neutral-100 p-2 rounded-lg">
-            <div className="text-neutral-400">{t('property.minInvestment')}</div>
-            <div className="font-medium font-inter">{formatCurrency(property.minInvestment)}</div>
+          <div className="bg-neutral-100 p-1.5 rounded-lg">
+            <div className="text-neutral-400 text-xs">{t('property.minInvestment')}</div>
+            <div className="font-medium font-inter text-xs">{formatCurrency(property.minInvestment)}</div>
           </div>
-          <div className="bg-neutral-100 p-2 rounded-lg">
-            <div className="text-neutral-400">
+          <div className="bg-neutral-100 p-1.5 rounded-lg">
+            <div className="text-neutral-400 text-xs">
               {property.tokenizationStatus === TokenizationStatus.UPCOMING 
                 ? t('property.target') 
                 : t('property.investors')}
             </div>
-            <div className="font-medium font-inter">{property.numInvestors}명</div>
+            <div className="font-medium font-inter text-xs">{property.numInvestors}명</div>
           </div>
         </div>
         
