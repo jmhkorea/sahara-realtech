@@ -23,8 +23,10 @@ export default function FoundationSection() {
 
   // 파일 업로드 핸들러
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, country: string) => {
-    const file = e.target.files[0];
-    if (!file) return;
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+    
+    const file = files[0];
     
     const formData = new FormData();
     formData.append('certificateImage', file);
@@ -100,19 +102,7 @@ export default function FoundationSection() {
                   {uploading.malta && <p className="text-xs text-blue-500 mt-2">업로드 중...</p>}
                 </div>
               )}
-              {certificates.malta && (
-                <div className="absolute bottom-2 right-2">
-                  <label className="cursor-pointer px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 text-xs">
-                    변경
-                    <input 
-                      type="file" 
-                      className="hidden" 
-                      accept="image/*"
-                      onChange={(e) => handleFileUpload(e, 'malta')} 
-                    />
-                  </label>
-                </div>
-              )}
+
             </div>
           </div>
           
@@ -149,19 +139,7 @@ export default function FoundationSection() {
                   {uploading.usa && <p className="text-xs text-blue-500 mt-2">업로드 중...</p>}
                 </div>
               )}
-              {certificates.usa && (
-                <div className="absolute bottom-2 right-2">
-                  <label className="cursor-pointer px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 text-xs">
-                    변경
-                    <input 
-                      type="file" 
-                      className="hidden" 
-                      accept="image/*"
-                      onChange={(e) => handleFileUpload(e, 'usa')} 
-                    />
-                  </label>
-                </div>
-              )}
+
             </div>
           </div>
           
@@ -198,19 +176,7 @@ export default function FoundationSection() {
                   {uploading.korea && <p className="text-xs text-blue-500 mt-2">업로드 중...</p>}
                 </div>
               )}
-              {certificates.korea && (
-                <div className="absolute bottom-2 right-2">
-                  <label className="cursor-pointer px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 text-xs">
-                    변경
-                    <input 
-                      type="file" 
-                      className="hidden" 
-                      accept="image/*"
-                      onChange={(e) => handleFileUpload(e, 'korea')} 
-                    />
-                  </label>
-                </div>
-              )}
+
             </div>
           </div>
           
@@ -247,19 +213,7 @@ export default function FoundationSection() {
                   {uploading.china && <p className="text-xs text-blue-500 mt-2">업로드 중...</p>}
                 </div>
               )}
-              {certificates.china && (
-                <div className="absolute bottom-2 right-2">
-                  <label className="cursor-pointer px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 text-xs">
-                    변경
-                    <input 
-                      type="file" 
-                      className="hidden" 
-                      accept="image/*"
-                      onChange={(e) => handleFileUpload(e, 'china')} 
-                    />
-                  </label>
-                </div>
-              )}
+
             </div>
           </div>
         </div>
