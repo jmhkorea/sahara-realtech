@@ -3,7 +3,7 @@ import { Link, useLocation } from "wouter";
 import { useTranslation } from "react-i18next";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Menu, Globe, ChevronDown, Settings, Building2, FolderGit } from "lucide-react";
+import { Menu, Globe, ChevronDown, Settings, Building2, FolderGit, Terminal, Code } from "lucide-react";
 import WalletConnect from "@/components/WalletConnect";
 
 export default function Header() {
@@ -95,6 +95,10 @@ export default function Header() {
             <Link href="/team-workspace" className="font-medium text-neutral-500 hover:text-primary transition-colors flex items-center whitespace-nowrap">
               <FolderGit className="h-4 w-4 mr-1" />
               워크스페이스
+            </Link>
+            <Link href="/devops" className="font-medium text-neutral-500 hover:text-primary transition-colors flex items-center whitespace-nowrap">
+              <Terminal className="h-4 w-4 mr-1" />
+              DevOps
             </Link>
             <Link href="/admin" className="font-medium text-neutral-500 hover:text-primary transition-colors flex items-center">
               <Settings className="h-4 w-4 mr-1" />
@@ -191,6 +195,10 @@ export default function Header() {
                   <Link href="/team-workspace" className="px-4 py-2 hover:bg-neutral-100 rounded-md flex items-center">
                     <FolderGit className="h-4 w-4 mr-2" />
                     팀 워크스페이스
+                  </Link>
+                  <Link href="/devops" className="px-4 py-2 hover:bg-neutral-100 rounded-md flex items-center">
+                    <Terminal className="h-4 w-4 mr-2" />
+                    DevOps
                   </Link>
                   <Link href="/admin" className="px-4 py-2 hover:bg-neutral-100 rounded-md flex items-center">
                     <Settings className="h-4 w-4 mr-2" />

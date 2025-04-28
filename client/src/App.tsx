@@ -22,6 +22,7 @@ import RealEstateTokenization from "@/pages/RealEstateTokenization";
 import SecureTransactions from "@/pages/SecureTransactions";
 import LiquidityEnhancement from "@/pages/LiquidityEnhancement";
 import Feedback from "@/pages/Feedback";
+import DevOpsPage from "@/pages/DevOpsPage";
 
 import RealWorldAssetsGuide from "@/pages/RealWorldAssetsGuide";
 import RwaLiquidation from "@/pages/RwaLiquidation";
@@ -79,6 +80,7 @@ function Router() {
       <Route path="/team-workspace" component={() => <RouteWithHeaderAndFooter component={TeamWorkspace} />} />
       <Route path="/investment-process" component={() => <RouteWithHeaderAndFooter component={InvestmentProcessPage} />} />
       <Route path="/system-auth" component={() => <RouteWithHeaderAndFooter component={SystemAuthPage} />} />
+      <Route path="/devops" component={() => <RouteWithHeaderAndFooter component={DevOpsPage} />} />
       <Route component={() => <RouteWithHeaderAndFooter component={NotFound} />} />
     </Switch>
   );
