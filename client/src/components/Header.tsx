@@ -96,7 +96,7 @@ export default function Header() {
               <FolderGit className="h-4 w-4 mr-1" />
               워크스페이스
             </Link>
-            <a href="https://resort-planner-jmhkorea.replit.app" target="_blank" rel="noopener noreferrer" className="font-medium text-neutral-500 hover:text-primary transition-colors flex items-center whitespace-nowrap">
+            <a href="https://resort-planner-jmhkorea.replit.app/realestate" target="_blank" rel="noopener noreferrer" className="font-medium text-neutral-500 hover:text-primary transition-colors flex items-center whitespace-nowrap">
               <Terminal className="h-4 w-4 mr-1" />
               DevOps
             </a>
@@ -196,7 +196,7 @@ export default function Header() {
                     <FolderGit className="h-4 w-4 mr-2" />
                     팀 워크스페이스
                   </Link>
-                  <a href="https://resort-planner-jmhkorea.replit.app" target="_blank" rel="noopener noreferrer" className="px-4 py-2 hover:bg-neutral-100 rounded-md flex items-center">
+                  <a href="https://resort-planner-jmhkorea.replit.app/realestate" target="_blank" rel="noopener noreferrer" className="px-4 py-2 hover:bg-neutral-100 rounded-md flex items-center">
                     <Terminal className="h-4 w-4 mr-2" />
                     DevOps
                   </a>
