@@ -16,14 +16,14 @@ export default function Hero() {
   return (
     <div className="relative overflow-hidden">
       {/* 대표 이미지 섹션 - 가로 전체를 채우는 배너 */}
-      <div className="w-full bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900">
+      <div className="w-full">
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
           <div className="relative">
             <img 
               src={heroImageUrl} 
               alt="블록체인 기반 부동산 투자" 
-              className="w-full object-contain h-[320px] md:h-[400px] lg:h-[480px] bg-black"
+              className="w-full object-cover h-[320px] md:h-[400px] lg:h-[480px]"
             />
             
             {/* 이미지 변경 버튼 제거됨 */}
