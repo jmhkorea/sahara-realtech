@@ -80,9 +80,9 @@ export default function Hero() {
             <div className="absolute -top-10 -left-10 w-40 h-40 bg-gradient-to-r from-pink-200 to-pink-100 rounded-full blur-3xl opacity-70"></div>
             <div className="absolute top-20 right-0 w-60 h-60 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full blur-3xl opacity-50"></div>
             
-            <h1 className="text-4xl md:text-5xl font-extrabold mb-6 bg-gradient-to-r from-pink-500 via-rose-400 to-purple-500 bg-clip-text text-transparent drop-shadow-sm">
-              <span className="block">실제 세계 자산을</span>
-              <span className="block">디지털화 하세요</span>
+            <h1 className="text-4xl md:text-5xl font-extrabold mb-6 bg-gradient-to-r from-pink-500 via-rose-400 to-purple-500 bg-clip-text text-transparent drop-shadow-sm text-center">
+              <span className="block">실제 세계 자산을 디지털화</span>
+              <span className="block">하세요</span>
             </h1>
             
             <p className="text-lg md:text-xl text-slate-700 mb-6 backdrop-blur-sm">
