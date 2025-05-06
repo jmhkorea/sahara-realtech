@@ -4,6 +4,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { HelmetProvider } from "react-helmet-async";
 import { Toaster } from "@/components/ui/toaster";
 import { KimiyiAIProvider } from "@/contexts/KimiyiAIContext";
+import { AdminProvider } from "@/contexts/AdminContext";
 import NotFound from "@/pages/not-found";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -35,6 +36,7 @@ import TeamWorkspace from "@/pages/TeamWorkspace";
 import InvestmentProcessPage from "@/pages/InvestmentProcessPage";
 import SystemAuthPage from "@/pages/SystemAuthPage";
 import ChatWidget from "@/components/ui/ChatWidget";
+import { AdminLoginPanel } from "@/components/ui/AdminLoginPanel";
 
 import "./lib/i18n";
 
@@ -91,10 +93,13 @@ function App() {
   return (
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
-        <KimiyiAIProvider>
-          <Toaster />
-          <Router />
-        </KimiyiAIProvider>
+        <AdminProvider>
+          <KimiyiAIProvider>
+            <Toaster />
+            <Router />
+            <AdminLoginPanel />
+          </KimiyiAIProvider>
+        </AdminProvider>
       </QueryClientProvider>
     </HelmetProvider>
   );

@@ -4,6 +4,7 @@ import { ArrowLeft, ChevronDown, ChevronUp, Upload } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { useState, useRef, ChangeEvent } from "react";
+import { useAdmin } from "@/contexts/AdminContext";
 import SEO from "@/components/SEO";
 import { toast } from "@/hooks/use-toast";
 import dubaiSigningCeremony from "@/assets/dubai-signing-ceremony.png";
