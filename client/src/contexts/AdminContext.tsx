@@ -1,4 +1,4 @@
-import { createContext, useState, useContext, ReactNode } from "react";
+import { createContext, useState, useContext, ReactNode, useEffect } from "react";
 
 interface AdminContextType {
   isAdmin: boolean;
@@ -36,12 +36,12 @@ export function AdminProvider({ children }: { children: ReactNode }) {
   };
 
   // 페이지 로드 시 localStorage에서 관리자 상태 확인
-  useState(() => {
+  useEffect(() => {
     const adminStatus = localStorage.getItem("adminStatus");
     if (adminStatus === "true") {
       setIsAdmin(true);
     }
-  });
+  }, []);
 
   return (
     <AdminContext.Provider value={{ isAdmin, setAdmin, login, logout }}>
