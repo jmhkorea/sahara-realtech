@@ -309,25 +309,7 @@ export default function CompanyIntroduction() {
                   alt="사하라 리얼테크 로고" 
                   className="w-full max-h-80 object-cover"
                 />
-                <div className="absolute bottom-4 right-4">
-                  <input
-                    type="file"
-                    ref={companyLogoInputRef}
-                    className="hidden"
-                    accept="image/*"
-                    onChange={handleCompanyLogoUpload}
-                  />
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="bg-white bg-opacity-70 hover:bg-white"
-                    onClick={() => companyLogoInputRef.current?.click()}
-                    disabled={isUploading}
-                  >
-                    {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
-                    {isUploading ? "" : "로고 변경"}
-                  </Button>
-                </div>
+                {/* 로고 업로드 버튼 제거 */}
               </div>
             )}
           </div>
