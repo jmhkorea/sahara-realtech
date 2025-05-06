@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { ArrowLeft, ChevronDown, ChevronUp } from "lucide-react";
+import { ArrowLeft, ChevronDown, ChevronUp, Upload } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { useState } from "react";
+import { useState, useRef, ChangeEvent } from "react";
 import SEO from "@/components/SEO";
+import { toast } from "@/hooks/use-toast";
 import dubaiSigningCeremony from "@/assets/dubai-signing-ceremony.png";
 import hancomAgreement from "@/assets/hancom-agreement.png";
 import ctgBusinessCard from "@/assets/ctg-business-card.png";
@@ -30,6 +31,48 @@ export default function CompanyIntroduction() {
   const [isSeniorProjectOpen, setIsSeniorProjectOpen] = useState(false);
   const [isEsportProjectOpen, setIsEsportProjectOpen] = useState(false);
   const [isGlobalEventOpen, setIsGlobalEventOpen] = useState(false);
+  const [isMaltaOpen, setIsMaltaOpen] = useState(false);
+  
+  // 몰타 이미지 상태 관리
+  const [maltaImageUrl, setMaltaImageUrl] = useState<string>(() => {
+    // 로컬 스토리지에서 이미지 URL을 가져오거나 기본 이미지 사용
+    const savedImage = localStorage.getItem('maltaFoundationImage');
+    return savedImage || '/images/malta-foundation.png';
+  });
+  const [isUploading, setIsUploading] = useState(false);
+  const maltaImageInputRef = useRef<HTMLInputElement>(null);
+  
+  // 이미지 업로드 처리 함수
+  const handleMaltaImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+    
+    const file = files[0];
+    setIsUploading(true);
+    
+    try {
+      // 파일 URL 생성 (브라우저 메모리에 임시 저장)
+      const imageUrl = URL.createObjectURL(file);
+      setMaltaImageUrl(imageUrl);
+      
+      // 로컬 스토리지에 저장 (새로고침해도 유지)
+      localStorage.setItem('maltaFoundationImage', imageUrl);
+      
+      toast({
+        title: "이미지 업로드 성공",
+        description: "몰타 공화국 재단 이미지가 변경되었습니다.",
+      });
+    } catch (error) {
+      console.error('이미지 업로드 오류:', error);
+      toast({
+        variant: "destructive",
+        title: "이미지 업로드 실패",
+        description: "이미지 업로드 중 오류가 발생했습니다. 다시 시도해주세요.",
+      });
+    } finally {
+      setIsUploading(false);
+    }
+  };
   return (
     <>
       <SEO 
@@ -117,11 +160,56 @@ export default function CompanyIntroduction() {
                       <p className="text-sm text-gray-600">미주리주 세인트 루이스</p>
                     </CardContent>
                   </Card>
-                  <Card>
-                    <CardContent className="p-4">
-                      <h4 className="font-semibold">재단</h4>
-                      <p className="text-sm text-gray-600">유럽 몰타공화국</p>
-                    </CardContent>
+                  <Card className="overflow-hidden">
+                    <Collapsible open={isMaltaOpen} onOpenChange={setIsMaltaOpen}>
+                      <CardContent className="p-4">
+                        <div className="flex justify-between items-center">
+                          <h4 className="font-semibold">재단</h4>
+                          <CollapsibleTrigger asChild>
+                            <Button variant="ghost" size="sm" className="p-0 h-8 w-8">
+                              {isMaltaOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                            </Button>
+                          </CollapsibleTrigger>
+                        </div>
+                        <p className="text-sm text-gray-600">유럽 몰타공화국</p>
+                        
+                        <CollapsibleContent>
+                          <div className="pt-3 space-y-2">
+                            <p className="text-xs text-gray-600">
+                              몰타는 유럽 연합(EU) 회원국 중 하나로, 블록체인 및 암호화폐 기업에 우호적인 규제 환경을 
+                              제공하여 '블록체인 섬'으로 알려져 있습니다. 사하라 리얼테크는 글로벌 확장과 합법적인 
+                              디지털 자산 사업을 위해 몰타에 재단을 설립했습니다.
+                            </p>
+                            <div className="relative mt-2 rounded overflow-hidden border border-gray-200">
+                              <img 
+                                src={maltaImageUrl} 
+                                alt="몰타 재단" 
+                                className="w-full h-auto"
+                              />
+                              <div className="absolute bottom-0 right-0 p-2">
+                                <input
+                                  type="file"
+                                  ref={maltaImageInputRef}
+                                  className="hidden"
+                                  accept="image/*"
+                                  onChange={handleMaltaImageUpload}
+                                />
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  className="bg-white bg-opacity-70 hover:bg-white"
+                                  onClick={() => maltaImageInputRef.current?.click()}
+                                  disabled={isUploading}
+                                >
+                                  {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
+                                  {isUploading ? "" : "이미지 변경"}
+                                </Button>
+                              </div>
+                            </div>
+                          </div>
+                        </CollapsibleContent>
+                      </CardContent>
+                    </Collapsible>
                   </Card>
                   <Card className="overflow-hidden">
                     <Collapsible open={isKoreaOfficeOpen} onOpenChange={setIsKoreaOfficeOpen}>
