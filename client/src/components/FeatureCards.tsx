@@ -81,7 +81,8 @@ export default function FeatureCards() {
   const { t } = useTranslation();
   const [openAccordion, setOpenAccordion] = useState<string>("features");
 
-  const cardFeatures = [
+  // 모든 특징 카드 정보를 하나의 배열로 관리
+  const allFeatures = [
     {
       icon: <Building className="h-8 w-8 text-blue-600" />,
       title: "부동산 토큰화",
@@ -121,10 +122,7 @@ export default function FeatureCards() {
       bgColorClass: "bg-rose-100",
       textColorClass: "text-rose-600",
       borderColorClass: "border-rose-100"
-    }
-  ];
-
-  const additionalFeatures = [
+    },
     {
       icon: <Clock className="h-8 w-8 text-blue-600" />,
       title: "유동성 확보",
@@ -171,13 +169,13 @@ export default function FeatureCards() {
             <AccordionItem value="features" className="border-b-0">
               <AccordionTrigger className="px-6 py-4 hover:no-underline">
                 <div className="flex items-center text-xl font-semibold text-gray-800">
-                  <span>핵심 특징 알아보기</span>
+                  <span>블록체인 부동산 투자 핵심 특징 알아보기</span>
                   <ChevronDown className="h-5 w-5 ml-2 text-pink-500 shrink-0 transition-transform duration-200" />
                 </div>
               </AccordionTrigger>
               <AccordionContent className="px-6 pb-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                  {cardFeatures.map((feature, index) => (
+                  {allFeatures.map((feature, index) => (
                     <FeatureCard
                       key={index}
                       icon={feature.icon}
@@ -195,25 +193,6 @@ export default function FeatureCards() {
               </AccordionContent>
             </AccordionItem>
           </Accordion>
-        </div>
-        
-        <div className="mt-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {additionalFeatures.map((feature, index) => (
-              <FeatureCard
-                key={index}
-                icon={feature.icon}
-                title={feature.title}
-                description={feature.description}
-                link={feature.link}
-                linkText={feature.linkText}
-                bgColorClass={feature.bgColorClass}
-                textColorClass={feature.textColorClass}
-                borderColorClass={feature.borderColorClass}
-                isExternal={feature.isExternal}
-              />
-            ))}
-          </div>
         </div>
       </div>
     </section>

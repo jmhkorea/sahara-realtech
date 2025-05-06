@@ -29,13 +29,21 @@ export default function Home() {
       <InvestmentGuide />
       <FeatureCards />
       <FeaturedProperties />
-      <div className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">
+      <div className="py-16 bg-gradient-to-r from-pink-50 via-white to-pink-50 relative overflow-hidden">
+        {/* 벚꽃 효과 - 작은 원형 장식 요소들 */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-10 left-[10%] w-4 h-4 bg-pink-200 rounded-full opacity-30"></div>
+          <div className="absolute top-1/4 right-[15%] w-6 h-6 bg-purple-200 rounded-full opacity-20"></div>
+          <div className="absolute bottom-1/3 left-[20%] w-5 h-5 bg-pink-300 rounded-full opacity-20"></div>
+          <div className="absolute bottom-10 right-[25%] w-3 h-3 bg-purple-300 rounded-full opacity-30"></div>
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center max-w-3xl mx-auto mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-pink-500 via-rose-400 to-purple-500 bg-clip-text text-transparent">
               부동산 투자 프로세스
             </h2>
-            <p className="text-gray-500">
+            <p className="text-slate-600">
               사하라 리얼테크의 간편한 4단계 투자 프로세스를 통해 블록체인 부동산 투자를 시작하세요.
             </p>
           </div>
