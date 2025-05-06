@@ -20,11 +20,20 @@ export default function Hero() {
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
           <div className="relative">
-            <img 
-              src={heroImageUrl} 
-              alt="블록체인 기반 부동산 투자" 
-              className="w-full object-cover h-[320px] md:h-[400px] lg:h-[480px]"
-            />
+            <div className="relative">
+              <img 
+                src={heroImageUrl} 
+                alt="블록체인 기반 부동산 투자" 
+                className="w-full object-cover h-[320px] md:h-[400px] lg:h-[480px]"
+              />
+              
+              <div className="absolute inset-0 flex items-center justify-center">
+                <h2 className="text-5xl md:text-7xl font-extrabold text-white tracking-wider drop-shadow-xl text-center">
+                  <span className="block">SAHARA</span>
+                  <span className="block">REALTECH</span>
+                </h2>
+              </div>
+            </div>
             
             {/* 이미지 변경 버튼 제거됨 */}
           </div>
