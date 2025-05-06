@@ -37,8 +37,8 @@ export default function CompanyIntroduction() {
           <div className="relative rounded-lg overflow-hidden shadow-lg">
             <div className="relative bg-gradient-to-r from-blue-100 to-amber-100">
               <img 
-                src="/images/sahara-background.png" 
-                alt="사하라 리얼테크 로고" 
+                src="attached_assets/5EDA3512-EF11-4F10-B183-0E42E2C0710B.jpeg" 
+                alt="사하라 리얼테크 배경" 
                 className="w-full max-h-80 object-cover"
               />
             </div>
@@ -78,7 +78,7 @@ export default function CompanyIntroduction() {
               <section className="mb-6">
                 <div className="rounded-lg overflow-hidden shadow-lg mb-6">
                   <img 
-                    src="/images/dubai-signing-ceremony.png" 
+                    src="attached_assets/10A37A4A-F7DB-4A14-A302-C5B1DFAED220.jpeg" 
                     alt="두바이 계약 체결식 - 사하라 리얼테크와 KHOORY & PARK LLC" 
                     className="w-full object-cover" 
                   />
@@ -123,7 +123,7 @@ export default function CompanyIntroduction() {
                             </p>
                             <div className="relative mt-2 rounded overflow-hidden border border-gray-200">
                               <img 
-                                src="/images/global-event-3.jpg" 
+                                src="attached_assets/25C71D95-6A16-4858-9C8C-5C33DC0C1ECD.jpeg" 
                                 alt="미국 본사" 
                                 className="w-full h-auto"
                               />
@@ -155,7 +155,7 @@ export default function CompanyIntroduction() {
                             </p>
                             <div className="relative mt-2 rounded overflow-hidden border border-gray-200">
                               <img 
-                                src="/images/global-event-5.jpg" 
+                                src="attached_assets/5EDA3512-EF11-4F10-B183-0E42E2C0710B.jpeg" 
                                 alt="몰타 재단" 
                                 className="w-full h-auto"
                               />
@@ -187,7 +187,7 @@ export default function CompanyIntroduction() {
                             </p>
                             <div className="mt-2 rounded overflow-hidden border border-gray-200">
                               <img 
-                                src="/images/hancom-agreement.png" 
+                                src="attached_assets/2C93E7BE-66D3-476E-8BFA-A9AF387FBEB5.jpeg" 
                                 alt="한글과 컴퓨터 한컴위드와 디지털 부동산을 위한 협약식" 
                                 className="w-full h-auto"
                               />
@@ -222,7 +222,7 @@ export default function CompanyIntroduction() {
                             </p>
                             <div className="mt-3 rounded overflow-hidden border border-gray-200">
                               <img 
-                                src="/images/ctg-business-card.png" 
+                                src="attached_assets/2E083608-9217-4F54-8101-7C5FF6E0ABCB.jpeg" 
                                 alt="Capital Trust Group - Min Ho Jung 명함" 
                                 className="w-full h-auto"
                               />
@@ -257,7 +257,7 @@ export default function CompanyIntroduction() {
                             <div className="mt-2 flex justify-center">
                               <div className="rounded overflow-hidden border border-gray-200 max-w-sm">
                                 <img 
-                                  src="/images/kimiyi-ai.jpg" 
+                                  src="attached_assets/7F119182-C2BC-4C27-84D4-1B081322F5B1.jpeg" 
                                   alt="Kimiyi AI - 생성형 AI 기업" 
                                   className="w-full h-auto"
                                 />
@@ -293,7 +293,7 @@ export default function CompanyIntroduction() {
                             <div className="mt-2 flex justify-center">
                               <div className="rounded overflow-hidden border border-gray-200 max-w-sm">
                                 <img 
-                                  src="/images/senior-ai-kiosk.png" 
+                                  src="attached_assets/76AD10FC-527E-4929-8EA2-7A475096AA00.jpeg" 
                                   alt="대한노인회 경로당 건강 AI 키오스크" 
                                   className="w-full h-auto"
                                 />
