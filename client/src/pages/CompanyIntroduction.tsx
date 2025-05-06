@@ -67,12 +67,19 @@ export default function CompanyIntroduction() {
     return savedImage || '';
   });
   
+  // 회사 로고 이미지 상태
+  const [companyLogoUrl, setCompanyLogoUrl] = useState<string>(() => {
+    const savedLogo = localStorage.getItem('companyLogoImage');
+    return savedLogo || '';
+  });
+  
   const [isUploading, setIsUploading] = useState(false);
   const maltaImage1InputRef = useRef<HTMLInputElement>(null);
   const maltaImage2InputRef = useRef<HTMLInputElement>(null);
   const usaImage1InputRef = useRef<HTMLInputElement>(null);
   const usaImage2InputRef = useRef<HTMLInputElement>(null);
   const koreaImage2InputRef = useRef<HTMLInputElement>(null);
+  const companyLogoInputRef = useRef<HTMLInputElement>(null);
   
   // 이미지 업로드 처리 함수들
   const handleMaltaImage1Upload = (e: ChangeEvent<HTMLInputElement>) => {
@@ -231,6 +238,38 @@ export default function CompanyIntroduction() {
       setIsUploading(false);
     }
   };
+  
+  // 회사 로고 이미지 업로드 처리 함수
+  const handleCompanyLogoUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+    
+    const file = files[0];
+    setIsUploading(true);
+    
+    try {
+      // 파일 URL 생성 (브라우저 메모리에 임시 저장)
+      const imageUrl = URL.createObjectURL(file);
+      setCompanyLogoUrl(imageUrl);
+      
+      // 로컬 스토리지에 저장 (새로고침해도 유지)
+      localStorage.setItem('companyLogoImage', imageUrl);
+      
+      toast({
+        title: "로고 업로드 성공",
+        description: "회사 로고가 성공적으로 업로드되었습니다.",
+      });
+    } catch (error) {
+      console.error('로고 업로드 오류:', error);
+      toast({
+        variant: "destructive",
+        title: "로고 업로드 실패",
+        description: "로고 업로드 중 오류가 발생했습니다. 다시 시도해주세요.",
+      });
+    } finally {
+      setIsUploading(false);
+    }
+  };
   return (
     <>
       <SEO 
@@ -250,9 +289,61 @@ export default function CompanyIntroduction() {
         </div>
         
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-          <div className="bg-gradient-to-r from-blue-700 to-blue-900 py-12 px-6 text-white">
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">사하라 리얼테크 소개</h1>
-            <p className="text-lg opacity-90">실물자산 디지털화를 선도하는 글로벌 블록체인 전문 기업</p>
+          <div className="bg-gradient-to-r from-blue-700 to-blue-900 py-12 px-6 text-white relative">
+            {companyLogoUrl ? (
+              <div className="flex justify-center items-center">
+                <div className="relative mb-4">
+                  <img 
+                    src={companyLogoUrl} 
+                    alt="사하라 리얼테크 로고" 
+                    className="max-h-36 w-auto"
+                  />
+                  <div className="absolute bottom-0 right-0 p-2">
+                    <input
+                      type="file"
+                      ref={companyLogoInputRef}
+                      className="hidden"
+                      accept="image/*"
+                      onChange={handleCompanyLogoUpload}
+                    />
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="bg-white bg-opacity-70 hover:bg-white"
+                      onClick={() => companyLogoInputRef.current?.click()}
+                      disabled={isUploading}
+                    >
+                      {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
+                      {isUploading ? "" : "로고 변경"}
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <>
+                <h1 className="text-3xl md:text-4xl font-bold mb-4">사하라 리얼테크 소개</h1>
+                <p className="text-lg opacity-90 mb-4">실물자산 디지털화를 선도하는 글로벌 블록체인 전문 기업</p>
+                <div className="flex justify-center mt-4">
+                  <input
+                    type="file"
+                    ref={companyLogoInputRef}
+                    className="hidden"
+                    accept="image/*"
+                    onChange={handleCompanyLogoUpload}
+                  />
+                  <Button
+                    variant="outline"
+                    size="md"
+                    className="bg-white text-blue-900 hover:bg-gray-100"
+                    onClick={() => companyLogoInputRef.current?.click()}
+                    disabled={isUploading}
+                  >
+                    {isUploading ? "업로드 중..." : <Upload size={18} className="mr-2" />}
+                    {isUploading ? "업로드 중..." : "회사 로고 업로드하기"}
+                  </Button>
+                </div>
+              </>
+            )}
           </div>
           
           <div className="p-6 md:p-8">
