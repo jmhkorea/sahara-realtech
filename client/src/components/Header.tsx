@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, Globe, ChevronDown, Settings, Building2, FolderGit, Terminal, Code } from "lucide-react";
 import WalletConnect from "@/components/WalletConnect";
 import { useKimiyiAI } from "@/contexts/KimiyiAIContext";
+import SaharaLogo from "@/components/SaharaLogo";
 
 export default function Header() {
   const [, setLocation] = useLocation();
@@ -63,7 +64,7 @@ export default function Header() {
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2 mr-8">
-            <span className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">SaharaRealTech</span>
+            <SaharaLogo size="small" />
           </Link>
           
           <nav className="hidden md:flex items-center space-x-12">
@@ -172,7 +173,7 @@ export default function Header() {
               </SheetTrigger>
               <SheetContent className="bg-gradient-to-b from-white to-pink-50 border-l border-pink-100">
                 <div className="px-4 py-3 flex justify-center mb-4">
-                  <span className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">SaharaRealTech</span>
+                  <SaharaLogo size="small" />
                 </div>
                 <div className="flex flex-col gap-4">
                   <Link href="/" className="px-4 py-2 hover:bg-pink-100/50 rounded-md text-gray-700">

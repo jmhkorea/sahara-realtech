@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 export default function Hero() {
   const { t } = useTranslation();
   const [mounted, setMounted] = useState(false);
-  const heroImageUrl = '/attached_assets/image_1746530349804.png';
+  const heroImageUrl = '/attached_assets/latest_hero.jpeg';
 
   useEffect(() => {
     setMounted(true);
