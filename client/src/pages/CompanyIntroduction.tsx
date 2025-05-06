@@ -480,23 +480,7 @@ export default function CompanyIntroduction() {
                               
                               {!maltaImage2Url && (
                                 <div className="mt-4">
-                                  <input
-                                    type="file"
-                                    ref={maltaImage2InputRef}
-                                    className="hidden"
-                                    accept="image/*"
-                                    onChange={handleMaltaImage2Upload}
-                                  />
-                                  <Button
-                                    variant="outline"
-                                    size="sm"
-                                    className="w-full"
-                                    onClick={() => maltaImage2InputRef.current?.click()}
-                                    disabled={isUploading}
-                                  >
-                                    {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
-                                    {isUploading ? "" : "이미지 2 추가하기"}
-                                  </Button>
+                                  {/* 이미지 업로드 버튼 제거됨 */}
                                 </div>
                               )}
                             </div>
@@ -547,23 +531,7 @@ export default function CompanyIntroduction() {
                             
                             {!koreaImage2Url && (
                               <div className="mt-4">
-                                <input
-                                  type="file"
-                                  ref={koreaImage2InputRef}
-                                  className="hidden"
-                                  accept="image/*"
-                                  onChange={handleKoreaImage2Upload}
-                                />
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  className="w-full"
-                                  onClick={() => koreaImage2InputRef.current?.click()}
-                                  disabled={isUploading}
-                                >
-                                  {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
-                                  {isUploading ? "" : "이미지 2 추가하기"}
-                                </Button>
+                                {/* 이미지 업로드 버튼 제거됨 */}
                               </div>
                             )}
                           </div>
