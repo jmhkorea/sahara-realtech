@@ -37,6 +37,7 @@ import InvestmentProcessPage from "@/pages/InvestmentProcessPage";
 import SystemAuthPage from "@/pages/SystemAuthPage";
 import ChatWidget from "@/components/ui/ChatWidget";
 import { AdminLoginPanel } from "@/components/ui/AdminLoginPanel";
+import KimiyiAIChat from "@/components/KimiyiAIChat";
 
 import "./lib/i18n";
 
@@ -98,6 +99,7 @@ function App() {
             <Toaster />
             <Router />
             <AdminLoginPanel />
+            <KimiyiAIChat />
           </KimiyiAIProvider>
         </AdminProvider>
       </QueryClientProvider>
