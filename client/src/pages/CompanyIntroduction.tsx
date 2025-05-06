@@ -23,6 +23,7 @@ import globalEventAfrica from "@/assets/global-event-africa.png";
 import awardInnovation from "@/assets/award-innovation.jpg";
 import awardPatent from "@/assets/award-patent.jpg";
 import awardCto from "@/assets/award-cto.jpg";
+import saharaBackground from "@/assets/sahara-background.png";
 
 export default function CompanyIntroduction() {
   const [isCtgInfoOpen, setIsCtgInfoOpen] = useState(false);
@@ -302,10 +303,13 @@ export default function CompanyIntroduction() {
                 </div>
               </div>
             ) : (
-              <>
-                <h1 className="text-3xl md:text-4xl font-bold mb-4">사하라 리얼테크 소개</h1>
-                <p className="text-lg opacity-90 mb-4">실물자산 디지털화를 선도하는 글로벌 블록체인 전문 기업</p>
-                <div className="flex justify-center mt-4">
+              <div className="relative">
+                <img 
+                  src={saharaBackground} 
+                  alt="사하라 리얼테크 로고" 
+                  className="w-full max-h-80 object-cover"
+                />
+                <div className="absolute bottom-4 right-4">
                   <input
                     type="file"
                     ref={companyLogoInputRef}
@@ -315,16 +319,16 @@ export default function CompanyIntroduction() {
                   />
                   <Button
                     variant="outline"
-                    size="md"
-                    className="bg-white text-blue-900 hover:bg-gray-100"
+                    size="sm"
+                    className="bg-white bg-opacity-70 hover:bg-white"
                     onClick={() => companyLogoInputRef.current?.click()}
                     disabled={isUploading}
                   >
-                    {isUploading ? "업로드 중..." : <Upload size={18} className="mr-2" />}
-                    {isUploading ? "업로드 중..." : "회사 로고 업로드하기"}
+                    {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
+                    {isUploading ? "" : "로고 변경"}
                   </Button>
                 </div>
-              </>
+              </div>
             )}
           </div>
           
@@ -426,23 +430,7 @@ export default function CompanyIntroduction() {
                               
                               {!usaImage2Url && (
                                 <div className="mt-4">
-                                  <input
-                                    type="file"
-                                    ref={usaImage2InputRef}
-                                    className="hidden"
-                                    accept="image/*"
-                                    onChange={handleUsaImage2Upload}
-                                  />
-                                  <Button
-                                    variant="outline"
-                                    size="sm"
-                                    className="w-full"
-                                    onClick={() => usaImage2InputRef.current?.click()}
-                                    disabled={isUploading}
-                                  >
-                                    {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
-                                    {isUploading ? "" : "이미지 2 추가하기"}
-                                  </Button>
+                                  {/* 이미지 업로드 버튼 제거됨 */}
                                 </div>
                               )}
                             </div>
