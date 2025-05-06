@@ -1,17 +1,69 @@
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { useEffect, useState } from "react";
-import heroImage from "../assets/image_1746507427028.png";
+import { useEffect, useState, useRef, ChangeEvent } from "react";
+import { Loader2 } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
+import axios from "axios";
+
+// 기본 히어로 이미지 URL (기본 이미지가 필요 없어지므로 삭제됨)
 
 export default function Hero() {
   const { t } = useTranslation();
   const [mounted, setMounted] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [heroImageUrl, setHeroImageUrl] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setMounted(true);
+    
+    // 로컬 스토리지에서 저장된 이미지 URL 가져오기
+    const savedImageUrl = localStorage.getItem('heroImageUrl');
+    if (savedImageUrl) {
+      setHeroImageUrl(savedImageUrl);
+    }
+    
     return () => setMounted(false);
   }, []);
+
+  const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    const file = files[0];
+    const formData = new FormData();
+    formData.append('heroImage', file);
+
+    setUploading(true);
+
+    try {
+      const response = await axios.post('/api/hero/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+
+      if (response.data.success) {
+        // 업로드 성공 시 이미지 URL 저장
+        setHeroImageUrl(response.data.filePath);
+        localStorage.setItem('heroImageUrl', response.data.filePath);
+        toast({
+          title: "이미지 업로드 성공",
+          description: "히어로 이미지가 성공적으로 업로드되었습니다.",
+        });
+      }
+    } catch (error) {
+      console.error('이미지 업로드 에러:', error);
+      toast({
+        variant: "destructive",
+        title: "이미지 업로드 실패",
+        description: "이미지 업로드 중 오류가 발생했습니다. 다시 시도해주세요.",
+      });
+    } finally {
+      setUploading(false);
+    }
+  };
 
   return (
     <div className="relative overflow-hidden">
@@ -19,11 +71,40 @@ export default function Hero() {
       <div className="w-full bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900">
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-          <img 
-            src={heroImage} 
-            alt="블록체인 기반 부동산 투자" 
-            className="w-full object-cover h-[320px] md:h-[400px] lg:h-[480px] opacity-90"
-          />
+          {heroImageUrl ? (
+            <img 
+              src={heroImageUrl} 
+              alt="블록체인 기반 부동산 투자" 
+              className="w-full object-cover h-[320px] md:h-[400px] lg:h-[480px] opacity-90"
+            />
+          ) : (
+            <div className="flex flex-col items-center justify-center w-full h-[320px] md:h-[400px] lg:h-[480px]">
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleImageUpload}
+                accept="image/*"
+                className="hidden"
+              />
+              <Button
+                onClick={() => fileInputRef.current?.click()}
+                disabled={uploading}
+                className="bg-gradient-to-r from-pink-500 to-purple-500 text-white hover:from-pink-600 hover:to-purple-600"
+              >
+                {uploading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    이미지 업로드 중...
+                  </>
+                ) : (
+                  "히어로 이미지 업로드"
+                )}
+              </Button>
+              <p className="mt-2 text-white/80 text-sm">
+                배너 이미지를 업로드하세요 (1920x480 권장)
+              </p>
+            </div>
+          )}
           <div className="absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-pink-50 to-transparent z-20"></div>
         </div>
       </div>

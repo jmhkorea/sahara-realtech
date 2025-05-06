@@ -109,6 +109,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
+  // 히어로 이미지 업로드 API
+  app.post('/api/hero/upload', upload.single('heroImage'), async (req: Request, res: Response) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ message: '이미지가 업로드되지 않았습니다.' });
+      }
+      
+      // 파일 경로를 클라이언트에 반환
+      const filePath = `/uploads/${req.file.filename}`;
+      
+      res.status(200).json({ 
+        success: true,
+        filePath: filePath,
+        message: '히어로 이미지가 성공적으로 업로드되었습니다.' 
+      });
+    } catch (error) {
+      console.error('히어로 이미지 업로드 에러:', error);
+      res.status(500).json({ 
+        success: false,
+        message: '히어로 이미지 업로드 중 오류가 발생했습니다.' 
+      });
+    }
+  });
+  
   // Properties
   app.get('/api/properties', async (req: Request, res: Response) => {
     try {
