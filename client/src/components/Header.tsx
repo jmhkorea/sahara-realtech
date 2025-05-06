@@ -89,9 +89,15 @@ export default function Header() {
             <Link href="/team" className="font-medium text-gray-700 hover:text-pink-600 transition-colors">
               {t('nav.team', '팀')}
             </Link>
-            <Link href="/feedback" className="font-medium text-gray-700 hover:text-pink-600 transition-colors">
-              {t('nav.feedback', '피드백')}
-            </Link>
+            <a 
+              href="https://digitalhuman.kimiyi.ai/?id=4Eyoo5HGb3kT2xspOUjfeIP_h8z-nOs0eBplAhWaIEGgXYDE648u8HGF0rCo7_qUHR4x8l3vI0qsMj8KNwxyRw2" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="font-medium text-gray-700 hover:text-pink-600 transition-colors flex items-center whitespace-nowrap"
+            >
+              <Code className="h-4 w-4 mr-1 text-pink-500" />
+              AI 어시스턴트
+            </a>
             <Link href="/team-workspace" className="font-medium text-gray-700 hover:text-pink-600 transition-colors flex items-center whitespace-nowrap">
               <FolderGit className="h-4 w-4 mr-1 text-rose-500" />
               워크스페이스
@@ -192,9 +198,15 @@ export default function Header() {
                   <Link href="/team" className="px-4 py-2 hover:bg-pink-100/50 rounded-md text-gray-700">
                     {t('nav.team')}
                   </Link>
-                  <Link href="/feedback" className="px-4 py-2 hover:bg-pink-100/50 rounded-md text-gray-700">
-                    {t('nav.feedback', '피드백')}
-                  </Link>
+                  <a 
+                    href="https://digitalhuman.kimiyi.ai/?id=4Eyoo5HGb3kT2xspOUjfeIP_h8z-nOs0eBplAhWaIEGgXYDE648u8HGF0rCo7_qUHR4x8l3vI0qsMj8KNwxyRw2" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="px-4 py-2 hover:bg-pink-100/50 rounded-md flex items-center text-gray-700"
+                  >
+                    <Code className="h-4 w-4 mr-2 text-pink-500" />
+                    AI 어시스턴트
+                  </a>
                   <Link href="/team-workspace" className="px-4 py-2 hover:bg-pink-100/50 rounded-md flex items-center text-gray-700">
                     <FolderGit className="h-4 w-4 mr-2 text-rose-500" />
                     팀 워크스페이스
