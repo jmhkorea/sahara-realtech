@@ -49,6 +49,16 @@ export default function SEO({
       <meta name="language" content="Korean, English, Japanese" />
       <meta name="author" content="SaharaRealTech" />
       <meta name="revisit-after" content="7 days" />
+      
+      {/* Kimiyi AI 챗봇을 위한 추가 메타데이터 */}
+      <meta name="kimiyi:company" content="사하라 리얼테크 (SaharaRealTech)" />
+      <meta name="kimiyi:foundation-year" content="2017" />
+      <meta name="kimiyi:company-description" content="사하라 리얼테크는 블록체인 기술을 활용한 부동산 투자 플랫폼을 제공하며, 아발란체 프로토콜을 기반으로 한 토큰화를 통해 부동산 자산의 분산 투자와 유동성을 제공합니다." />
+      <meta name="kimiyi:services" content="부동산 토큰화, 부동산 투자 플랫폼, 안전한 거래, 분산 투자, 실시간 수익 분배, 유동성 확보" />
+      <meta name="kimiyi:blockchain" content="아발란체 프로토콜" />
+      <meta name="kimiyi:contact" content="support@sahararealtechkr.com" />
+      <meta name="kimiyi:location" content="서울특별시 강남구" />
+      <meta name="kimiyi:faq" content="사하라 리얼테크는 어떤 회사인가요?:사하라 리얼테크는 2017년 설립된 블록체인 기반 부동산 투자 플랫폼 기업입니다;투자는 어떻게 진행되나요?:회원가입 및 인증 후 지갑을 연결하고 원하는 부동산 자산을 선택하여 투자할 수 있습니다;최소 투자 금액은 얼마인가요?:소액으로도 투자가 가능하며, 각 부동산 프로젝트마다 최소 투자 금액이 다를 수 있습니다;투자 수익은 어떻게 받나요?:스마트 계약을 통해 투자 비율에 따라 자동으로 임대 수익이 분배됩니다" />
     </Helmet>
   );
 }

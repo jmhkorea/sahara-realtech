@@ -10,6 +10,7 @@ import InvestmentGuide from "@/components/InvestmentGuide";
 import FeatureCards from "@/components/FeatureCards";
 import FoundationSection from "@/components/FoundationSection";
 import InvestmentProcess from "@/components/InvestmentProcess";
+import KimiyiAIChat from "@/components/KimiyiAIChat";
 import SEO from "@/components/SEO";
 import { useTranslation } from "react-i18next";
 
@@ -56,6 +57,7 @@ export default function Home() {
       <FinancialAnalytics />
       <FAQ />
       <Newsletter />
+      <KimiyiAIChat position="right-bottom" />
     </>
   );
 }
