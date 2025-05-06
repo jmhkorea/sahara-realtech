@@ -35,24 +35,47 @@ export default function CompanyIntroduction() {
   const [isUsaOpen, setIsUsaOpen] = useState(false);
   
   // 이미지 상태 관리
-  const [maltaImageUrl, setMaltaImageUrl] = useState<string>(() => {
+  const [maltaImage1Url, setMaltaImage1Url] = useState<string>(() => {
     // 로컬 스토리지에서 이미지 URL을 가져오거나 기본 이미지 사용
-    const savedImage = localStorage.getItem('maltaFoundationImage');
+    const savedImage = localStorage.getItem('maltaFoundationImage1');
     return savedImage || '/images/malta-foundation.png';
   });
   
-  const [usaImageUrl, setUsaImageUrl] = useState<string>(() => {
+  const [maltaImage2Url, setMaltaImage2Url] = useState<string>(() => {
+    const savedImage = localStorage.getItem('maltaFoundationImage2');
+    return savedImage || '';
+  });
+  
+  const [usaImage1Url, setUsaImage1Url] = useState<string>(() => {
     // 로컬 스토리지에서 이미지 URL을 가져오거나 기본 이미지 사용
-    const savedImage = localStorage.getItem('usaHeadquartersImage');
+    const savedImage = localStorage.getItem('usaHeadquartersImage1');
     return savedImage || '/images/usa-headquarters.png';
   });
   
-  const [isUploading, setIsUploading] = useState(false);
-  const maltaImageInputRef = useRef<HTMLInputElement>(null);
-  const usaImageInputRef = useRef<HTMLInputElement>(null);
+  const [usaImage2Url, setUsaImage2Url] = useState<string>(() => {
+    const savedImage = localStorage.getItem('usaHeadquartersImage2');
+    return savedImage || '';
+  });
   
-  // 이미지 업로드 처리 함수
-  const handleMaltaImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
+  const [koreaImage1Url, setKoreaImage1Url] = useState<string>(() => {
+    // 이미 존재하는 한컴위드 이미지
+    return hancomAgreement;
+  });
+  
+  const [koreaImage2Url, setKoreaImage2Url] = useState<string>(() => {
+    const savedImage = localStorage.getItem('koreaOfficeImage2');
+    return savedImage || '';
+  });
+  
+  const [isUploading, setIsUploading] = useState(false);
+  const maltaImage1InputRef = useRef<HTMLInputElement>(null);
+  const maltaImage2InputRef = useRef<HTMLInputElement>(null);
+  const usaImage1InputRef = useRef<HTMLInputElement>(null);
+  const usaImage2InputRef = useRef<HTMLInputElement>(null);
+  const koreaImage2InputRef = useRef<HTMLInputElement>(null);
+  
+  // 이미지 업로드 처리 함수들
+  const handleMaltaImage1Upload = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
     
@@ -62,14 +85,45 @@ export default function CompanyIntroduction() {
     try {
       // 파일 URL 생성 (브라우저 메모리에 임시 저장)
       const imageUrl = URL.createObjectURL(file);
-      setMaltaImageUrl(imageUrl);
+      setMaltaImage1Url(imageUrl);
       
       // 로컬 스토리지에 저장 (새로고침해도 유지)
-      localStorage.setItem('maltaFoundationImage', imageUrl);
+      localStorage.setItem('maltaFoundationImage1', imageUrl);
       
       toast({
         title: "이미지 업로드 성공",
-        description: "몰타 공화국 재단 이미지가 변경되었습니다.",
+        description: "몰타 공화국 재단 이미지 1이 변경되었습니다.",
+      });
+    } catch (error) {
+      console.error('이미지 업로드 오류:', error);
+      toast({
+        variant: "destructive",
+        title: "이미지 업로드 실패",
+        description: "이미지 업로드 중 오류가 발생했습니다. 다시 시도해주세요.",
+      });
+    } finally {
+      setIsUploading(false);
+    }
+  };
+  
+  const handleMaltaImage2Upload = (e: ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+    
+    const file = files[0];
+    setIsUploading(true);
+    
+    try {
+      // 파일 URL 생성 (브라우저 메모리에 임시 저장)
+      const imageUrl = URL.createObjectURL(file);
+      setMaltaImage2Url(imageUrl);
+      
+      // 로컬 스토리지에 저장 (새로고침해도 유지)
+      localStorage.setItem('maltaFoundationImage2', imageUrl);
+      
+      toast({
+        title: "이미지 업로드 성공",
+        description: "몰타 공화국 재단 이미지 2가 변경되었습니다.",
       });
     } catch (error) {
       console.error('이미지 업로드 오류:', error);
@@ -84,7 +138,7 @@ export default function CompanyIntroduction() {
   };
   
   // 미국 본사 이미지 업로드 처리 함수
-  const handleUsaImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleUsaImage1Upload = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
     
@@ -94,14 +148,77 @@ export default function CompanyIntroduction() {
     try {
       // 파일 URL 생성 (브라우저 메모리에 임시 저장)
       const imageUrl = URL.createObjectURL(file);
-      setUsaImageUrl(imageUrl);
+      setUsaImage1Url(imageUrl);
       
       // 로컬 스토리지에 저장 (새로고침해도 유지)
-      localStorage.setItem('usaHeadquartersImage', imageUrl);
+      localStorage.setItem('usaHeadquartersImage1', imageUrl);
       
       toast({
         title: "이미지 업로드 성공",
-        description: "미국 본사 이미지가 변경되었습니다.",
+        description: "미국 본사 이미지 1이 변경되었습니다.",
+      });
+    } catch (error) {
+      console.error('이미지 업로드 오류:', error);
+      toast({
+        variant: "destructive",
+        title: "이미지 업로드 실패",
+        description: "이미지 업로드 중 오류가 발생했습니다. 다시 시도해주세요.",
+      });
+    } finally {
+      setIsUploading(false);
+    }
+  };
+  
+  const handleUsaImage2Upload = (e: ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+    
+    const file = files[0];
+    setIsUploading(true);
+    
+    try {
+      // 파일 URL 생성 (브라우저 메모리에 임시 저장)
+      const imageUrl = URL.createObjectURL(file);
+      setUsaImage2Url(imageUrl);
+      
+      // 로컬 스토리지에 저장 (새로고침해도 유지)
+      localStorage.setItem('usaHeadquartersImage2', imageUrl);
+      
+      toast({
+        title: "이미지 업로드 성공",
+        description: "미국 본사 이미지 2가 변경되었습니다.",
+      });
+    } catch (error) {
+      console.error('이미지 업로드 오류:', error);
+      toast({
+        variant: "destructive",
+        title: "이미지 업로드 실패",
+        description: "이미지 업로드 중 오류가 발생했습니다. 다시 시도해주세요.",
+      });
+    } finally {
+      setIsUploading(false);
+    }
+  };
+  
+  // 한국 지사 이미지 업로드 처리 함수
+  const handleKoreaImage2Upload = (e: ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+    
+    const file = files[0];
+    setIsUploading(true);
+    
+    try {
+      // 파일 URL 생성 (브라우저 메모리에 임시 저장)
+      const imageUrl = URL.createObjectURL(file);
+      setKoreaImage2Url(imageUrl);
+      
+      // 로컬 스토리지에 저장 (새로고침해도 유지)
+      localStorage.setItem('koreaOfficeImage2', imageUrl);
+      
+      toast({
+        title: "이미지 업로드 성공",
+        description: "한국 지사 이미지 2가 변경되었습니다.",
       });
     } catch (error) {
       console.error('이미지 업로드 오류:', error);
@@ -217,29 +334,80 @@ export default function CompanyIntroduction() {
                             </p>
                             <div className="relative mt-2 rounded overflow-hidden border border-gray-200">
                               <img 
-                                src={usaImageUrl} 
+                                src={usaImage1Url} 
                                 alt="미국 본사" 
                                 className="w-full h-auto"
                               />
                               <div className="absolute bottom-0 right-0 p-2">
                                 <input
                                   type="file"
-                                  ref={usaImageInputRef}
+                                  ref={usaImage1InputRef}
                                   className="hidden"
                                   accept="image/*"
-                                  onChange={handleUsaImageUpload}
+                                  onChange={handleUsaImage1Upload}
                                 />
                                 <Button
                                   variant="outline"
                                   size="sm"
                                   className="bg-white bg-opacity-70 hover:bg-white"
-                                  onClick={() => usaImageInputRef.current?.click()}
+                                  onClick={() => usaImage1InputRef.current?.click()}
                                   disabled={isUploading}
                                 >
                                   {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
-                                  {isUploading ? "" : "이미지 변경"}
+                                  {isUploading ? "" : "이미지 1 변경"}
                                 </Button>
                               </div>
+                              
+                              {usaImage2Url && (
+                                <div className="relative mt-4 rounded overflow-hidden border border-gray-200">
+                                  <img 
+                                    src={usaImage2Url} 
+                                    alt="미국 본사 추가 이미지" 
+                                    className="w-full h-auto"
+                                  />
+                                  <div className="absolute bottom-0 right-0 p-2">
+                                    <input
+                                      type="file"
+                                      ref={usaImage2InputRef}
+                                      className="hidden"
+                                      accept="image/*"
+                                      onChange={handleUsaImage2Upload}
+                                    />
+                                    <Button
+                                      variant="outline"
+                                      size="sm"
+                                      className="bg-white bg-opacity-70 hover:bg-white"
+                                      onClick={() => usaImage2InputRef.current?.click()}
+                                      disabled={isUploading}
+                                    >
+                                      {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
+                                      {isUploading ? "" : "이미지 2 변경"}
+                                    </Button>
+                                  </div>
+                                </div>
+                              )}
+                              
+                              {!usaImage2Url && (
+                                <div className="mt-4">
+                                  <input
+                                    type="file"
+                                    ref={usaImage2InputRef}
+                                    className="hidden"
+                                    accept="image/*"
+                                    onChange={handleUsaImage2Upload}
+                                  />
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="w-full"
+                                    onClick={() => usaImage2InputRef.current?.click()}
+                                    disabled={isUploading}
+                                  >
+                                    {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
+                                    {isUploading ? "" : "이미지 2 추가하기"}
+                                  </Button>
+                                </div>
+                              )}
                             </div>
                           </div>
                         </CollapsibleContent>
@@ -268,29 +436,80 @@ export default function CompanyIntroduction() {
                             </p>
                             <div className="relative mt-2 rounded overflow-hidden border border-gray-200">
                               <img 
-                                src={maltaImageUrl} 
+                                src={maltaImage1Url} 
                                 alt="몰타 재단" 
                                 className="w-full h-auto"
                               />
                               <div className="absolute bottom-0 right-0 p-2">
                                 <input
                                   type="file"
-                                  ref={maltaImageInputRef}
+                                  ref={maltaImage1InputRef}
                                   className="hidden"
                                   accept="image/*"
-                                  onChange={handleMaltaImageUpload}
+                                  onChange={handleMaltaImage1Upload}
                                 />
                                 <Button
                                   variant="outline"
                                   size="sm"
                                   className="bg-white bg-opacity-70 hover:bg-white"
-                                  onClick={() => maltaImageInputRef.current?.click()}
+                                  onClick={() => maltaImage1InputRef.current?.click()}
                                   disabled={isUploading}
                                 >
                                   {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
-                                  {isUploading ? "" : "이미지 변경"}
+                                  {isUploading ? "" : "이미지 1 변경"}
                                 </Button>
                               </div>
+                              
+                              {maltaImage2Url && (
+                                <div className="relative mt-4 rounded overflow-hidden border border-gray-200">
+                                  <img 
+                                    src={maltaImage2Url} 
+                                    alt="몰타 재단 추가 이미지" 
+                                    className="w-full h-auto"
+                                  />
+                                  <div className="absolute bottom-0 right-0 p-2">
+                                    <input
+                                      type="file"
+                                      ref={maltaImage2InputRef}
+                                      className="hidden"
+                                      accept="image/*"
+                                      onChange={handleMaltaImage2Upload}
+                                    />
+                                    <Button
+                                      variant="outline"
+                                      size="sm"
+                                      className="bg-white bg-opacity-70 hover:bg-white"
+                                      onClick={() => maltaImage2InputRef.current?.click()}
+                                      disabled={isUploading}
+                                    >
+                                      {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
+                                      {isUploading ? "" : "이미지 2 변경"}
+                                    </Button>
+                                  </div>
+                                </div>
+                              )}
+                              
+                              {!maltaImage2Url && (
+                                <div className="mt-4">
+                                  <input
+                                    type="file"
+                                    ref={maltaImage2InputRef}
+                                    className="hidden"
+                                    accept="image/*"
+                                    onChange={handleMaltaImage2Upload}
+                                  />
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="w-full"
+                                    onClick={() => maltaImage2InputRef.current?.click()}
+                                    disabled={isUploading}
+                                  >
+                                    {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
+                                    {isUploading ? "" : "이미지 2 추가하기"}
+                                  </Button>
+                                </div>
+                              )}
                             </div>
                           </div>
                         </CollapsibleContent>
@@ -319,12 +538,63 @@ export default function CompanyIntroduction() {
                             </p>
                             <div className="mt-2 rounded overflow-hidden border border-gray-200">
                               <img 
-                                src={hancomAgreement} 
+                                src={koreaImage1Url} 
                                 alt="한글과 컴퓨터 한컴위드와 디지털 부동산을 위한 협약식" 
                                 className="w-full h-auto"
                               />
                               <p className="text-xs text-center py-1 bg-gray-100">한글과 컴퓨터 한컴위드와 디지털 부동산을 위한 협약식</p>
                             </div>
+                            
+                            {koreaImage2Url && (
+                              <div className="relative mt-4 rounded overflow-hidden border border-gray-200">
+                                <img 
+                                  src={koreaImage2Url} 
+                                  alt="한국 지사 추가 이미지" 
+                                  className="w-full h-auto"
+                                />
+                                <div className="absolute bottom-0 right-0 p-2">
+                                  <input
+                                    type="file"
+                                    ref={koreaImage2InputRef}
+                                    className="hidden"
+                                    accept="image/*"
+                                    onChange={handleKoreaImage2Upload}
+                                  />
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="bg-white bg-opacity-70 hover:bg-white"
+                                    onClick={() => koreaImage2InputRef.current?.click()}
+                                    disabled={isUploading}
+                                  >
+                                    {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
+                                    {isUploading ? "" : "이미지 2 변경"}
+                                  </Button>
+                                </div>
+                              </div>
+                            )}
+                            
+                            {!koreaImage2Url && (
+                              <div className="mt-4">
+                                <input
+                                  type="file"
+                                  ref={koreaImage2InputRef}
+                                  className="hidden"
+                                  accept="image/*"
+                                  onChange={handleKoreaImage2Upload}
+                                />
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  className="w-full"
+                                  onClick={() => koreaImage2InputRef.current?.click()}
+                                  disabled={isUploading}
+                                >
+                                  {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
+                                  {isUploading ? "" : "이미지 2 추가하기"}
+                                </Button>
+                              </div>
+                            )}
                           </div>
                         </CollapsibleContent>
                       </CardContent>
