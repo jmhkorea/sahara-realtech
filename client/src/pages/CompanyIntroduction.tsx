@@ -338,25 +338,28 @@ export default function CompanyIntroduction() {
                                 alt="미국 본사" 
                                 className="w-full h-auto"
                               />
-                              <div className="absolute bottom-0 right-0 p-2">
-                                <input
-                                  type="file"
-                                  ref={usaImage1InputRef}
-                                  className="hidden"
-                                  accept="image/*"
-                                  onChange={handleUsaImage1Upload}
-                                />
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  className="bg-white bg-opacity-70 hover:bg-white"
-                                  onClick={() => usaImage1InputRef.current?.click()}
-                                  disabled={isUploading}
-                                >
-                                  {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
-                                  {isUploading ? "" : "이미지 1 변경"}
-                                </Button>
-                              </div>
+                              {/* 관리자용 업로드 버튼 */}
+                              {false && (
+                                <div className="absolute bottom-0 right-0 p-2">
+                                  <input
+                                    type="file"
+                                    ref={usaImage1InputRef}
+                                    className="hidden"
+                                    accept="image/*"
+                                    onChange={handleUsaImage1Upload}
+                                  />
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="bg-white bg-opacity-70 hover:bg-white"
+                                    onClick={() => usaImage1InputRef.current?.click()}
+                                    disabled={isUploading}
+                                  >
+                                    {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
+                                    {isUploading ? "" : "이미지 1 변경"}
+                                  </Button>
+                                </div>
+                              )}
                               
                               {usaImage2Url && (
                                 <div className="relative mt-4 rounded overflow-hidden border border-gray-200">
@@ -365,25 +368,28 @@ export default function CompanyIntroduction() {
                                     alt="미국 본사 추가 이미지" 
                                     className="w-full h-auto"
                                   />
-                                  <div className="absolute bottom-0 right-0 p-2">
-                                    <input
-                                      type="file"
-                                      ref={usaImage2InputRef}
-                                      className="hidden"
-                                      accept="image/*"
-                                      onChange={handleUsaImage2Upload}
-                                    />
-                                    <Button
-                                      variant="outline"
-                                      size="sm"
-                                      className="bg-white bg-opacity-70 hover:bg-white"
-                                      onClick={() => usaImage2InputRef.current?.click()}
-                                      disabled={isUploading}
-                                    >
-                                      {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
-                                      {isUploading ? "" : "이미지 2 변경"}
-                                    </Button>
-                                  </div>
+                                  {/* 관리자용 업로드 버튼 */}
+                                  {false && (
+                                    <div className="absolute bottom-0 right-0 p-2">
+                                      <input
+                                        type="file"
+                                        ref={usaImage2InputRef}
+                                        className="hidden"
+                                        accept="image/*"
+                                        onChange={handleUsaImage2Upload}
+                                      />
+                                      <Button
+                                        variant="outline"
+                                        size="sm"
+                                        className="bg-white bg-opacity-70 hover:bg-white"
+                                        onClick={() => usaImage2InputRef.current?.click()}
+                                        disabled={isUploading}
+                                      >
+                                        {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
+                                        {isUploading ? "" : "이미지 2 변경"}
+                                      </Button>
+                                    </div>
+                                  )}
                                 </div>
                               )}
                               
@@ -440,25 +446,28 @@ export default function CompanyIntroduction() {
                                 alt="몰타 재단" 
                                 className="w-full h-auto"
                               />
-                              <div className="absolute bottom-0 right-0 p-2">
-                                <input
-                                  type="file"
-                                  ref={maltaImage1InputRef}
-                                  className="hidden"
-                                  accept="image/*"
-                                  onChange={handleMaltaImage1Upload}
-                                />
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  className="bg-white bg-opacity-70 hover:bg-white"
-                                  onClick={() => maltaImage1InputRef.current?.click()}
-                                  disabled={isUploading}
-                                >
-                                  {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
-                                  {isUploading ? "" : "이미지 1 변경"}
-                                </Button>
-                              </div>
+                              {/* 관리자용 업로드 버튼 */}
+                              {false && (
+                                <div className="absolute bottom-0 right-0 p-2">
+                                  <input
+                                    type="file"
+                                    ref={maltaImage1InputRef}
+                                    className="hidden"
+                                    accept="image/*"
+                                    onChange={handleMaltaImage1Upload}
+                                  />
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="bg-white bg-opacity-70 hover:bg-white"
+                                    onClick={() => maltaImage1InputRef.current?.click()}
+                                    disabled={isUploading}
+                                  >
+                                    {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
+                                    {isUploading ? "" : "이미지 1 변경"}
+                                  </Button>
+                                </div>
+                              )}
                               
                               {maltaImage2Url && (
                                 <div className="relative mt-4 rounded overflow-hidden border border-gray-200">
@@ -467,25 +476,28 @@ export default function CompanyIntroduction() {
                                     alt="몰타 재단 추가 이미지" 
                                     className="w-full h-auto"
                                   />
-                                  <div className="absolute bottom-0 right-0 p-2">
-                                    <input
-                                      type="file"
-                                      ref={maltaImage2InputRef}
-                                      className="hidden"
-                                      accept="image/*"
-                                      onChange={handleMaltaImage2Upload}
-                                    />
-                                    <Button
-                                      variant="outline"
-                                      size="sm"
-                                      className="bg-white bg-opacity-70 hover:bg-white"
-                                      onClick={() => maltaImage2InputRef.current?.click()}
-                                      disabled={isUploading}
-                                    >
-                                      {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
-                                      {isUploading ? "" : "이미지 2 변경"}
-                                    </Button>
-                                  </div>
+                                  {/* 관리자용 업로드 버튼 */}
+                                  {false && (
+                                    <div className="absolute bottom-0 right-0 p-2">
+                                      <input
+                                        type="file"
+                                        ref={maltaImage2InputRef}
+                                        className="hidden"
+                                        accept="image/*"
+                                        onChange={handleMaltaImage2Upload}
+                                      />
+                                      <Button
+                                        variant="outline"
+                                        size="sm"
+                                        className="bg-white bg-opacity-70 hover:bg-white"
+                                        onClick={() => maltaImage2InputRef.current?.click()}
+                                        disabled={isUploading}
+                                      >
+                                        {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
+                                        {isUploading ? "" : "이미지 2 변경"}
+                                      </Button>
+                                    </div>
+                                  )}
                                 </div>
                               )}
                               
@@ -552,25 +564,28 @@ export default function CompanyIntroduction() {
                                   alt="한국 지사 추가 이미지" 
                                   className="w-full h-auto"
                                 />
-                                <div className="absolute bottom-0 right-0 p-2">
-                                  <input
-                                    type="file"
-                                    ref={koreaImage2InputRef}
-                                    className="hidden"
-                                    accept="image/*"
-                                    onChange={handleKoreaImage2Upload}
-                                  />
-                                  <Button
-                                    variant="outline"
-                                    size="sm"
-                                    className="bg-white bg-opacity-70 hover:bg-white"
-                                    onClick={() => koreaImage2InputRef.current?.click()}
-                                    disabled={isUploading}
-                                  >
-                                    {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
-                                    {isUploading ? "" : "이미지 2 변경"}
-                                  </Button>
-                                </div>
+                                {/* 관리자용 업로드 버튼 */}
+                                {false && (
+                                  <div className="absolute bottom-0 right-0 p-2">
+                                    <input
+                                      type="file"
+                                      ref={koreaImage2InputRef}
+                                      className="hidden"
+                                      accept="image/*"
+                                      onChange={handleKoreaImage2Upload}
+                                    />
+                                    <Button
+                                      variant="outline"
+                                      size="sm"
+                                      className="bg-white bg-opacity-70 hover:bg-white"
+                                      onClick={() => koreaImage2InputRef.current?.click()}
+                                      disabled={isUploading}
+                                    >
+                                      {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
+                                      {isUploading ? "" : "이미지 2 변경"}
+                                    </Button>
+                                  </div>
+                                )}
                               </div>
                             )}
                             
