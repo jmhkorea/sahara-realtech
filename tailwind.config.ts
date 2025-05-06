@@ -79,10 +79,44 @@ export default {
             height: "0",
           },
         },
+        "cherry-blossom-fall": {
+          "0%": {
+            transform: "translateY(0) rotate(0deg)",
+            opacity: "0.8",
+          },
+          "50%": {
+            transform: "translateX(100px) rotate(180deg)",
+            opacity: "0.6",
+          },
+          "100%": {
+            transform: "translateY(1000px) translateX(-100px) rotate(360deg)",
+            opacity: "0",
+          },
+        },
+        "cherry-blossom-fall-2": {
+          "0%": {
+            transform: "translateY(0) rotate(0deg) scale(1)",
+            opacity: "0.9",
+          },
+          "30%": {
+            transform: "translateX(-80px) rotate(-90deg) scale(0.9)",
+            opacity: "0.7",
+          },
+          "60%": {
+            transform: "translateX(60px) rotate(90deg) scale(0.8)",
+            opacity: "0.5",
+          },
+          "100%": {
+            transform: "translateY(1000px) translateX(80px) rotate(360deg) scale(0.5)",
+            opacity: "0",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "cherry-blossom-fall": "cherry-blossom-fall 10s ease-in-out forwards",
+        "cherry-blossom-fall-2": "cherry-blossom-fall-2 15s ease-in-out forwards",
       },
     },
   },
