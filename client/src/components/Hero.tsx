@@ -2,17 +2,15 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { useEffect, useState, useRef, ChangeEvent } from "react";
-import { Loader2 } from "lucide-react";
+import { Loader2, Upload } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import axios from "axios";
-
-// 기본 히어로 이미지 URL (기본 이미지가 필요 없어지므로 삭제됨)
 
 export default function Hero() {
   const { t } = useTranslation();
   const [mounted, setMounted] = useState(false);
   const [uploading, setUploading] = useState(false);
-  const [heroImageUrl, setHeroImageUrl] = useState<string | null>(null);
+  const [heroImageUrl, setHeroImageUrl] = useState<string>('/images/hero-banner.png');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -27,42 +25,31 @@ export default function Hero() {
     return () => setMounted(false);
   }, []);
 
+  // 이미지 선택 함수
+  const handleSelectImage = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  // 이미지 업로드 처리 함수
   const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
 
     const file = files[0];
-    const formData = new FormData();
-    formData.append('heroImage', file);
-
-    setUploading(true);
-
-    try {
-      const response = await axios.post('/api/hero/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
-
-      if (response.data.success) {
-        // 업로드 성공 시 이미지 URL 저장
-        setHeroImageUrl(response.data.filePath);
-        localStorage.setItem('heroImageUrl', response.data.filePath);
-        toast({
-          title: "이미지 업로드 성공",
-          description: "히어로 이미지가 성공적으로 업로드되었습니다.",
-        });
-      }
-    } catch (error) {
-      console.error('이미지 업로드 에러:', error);
-      toast({
-        variant: "destructive",
-        title: "이미지 업로드 실패",
-        description: "이미지 업로드 중 오류가 발생했습니다. 다시 시도해주세요.",
-      });
-    } finally {
-      setUploading(false);
-    }
+    
+    // 파일 URL 생성
+    const imageUrl = URL.createObjectURL(file);
+    setHeroImageUrl(imageUrl);
+    
+    // 로컬 스토리지에 저장
+    localStorage.setItem('heroImageUrl', imageUrl);
+    
+    toast({
+      title: "이미지 업로드 성공",
+      description: "히어로 이미지가 성공적으로 적용되었습니다.",
+    });
   };
 
   return (
@@ -71,14 +58,15 @@ export default function Hero() {
       <div className="w-full bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900">
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-          {heroImageUrl ? (
+          <div className="relative">
             <img 
               src={heroImageUrl} 
               alt="블록체인 기반 부동산 투자" 
               className="w-full object-cover h-[320px] md:h-[400px] lg:h-[480px] opacity-90"
             />
-          ) : (
-            <div className="flex flex-col items-center justify-center w-full h-[320px] md:h-[400px] lg:h-[480px]">
+            
+            {/* 이미지 우측 하단에 업로드 버튼 배치 */}
+            <div className="absolute bottom-4 right-4 z-30">
               <input
                 type="file"
                 ref={fileInputRef}
@@ -87,24 +75,15 @@ export default function Hero() {
                 className="hidden"
               />
               <Button
-                onClick={() => fileInputRef.current?.click()}
-                disabled={uploading}
-                className="bg-gradient-to-r from-pink-500 to-purple-500 text-white hover:from-pink-600 hover:to-purple-600"
+                onClick={handleSelectImage}
+                size="sm"
+                className="bg-white/80 backdrop-blur-sm text-pink-600 hover:bg-white border border-pink-200 shadow-md"
               >
-                {uploading ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    이미지 업로드 중...
-                  </>
-                ) : (
-                  "히어로 이미지 업로드"
-                )}
+                <Upload className="h-4 w-4 mr-1" />
+                이미지 변경
               </Button>
-              <p className="mt-2 text-white/80 text-sm">
-                배너 이미지를 업로드하세요 (1920x480 권장)
-              </p>
             </div>
-          )}
+          </div>
           <div className="absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-pink-50 to-transparent z-20"></div>
         </div>
       </div>
