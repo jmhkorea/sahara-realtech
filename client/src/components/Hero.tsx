@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 export default function Hero() {
   const { t } = useTranslation();
   const [mounted, setMounted] = useState(false);
-  const heroImageUrl = '/attached_assets/latest_hero.jpeg';
+  const heroImageUrl = '/attached_assets/image_1746530349804.png';
 
   useEffect(() => {
     setMounted(true);
@@ -20,11 +20,12 @@ export default function Hero() {
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
           <div className="relative">
-            <div className="relative">
+            <div className="relative overflow-hidden">
               <img 
                 src={heroImageUrl} 
-                alt="블록체인 기반 부동산 투자" 
-                className="w-full object-cover h-[320px] md:h-[400px] lg:h-[480px]"
+                alt="블록체인 기반 부동산 투자"
+                className="w-full object-cover h-[320px] md:h-[400px] lg:h-[480px] object-position-y-[20%]"
+                style={{ objectPosition: '0 20%' }}
               />
               
               {/* 이미지에 이미 텍스트가 있으므로 추가 텍스트 제거 */}
