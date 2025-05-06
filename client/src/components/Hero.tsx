@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { useEffect, useState } from "react";
+import heroImage from "../assets/image_1746507427028.png";
 
 export default function Hero() {
   const { t } = useTranslation();
@@ -19,7 +20,7 @@ export default function Hero() {
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
           <img 
-            src="/hero-image.jpeg" 
+            src={heroImage} 
             alt="블록체인 기반 부동산 투자" 
             className="w-full object-cover h-[320px] md:h-[400px] lg:h-[480px] opacity-90"
           />
