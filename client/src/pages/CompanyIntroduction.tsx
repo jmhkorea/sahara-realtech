@@ -564,28 +564,25 @@ export default function CompanyIntroduction() {
                                   alt="한국 지사 추가 이미지" 
                                   className="w-full h-auto"
                                 />
-                                {/* 관리자용 업로드 버튼 */}
-                                {false && (
-                                  <div className="absolute bottom-0 right-0 p-2">
-                                    <input
-                                      type="file"
-                                      ref={koreaImage2InputRef}
-                                      className="hidden"
-                                      accept="image/*"
-                                      onChange={handleKoreaImage2Upload}
-                                    />
-                                    <Button
-                                      variant="outline"
-                                      size="sm"
-                                      className="bg-white bg-opacity-70 hover:bg-white"
-                                      onClick={() => koreaImage2InputRef.current?.click()}
-                                      disabled={isUploading}
-                                    >
-                                      {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
-                                      {isUploading ? "" : "이미지 2 변경"}
-                                    </Button>
-                                  </div>
-                                )}
+                                <div className="absolute bottom-0 right-0 p-2">
+                                  <input
+                                    type="file"
+                                    ref={koreaImage2InputRef}
+                                    className="hidden"
+                                    accept="image/*"
+                                    onChange={handleKoreaImage2Upload}
+                                  />
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="bg-white bg-opacity-70 hover:bg-white"
+                                    onClick={() => koreaImage2InputRef.current?.click()}
+                                    disabled={isUploading}
+                                  >
+                                    {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
+                                    {isUploading ? "" : "이미지 2 변경"}
+                                  </Button>
+                                </div>
                               </div>
                             )}
                             
