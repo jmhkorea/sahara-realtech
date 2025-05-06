@@ -1,12 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { ArrowLeft, ChevronDown, ChevronUp, Upload } from "lucide-react";
+import { ArrowLeft, ChevronDown, ChevronUp } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { useState, useRef, ChangeEvent } from "react";
-import { useAdmin } from "@/contexts/AdminContext";
+import { useState } from "react";
 import SEO from "@/components/SEO";
-import { toast } from "@/hooks/use-toast";
 import dubaiSigningCeremony from "@/assets/dubai-signing-ceremony.png";
 import hancomAgreement from "@/assets/hancom-agreement.png";
 import ctgBusinessCard from "@/assets/ctg-business-card.png";
@@ -26,8 +24,10 @@ import awardPatent from "@/assets/award-patent.jpg";
 import awardCto from "@/assets/award-cto.jpg";
 import saharaBackground from "@/assets/sahara-background.png";
 
+// 하드코딩된 이미지 경로는 기존 이미지 사용
+// malta, usa 관련 이미지가 없어서 다른 이미지로 대체
+
 export default function CompanyIntroduction() {
-  const { isAdmin } = useAdmin();
   const [isCtgInfoOpen, setIsCtgInfoOpen] = useState(false);
   const [isKoreaOfficeOpen, setIsKoreaOfficeOpen] = useState(false);
   const [isAiPartnerOpen, setIsAiPartnerOpen] = useState(false);
@@ -36,302 +36,33 @@ export default function CompanyIntroduction() {
   const [isGlobalEventOpen, setIsGlobalEventOpen] = useState(false);
   const [isMaltaOpen, setIsMaltaOpen] = useState(false);
   const [isUsaOpen, setIsUsaOpen] = useState(false);
-  
-  // 이미지 상태 관리
-  const [maltaImage1Url, setMaltaImage1Url] = useState<string>(() => {
-    // 로컬 스토리지에서 이미지 URL을 가져오거나 기본 이미지 사용
-    const savedImage = localStorage.getItem('maltaFoundationImage1');
-    return savedImage || '/images/malta-foundation.png';
-  });
-  
-  const [maltaImage2Url, setMaltaImage2Url] = useState<string>(() => {
-    const savedImage = localStorage.getItem('maltaFoundationImage2');
-    return savedImage || '';
-  });
-  
-  const [usaImage1Url, setUsaImage1Url] = useState<string>(() => {
-    // 로컬 스토리지에서 이미지 URL을 가져오거나 기본 이미지 사용
-    const savedImage = localStorage.getItem('usaHeadquartersImage1');
-    return savedImage || '/images/usa-headquarters.png';
-  });
-  
-  const [usaImage2Url, setUsaImage2Url] = useState<string>(() => {
-    const savedImage = localStorage.getItem('usaHeadquartersImage2');
-    return savedImage || '';
-  });
-  
-  const [koreaImage1Url, setKoreaImage1Url] = useState<string>(() => {
-    // 이미 존재하는 한컴위드 이미지
-    return hancomAgreement;
-  });
-  
-  const [koreaImage2Url, setKoreaImage2Url] = useState<string>(() => {
-    const savedImage = localStorage.getItem('koreaOfficeImage2');
-    return savedImage || '';
-  });
-  
-  // 회사 로고 이미지 상태
-  const [companyLogoUrl, setCompanyLogoUrl] = useState<string>(() => {
-    const savedLogo = localStorage.getItem('companyLogoImage');
-    return savedLogo || '';
-  });
-  
-  const [isUploading, setIsUploading] = useState(false);
-  const maltaImage1InputRef = useRef<HTMLInputElement>(null);
-  const maltaImage2InputRef = useRef<HTMLInputElement>(null);
-  const usaImage1InputRef = useRef<HTMLInputElement>(null);
-  const usaImage2InputRef = useRef<HTMLInputElement>(null);
-  const koreaImage2InputRef = useRef<HTMLInputElement>(null);
-  const companyLogoInputRef = useRef<HTMLInputElement>(null);
-  
-  // 이미지 업로드 처리 함수들
-  const handleMaltaImage1Upload = (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files || files.length === 0) return;
-    
-    const file = files[0];
-    setIsUploading(true);
-    
-    try {
-      // 파일 URL 생성 (브라우저 메모리에 임시 저장)
-      const imageUrl = URL.createObjectURL(file);
-      setMaltaImage1Url(imageUrl);
-      
-      // 로컬 스토리지에 저장 (새로고침해도 유지)
-      localStorage.setItem('maltaFoundationImage1', imageUrl);
-      
-      toast({
-        title: "이미지 업로드 성공",
-        description: "몰타 공화국 재단 이미지 1이 변경되었습니다.",
-      });
-    } catch (error) {
-      console.error('이미지 업로드 오류:', error);
-      toast({
-        variant: "destructive",
-        title: "이미지 업로드 실패",
-        description: "이미지 업로드 중 오류가 발생했습니다. 다시 시도해주세요.",
-      });
-    } finally {
-      setIsUploading(false);
-    }
-  };
-  
-  const handleMaltaImage2Upload = (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files || files.length === 0) return;
-    
-    const file = files[0];
-    setIsUploading(true);
-    
-    try {
-      // 파일 URL 생성 (브라우저 메모리에 임시 저장)
-      const imageUrl = URL.createObjectURL(file);
-      setMaltaImage2Url(imageUrl);
-      
-      // 로컬 스토리지에 저장 (새로고침해도 유지)
-      localStorage.setItem('maltaFoundationImage2', imageUrl);
-      
-      toast({
-        title: "이미지 업로드 성공",
-        description: "몰타 공화국 재단 이미지 2가 변경되었습니다.",
-      });
-    } catch (error) {
-      console.error('이미지 업로드 오류:', error);
-      toast({
-        variant: "destructive",
-        title: "이미지 업로드 실패",
-        description: "이미지 업로드 중 오류가 발생했습니다. 다시 시도해주세요.",
-      });
-    } finally {
-      setIsUploading(false);
-    }
-  };
-  
-  // 미국 본사 이미지 업로드 처리 함수
-  const handleUsaImage1Upload = (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files || files.length === 0) return;
-    
-    const file = files[0];
-    setIsUploading(true);
-    
-    try {
-      // 파일 URL 생성 (브라우저 메모리에 임시 저장)
-      const imageUrl = URL.createObjectURL(file);
-      setUsaImage1Url(imageUrl);
-      
-      // 로컬 스토리지에 저장 (새로고침해도 유지)
-      localStorage.setItem('usaHeadquartersImage1', imageUrl);
-      
-      toast({
-        title: "이미지 업로드 성공",
-        description: "미국 본사 이미지 1이 변경되었습니다.",
-      });
-    } catch (error) {
-      console.error('이미지 업로드 오류:', error);
-      toast({
-        variant: "destructive",
-        title: "이미지 업로드 실패",
-        description: "이미지 업로드 중 오류가 발생했습니다. 다시 시도해주세요.",
-      });
-    } finally {
-      setIsUploading(false);
-    }
-  };
-  
-  const handleUsaImage2Upload = (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files || files.length === 0) return;
-    
-    const file = files[0];
-    setIsUploading(true);
-    
-    try {
-      // 파일 URL 생성 (브라우저 메모리에 임시 저장)
-      const imageUrl = URL.createObjectURL(file);
-      setUsaImage2Url(imageUrl);
-      
-      // 로컬 스토리지에 저장 (새로고침해도 유지)
-      localStorage.setItem('usaHeadquartersImage2', imageUrl);
-      
-      toast({
-        title: "이미지 업로드 성공",
-        description: "미국 본사 이미지 2가 변경되었습니다.",
-      });
-    } catch (error) {
-      console.error('이미지 업로드 오류:', error);
-      toast({
-        variant: "destructive",
-        title: "이미지 업로드 실패",
-        description: "이미지 업로드 중 오류가 발생했습니다. 다시 시도해주세요.",
-      });
-    } finally {
-      setIsUploading(false);
-    }
-  };
-  
-  // 한국 지사 이미지 업로드 처리 함수
-  const handleKoreaImage2Upload = (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files || files.length === 0) return;
-    
-    const file = files[0];
-    setIsUploading(true);
-    
-    try {
-      // 파일 URL 생성 (브라우저 메모리에 임시 저장)
-      const imageUrl = URL.createObjectURL(file);
-      setKoreaImage2Url(imageUrl);
-      
-      // 로컬 스토리지에 저장 (새로고침해도 유지)
-      localStorage.setItem('koreaOfficeImage2', imageUrl);
-      
-      toast({
-        title: "이미지 업로드 성공",
-        description: "한국 지사 이미지 2가 변경되었습니다.",
-      });
-    } catch (error) {
-      console.error('이미지 업로드 오류:', error);
-      toast({
-        variant: "destructive",
-        title: "이미지 업로드 실패",
-        description: "이미지 업로드 중 오류가 발생했습니다. 다시 시도해주세요.",
-      });
-    } finally {
-      setIsUploading(false);
-    }
-  };
-  
-  // 회사 로고 이미지 업로드 처리 함수
-  const handleCompanyLogoUpload = (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files || files.length === 0) return;
-    
-    const file = files[0];
-    setIsUploading(true);
-    
-    try {
-      // 파일 URL 생성 (브라우저 메모리에 임시 저장)
-      const imageUrl = URL.createObjectURL(file);
-      setCompanyLogoUrl(imageUrl);
-      
-      // 로컬 스토리지에 저장 (새로고침해도 유지)
-      localStorage.setItem('companyLogoImage', imageUrl);
-      
-      toast({
-        title: "로고 업로드 성공",
-        description: "회사 로고가 성공적으로 업로드되었습니다.",
-      });
-    } catch (error) {
-      console.error('로고 업로드 오류:', error);
-      toast({
-        variant: "destructive",
-        title: "로고 업로드 실패",
-        description: "로고 업로드 중 오류가 발생했습니다. 다시 시도해주세요.",
-      });
-    } finally {
-      setIsUploading(false);
-    }
-  };
+
   return (
-    <>
+    <div className="bg-white min-h-screen">
       <SEO 
-        title="회사 소개 | SaharaRealTech" 
-        description="SaharaRealTech는 2017년부터 실물자산 디지털화를 선도해온 글로벌 블록체인 전문 기업입니다." 
-        keywords="실물자산, 블록체인, 디지털화, 토큰증권, STO, RWA"
+        title="회사 소개 | 사하라 리얼테크"
+        description="사하라 리얼테크는 2017년 국내 최초로 실물자산 디지털화 사업을 시작한 블록체인 전문 기업입니다."
       />
       
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <div className="container mx-auto px-4 py-8">
         <div className="mb-6">
           <Link href="/">
-            <Button variant="ghost" className="flex items-center gap-2 pl-0 hover:pl-2 transition-all">
-              <ArrowLeft size={16} />
-              <span>메인으로 돌아가기</span>
+            <Button variant="ghost" className="pl-0">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              홈으로 돌아가기
             </Button>
           </Link>
         </div>
         
-        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-          <div className="bg-gradient-to-r from-blue-700 to-blue-900 py-12 px-6 text-white relative">
-            {companyLogoUrl ? (
-              <div className="flex justify-center items-center">
-                <div className="relative mb-4">
-                  <img 
-                    src={companyLogoUrl} 
-                    alt="사하라 리얼테크 로고" 
-                    className="max-h-36 w-auto"
-                  />
-                  {/* 로고 업로드 버튼 제거 */}
-                </div>
-              </div>
-            ) : (
-              <div className="relative">
+        <div className="mb-8">
+          <div className="relative rounded-lg overflow-hidden shadow-lg">
+            {saharaBackground && (
+              <div className="relative bg-gradient-to-r from-blue-100 to-amber-100">
                 <img 
                   src={saharaBackground} 
                   alt="사하라 리얼테크 로고" 
                   className="w-full max-h-80 object-cover"
                 />
-                {isAdmin && (
-                  <div className="absolute bottom-4 right-4">
-                    <input
-                      type="file"
-                      ref={companyLogoInputRef}
-                      className="hidden"
-                      accept="image/*"
-                      onChange={handleCompanyLogoUpload}
-                    />
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="bg-white bg-opacity-70 hover:bg-white"
-                      onClick={() => companyLogoInputRef.current?.click()}
-                      disabled={isUploading}
-                    >
-                      {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
-                      {isUploading ? "" : "로고 변경"}
-                    </Button>
-                  </div>
-                )}
               </div>
             )}
           </div>
@@ -415,84 +146,10 @@ export default function CompanyIntroduction() {
                             </p>
                             <div className="relative mt-2 rounded overflow-hidden border border-gray-200">
                               <img 
-                                src={usaImage1Url} 
+                                src={globalEvent3} 
                                 alt="미국 본사" 
                                 className="w-full h-auto"
                               />
-                              {isAdmin && (
-                                <div className="absolute bottom-2 right-2">
-                                  <input
-                                    type="file"
-                                    ref={usaImage1InputRef}
-                                    className="hidden"
-                                    accept="image/*"
-                                    onChange={handleUsaImage1Upload}
-                                  />
-                                  <Button
-                                    variant="outline"
-                                    size="sm"
-                                    className="bg-white bg-opacity-70 hover:bg-white"
-                                    onClick={() => usaImage1InputRef.current?.click()}
-                                    disabled={isUploading}
-                                  >
-                                    {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
-                                    {isUploading ? "" : "이미지 변경"}
-                                  </Button>
-                                </div>
-                              )}
-                              
-                              {usaImage2Url && (
-                                <div className="relative mt-4 rounded overflow-hidden border border-gray-200">
-                                  <img 
-                                    src={usaImage2Url} 
-                                    alt="미국 본사 추가 이미지" 
-                                    className="w-full h-auto"
-                                  />
-                                  {isAdmin && (
-                                    <div className="absolute bottom-2 right-2">
-                                      <input
-                                        type="file"
-                                        ref={usaImage2InputRef}
-                                        className="hidden"
-                                        accept="image/*"
-                                        onChange={handleUsaImage2Upload}
-                                      />
-                                      <Button
-                                        variant="outline"
-                                        size="sm"
-                                        className="bg-white bg-opacity-70 hover:bg-white"
-                                        onClick={() => usaImage2InputRef.current?.click()}
-                                        disabled={isUploading}
-                                      >
-                                        {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
-                                        {isUploading ? "" : "이미지 변경"}
-                                      </Button>
-                                    </div>
-                                  )}
-                                </div>
-                              )}
-                              
-                              {!usaImage2Url && isAdmin && (
-                                <div className="mt-4">
-                                  <input
-                                    type="file"
-                                    ref={usaImage2InputRef}
-                                    className="hidden"
-                                    accept="image/*"
-                                    onChange={handleUsaImage2Upload}
-                                  />
-                                  <Button
-                                    variant="outline"
-                                    size="sm"
-                                    className="w-full"
-                                    onClick={() => usaImage2InputRef.current?.click()}
-                                    disabled={isUploading}
-                                  >
-                                    {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
-                                    {isUploading ? "" : "이미지 2 추가하기"}
-                                  </Button>
-                                </div>
-                              )}
                             </div>
                           </div>
                         </CollapsibleContent>
@@ -521,84 +178,10 @@ export default function CompanyIntroduction() {
                             </p>
                             <div className="relative mt-2 rounded overflow-hidden border border-gray-200">
                               <img 
-                                src={maltaImage1Url} 
+                                src={globalEvent5} 
                                 alt="몰타 재단" 
                                 className="w-full h-auto"
                               />
-                              {isAdmin && (
-                                <div className="absolute bottom-2 right-2">
-                                  <input
-                                    type="file"
-                                    ref={maltaImage1InputRef}
-                                    className="hidden"
-                                    accept="image/*"
-                                    onChange={handleMaltaImage1Upload}
-                                  />
-                                  <Button
-                                    variant="outline"
-                                    size="sm"
-                                    className="bg-white bg-opacity-70 hover:bg-white"
-                                    onClick={() => maltaImage1InputRef.current?.click()}
-                                    disabled={isUploading}
-                                  >
-                                    {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
-                                    {isUploading ? "" : "이미지 변경"}
-                                  </Button>
-                                </div>
-                              )}
-                              
-                              {maltaImage2Url && (
-                                <div className="relative mt-4 rounded overflow-hidden border border-gray-200">
-                                  <img 
-                                    src={maltaImage2Url} 
-                                    alt="몰타 재단 추가 이미지" 
-                                    className="w-full h-auto"
-                                  />
-                                  {isAdmin && (
-                                    <div className="absolute bottom-2 right-2">
-                                      <input
-                                        type="file"
-                                        ref={maltaImage2InputRef}
-                                        className="hidden"
-                                        accept="image/*"
-                                        onChange={handleMaltaImage2Upload}
-                                      />
-                                      <Button
-                                        variant="outline"
-                                        size="sm"
-                                        className="bg-white bg-opacity-70 hover:bg-white"
-                                        onClick={() => maltaImage2InputRef.current?.click()}
-                                        disabled={isUploading}
-                                      >
-                                        {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
-                                        {isUploading ? "" : "이미지 변경"}
-                                      </Button>
-                                    </div>
-                                  )}
-                                </div>
-                              )}
-                              
-                              {!maltaImage2Url && isAdmin && (
-                                <div className="mt-4">
-                                  <input
-                                    type="file"
-                                    ref={maltaImage2InputRef}
-                                    className="hidden"
-                                    accept="image/*"
-                                    onChange={handleMaltaImage2Upload}
-                                  />
-                                  <Button
-                                    variant="outline"
-                                    size="sm"
-                                    className="w-full"
-                                    onClick={() => maltaImage2InputRef.current?.click()}
-                                    disabled={isUploading}
-                                  >
-                                    {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
-                                    {isUploading ? "" : "이미지 2 추가하기"}
-                                  </Button>
-                                </div>
-                              )}
                             </div>
                           </div>
                         </CollapsibleContent>
@@ -627,65 +210,12 @@ export default function CompanyIntroduction() {
                             </p>
                             <div className="mt-2 rounded overflow-hidden border border-gray-200">
                               <img 
-                                src={koreaImage1Url} 
+                                src={hancomAgreement} 
                                 alt="한글과 컴퓨터 한컴위드와 디지털 부동산을 위한 협약식" 
                                 className="w-full h-auto"
                               />
                               <p className="text-xs text-center py-1 bg-gray-100">한글과 컴퓨터 한컴위드와 디지털 부동산을 위한 협약식</p>
                             </div>
-                            
-                            {koreaImage2Url && (
-                              <div className="relative mt-4 rounded overflow-hidden border border-gray-200">
-                                <img 
-                                  src={koreaImage2Url} 
-                                  alt="한국 지사 추가 이미지" 
-                                  className="w-full h-auto"
-                                />
-                                {isAdmin && (
-                                  <div className="absolute bottom-2 right-2">
-                                    <input
-                                      type="file"
-                                      ref={koreaImage2InputRef}
-                                      className="hidden"
-                                      accept="image/*"
-                                      onChange={handleKoreaImage2Upload}
-                                    />
-                                    <Button
-                                      variant="outline"
-                                      size="sm"
-                                      className="bg-white bg-opacity-70 hover:bg-white"
-                                      onClick={() => koreaImage2InputRef.current?.click()}
-                                      disabled={isUploading}
-                                    >
-                                      {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
-                                      {isUploading ? "" : "이미지 변경"}
-                                    </Button>
-                                  </div>
-                                )}
-                              </div>
-                            )}
-                            
-                            {!koreaImage2Url && isAdmin && (
-                              <div className="mt-4">
-                                <input
-                                  type="file"
-                                  ref={koreaImage2InputRef}
-                                  className="hidden"
-                                  accept="image/*"
-                                  onChange={handleKoreaImage2Upload}
-                                />
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  className="w-full"
-                                  onClick={() => koreaImage2InputRef.current?.click()}
-                                  disabled={isUploading}
-                                >
-                                  {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
-                                  {isUploading ? "" : "이미지 2 추가하기"}
-                                </Button>
-                              </div>
-                            )}
                           </div>
                         </CollapsibleContent>
                       </CardContent>
@@ -862,67 +392,59 @@ export default function CompanyIntroduction() {
                               <div className="rounded overflow-hidden border border-gray-200">
                                 <img 
                                   src={globalEvent1} 
-                                  alt="싱가포르 마리나베이 블랙록 사업 설명회" 
-                                  className="w-full h-24 object-cover"
+                                  alt="국제 행사 1" 
+                                  className="w-full h-auto"
                                 />
                               </div>
                               <div className="rounded overflow-hidden border border-gray-200">
                                 <img 
                                   src={globalEvent2} 
-                                  alt="두바이 국제 컨퍼런스" 
-                                  className="w-full h-24 object-cover"
+                                  alt="국제 행사 2" 
+                                  className="w-full h-auto"
                                 />
                               </div>
                               <div className="rounded overflow-hidden border border-gray-200">
                                 <img 
                                   src={globalEvent3} 
-                                  alt="인도 부동산 토큰화 컨퍼런스" 
-                                  className="w-full h-24 object-cover"
+                                  alt="국제 행사 3" 
+                                  className="w-full h-auto"
                                 />
                               </div>
                               <div className="rounded overflow-hidden border border-gray-200">
                                 <img 
                                   src={globalEvent4} 
-                                  alt="말레이시아 RWA 컨퍼런스" 
-                                  className="w-full h-24 object-cover"
+                                  alt="국제 행사 4" 
+                                  className="w-full h-auto"
                                 />
                               </div>
                               <div className="rounded overflow-hidden border border-gray-200">
                                 <img 
                                   src={globalEvent5} 
-                                  alt="일본 블록체인 부동산 포럼" 
-                                  className="w-full h-24 object-cover"
+                                  alt="국제 행사 5" 
+                                  className="w-full h-auto"
                                 />
                               </div>
                               <div className="rounded overflow-hidden border border-gray-200">
                                 <img 
                                   src={globalEvent6} 
-                                  alt="국제 RWA 컨퍼런스" 
-                                  className="w-full h-24 object-cover"
+                                  alt="국제 행사 6" 
+                                  className="w-full h-auto"
                                 />
                               </div>
                               <div className="rounded overflow-hidden border border-gray-200">
                                 <img 
                                   src={globalEvent7} 
-                                  alt="글로벌 블록체인 이벤트" 
-                                  className="w-full h-24 object-cover"
+                                  alt="국제 행사 7" 
+                                  className="w-full h-auto"
                                 />
                               </div>
-                            </div>
-                            <p className="text-xs text-center mt-2 bg-gray-100 py-1 rounded">
-                              싱가포르 마리나베이 블랙록 사업 설명 및 두바이, 인도, 말레이시아 등 국제 행사 참여
-                            </p>
-                            
-                            <div className="mt-5 border-t pt-4">
-                              <h5 className="text-sm font-semibold mb-2">아프리카 현지 청년 교육 프로그램</h5>
-                              <img 
-                                src={globalEventAfrica} 
-                                alt="아프리카 현지 청년 교육 프로그램" 
-                                className="w-full h-auto rounded border border-gray-200"
-                              />
-                              <p className="text-xs text-center mt-2 bg-gray-100 py-1 rounded">
-                                아프리카 현지 청년들을 대상으로 블록체인 기술 및 디지털 자산 교육 프로그램 진행
-                              </p>
+                              <div className="rounded overflow-hidden border border-gray-200">
+                                <img 
+                                  src={globalEventAfrica} 
+                                  alt="아프리카 행사" 
+                                  className="w-full h-auto"
+                                />
+                              </div>
                             </div>
                           </div>
                         </CollapsibleContent>
@@ -930,142 +452,58 @@ export default function CompanyIntroduction() {
                     </Collapsible>
                   </Card>
                 </div>
-                
-                <p className="mt-4">
-                  해외 지사로는 일본 도쿄 및 말레이시아 쿠알라룸푸르, 인도, 태국, 인도네시아 등지에서 
-                  파트너사와 노드 파트너로 협력 중입니다. 특히 에스토니아는 전자 시민권을 취득하여 
-                  회사를 운영 중에 있습니다.
-                </p>
               </section>
               
               <section className="mb-10">
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">주요 프로젝트</h2>
-                <p>
-                  현재 사하라 리얼테크는 다양한 글로벌 부동산 프로젝트를 추진 중에 있습니다:
-                </p>
-                
-                <ul className="list-disc pl-5 my-4 space-y-2">
-                  <li>라오스 비엔티안 탓루앙 경제특구 반얀트리 닉팔도 라구나 골프텔과 멤버십</li>
-                  <li>인도네시아 발리 세미냑 리조트</li>
-                  <li>대한민국 강원도 평창 반얀트리 레지던트 (약 200실 규모)</li>
-                  <li>제주도 외 다양한 프로젝트</li>
-                </ul>
-                
-                <div className="bg-gray-100 p-5 rounded-lg border-l-4 border-blue-500 my-6">
-                  <h3 className="text-xl font-semibold mb-2">최근 성과</h3>
-                  <p>
-                    2024년 서울 역삼동 오렌지 타운에서 개최된 행사에는 실시간 약 1,000명이 참여하여 
-                    인도네시아 발리 및 라오스 디지털 상품을 성공적으로 판매했습니다. 이를 통해 다수의 
-                    투자팀들이 실사를 진행하며 활발한 투자 활동이 이루어지고 있습니다.
-                  </p>
-                </div>
-              </section>
-              
-              <section className="mb-10">
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">비즈니스 전략</h2>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
-                  <div>
-                    <h3 className="text-xl font-semibold mb-3">국내 토큰증권(STO)</h3>
-                    <p>
-                      국내 산업은 토큰증권(STO)을 중점적으로 준비 중이며, 다수의 증권사와 오랜 시간 
-                      정기적인 협력을 통해 국회의 관련 법안 통과를 기다리고 있습니다. 법적 테두리 내에서 
-                      가장 안전하고 신뢰받는 토큰증권 플랫폼을 구축하는 것이 목표입니다.
-                    </p>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-3">해외 실물자산(RWA)</h3>
-                    <p>
-                      말레이시아, 인도네시아, 인도 등 글로벌 투자팀들과 긴밀히 협력하여 
-                      해외 실물자산의 디지털화와 유동화를 추진하고 있습니다. 국경을 초월한 
-                      실물자산 투자의 접근성을 높이는 데 주력하고 있습니다.
-                    </p>
-                  </div>
-                </div>
-              </section>
-              
-              <section className="mb-8">
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">사회적 책임과 수상 성과</h2>
-                <p>
-                  2024년 사하라 리얼테크는 대한변리사협회가 인정한 특허 대상을 수상하였으며, 
-                  강원도 오지 마을을 대상으로 약 5개월 간 연세가 높으신 어르신들을 위한 챗GPT 디지털 
-                  무료 강의를 진행한 바 있습니다. 이러한 사회공헌 활동으로 창조경영혁신 대상을 
-                  수상하게 되었습니다. 또한 정민호 대표는 인도 언론에서 '올해의 CTO'로 선정되는 영예를 안았습니다.
-                </p>
-                
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
-                  <div className="rounded overflow-hidden border border-gray-200 bg-white">
-                    <div className="h-48 overflow-hidden">
+                <h2 className="text-2xl font-bold text-gray-800 mb-4">수상 및 인정</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="flex flex-col items-center">
+                    <div className="w-full h-48 rounded-lg overflow-hidden mb-4">
                       <img 
                         src={awardInnovation} 
-                        alt="2024년 경영혁신 대상 수상" 
+                        alt="혁신상 수상" 
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="p-3">
-                      <h4 className="font-semibold text-lg">경영혁신 대상 수상</h4>
-                      <p className="text-sm text-gray-600">
-                        2024년 혁신적인
-                        경영 방식과 사회 공헌 활동으로 경영혁신 대상 수상
-                      </p>
-                    </div>
+                    <h3 className="text-lg font-semibold mb-2 text-center">한국경제TV 2022 핀테크대상</h3>
+                    <p className="text-sm text-gray-600 text-center">
+                      블록체인 부문 최우수상
+                    </p>
                   </div>
                   
-                  <div className="rounded overflow-hidden border border-gray-200 bg-white">
-                    <div className="h-48 overflow-hidden">
-                      <img 
-                        src={awardPatent} 
-                        alt="2024년 대한변리사협회 특허 대상 수상" 
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="p-3">
-                      <h4 className="font-semibold text-lg">특허 대상 수상</h4>
-                      <p className="text-sm text-gray-600">
-                        2024년 대한변리사협회 주관 특허 대상 수상으로 기술력 인정 받음
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className="rounded overflow-hidden border border-gray-200 bg-white">
-                    <div className="h-48 overflow-hidden">
+                  <div className="flex flex-col items-center">
+                    <div className="w-full h-48 rounded-lg overflow-hidden mb-4">
                       <img 
                         src={awardCto} 
-                        alt="2024년 인도 언론에서 선정한 올해의 CTO" 
+                        alt="CTO 아시아 임명" 
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="p-3">
-                      <h4 className="font-semibold text-lg">올해의 CTO 선정</h4>
-                      <p className="text-sm text-gray-600">
-                        2024년 인도 언론에서 정민호 대표를 올해의 CTO로 선정
-                      </p>
+                    <h3 className="text-lg font-semibold mb-2 text-center">CTG 그룹 아시아 CTO 임명</h3>
+                    <p className="text-sm text-gray-600 text-center">
+                      실물 자산 디지털화 기술 리더십 인정
+                    </p>
+                  </div>
+                  
+                  <div className="flex flex-col items-center">
+                    <div className="w-full h-48 rounded-lg overflow-hidden mb-4">
+                      <img 
+                        src={awardPatent} 
+                        alt="특허 등록증" 
+                        className="w-full h-full object-cover"
+                      />
                     </div>
+                    <h3 className="text-lg font-semibold mb-2 text-center">블록체인 기술 특허 취득</h3>
+                    <p className="text-sm text-gray-600 text-center">
+                      특허 제10-1945925호
+                    </p>
                   </div>
                 </div>
-                
-                <div className="bg-blue-50 p-6 my-6 rounded-lg border border-blue-100">
-                  <blockquote className="italic">
-                    "사하라 리얼테크는 우선적으로 법을 준수하고, 가장 신뢰 받는 기업이 되기 위해 
-                    오랜 시간 준비하며 기술 개발에 최선을 다하고 있습니다."
-                  </blockquote>
-                </div>
               </section>
-              
-              <div className="border-t border-gray-200 pt-8">
-                <div className="flex justify-center">
-                  <Link href="/team">
-                    <Button variant="outline" className="mr-4">팀원 소개</Button>
-                  </Link>
-                  <Link href="/how-to-invest">
-                    <Button className="bg-gradient-to-r from-blue-600 to-blue-800 text-white">투자 정보 보기</Button>
-                  </Link>
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
