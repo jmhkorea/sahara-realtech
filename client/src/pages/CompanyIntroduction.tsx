@@ -5,27 +5,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { useState } from "react";
 import SEO from "@/components/SEO";
-import dubaiSigningCeremony from "@/assets/dubai-signing-ceremony.png";
-import hancomAgreement from "@/assets/hancom-agreement.png";
-import ctgBusinessCard from "@/assets/ctg-business-card.png";
-import kimiyiAi from "@/assets/kimiyi-ai.jpg";
-import seniorAiKiosk from "@/assets/senior-ai-kiosk.png";
-import esportMeeting from "@/assets/esport-meeting.jpg";
-import globalEvent1 from "@/assets/global-event-1.jpg";
-import globalEvent2 from "@/assets/global-event-2.jpg";
-import globalEvent3 from "@/assets/global-event-3.jpg";
-import globalEvent4 from "@/assets/global-event-4.jpg";
-import globalEvent5 from "@/assets/global-event-5.jpg";
-import globalEvent6 from "@/assets/global-event-6.jpg";
-import globalEvent7 from "@/assets/global-event-7.jpg";
-import globalEventAfrica from "@/assets/global-event-africa.png";
-import awardInnovation from "@/assets/award-innovation.jpg";
-import awardPatent from "@/assets/award-patent.jpg";
-import awardCto from "@/assets/award-cto.jpg";
-import saharaBackground from "@/assets/sahara-background.png";
-
-// 하드코딩된 이미지 경로는 기존 이미지 사용
-// malta, usa 관련 이미지가 없어서 다른 이미지로 대체
 
 export default function CompanyIntroduction() {
   const [isCtgInfoOpen, setIsCtgInfoOpen] = useState(false);
@@ -56,15 +35,13 @@ export default function CompanyIntroduction() {
         
         <div className="mb-8">
           <div className="relative rounded-lg overflow-hidden shadow-lg">
-            {saharaBackground && (
-              <div className="relative bg-gradient-to-r from-blue-100 to-amber-100">
-                <img 
-                  src={saharaBackground} 
-                  alt="사하라 리얼테크 로고" 
-                  className="w-full max-h-80 object-cover"
-                />
-              </div>
-            )}
+            <div className="relative bg-gradient-to-r from-blue-100 to-amber-100">
+              <img 
+                src="/images/sahara-background.png" 
+                alt="사하라 리얼테크 로고" 
+                className="w-full max-h-80 object-cover"
+              />
+            </div>
           </div>
           
           <div className="p-6 md:p-8">
@@ -101,7 +78,7 @@ export default function CompanyIntroduction() {
               <section className="mb-6">
                 <div className="rounded-lg overflow-hidden shadow-lg mb-6">
                   <img 
-                    src={dubaiSigningCeremony} 
+                    src="/images/dubai-signing-ceremony.png" 
                     alt="두바이 계약 체결식 - 사하라 리얼테크와 KHOORY & PARK LLC" 
                     className="w-full object-cover" 
                   />
@@ -146,7 +123,7 @@ export default function CompanyIntroduction() {
                             </p>
                             <div className="relative mt-2 rounded overflow-hidden border border-gray-200">
                               <img 
-                                src={globalEvent3} 
+                                src="/images/global-event-3.jpg" 
                                 alt="미국 본사" 
                                 className="w-full h-auto"
                               />
@@ -178,7 +155,7 @@ export default function CompanyIntroduction() {
                             </p>
                             <div className="relative mt-2 rounded overflow-hidden border border-gray-200">
                               <img 
-                                src={globalEvent5} 
+                                src="/images/global-event-5.jpg" 
                                 alt="몰타 재단" 
                                 className="w-full h-auto"
                               />
@@ -210,7 +187,7 @@ export default function CompanyIntroduction() {
                             </p>
                             <div className="mt-2 rounded overflow-hidden border border-gray-200">
                               <img 
-                                src={hancomAgreement} 
+                                src="/images/hancom-agreement.png" 
                                 alt="한글과 컴퓨터 한컴위드와 디지털 부동산을 위한 협약식" 
                                 className="w-full h-auto"
                               />
@@ -245,7 +222,7 @@ export default function CompanyIntroduction() {
                             </p>
                             <div className="mt-3 rounded overflow-hidden border border-gray-200">
                               <img 
-                                src={ctgBusinessCard} 
+                                src="/images/ctg-business-card.png" 
                                 alt="Capital Trust Group - Min Ho Jung 명함" 
                                 className="w-full h-auto"
                               />
@@ -280,7 +257,7 @@ export default function CompanyIntroduction() {
                             <div className="mt-2 flex justify-center">
                               <div className="rounded overflow-hidden border border-gray-200 max-w-sm">
                                 <img 
-                                  src={kimiyiAi} 
+                                  src="/images/kimiyi-ai.jpg" 
                                   alt="Kimiyi AI - 생성형 AI 기업" 
                                   className="w-full h-auto"
                                 />
@@ -316,7 +293,7 @@ export default function CompanyIntroduction() {
                             <div className="mt-2 flex justify-center">
                               <div className="rounded overflow-hidden border border-gray-200 max-w-sm">
                                 <img 
-                                  src={seniorAiKiosk} 
+                                  src="/images/senior-ai-kiosk.png" 
                                   alt="대한노인회 경로당 건강 AI 키오스크" 
                                   className="w-full h-auto"
                                 />
@@ -355,7 +332,7 @@ export default function CompanyIntroduction() {
                             <div className="mt-2 flex justify-center">
                               <div className="rounded overflow-hidden border border-gray-200 max-w-sm">
                                 <img 
-                                  src={esportMeeting} 
+                                  src="/images/esport-meeting.jpg" 
                                   alt="국제 e-Sport 진흥원 전옥이 이사장과 정민호 대표" 
                                   className="w-full h-auto"
                                 />
@@ -391,56 +368,56 @@ export default function CompanyIntroduction() {
                             <div className="mt-3 grid grid-cols-3 md:grid-cols-4 gap-2">
                               <div className="rounded overflow-hidden border border-gray-200">
                                 <img 
-                                  src={globalEvent1} 
+                                  src="/images/global-event-1.jpg" 
                                   alt="국제 행사 1" 
                                   className="w-full h-auto"
                                 />
                               </div>
                               <div className="rounded overflow-hidden border border-gray-200">
                                 <img 
-                                  src={globalEvent2} 
+                                  src="/images/global-event-2.jpg" 
                                   alt="국제 행사 2" 
                                   className="w-full h-auto"
                                 />
                               </div>
                               <div className="rounded overflow-hidden border border-gray-200">
                                 <img 
-                                  src={globalEvent3} 
+                                  src="/images/global-event-3.jpg" 
                                   alt="국제 행사 3" 
                                   className="w-full h-auto"
                                 />
                               </div>
                               <div className="rounded overflow-hidden border border-gray-200">
                                 <img 
-                                  src={globalEvent4} 
+                                  src="/images/global-event-4.jpg" 
                                   alt="국제 행사 4" 
                                   className="w-full h-auto"
                                 />
                               </div>
                               <div className="rounded overflow-hidden border border-gray-200">
                                 <img 
-                                  src={globalEvent5} 
+                                  src="/images/global-event-5.jpg" 
                                   alt="국제 행사 5" 
                                   className="w-full h-auto"
                                 />
                               </div>
                               <div className="rounded overflow-hidden border border-gray-200">
                                 <img 
-                                  src={globalEvent6} 
+                                  src="/images/global-event-6.jpg" 
                                   alt="국제 행사 6" 
                                   className="w-full h-auto"
                                 />
                               </div>
                               <div className="rounded overflow-hidden border border-gray-200">
                                 <img 
-                                  src={globalEvent7} 
+                                  src="/images/global-event-7.jpg" 
                                   alt="국제 행사 7" 
                                   className="w-full h-auto"
                                 />
                               </div>
                               <div className="rounded overflow-hidden border border-gray-200">
                                 <img 
-                                  src={globalEventAfrica} 
+                                  src="/images/global-event-africa.png" 
                                   alt="아프리카 행사" 
                                   className="w-full h-auto"
                                 />
@@ -460,7 +437,7 @@ export default function CompanyIntroduction() {
                   <div className="flex flex-col items-center">
                     <div className="w-full h-48 rounded-lg overflow-hidden mb-4">
                       <img 
-                        src={awardInnovation} 
+                        src="/images/award-innovation.jpg" 
                         alt="혁신상 수상" 
                         className="w-full h-full object-cover"
                       />
@@ -474,7 +451,7 @@ export default function CompanyIntroduction() {
                   <div className="flex flex-col items-center">
                     <div className="w-full h-48 rounded-lg overflow-hidden mb-4">
                       <img 
-                        src={awardCto} 
+                        src="/images/award-cto.jpg" 
                         alt="CTO 아시아 임명" 
                         className="w-full h-full object-cover"
                       />
@@ -488,7 +465,7 @@ export default function CompanyIntroduction() {
                   <div className="flex flex-col items-center">
                     <div className="w-full h-48 rounded-lg overflow-hidden mb-4">
                       <img 
-                        src={awardPatent} 
+                        src="/images/award-patent.jpg" 
                         alt="특허 등록증" 
                         className="w-full h-full object-cover"
                       />
