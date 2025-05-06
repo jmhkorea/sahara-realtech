@@ -32,15 +32,24 @@ export default function CompanyIntroduction() {
   const [isEsportProjectOpen, setIsEsportProjectOpen] = useState(false);
   const [isGlobalEventOpen, setIsGlobalEventOpen] = useState(false);
   const [isMaltaOpen, setIsMaltaOpen] = useState(false);
+  const [isUsaOpen, setIsUsaOpen] = useState(false);
   
-  // 몰타 이미지 상태 관리
+  // 이미지 상태 관리
   const [maltaImageUrl, setMaltaImageUrl] = useState<string>(() => {
     // 로컬 스토리지에서 이미지 URL을 가져오거나 기본 이미지 사용
     const savedImage = localStorage.getItem('maltaFoundationImage');
     return savedImage || '/images/malta-foundation.png';
   });
+  
+  const [usaImageUrl, setUsaImageUrl] = useState<string>(() => {
+    // 로컬 스토리지에서 이미지 URL을 가져오거나 기본 이미지 사용
+    const savedImage = localStorage.getItem('usaHeadquartersImage');
+    return savedImage || '/images/usa-headquarters.png';
+  });
+  
   const [isUploading, setIsUploading] = useState(false);
   const maltaImageInputRef = useRef<HTMLInputElement>(null);
+  const usaImageInputRef = useRef<HTMLInputElement>(null);
   
   // 이미지 업로드 처리 함수
   const handleMaltaImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
@@ -61,6 +70,38 @@ export default function CompanyIntroduction() {
       toast({
         title: "이미지 업로드 성공",
         description: "몰타 공화국 재단 이미지가 변경되었습니다.",
+      });
+    } catch (error) {
+      console.error('이미지 업로드 오류:', error);
+      toast({
+        variant: "destructive",
+        title: "이미지 업로드 실패",
+        description: "이미지 업로드 중 오류가 발생했습니다. 다시 시도해주세요.",
+      });
+    } finally {
+      setIsUploading(false);
+    }
+  };
+  
+  // 미국 본사 이미지 업로드 처리 함수
+  const handleUsaImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+    
+    const file = files[0];
+    setIsUploading(true);
+    
+    try {
+      // 파일 URL 생성 (브라우저 메모리에 임시 저장)
+      const imageUrl = URL.createObjectURL(file);
+      setUsaImageUrl(imageUrl);
+      
+      // 로컬 스토리지에 저장 (새로고침해도 유지)
+      localStorage.setItem('usaHeadquartersImage', imageUrl);
+      
+      toast({
+        title: "이미지 업로드 성공",
+        description: "미국 본사 이미지가 변경되었습니다.",
       });
     } catch (error) {
       console.error('이미지 업로드 오류:', error);
@@ -154,11 +195,56 @@ export default function CompanyIntroduction() {
                 </p>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-6">
-                  <Card>
-                    <CardContent className="p-4">
-                      <h4 className="font-semibold">미국 본사</h4>
-                      <p className="text-sm text-gray-600">미주리주 세인트 루이스</p>
-                    </CardContent>
+                  <Card className="overflow-hidden">
+                    <Collapsible open={isUsaOpen} onOpenChange={setIsUsaOpen}>
+                      <CardContent className="p-4">
+                        <div className="flex justify-between items-center">
+                          <h4 className="font-semibold">미국 본사</h4>
+                          <CollapsibleTrigger asChild>
+                            <Button variant="ghost" size="sm" className="p-0 h-8 w-8">
+                              {isUsaOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                            </Button>
+                          </CollapsibleTrigger>
+                        </div>
+                        <p className="text-sm text-gray-600">미주리주 세인트 루이스</p>
+                        
+                        <CollapsibleContent>
+                          <div className="pt-3 space-y-2">
+                            <p className="text-xs text-gray-600">
+                              미국 미주리주 세인트 루이스에 위치한 글로벌 본사는 자유로운 블록체인 환경에서 
+                              디지털 자산 기술 개발 및 글로벌 네트워크 구축에 중점을 두고 있습니다. 
+                              미국 내 금융 기관들과 협력하여 혁신적인 부동산 토큰화 솔루션을 개발하고 있습니다.
+                            </p>
+                            <div className="relative mt-2 rounded overflow-hidden border border-gray-200">
+                              <img 
+                                src={usaImageUrl} 
+                                alt="미국 본사" 
+                                className="w-full h-auto"
+                              />
+                              <div className="absolute bottom-0 right-0 p-2">
+                                <input
+                                  type="file"
+                                  ref={usaImageInputRef}
+                                  className="hidden"
+                                  accept="image/*"
+                                  onChange={handleUsaImageUpload}
+                                />
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  className="bg-white bg-opacity-70 hover:bg-white"
+                                  onClick={() => usaImageInputRef.current?.click()}
+                                  disabled={isUploading}
+                                >
+                                  {isUploading ? "업로드 중..." : <Upload size={14} className="mr-1" />}
+                                  {isUploading ? "" : "이미지 변경"}
+                                </Button>
+                              </div>
+                            </div>
+                          </div>
+                        </CollapsibleContent>
+                      </CardContent>
+                    </Collapsible>
                   </Card>
                   <Card className="overflow-hidden">
                     <Collapsible open={isMaltaOpen} onOpenChange={setIsMaltaOpen}>
