@@ -37,7 +37,7 @@ export default function CompanyIntroduction() {
           <div className="relative rounded-lg overflow-hidden shadow-lg">
             <div className="relative bg-gradient-to-r from-blue-100 to-amber-100">
               <img 
-                src="attached_assets/5EDA3512-EF11-4F10-B183-0E42E2C0710B.jpeg" 
+                src="/attached_assets/5EDA3512-EF11-4F10-B183-0E42E2C0710B.jpeg" 
                 alt="사하라 리얼테크 배경" 
                 className="w-full max-h-80 object-cover"
               />
@@ -78,7 +78,7 @@ export default function CompanyIntroduction() {
               <section className="mb-6">
                 <div className="rounded-lg overflow-hidden shadow-lg mb-6">
                   <img 
-                    src="attached_assets/10A37A4A-F7DB-4A14-A302-C5B1DFAED220.jpeg" 
+                    src="/attached_assets/10A37A4A-F7DB-4A14-A302-C5B1DFAED220.jpeg" 
                     alt="두바이 계약 체결식 - 사하라 리얼테크와 KHOORY & PARK LLC" 
                     className="w-full object-cover" 
                   />
@@ -293,7 +293,7 @@ export default function CompanyIntroduction() {
                             <div className="mt-2 flex justify-center">
                               <div className="rounded overflow-hidden border border-gray-200 max-w-sm">
                                 <img 
-                                  src="attached_assets/76AD10FC-527E-4929-8EA2-7A475096AA00.jpeg" 
+                                  src="/attached_assets/76AD10FC-527E-4929-8EA2-7A475096AA00.jpeg" 
                                   alt="대한노인회 경로당 건강 AI 키오스크" 
                                   className="w-full h-auto"
                                 />
@@ -332,7 +332,7 @@ export default function CompanyIntroduction() {
                             <div className="mt-2 flex justify-center">
                               <div className="rounded overflow-hidden border border-gray-200 max-w-sm">
                                 <img 
-                                  src="attached_assets/04441A24-45C7-464C-94E4-00A86992F901_1_105_c.jpeg" 
+                                  src="/attached_assets/04441A24-45C7-464C-94E4-00A86992F901_1_105_c.jpeg" 
                                   alt="국제 e-Sport 진흥원 전옥이 이사장과 정민호 대표" 
                                   className="w-full h-auto"
                                 />
@@ -368,56 +368,56 @@ export default function CompanyIntroduction() {
                             <div className="mt-3 grid grid-cols-3 md:grid-cols-4 gap-2">
                               <div className="rounded overflow-hidden border border-gray-200">
                                 <img 
-                                  src="attached_assets/333B116C-1C03-41C9-801C-302D2332F97E_1_105_c.jpeg" 
+                                  src="/attached_assets/333B116C-1C03-41C9-801C-302D2332F97E_1_105_c.jpeg" 
                                   alt="국제 행사 1" 
                                   className="w-full h-auto"
                                 />
                               </div>
                               <div className="rounded overflow-hidden border border-gray-200">
                                 <img 
-                                  src="attached_assets/E2B2C37C-5C2D-4066-ABF7-0FD6F1194FC4.jpeg" 
+                                  src="/attached_assets/E2B2C37C-5C2D-4066-ABF7-0FD6F1194FC4.jpeg" 
                                   alt="국제 행사 2" 
                                   className="w-full h-auto"
                                 />
                               </div>
                               <div className="rounded overflow-hidden border border-gray-200">
                                 <img 
-                                  src="attached_assets/10A37A4A-F7DB-4A14-A302-C5B1DFAED220.jpeg" 
+                                  src="/attached_assets/10A37A4A-F7DB-4A14-A302-C5B1DFAED220.jpeg" 
                                   alt="국제 행사 3" 
                                   className="w-full h-auto"
                                 />
                               </div>
                               <div className="rounded overflow-hidden border border-gray-200">
                                 <img 
-                                  src="attached_assets/25C71D95-6A16-4858-9C8C-5C33DC0C1ECD.jpeg" 
+                                  src="/attached_assets/25C71D95-6A16-4858-9C8C-5C33DC0C1ECD.jpeg" 
                                   alt="국제 행사 4" 
                                   className="w-full h-auto"
                                 />
                               </div>
                               <div className="rounded overflow-hidden border border-gray-200">
                                 <img 
-                                  src="attached_assets/5EDA3512-EF11-4F10-B183-0E42E2C0710B.jpeg" 
+                                  src="/attached_assets/5EDA3512-EF11-4F10-B183-0E42E2C0710B.jpeg" 
                                   alt="국제 행사 5" 
                                   className="w-full h-auto"
                                 />
                               </div>
                               <div className="rounded overflow-hidden border border-gray-200">
                                 <img 
-                                  src="attached_assets/7F119182-C2BC-4C27-84D4-1B081322F5B1.jpeg" 
+                                  src="/attached_assets/7F119182-C2BC-4C27-84D4-1B081322F5B1.jpeg" 
                                   alt="국제 행사 6" 
                                   className="w-full h-auto"
                                 />
                               </div>
                               <div className="rounded overflow-hidden border border-gray-200">
                                 <img 
-                                  src="attached_assets/2C93E7BE-66D3-476E-8BFA-A9AF387FBEB5.jpeg" 
+                                  src="/attached_assets/2C93E7BE-66D3-476E-8BFA-A9AF387FBEB5.jpeg" 
                                   alt="국제 행사 7" 
                                   className="w-full h-auto"
                                 />
                               </div>
                               <div className="rounded overflow-hidden border border-gray-200">
                                 <img 
-                                  src="attached_assets/2E083608-9217-4F54-8101-7C5FF6E0ABCB.jpeg" 
+                                  src="/attached_assets/2E083608-9217-4F54-8101-7C5FF6E0ABCB.jpeg" 
                                   alt="아프리카 행사" 
                                   className="w-full h-auto"
                                 />
@@ -437,7 +437,7 @@ export default function CompanyIntroduction() {
                   <div className="flex flex-col items-center">
                     <div className="w-full h-48 rounded-lg overflow-hidden mb-4">
                       <img 
-                        src="attached_assets/이미지 2025. 5. 6. 오후 5.35.jpeg" 
+                        src="/attached_assets/이미지 2025. 5. 6. 오후 5.35.jpeg" 
                         alt="혁신상 수상" 
                         className="w-full h-full object-cover"
                       />
@@ -451,7 +451,7 @@ export default function CompanyIntroduction() {
                   <div className="flex flex-col items-center">
                     <div className="w-full h-48 rounded-lg overflow-hidden mb-4">
                       <img 
-                        src="attached_assets/이미지 2025. 4. 22. 오전 10.48.jpeg" 
+                        src="/attached_assets/이미지 2025. 4. 22. 오전 10.48.jpeg" 
                         alt="CTO 아시아 임명" 
                         className="w-full h-full object-cover"
                       />
@@ -465,7 +465,7 @@ export default function CompanyIntroduction() {
                   <div className="flex flex-col items-center">
                     <div className="w-full h-48 rounded-lg overflow-hidden mb-4">
                       <img 
-                        src="attached_assets/AE88A086-A040-4E48-A4FC-7F23F1135706.jpeg" 
+                        src="/attached_assets/AE88A086-A040-4E48-A4FC-7F23F1135706.jpeg" 
                         alt="특허 등록증" 
                         className="w-full h-full object-cover"
                       />
