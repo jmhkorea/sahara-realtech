@@ -61,8 +61,7 @@ export default function Header() {
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2 mr-8">
-            <img src="/assets/logo-sahararealtech.svg" alt="SaharaRealTech Logo" className="h-10" />
-            <span className="font-bold text-lg hidden md:block">SaharaRealTech</span>
+            <span className="text-xl font-bold text-gray-800">SaharaRealTech</span>
           </Link>
           
           <nav className="hidden md:flex items-center space-x-12">
@@ -164,9 +163,8 @@ export default function Header() {
                 </Button>
               </SheetTrigger>
               <SheetContent>
-                <div className="px-4 py-3 flex flex-col items-center mb-4">
-                  <img src="/assets/logo-sahararealtech.svg" alt="SaharaRealTech Logo" className="h-10 mb-2" />
-                  <span className="font-bold text-lg">SaharaRealTech</span>
+                <div className="px-4 py-3 flex justify-center mb-4">
+                  <span className="text-xl font-bold text-gray-800">SaharaRealTech</span>
                 </div>
                 <div className="flex flex-col gap-4">
                   <Link href="/" className="px-4 py-2 hover:bg-neutral-100 rounded-md">
