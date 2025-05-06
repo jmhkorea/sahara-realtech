@@ -27,12 +27,7 @@ export default function Hero() {
                 className="w-full object-cover h-[320px] md:h-[400px] lg:h-[480px]"
               />
               
-              <div className="absolute inset-0 flex items-center justify-center">
-                <h2 className="text-5xl md:text-7xl font-extrabold text-white tracking-wider drop-shadow-xl text-center">
-                  <span className="block">SAHARA</span>
-                  <span className="block">REALTECH</span>
-                </h2>
-              </div>
+              {/* 이미지에 이미 텍스트가 있으므로 추가 텍스트 제거 */}
             </div>
             
             {/* 이미지 변경 버튼 제거됨 */}
