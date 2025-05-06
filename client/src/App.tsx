@@ -46,7 +46,7 @@ const RouteWithHeaderAndFooter = ({ component: Component, ...rest }: { component
         <Component {...rest} />
       </main>
       <Footer />
-      <ChatWidget />
+      {/* <ChatWidget /> */}
     </div>
   );
 };
