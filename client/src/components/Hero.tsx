@@ -1,56 +1,17 @@
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { useEffect, useState, useRef, ChangeEvent } from "react";
-import { Loader2, Upload } from "lucide-react";
-import { toast } from "@/hooks/use-toast";
-import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function Hero() {
   const { t } = useTranslation();
   const [mounted, setMounted] = useState(false);
-  const [uploading, setUploading] = useState(false);
-  const [heroImageUrl, setHeroImageUrl] = useState<string>('/images/hero-banner.png');
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const heroImageUrl = '/attached_assets/image_1745371556766.png';
 
   useEffect(() => {
     setMounted(true);
-    
-    // 로컬 스토리지에서 저장된 이미지 URL 가져오기
-    const savedImageUrl = localStorage.getItem('heroImageUrl');
-    if (savedImageUrl) {
-      setHeroImageUrl(savedImageUrl);
-    }
-    
     return () => setMounted(false);
   }, []);
-
-  // 이미지 선택 함수
-  const handleSelectImage = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
-
-  // 이미지 업로드 처리 함수
-  const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files || files.length === 0) return;
-
-    const file = files[0];
-    
-    // 파일 URL 생성
-    const imageUrl = URL.createObjectURL(file);
-    setHeroImageUrl(imageUrl);
-    
-    // 로컬 스토리지에 저장
-    localStorage.setItem('heroImageUrl', imageUrl);
-    
-    toast({
-      title: "이미지 업로드 성공",
-      description: "히어로 이미지가 성공적으로 적용되었습니다.",
-    });
-  };
 
   return (
     <div className="relative overflow-hidden">
@@ -65,24 +26,7 @@ export default function Hero() {
               className="w-full object-cover h-[320px] md:h-[400px] lg:h-[480px] opacity-90"
             />
             
-            {/* 이미지 우측 하단에 업로드 버튼 배치 */}
-            <div className="absolute bottom-4 right-4 z-30">
-              <input
-                type="file"
-                ref={fileInputRef}
-                onChange={handleImageUpload}
-                accept="image/*"
-                className="hidden"
-              />
-              <Button
-                onClick={handleSelectImage}
-                size="sm"
-                className="bg-white/80 backdrop-blur-sm text-pink-600 hover:bg-white border border-pink-200 shadow-md"
-              >
-                <Upload className="h-4 w-4 mr-1" />
-                이미지 변경
-              </Button>
-            </div>
+            {/* 이미지 변경 버튼 제거됨 */}
           </div>
           <div className="absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-pink-50 to-transparent z-20"></div>
         </div>

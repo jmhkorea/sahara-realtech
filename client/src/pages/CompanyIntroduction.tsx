@@ -123,7 +123,7 @@ export default function CompanyIntroduction() {
                             </p>
                             <div className="relative mt-2 rounded overflow-hidden border border-gray-200">
                               <img 
-                                src="attached_assets/25C71D95-6A16-4858-9C8C-5C33DC0C1ECD.jpeg" 
+                                src="/attached_assets/25C71D95-6A16-4858-9C8C-5C33DC0C1ECD.jpeg" 
                                 alt="미국 본사" 
                                 className="w-full h-auto"
                               />
@@ -155,7 +155,7 @@ export default function CompanyIntroduction() {
                             </p>
                             <div className="relative mt-2 rounded overflow-hidden border border-gray-200">
                               <img 
-                                src="attached_assets/5EDA3512-EF11-4F10-B183-0E42E2C0710B.jpeg" 
+                                src="/attached_assets/5EDA3512-EF11-4F10-B183-0E42E2C0710B.jpeg" 
                                 alt="몰타 재단" 
                                 className="w-full h-auto"
                               />
@@ -187,7 +187,7 @@ export default function CompanyIntroduction() {
                             </p>
                             <div className="mt-2 rounded overflow-hidden border border-gray-200">
                               <img 
-                                src="attached_assets/2C93E7BE-66D3-476E-8BFA-A9AF387FBEB5.jpeg" 
+                                src="/attached_assets/2C93E7BE-66D3-476E-8BFA-A9AF387FBEB5.jpeg" 
                                 alt="한글과 컴퓨터 한컴위드와 디지털 부동산을 위한 협약식" 
                                 className="w-full h-auto"
                               />
@@ -222,7 +222,7 @@ export default function CompanyIntroduction() {
                             </p>
                             <div className="mt-3 rounded overflow-hidden border border-gray-200">
                               <img 
-                                src="attached_assets/2E083608-9217-4F54-8101-7C5FF6E0ABCB.jpeg" 
+                                src="/attached_assets/2E083608-9217-4F54-8101-7C5FF6E0ABCB.jpeg" 
                                 alt="Capital Trust Group - Min Ho Jung 명함" 
                                 className="w-full h-auto"
                               />
@@ -257,7 +257,7 @@ export default function CompanyIntroduction() {
                             <div className="mt-2 flex justify-center">
                               <div className="rounded overflow-hidden border border-gray-200 max-w-sm">
                                 <img 
-                                  src="attached_assets/7F119182-C2BC-4C27-84D4-1B081322F5B1.jpeg" 
+                                  src="/attached_assets/7F119182-C2BC-4C27-84D4-1B081322F5B1.jpeg" 
                                   alt="Kimiyi AI - 생성형 AI 기업" 
                                   className="w-full h-auto"
                                 />

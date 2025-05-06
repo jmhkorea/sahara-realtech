@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { 
   Collapsible, 
@@ -12,107 +11,12 @@ export default function FoundationSection() {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   
-  // 각 국가별 인증서 이미지 상태 관리
-  const [certificates, setCertificates] = useState({
-    malta: '/images/malta-certificate.png', // 몰타 인증서 기본 이미지
-    usa: null,
-    korea: null,
-    china: null
-  });
-  
-  // 업로드 진행 상태
-  const [uploading, setUploading] = useState({
-    malta: false,
-    usa: false,
-    korea: false,
-    china: false
-  });
-
-  // 컴포넌트 마운트 시 DB에서 인증서 가져오기
-  useEffect(() => {
-    const fetchCertificates = async () => {
-      try {
-        const response = await axios.get('/api/certificates?category=foundation');
-        
-        if (response.data && response.data.length > 0) {
-          // 국가별 인증서 분류
-          const updatedCertificates = { ...certificates };
-          
-          response.data.forEach((cert: any) => {
-            // 인증서 이름에 국가명이 포함되어 있다고 가정
-            if (cert.name.toLowerCase().includes('malta')) {
-              updatedCertificates.malta = cert.filePath;
-            } else if (cert.name.toLowerCase().includes('usa') || cert.name.toLowerCase().includes('미국')) {
-              updatedCertificates.usa = cert.filePath;
-            } else if (cert.name.toLowerCase().includes('korea') || cert.name.toLowerCase().includes('한국')) {
-              updatedCertificates.korea = cert.filePath;
-            } else if (cert.name.toLowerCase().includes('china') || cert.name.toLowerCase().includes('중국')) {
-              updatedCertificates.china = cert.filePath;
-            }
-          });
-          
-          setCertificates(updatedCertificates);
-        }
-      } catch (error) {
-        console.error('인증서 목록 불러오기 오류:', error);
-      }
-    };
-    
-    fetchCertificates();
-  }, []);
-
-  // 파일 업로드 핸들러
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, country: string) => {
-    const files = e.target.files;
-    if (!files || files.length === 0) return;
-    
-    const file = files[0];
-    
-    const formData = new FormData();
-    formData.append('certificateImage', file);
-    
-    try {
-      setUploading({...uploading, [country]: true});
-      
-      // 1. 이미지 업로드
-      const uploadResponse = await axios.post('/api/certificates/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
-      
-      if (uploadResponse.data.filePath) {
-        // 2. 인증서 메타데이터 저장
-        const countryNames = {
-          malta: "몰타",
-          usa: "미국",
-          korea: "한국",
-          china: "중국"
-        };
-        
-        const certificateData = {
-          name: `${countryNames[country]} 사업자등록증`,
-          category: 'foundation',
-          filePath: uploadResponse.data.filePath,
-          position: Object.keys(countryNames).indexOf(country),
-          description: `${countryNames[country]} 법인 사업자 등록증`
-        };
-        
-        // 3. 인증서 데이터베이스에 저장
-        await axios.post('/api/certificates', certificateData);
-        
-        // 4. 상태 업데이트
-        setCertificates({
-          ...certificates,
-          [country]: uploadResponse.data.filePath
-        });
-      }
-    } catch (error) {
-      console.error('이미지 업로드 오류:', error);
-      alert('이미지 업로드 중 오류가 발생했습니다.');
-    } finally {
-      setUploading({...uploading, [country]: false});
-    }
+  // 각 국가별 인증서 이미지 경로를 하드코딩
+  const certificates = {
+    malta: '/attached_assets/image_1745291608074.png',
+    usa: '/attached_assets/image_1745285866225.png',
+    korea: '/attached_assets/image_1745286449870.png',
+    china: '/attached_assets/image_1745285779003.png'
   };
 
   return (
@@ -168,26 +72,6 @@ export default function FoundationSection() {
                   </div>
                   <div className="rounded-lg h-52 flex items-center justify-center overflow-hidden bg-gray-100 relative">
                     <img src={certificates.malta} alt="몰타공화국 사업자등록증" className="w-full h-full object-contain" />
-                    
-                    {/* 이미지 우측 하단에 이미지 변경 버튼 */}
-                    <div className="absolute bottom-2 right-2">
-                      <label className="cursor-pointer px-2 py-1 bg-white/80 text-blue-600 rounded hover:bg-white border border-blue-200 text-xs shadow-sm backdrop-blur-sm inline-flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
-                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                          <polyline points="17 8 12 3 7 8"></polyline>
-                          <line x1="12" y1="3" x2="12" y2="15"></line>
-                        </svg>
-                        이미지 변경
-                        <input 
-                          type="file" 
-                          className="hidden" 
-                          accept="image/*"
-                          onChange={(e) => handleFileUpload(e, 'malta')}
-                          disabled={uploading.malta}
-                        />
-                      </label>
-                      {uploading.malta && <p className="text-xs text-blue-500 mt-1 text-center">업로드 중...</p>}
-                    </div>
                   </div>
                 </div>
                 
@@ -206,24 +90,7 @@ export default function FoundationSection() {
                     </div>
                   </div>
                   <div className="rounded-lg h-52 flex items-center justify-center overflow-hidden bg-gray-100 relative">
-                    {certificates.usa ? (
-                      <img src={certificates.usa} alt="미국 사업자등록증" className="w-full h-full object-contain" />
-                    ) : (
-                      <div className="text-center p-4">
-                        <p className="text-gray-500 text-sm mb-2">사업자등록증 이미지를 업로드해주세요</p>
-                        <label className="cursor-pointer px-3 py-1.5 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm">
-                          이미지 업로드
-                          <input 
-                            type="file" 
-                            className="hidden" 
-                            accept="image/*"
-                            onChange={(e) => handleFileUpload(e, 'usa')}
-                            disabled={uploading.usa}
-                          />
-                        </label>
-                        {uploading.usa && <p className="text-xs text-blue-500 mt-2">업로드 중...</p>}
-                      </div>
-                    )}
+                    <img src={certificates.usa} alt="미국 사업자등록증" className="w-full h-full object-contain" />
                   </div>
                 </div>
                 
@@ -242,24 +109,7 @@ export default function FoundationSection() {
                     </div>
                   </div>
                   <div className="rounded-lg h-52 flex items-center justify-center overflow-hidden bg-gray-100 relative">
-                    {certificates.korea ? (
-                      <img src={certificates.korea} alt="한국 사업자등록증" className="w-full h-full object-contain" />
-                    ) : (
-                      <div className="text-center p-4">
-                        <p className="text-gray-500 text-sm mb-2">사업자등록증 이미지를 업로드해주세요</p>
-                        <label className="cursor-pointer px-3 py-1.5 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm">
-                          이미지 업로드
-                          <input 
-                            type="file" 
-                            className="hidden" 
-                            accept="image/*"
-                            onChange={(e) => handleFileUpload(e, 'korea')}
-                            disabled={uploading.korea}
-                          />
-                        </label>
-                        {uploading.korea && <p className="text-xs text-blue-500 mt-2">업로드 중...</p>}
-                      </div>
-                    )}
+                    <img src={certificates.korea} alt="한국 사업자등록증" className="w-full h-full object-contain" />
                   </div>
                 </div>
                 
@@ -278,24 +128,7 @@ export default function FoundationSection() {
                     </div>
                   </div>
                   <div className="rounded-lg h-52 flex items-center justify-center overflow-hidden bg-gray-100 relative">
-                    {certificates.china ? (
-                      <img src={certificates.china} alt="중국 사업자등록증" className="w-full h-full object-contain" />
-                    ) : (
-                      <div className="text-center p-4">
-                        <p className="text-gray-500 text-sm mb-2">사업자등록증 이미지를 업로드해주세요</p>
-                        <label className="cursor-pointer px-3 py-1.5 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm">
-                          이미지 업로드
-                          <input 
-                            type="file" 
-                            className="hidden" 
-                            accept="image/*"
-                            onChange={(e) => handleFileUpload(e, 'china')}
-                            disabled={uploading.china}
-                          />
-                        </label>
-                        {uploading.china && <p className="text-xs text-blue-500 mt-2">업로드 중...</p>}
-                      </div>
-                    )}
+                    <img src={certificates.china} alt="중국 사업자등록증" className="w-full h-full object-contain" />
                   </div>
                 </div>
               </div>
