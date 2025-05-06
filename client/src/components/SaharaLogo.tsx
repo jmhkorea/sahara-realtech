@@ -9,7 +9,7 @@ export default function SaharaLogo({ size = 'medium' }: { size?: 'small' | 'medi
   };
 
   return (
-    <div className="inline-flex flex-col items-center">
+    <div className="inline-flex flex-col items-start">
       <span className={`font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 ${sizeClasses[size]} leading-tight`}>
         SAHARA
       </span>
