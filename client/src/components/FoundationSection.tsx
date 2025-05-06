@@ -14,7 +14,7 @@ export default function FoundationSection() {
   
   // 각 국가별 인증서 이미지 상태 관리
   const [certificates, setCertificates] = useState({
-    malta: null,
+    malta: '/images/malta-certificate.png', // 몰타 인증서 기본 이미지
     usa: null,
     korea: null,
     china: null
@@ -167,24 +167,27 @@ export default function FoundationSection() {
                     </div>
                   </div>
                   <div className="rounded-lg h-52 flex items-center justify-center overflow-hidden bg-gray-100 relative">
-                    {certificates.malta ? (
-                      <img src={certificates.malta} alt="몰타공화국 사업자등록증" className="w-full h-full object-contain" />
-                    ) : (
-                      <div className="text-center p-4">
-                        <p className="text-gray-500 text-sm mb-2">사업자등록증 이미지를 업로드해주세요</p>
-                        <label className="cursor-pointer px-3 py-1.5 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm">
-                          이미지 업로드
-                          <input 
-                            type="file" 
-                            className="hidden" 
-                            accept="image/*"
-                            onChange={(e) => handleFileUpload(e, 'malta')}
-                            disabled={uploading.malta}
-                          />
-                        </label>
-                        {uploading.malta && <p className="text-xs text-blue-500 mt-2">업로드 중...</p>}
-                      </div>
-                    )}
+                    <img src={certificates.malta} alt="몰타공화국 사업자등록증" className="w-full h-full object-contain" />
+                    
+                    {/* 이미지 우측 하단에 이미지 변경 버튼 */}
+                    <div className="absolute bottom-2 right-2">
+                      <label className="cursor-pointer px-2 py-1 bg-white/80 text-blue-600 rounded hover:bg-white border border-blue-200 text-xs shadow-sm backdrop-blur-sm inline-flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
+                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                          <polyline points="17 8 12 3 7 8"></polyline>
+                          <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        이미지 변경
+                        <input 
+                          type="file" 
+                          className="hidden" 
+                          accept="image/*"
+                          onChange={(e) => handleFileUpload(e, 'malta')}
+                          disabled={uploading.malta}
+                        />
+                      </label>
+                      {uploading.malta && <p className="text-xs text-blue-500 mt-1 text-center">업로드 중...</p>}
+                    </div>
                   </div>
                 </div>
                 
