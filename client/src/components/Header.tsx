@@ -5,10 +5,12 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Menu, Globe, ChevronDown, Settings, Building2, FolderGit, Terminal, Code } from "lucide-react";
 import WalletConnect from "@/components/WalletConnect";
+import { useKimiyiAI } from "@/contexts/KimiyiAIContext";
 
 export default function Header() {
   const [, setLocation] = useLocation();
   const { t, i18n } = useTranslation();
+  const { openChat } = useKimiyiAI();
 
   // 언어 선택 드롭다운 상태
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
@@ -89,17 +91,15 @@ export default function Header() {
             <Link href="/team" className="font-medium text-gray-700 hover:text-pink-600 transition-colors">
               {t('nav.team', '팀')}
             </Link>
-            <a 
-              href="https://digitalhuman.kimiyi.ai/?id=4Eyoo5HGb3kT2xspOUjfeIP_h8z-nOs0eBplAhWaIEGgXYDE648u8HGF0rCo7_qUHR4x8l3vI0qsMj8KNwxyRw2" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <button 
+              onClick={openChat}
               className="font-medium text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 transition-colors flex items-center whitespace-nowrap relative group"
             >
               <div className="absolute -left-1 -top-1 w-7 h-7 bg-gradient-to-r from-pink-200 to-purple-200 rounded-full opacity-70 group-hover:animate-pulse"></div>
               <Code className="h-5 w-5 mr-1.5 z-10 text-pink-600" />
               <span className="font-bold">AI 어시스턴트</span>
               <span className="ml-1 text-xs font-normal px-1.5 py-0.5 bg-pink-100 text-pink-800 rounded-full">New</span>
-            </a>
+            </button>
             <Link href="/team-workspace" className="font-medium text-gray-700 hover:text-pink-600 transition-colors flex items-center whitespace-nowrap">
               <FolderGit className="h-4 w-4 mr-1 text-rose-500" />
               워크스페이스
@@ -200,10 +200,8 @@ export default function Header() {
                   <Link href="/team" className="px-4 py-2 hover:bg-pink-100/50 rounded-md text-gray-700">
                     {t('nav.team')}
                   </Link>
-                  <a 
-                    href="https://digitalhuman.kimiyi.ai/?id=4Eyoo5HGb3kT2xspOUjfeIP_h8z-nOs0eBplAhWaIEGgXYDE648u8HGF0rCo7_qUHR4x8l3vI0qsMj8KNwxyRw2" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
+                  <button 
+                    onClick={openChat}
                     className="px-4 py-3 bg-gradient-to-r from-pink-50 to-purple-50 rounded-md flex items-center text-gray-700 mb-1 relative group"
                   >
                     <div className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-gradient-to-r from-pink-200 to-purple-200 rounded-full opacity-70 group-hover:animate-pulse"></div>
@@ -213,7 +211,7 @@ export default function Header() {
                       <span className="text-xs text-pink-600">디지털 휴먼과 대화하기</span>
                     </div>
                     <span className="ml-2 text-xs font-normal px-1.5 py-0.5 bg-pink-100 text-pink-800 rounded-full">New</span>
-                  </a>
+                  </button>
                   <Link href="/team-workspace" className="px-4 py-2 hover:bg-pink-100/50 rounded-md flex items-center text-gray-700">
                     <FolderGit className="h-4 w-4 mr-2 text-rose-500" />
                     팀 워크스페이스

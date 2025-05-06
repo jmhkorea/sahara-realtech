@@ -3,6 +3,7 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { HelmetProvider } from "react-helmet-async";
 import { Toaster } from "@/components/ui/toaster";
+import { KimiyiAIProvider } from "@/contexts/KimiyiAIContext";
 import NotFound from "@/pages/not-found";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -90,8 +91,10 @@ function App() {
   return (
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
-        <Toaster />
-        <Router />
+        <KimiyiAIProvider>
+          <Toaster />
+          <Router />
+        </KimiyiAIProvider>
       </QueryClientProvider>
     </HelmetProvider>
   );
